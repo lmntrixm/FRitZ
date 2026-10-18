@@ -70,3 +70,8 @@ a.crumb{text-decoration:none}
   .savebar .btn{padding-inline:14px}
 }
 @media (max-width:899px){.bulk{border-radius:24px;padding:10px 12px}}
+
+/* fixed sidebar: never squeezed by a wide table on another page */
+.adm>.side{flex:0 0 256px;width:256px;min-width:256px}
+/* the artboard capped content at 1400px for a 1440 frame; on wider screens fill the page */
+.content{max-width:none}
