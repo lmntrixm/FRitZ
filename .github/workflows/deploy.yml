@@ -1,0 +1,76 @@
+# Tests on every push and pull request; deploys `main` to DirectAdmin over FTP (the host has no SSH).
+# Setup steps and the secrets list: docs/DEPLOY.md
+name: test-and-deploy
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_sqlite, gd, zip, openssl
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - run: cp .env.example .env && php artisan key:generate
+      - run: ./vendor/bin/pint --test
+      - run: php artisan test
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, gd, zip, openssl
+          coverage: none
+      - name: Build
+        working-directory: web
+        run: composer install --no-dev --no-interaction --prefer-dist --no-progress --optimize-autoloader
+      - name: Split into app and web root
+        run: |
+          mkdir -p dist/app dist/public
+          # the checkout holds only tracked files: no .env, no fonts, no uploads, empty storage dirs
+          rsync -a web/ dist/app/ --exclude public --exclude tests --exclude phpunit.xml
+          rsync -a web/public/ dist/public/
+      - name: Upload app (outside the web root)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: dist/app/
+          server-dir: ${{ vars.FTP_APP_DIR }}
+          state-name: .ftp-deploy-app.json
+      - name: Upload web root (public_html)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: dist/public/
+          server-dir: ${{ vars.FTP_WEB_DIR }}
+          state-name: .ftp-deploy-web.json
+      - name: Migrate and cache (post-deploy hook)
+        run: |
+          curl --fail-with-body -sS -X POST -H "X-Deploy-Token: ${{ secrets.DEPLOY_TOKEN }}" "${{ vars.SITE_URL }}/_deploy"

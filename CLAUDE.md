@@ -28,6 +28,15 @@ Read these first, in this order:
 - Every dangerous admin action is confirmed, and the confirmation explains its effect.
 - Hosting is **DirectAdmin** shared hosting (changed from cPanel by the client). The proposed stack is in `docs/PLAN.md` and waits for client approval before any code is written.
 
+## Code layout (built)
+- `web/`: the Laravel 12 app (PHP 8.2+, Blade, Alpine.js, MySQL; SQLite locally). It has no front-end build step.
+  - `public/css/fz.css`: port of `project/fz.css`. `public/css/site.css`: the production layer (fixed overlays, page scroll).
+  - `app/Support/Icons.php`: generated from `Icon.dc.html`. `resources/views/partials/art-sprite.blade.php`: generated from `ProductArt.dc.html`. Placeholder drawings only until real photos arrive.
+  - Browser state (inquiry list, compare, theme) lives in `public/js/fz.js` as Alpine stores in localStorage.
+  - `CatalogSeeder` holds the reference data. `DemoProductSeeder` holds the design's sample products, for the test domain only (`FRITZ_DEMO_DATA`).
+- `docs/PLAN.md`: stack, schema and phases. `docs/DEPLOY.md`: DirectAdmin over FTP (no SSH), GitHub Actions in `.github/workflows/deploy.yml`.
+- Checks: `cd web && php artisan test && ./vendor/bin/pint --test`. `node .claude/skills/design-taste-frontend/scripts/lint.mjs web/public/css web/public/js/fz.js web/resources/views`.
+
 ## How to read the design files (`project/`)
 - `*.dc.html` files are design artboards, not production pages.
   - They need the canvas runtime (`support.js`), which is not included, so they will not run standalone.

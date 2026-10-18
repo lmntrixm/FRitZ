@@ -5,3 +5,4 @@ fonts/*.woff2
 # local tooling state
 .impeccable/questions/
 .DS_Store
+web/public/fonts/*.woff2
