@@ -98,14 +98,14 @@ class CatalogSeeder extends Seeder
         }
 
         $defaults = [
-            // contact details are bracketed placeholders until the client supplies them
+            // contact details stay empty until the client enters them in «تنظیمات»
             'whatsapp_number' => '',
             'whatsapp_name' => 'FRitZ',
             'message_template' => "سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:\n\n{اقلام}\n\nنام: {نام}\nپروژه: {پروژه}\n\nارسال‌شده از کاتالوگ FRitZ",
-            'phone' => '[شماره تماس]',
-            'email' => '[ایمیل]',
-            'hours' => '[ساعات کاری]',
-            'address' => '[نشانی]',
+            'phone' => '',
+            'email' => '',
+            'hours' => '',
+            'address' => '',
             'seo_title' => 'FRitZ Smart Solutions — کاتالوگ تجهیزات خانه هوشمند',
             'seo_description' => 'محصولات خانه هوشمند از ۱۰ برند در پروتکل‌های KNX، Zigbee و Modbus. مشخصات را ببینید، مقایسه کنید و در واتساپ استعلام بگیرید.',
             'allow_indexing' => false,

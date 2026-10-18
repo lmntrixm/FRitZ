@@ -67,6 +67,9 @@ return [
 
     'timezone' => 'UTC',
 
+    // dates shown to people (Solar Hijri, Iran time); storage stays UTC
+    'display_timezone' => 'Asia/Tehran',
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -78,7 +81,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'fa'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 

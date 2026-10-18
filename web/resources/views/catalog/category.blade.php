@@ -101,7 +101,7 @@
                   @foreach ($g['opts'] as $o)
                     <label class="chip" :class="sel['{{ $g['key'] }}'].includes(@js($o['value'])) && 'on'">
                       <input type="checkbox" class="sr" name="{{ CatalogFilter::input($g['key']) }}" value="{{ $o['value'] }}" x-model="sel['{{ $g['key'] }}']">
-                      @if ($o['swatch'])<span class="sw" style="background:{{ $o['swatch'] }}"></span>@endif
+                      @if ($o['swatch'])<span class="swc" style="background:{{ $o['swatch'] }}"></span>@endif
                       <span @class(['lat' => $g['lat']])>{{ $o['label'] }}</span>
                     </label>
                   @endforeach

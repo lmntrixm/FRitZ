@@ -43,13 +43,21 @@
   <section class="sec">
     <h2 class="t-h2" style="margin-bottom:14px">ارتباط با ما</h2>
     <a class="btn btn-p btn-lg btn-w" href="https://wa.me/{{ $wa }}" target="_blank" rel="noopener"><x-icon i="chat" s="20" sw="1.8" />گفت‌وگو در واتساپ</a>
-    <div class="card" style="margin-top:12px;padding:0 20px;background:var(--sf2)">
-      @php $phone = Setting::get('phone'); $email = Setting::get('email'); @endphp
-      <a class="kbd-row" href="tel:{{ preg_replace('/[^\d+]/', '', (string) $phone) }}" style="padding:0"><x-icon i="phone" s="20" /><span style="flex:1">تلفن</span><span class="lat" style="font-weight:700">{{ $phone }}</span></a>
-      <a class="kbd-row" href="mailto:{{ $email }}" style="padding:0"><x-icon i="mail" s="20" /><span style="flex:1">ایمیل</span><span class="lat" style="font-weight:700">{{ $email }}</span></a>
-      <div class="kbd-row" style="padding:0"><x-icon i="clock" s="20" /><span style="flex:1">ساعات پاسخ‌گویی</span><span style="font-weight:700">{{ Setting::get('hours') }}</span></div>
-      <div class="kbd-row" style="padding:0"><x-icon i="pin" s="20" /><span style="flex:1">نشانی دفتر</span><span style="font-weight:700">{{ Setting::get('address') }}</span></div>
-    </div>
+    @php
+      $rows = array_filter([
+        ['phone', 'تلفن', Setting::get('phone'), 'tel:' . preg_replace('/[^\d+]/', '', (string) Setting::get('phone')), true],
+        ['mail', 'ایمیل', Setting::get('email'), 'mailto:' . Setting::get('email'), true],
+        ['clock', 'ساعات پاسخ‌گویی', Setting::get('hours'), null, false],
+        ['pin', 'نشانی دفتر', Setting::get('address'), null, false],
+      ], fn ($r) => filled($r[2]));
+    @endphp
+    @if ($rows)
+      <div class="card" style="margin-top:12px;padding:0 20px;background:var(--sf2)">
+        @foreach ($rows as [$icon, $label, $value, $href, $lat])
+          <{{ $href ? 'a' : 'div' }} class="kbd-row" @if($href) href="{{ $href }}" @endif style="padding:0"><x-icon :i="$icon" s="20" /><span style="flex:1">{{ $label }}</span><span @class(['lat' => $lat]) style="font-weight:700">{{ $value }}</span></{{ $href ? 'a' : 'div' }}>
+        @endforeach
+      </div>
+    @endif
     <div class="ph" style="height:160px;margin-top:12px"><span class="slot-note">[نقشه موقعیت دفتر]</span></div>
   </section>
 

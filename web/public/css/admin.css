@@ -1,0 +1,48 @@
+/* FRitZ Admin — production layer over fz.css + adm.css.
+   Artboards are fixed 1440 / 390 frames; here the shell follows the viewport:
+   sidebar on wide screens, a drawer under 900px (A-Mobile). */
+
+[x-cloak]{display:none!important}
+html.fz{background:var(--app);min-height:100%}
+.fz body{margin:0;min-height:100dvh;background:var(--app)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:20;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700}
+.skip:focus{top:12px}
+
+.adm{min-height:100dvh;flex-wrap:nowrap}
+.adm>.side{position:sticky;top:0;height:100dvh;overflow-y:auto}
+.side .nv{text-decoration:none}
+.nv[aria-disabled="true"]{opacity:.55}
+.me{border-radius:0}
+.mhdr{display:none;background:var(--bg)}
+.scrim{position:fixed;inset:0;background:var(--ov);z-index:7}
+
+@media (max-width:899px){
+  .adm>.side{display:none}
+  .adm>.side.open{display:flex;position:fixed;top:0;bottom:0;right:0;z-index:8;width:300px;max-width:86vw;height:auto;box-shadow:var(--sh2)} /* taste-skill-ignore: drawer overlay (A-Mobile) */
+  .mhdr{display:flex;position:sticky;top:0;z-index:5}
+  .top{display:none}
+  .content{padding:12px 16px 64px}
+  .ptitle{font-size:24px}
+  .savebar{padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+}
+
+/* the app ground is grey; inputs sit on white panels */
+.panel .inp,.sec-card .inp{background:var(--sf2)}
+.fld textarea.inp{font-family:inherit}
+.fld .cnt-hint.over{color:var(--wn);font-weight:700}
+a.qnav-a{color:inherit}
+.qnav a{text-decoration:none}
+.flash{margin-bottom:4px}
+.soon{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:72px 24px}
+.soon .ico{width:64px;height:64px;border-radius:50%;background:var(--sf2);display:grid;place-items:center;color:var(--tx2)}
+
+/* login */
+.auth{min-height:100dvh;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));background:var(--bg)}
+.auth main{display:grid;place-items:center;padding:48px 24px}
+.auth .ph{min-height:100%;align-content:center;gap:32px;padding:48px}
+@media (max-width:899px){.auth .ph{display:none}}
+
+/* charts */
+.chart{display:block;overflow:visible}
+.hbar .tr{background:var(--sf2)}

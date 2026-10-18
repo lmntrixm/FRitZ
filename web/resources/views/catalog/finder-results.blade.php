@@ -24,7 +24,7 @@
             <div class="chips" style="gap:6px">
               @foreach ($g['opts'] as $o)
                 <a @class(['chip', 'on' => $o['on']]) href="{{ $o['url'] }}" style="height:34px;padding:0 12px" @if($o['on']) aria-current="true" @endif>
-                  @if ($o['swatch'])<span class="sw" style="background:{{ $o['swatch'] }}"></span>@endif{{ $o['label'] }}
+                  @if ($o['swatch'])<span class="swc" style="background:{{ $o['swatch'] }}"></span>@endif{{ $o['label'] }}
                 </a>
               @endforeach
             </div>

@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use Illuminate\Support\Carbon;
+
 /** Persian text helpers: digits for display, and one normal form for search. */
 class Fa
 {
@@ -42,5 +44,33 @@ class Fa
     public static function compact(?string $s): string
     {
         return preg_replace('/[\s\-_\/.]+/u', '', self::normalize($s));
+    }
+
+    /** Solar Hijri date, e.g. «شنبه ۲۵ مهر ۱۴۰۵». Falls back to Gregorian when intl is missing. */
+    public static function date(\DateTimeInterface $d, string $pattern = 'EEEE d MMMM y'): string
+    {
+        if (! class_exists(\IntlDateFormatter::class)) {
+            return self::digits($d->format('Y-m-d'));
+        }
+        $f = new \IntlDateFormatter('fa_IR@calendar=persian', \IntlDateFormatter::FULL, \IntlDateFormatter::NONE,
+            config('app.display_timezone', 'Asia/Tehran'), \IntlDateFormatter::TRADITIONAL, $pattern);
+
+        return self::digits($f->format($d));
+    }
+
+    /** «۲۰ دقیقه پیش»، «۲ ساعت پیش»، «دیروز، ۱۸:۱۰»، «۱۸ مهر، ۱۰:۰۵». */
+    public static function ago(\DateTimeInterface $d): string
+    {
+        $c = Carbon::instance($d)->setTimezone(config('app.display_timezone', 'Asia/Tehran'));
+        $now = now(config('app.display_timezone', 'Asia/Tehran'));
+        $min = (int) $c->diffInMinutes($now);
+
+        return match (true) {
+            $min < 1 => 'همین حالا',
+            $min < 60 => self::digits($min).' دقیقه پیش',
+            $c->isSameDay($now) => self::digits((int) $c->diffInHours($now)).' ساعت پیش',
+            $c->isSameDay($now->copy()->subDay()) => 'دیروز، '.self::digits($c->format('H:i')),
+            default => self::date($c, 'd MMMM').'، '.self::digits($c->format('H:i')),
+        };
     }
 }

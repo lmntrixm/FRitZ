@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\EnsureActiveUser;
+use App\Http\Middleware\EnsureRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,6 +15,12 @@ $app = Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // the deploy hook is called by the CI workflow, which has no session or CSRF token
         $middleware->validateCsrfTokens(except: ['_deploy']);
+        $middleware->alias([
+            'role' => EnsureRole::class,
+            'active' => EnsureActiveUser::class,
+        ]);
+        $middleware->redirectGuestsTo(fn () => route('admin.login'));
+        $middleware->redirectUsersTo(fn () => route('admin.overview'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

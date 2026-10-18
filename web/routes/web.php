@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\DeployController;
@@ -23,3 +24,27 @@ Route::post('/inquiry', [InquiryController::class, 'log'])->middleware('throttle
 
 // Post-deploy hook (FTP hosting without SSH); 404 unless DEPLOY_TOKEN is configured.
 Route::post('/_deploy', DeployController::class)->middleware('throttle:6,1')->name('deploy');
+
+// Admin panel. No public sign-up; the first «مدیر کل» is created once at /admin/setup.
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('setup', [Admin\SetupController::class, 'show'])->name('setup');
+    Route::post('setup', [Admin\SetupController::class, 'store'])->middleware('throttle:10,1');
+
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [Admin\AuthController::class, 'show'])->name('login');
+        Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:30,1');
+    });
+
+    Route::middleware(['auth', 'active'])->group(function () {
+        Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
+        Route::get('/', Admin\OverviewController::class)->name('overview');
+
+        Route::middleware('role:admin')->group(function () {
+            Route::get('settings', [Admin\SettingsController::class, 'show'])->name('settings');
+            Route::put('settings', [Admin\SettingsController::class, 'update']);
+        });
+
+        Route::get('{section}', Admin\SoonController::class)->name('soon')
+            ->whereIn('section', array_keys(Admin\SoonController::SECTIONS));
+    });
+});

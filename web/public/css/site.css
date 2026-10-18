@@ -82,7 +82,7 @@ a.cat,a.wopt{color:inherit}
 .slot-note{color:var(--tx3);font-size:14px;font-weight:600}
 
 /* swatch inside colour chips */
-.sw{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(128,128,120,.5);flex:none} /* taste-skill-ignore: keeps a white swatch visible on white (M-Wizard) */
+.swc{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(128,128,120,.5);flex:none} /* taste-skill-ignore: keeps a white swatch visible on white (M-Wizard) */
 .has-stick .toast-wrap{bottom:calc(92px + env(safe-area-inset-bottom))}
 .chip:has(.sr:focus-visible){outline:2px solid var(--tx);outline-offset:3px}
 a.opt{color:inherit}
