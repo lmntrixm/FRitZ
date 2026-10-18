@@ -3,7 +3,6 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CompareController;
-use App\Http\Controllers\DeployController;
 use App\Http\Controllers\FinderController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ProductController;
@@ -21,9 +20,6 @@ Route::get('/finder', [FinderController::class, 'index'])->name('finder');
 Route::get('/finder/results', [FinderController::class, 'results'])->name('finder.results');
 Route::get('/about', [CatalogController::class, 'about'])->name('about');
 Route::post('/inquiry', [InquiryController::class, 'log'])->middleware('throttle:20,1')->name('inquiry.log');
-
-// Post-deploy hook (FTP hosting without SSH); 404 unless DEPLOY_TOKEN is configured.
-Route::post('/_deploy', DeployController::class)->middleware('throttle:6,1')->name('deploy');
 
 // Admin panel. No public sign-up; the first «مدیر کل» is created once at /admin/setup.
 Route::prefix('admin')->name('admin.')->group(function () {

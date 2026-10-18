@@ -1,20 +1,22 @@
 <?php
 
+use App\Http\Controllers\DeployController;
 use App\Http\Middleware\EnsureActiveUser;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Route;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        // the setup hook runs before any table exists, so it stays outside the web group (no session, no CSRF)
+        then: fn () => Route::match(['GET', 'POST'], '_deploy', DeployController::class)->name('deploy'),
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // the deploy hook is called by the CI workflow, which has no session or CSRF token
-        $middleware->validateCsrfTokens(except: ['_deploy']);
         $middleware->alias([
             'role' => EnsureRole::class,
             'active' => EnsureActiveUser::class,

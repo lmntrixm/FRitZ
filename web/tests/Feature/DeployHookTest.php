@@ -17,4 +17,11 @@ class DeployHookTest extends TestCase
         config(['fritz.deploy_token' => 'right-token-value']);
         $this->post('/_deploy', [], ['X-Deploy-Token' => 'wrong'])->assertNotFound();
     }
+
+    public function test_browser_form_is_offered_and_the_key_is_checked(): void
+    {
+        config(['fritz.deploy_token' => 'right-token-value']);
+        $this->get('/_deploy')->assertOk()->assertSee('کلید راه‌اندازی');
+        $this->post('/_deploy', ['token' => 'wrong'])->assertNotFound();
+    }
 }
