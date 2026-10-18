@@ -30,7 +30,7 @@ Read these first, in this order:
 
 ## Code layout (built)
 - `web/`: the Laravel 12 app (PHP 8.2+, Blade, Alpine.js, MySQL; SQLite locally). It has no front-end build step.
-  - `public/css/fz.css`: port of `project/fz.css`. `public/css/site.css`: the production layer (fixed overlays, page scroll).
+  - `public/css/fz.css`: port of `project/fz.css`. `public/css/site.css`: the production layer: the ClickUp-style app shell the client chose (sidebar tree from `app/Support/CatalogNav.php`, top bar `components/hdr`, bottom tab bar, Ctrl+K `cpalette` in `fz.js`), home widgets, product task view, fixed overlays.
   - `app/Support/Icons.php`: generated from `Icon.dc.html`. `resources/views/partials/art-sprite.blade.php`: generated from `ProductArt.dc.html`. Placeholder drawings only until real photos arrive.
   - Browser state (inquiry list, compare, theme) lives in `public/js/fz.js` as Alpine stores in localStorage.
   - Admin: `/admin` (`app/Http/Controllers/Admin`, `resources/views/admin`, `public/css/adm.css` ported plus `admin.css`). ClickUp-style shell chosen by the client (see DESIGN.md «Admin»): rail + catalog tree (`app/Support/AdminTree.php`, cached, cleared on product save) + Ctrl+K palette in `components/layouts/admin.blade.php`; products have list/table/board views, side peek (`products/peek`) and in-place status (`components/status`, `PATCH products/{slug}/status`). The first «مدیر کل» is created at `/admin/setup` with the `DEPLOY_TOKEN` key (no SSH), or locally with `php artisan fritz:user`. Sections not built yet show an honest "next stage" page.
@@ -70,4 +70,4 @@ Read these first, in this order:
 - `impeccable detect`
 - the taste-skill `lint.mjs`
 
-The admin panel is an "Operate" surface: precision over expression. Inside the admin, hairlines between regions and rows are part of the chosen work-app look (lines in `admin.css` carry `taste-skill-ignore` with that reason); the public catalog keeps its no-lines rule.
+The admin panel is an "Operate" surface: precision over expression. Inside the admin, hairlines between regions and rows are part of the chosen work-app look (lines in `admin.css` carry `taste-skill-ignore` with that reason); the public catalog uses the same work-app look (DESIGN.md «Catalog»).

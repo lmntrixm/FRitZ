@@ -1,28 +1,26 @@
 {{-- Category list (M-List, M-Filter, M-States, Main.dc.html list): filter + sort bar, active chips, grid, compare bar, filter sheet. --}}
 @php use App\Support\CatalogFilter; use App\Support\Fa; @endphp
-<x-layouts.site :title="$category->name">
-  <x-slot:header>
-    <x-hdr :title="$category->name" :sub="$sub" />
-  </x-slot:header>
+<x-layouts.site :title="$category->name" :sub="$sub" wide>
 
   <div x-data="filterSheet(@js($filter->matrix()), @js(collect($groups)->mapWithKeys(fn ($g) => [$g['key'] => collect($g['opts'])->where('on', true)->pluck('value')->values()])), @js($openSheet))">
-    <div class="bar">
-      <button class="btn btn-s btn-sm" type="button" @click="open = true" aria-label="{{ $activeN ? 'فیلتر، ' . Fa::digits($activeN) . ' فعال' : 'فیلتر' }}" aria-haspopup="dialog">
-        <x-icon i="filter" s="18" />فیلتر
-        @if ($activeN)<span class="cnt" style="position:static">{{ Fa::digits($activeN) }}</span>@endif
-      </button>
-      <button class="btn btn-g btn-sm" type="button" style="padding:0 8px" @click="sortOpen = true" aria-haspopup="dialog">
-        <x-icon i="sort" s="18" />{{ ['rec' => 'پیشنهادی', 'new' => 'جدیدترین', 'name' => 'نام'][$filter->sort] }}
-      </button>
-      <div style="flex:1"></div>
-      <div class="seg" role="group" aria-label="نوع نمایش">
-        <button type="button" class="ib" :class="$store.view.cols === 2 && 'on'" aria-label="دو ستون" :aria-pressed="$store.view.cols === 2" @click="$store.view.set(2)"><x-icon i="grid2" s="18" /></button>
-        <button type="button" class="ib" :class="$store.view.cols === 1 && 'on'" aria-label="یک ستون" :aria-pressed="$store.view.cols === 1" @click="$store.view.set(1)"><x-icon i="grid1" s="18" /></button>
+    <div class="phd">
+      <span class="phd-ic"><x-icon :i="$category->icon ?: 'box'" s="22" /></span>
+      <div style="min-width:0"><h1 class="phd-t">{{ $category->name }}</h1><p class="t-s mut">{{ $sub }}@if ($category->parent) · {{ $category->parent->name }}@endif</p></div>
+    </div>
+    <div class="vbar">
+      <div class="vtabs" role="group" aria-label="نوع نمایش">
+        <button type="button" class="vtab" :class="$store.view.cols === 2 && 'on'" :aria-pressed="$store.view.cols === 2" @click="$store.view.set(2)"><x-icon i="grid2" s="16" />کارت</button>
+        <button type="button" class="vtab" :class="$store.view.cols === 1 && 'on'" :aria-pressed="$store.view.cols === 1" @click="$store.view.set(1)"><x-icon i="menu" s="16" />ردیف</button>
       </div>
+      <div style="flex:1"></div>
+      <button class="selbtn" type="button" @click="sortOpen = true" aria-haspopup="dialog"><x-icon i="sort" s="16" />{{ ['rec' => 'پیشنهادی', 'new' => 'جدیدترین', 'name' => 'نام'][$filter->sort] }}</button>
+      <button @class(['selbtn', 'on' => $activeN]) type="button" @click="open = true" aria-label="{{ $activeN ? 'فیلتر، ' . Fa::digits($activeN) . ' فعال' : 'فیلتر' }}" aria-haspopup="dialog">
+        <x-icon i="filter" s="16" />فیلتر@if ($activeN)<span class="n">{{ Fa::digits($activeN) }}</span>@endif
+      </button>
     </div>
 
     @if ($active)
-      <div class="chips-x" style="padding-top:10px;padding-bottom:2px">
+      <div class="chips-x" style="padding-top:12px;padding-bottom:2px">
         @foreach ($active as $a)
           <span class="chip on rm"><span @class(['lat' => $a['lat']])>{{ $a['label'] }}</span><a class="x" href="{{ $a['url'] }}" aria-label="حذف فیلتر {{ $a['label'] }}"><x-icon i="x" s="14" sw="2" /></a></span>
         @endforeach

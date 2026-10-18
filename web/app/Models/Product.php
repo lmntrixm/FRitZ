@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\AdminTree;
+use App\Support\CatalogNav;
 use App\Support\Fa;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
@@ -27,7 +28,10 @@ class Product extends Model
     protected static function booted(): void
     {
         foreach (['saved', 'deleted', 'restored'] as $event) {
-            static::$event(fn () => AdminTree::forget());
+            static::$event(function () {
+                AdminTree::forget();
+                CatalogNav::forget();
+            });
         }
         static::saving(function (Product $p) {
             if (! $p->slug) {

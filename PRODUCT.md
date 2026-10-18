@@ -38,7 +38,7 @@ FRitZ is one supplier that covers many brands and protocols side by side, is an 
 - Name: FRitZ Smart Solutions. Brand colour #AFCB08 (lime), used for emphasis only. Light theme default with a dark theme.
 - Typeface: Kalameh (supplied by the user) for the whole interface.
 - Tone: technical and premium, not discount retail.
-- Standing direction (chosen by the user, «استاندارد پریمیوم»): the category canon played straight — a calm, white, product-first catalog at the craft level of European switch and automation makers (reference bar chosen in the user's absence: Gira, Busch-Jaeger, Loxone product sites). No conceptual metaphor, no irony.
+- Standing direction: the client replaced the first direction («استاندارد پریمیوم», Gira / Busch-Jaeger / Loxone as the bar) with a work app in the ClickUp manner for both the catalog and the admin, keeping FRitZ's brand (Kalameh, logo, lime rules). See DESIGN.md.
 
 ## Evidence on Hand
 - FRitZ logo supplied (lime wordmark «FRitZ» with grey «SMART SOLUTIONS»; PNG, transparent). A dark-ground variant recolours the grey line only.

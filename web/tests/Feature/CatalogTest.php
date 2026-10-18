@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use App\Models\Protocol;
+use App\Support\CatalogNav;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -91,5 +92,20 @@ class CatalogTest extends TestCase
         $this->get('/search?q='.urlencode('sas24'))->assertSee('SA/S 24.16');
         // Arabic yeh/kaf typed by the visitor still match Persian names
         $this->get('/search?q='.urlencode('كليد'))->assertSee('OT-SW3');
+    }
+
+    public function test_app_shell_tree_tabbar_and_palette(): void
+    {
+        $res = $this->get('/c/touch-panels')->assertOk();
+        // the category tree, with the current category marked
+        $res->assertSee('class="ti on"', false)->assertSee('کلید هوشمند')->assertSee('class="tabbar"', false)->assertSee('cpalette(', false);
+        // the product page carries its properties panel and keeps the inquiry as the action
+        $this->get('/p/zviz50a')->assertOk()->assertSee('pd-side', false)->assertSee('افزودن به لیست استعلام')->assertSee('کد مدل');
+        // the palette's product source
+        $this->getJson('/search/suggest?q=zviz')->assertOk()->assertJsonPath('products.0.name', fn ($n) => is_string($n) && $n !== '');
+        // a published product changes the sidebar counts right away
+        CatalogNav::get();
+        Product::where('model_code', 'ZVIZ50A')->first()->update(['status' => 'draft']);
+        $this->assertSame(6, collect(CatalogNav::get()['groups'])->flatMap(fn ($g) => $g['items'])->firstWhere('slug', 'touch-panels')['n']);
     }
 }

@@ -3,8 +3,7 @@
 <x-layouts.site title="مقایسه" :stick="$n > 0">
   <div x-data="{ only: false }" x-init="if (!location.search.includes('ids=') && $store.cmp.items.length) location.replace($store.cmp.url)">
     <header class="hdr">
-      <a class="ib" href="{{ route('home') }}" aria-label="بازگشت" @click.prevent="document.referrer.startsWith(location.origin) ? history.back() : (location.href = $el.href)"><x-icon i="chevBack" /></a>
-      <b style="font-size:16px;font-weight:800">مقایسه {{ Fa::digits($n) }} محصول</b>
+      <b style="font-size:16px;font-weight:800;padding-inline-start:8px">مقایسه {{ Fa::digits($n) }} محصول</b>
       <div class="sp"></div>
       @if ($n > 1)
         <label class="opt" style="font-size:13px;font-weight:700;padding-inline-end:8px"><input type="checkbox" class="cbx" x-model="only">فقط تفاوت‌ها</label>

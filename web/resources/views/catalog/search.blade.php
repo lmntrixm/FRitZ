@@ -2,8 +2,7 @@
 @php use App\Support\Fa; @endphp
 <x-layouts.site :title="$q !== '' ? 'جست‌وجوی ' . $q : 'جست‌وجو'">
   <div x-data="searchBox(@js($q), @js(route('search.suggest')))">
-    <form class="bar" role="search" action="{{ route('search') }}" method="get" style="padding:8px 8px 8px 12px;gap:4px;height:64px;position:sticky;top:0;z-index:3" @submit="remember(q)">
-      <a class="ib" href="{{ route('home') }}" aria-label="بازگشت" @click.prevent="document.referrer.startsWith(location.origin) ? history.back() : (location.href = $el.href)"><x-icon i="chevBack" /></a>
+    <form class="bar sbar2" role="search" action="{{ route('search') }}" method="get" @submit="remember(q)">
       <div class="field" style="flex:1">
         <x-icon i="search" s="20" />
         <input name="q" x-ref="q" x-model="q" @input.debounce.200ms="suggest()" placeholder="نام محصول یا کد مدل" aria-label="جست‌وجو" autocomplete="off" enterkeyhint="search"

@@ -125,4 +125,38 @@
     });
   });
 
+  /* Ctrl+K: pages, categories and brands filter locally; products come from /search/suggest. */
+  window.cpalette = (cmds) => ({
+    open: false, q: '', i: 0, found: [], busy: false, ctl: null,
+    norm(s) { return String(s || '').toLowerCase().replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/[‌\s\-_./]+/g, ''); },
+    show() { this.open = true; this.q = ''; this.found = []; this.i = 0; this.$nextTick(() => this.$refs.q.focus()); },
+    get list() {
+      const q = this.norm(this.q);
+      const local = q ? cmds.filter((c) => this.norm(c.l).includes(q)).slice(0, 8) : cmds.filter((c) => c.g !== 'برندها').slice(0, 10);
+      const all = this.q.trim() ? [{ l: 'همه نتایج برای «' + this.q.trim() + '»', i: 'search', u: cfg.search + '?q=' + encodeURIComponent(this.q.trim()), g: 'جست‌وجو' }] : [];
+      return [...this.found, ...local, ...all];
+    },
+    icon(name) {
+      const el = document.querySelector('#pal-icons')?.content.querySelector('[data-i="' + name + '"]');
+      return el ? el.innerHTML : '';
+    },
+    async find() {
+      this.i = 0;
+      const q = this.q.trim();
+      if (this.ctl) this.ctl.abort();
+      if (!q) { this.found = []; return; }
+      this.ctl = new AbortController();
+      this.busy = true;
+      try {
+        const r = await fetch(cfg.suggest + '?q=' + encodeURIComponent(q), { signal: this.ctl.signal, headers: { Accept: 'application/json' } });
+        const d = r.ok ? await r.json() : { products: [] };
+        const text = (h) => { const t = document.createElement('div'); t.innerHTML = h; return t.textContent; };
+        this.found = (d.products || []).map((p) => ({ l: p.name, s: p.brand, c: text(p.code), img: p.img, art: p.art, u: p.url, g: 'محصولات' }));
+      } catch (e) { /* aborted or offline: keep the local results */ }
+      this.busy = false;
+    },
+    move(d) { const n = this.list.length; if (n) this.i = (this.i + d + n) % n; },
+    go() { const r = this.list[this.i]; if (r) window.location.href = r.u; },
+  });
+
 })();

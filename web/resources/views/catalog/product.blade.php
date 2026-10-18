@@ -5,9 +5,9 @@
   $sheet = $p->datasheet();
   $desc = $p->description ?: $p->name . ' از برند ' . $p->brand->name . '. برای مشخصات کامل و نقشه سیم‌بندی، دیتاشیت را دانلود کنید یا درباره سازگاری با پروژه‌تان از کارشناسان FRitZ بپرسید.';
 @endphp
-<x-layouts.site :title="$p->name . ' ' . $p->model_code" :description="\Illuminate\Support\Str::limit($desc, 155)" stick>
+<x-layouts.site :title="$p->name . ' ' . $p->model_code" :description="\Illuminate\Support\Str::limit($desc, 155)" stick wide>
   <x-slot:header>
-    <x-hdr title="جزئیات محصول" :sub="$p->category->name" :back="route('category', $p->category)" />
+    <x-hdr :title="$p->name" :crumbs="[[$p->category->name, route('category', $p->category)]]" :back="route('category', $p->category)" />
   </x-slot:header>
 
   @push('head')
@@ -22,7 +22,8 @@
   @if ($preview)
     <div class="alert" role="status" style="background:var(--wnS,#FBF0D3);color:var(--tx)"><x-icon i="eye" s="18" /><span><b>پیش‌نمایش پیش‌نویس.</b> این محصول هنوز منتشر نشده و فقط برای کاربران پنل دیده می‌شود.</span></div>
   @endif
-  <div x-data="{ slide: 0, n: {{ max(1, $images->count()) }}, zoom: false, spec: true }">
+  <div class="pd" x-data="{ slide: 0, n: {{ max(1, $images->count()) }}, zoom: false, spec: true }">
+   <div class="pd-main">
     <div class="gal" @scroll.debounce.60ms="slide = Math.round(Math.abs($el.scrollLeft) / $el.clientWidth)" aria-label="تصاویر محصول" role="region">
       @forelse ($images as $i => $m)
         <div class="ph"><img src="{{ $m->url() }}" alt="{{ $m->alt ?: $p->name }}" @if($m->width) width="{{ $m->width }}" height="{{ $m->height }}" @endif loading="{{ $i ? 'lazy' : 'eager' }}"></div>
@@ -45,7 +46,7 @@
       <div style="display:flex;align-items:center;gap:10px"><span class="brand" style="color:var(--tx)">{{ $p->brand->name }}</span><span style="width:1px;height:12px;background:var(--bd2)"></span><span class="code">{{ $p->model_code }}</span></div>
       <h1 class="t-h1">{{ $p->name }}</h1>
       <div class="pbs">@foreach ($p->publicProtocols() as $x)<span class="pb">{{ $x->name }}</span>@endforeach</div>
-      <label class="opt" style="margin-top:4px"><input type="checkbox" class="cbx" :checked="$store.cmp.has({{ $p->id }})" @change="$store.cmp.toggle(@js($card)); $event.target.checked = $store.cmp.has({{ $p->id }})">افزودن به مقایسه</label>
+      <label class="opt pd-mcmp" style="margin-top:4px"><input type="checkbox" class="cbx" :checked="$store.cmp.has({{ $p->id }})" @change="$store.cmp.toggle(@js($card)); $event.target.checked = $store.cmp.has({{ $p->id }})">افزودن به مقایسه</label>
       <a class="more" x-show="$store.cmp.items.length > 1" x-cloak :href="$store.cmp.url" x-text="'مقایسه ' + FA($store.cmp.items.length) + ' محصول'"></a>
     </section>
 
@@ -85,6 +86,32 @@
         @endforeach
       </div>
     @endif
+
+   </div>
+
+   {{-- properties panel (desktop): the product as a task, one action --}}
+   <aside class="pd-side" aria-label="ویژگی‌ها و استعلام">
+    <div class="pd-card">
+      <button type="button" class="btn btn-p btn-w" :class="{ 'btn-ok': $store.inq.has({{ $p->id }}), 'btn-p': !$store.inq.has({{ $p->id }}) }" @click="$store.inq.toggle(@js($card))">
+        <span x-show="!$store.inq.has({{ $p->id }})"><x-icon i="plus" s="20" sw="2" /></span>
+        <span x-show="$store.inq.has({{ $p->id }})" x-cloak><x-icon i="check" s="20" sw="2" /></span>
+        <span x-text="$store.inq.has({{ $p->id }}) ? 'در لیست استعلام · ' + FA($store.inq.qty({{ $p->id }})) + ' عدد' : 'افزودن به لیست استعلام'">افزودن به لیست استعلام</span>
+      </button>
+      <button type="button" class="btn btn-g btn-sm btn-w" x-show="$store.inq.has({{ $p->id }})" x-cloak @click="$store.inq.show()">مشاهده لیست و ارسال در واتساپ</button>
+      @if ($sheet)
+        <a class="btn btn-s btn-sm btn-w" href="{{ $sheet->url() }}" download><x-icon i="download" s="18" />دیتاشیت <span class="lat" style="font-size:12px">PDF</span></a>
+      @endif
+      <label class="opt" style="justify-content:center"><input type="checkbox" class="cbx" :checked="$store.cmp.has({{ $p->id }})" @change="$store.cmp.toggle(@js($card)); $event.target.checked = $store.cmp.has({{ $p->id }})">افزودن به مقایسه</label>
+      <p class="t-c mut3" style="text-align:center">قیمت را از کارشناسان FRitZ در واتساپ استعلام بگیرید.</p>
+    </div>
+    <dl class="pd-props">
+      <dt>برند</dt><dd><a class="lat" href="{{ route('search', ['q' => $p->brand->name]) }}">{{ $p->brand->name }}</a></dd>
+      <dt>کد مدل</dt><dd><span class="code" style="color:var(--tx)">{{ $p->model_code }}</span></dd>
+      <dt>دسته</dt><dd><a href="{{ route('category', $p->category) }}">{{ $p->category->name }}</a></dd>
+      <dt>پروتکل</dt><dd>@forelse ($p->publicProtocols() as $x)<span class="pb">{{ $x->name }}</span>@empty<span class="mut3">—</span>@endforelse</dd>
+      @if ($p->country_of_origin)<dt>کشور سازنده</dt><dd>{{ $p->country_of_origin }}</dd>@endif
+    </dl>
+   </aside>
 
     <div class="stick">
       <button type="button" class="btn btn-lg btn-p" style="flex:1" :class="{ 'btn-ok': $store.inq.has({{ $p->id }}), 'btn-p': !$store.inq.has({{ $p->id }}) }" @click="$store.inq.toggle(@js($card))">

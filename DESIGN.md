@@ -1,12 +1,20 @@
 # FRitZ — Design
 
-Built world: the category canon («استاندارد پریمیوم»), played straight. Reference bar: Gira, Busch-Jaeger, Loxone product sites.
+Built world: a work app in the ClickUp manner, in FRitZ's own materials, chosen by the client for both the catalog and the admin (it replaced the earlier «استاندارد پریمیوم» canon). Brand commitments below still hold.
 
 ## Principles
-- The product is the page. One dominant product image per view, on a grey field.
-- Tone steps instead of lines. No 1px outline boxes, no shadows at rest. Shadows only on things that float: sheet, drawer, toast, compare bar, the stuck search bar.
-- Two shapes. Full pills for everything you can touch; square corners for surfaces and images.
-- Lime #AFCB08 appears in three places only: the single primary action, the inquiry count, and the active state. Text on lime is always ink.
+- One shell everywhere: the catalog tree beside a white work surface (12px radius, 1px hairline ring) on the grey app ground; a sticky top bar; Ctrl+K search.
+- Hairlines (`--line`) separate regions, cards, widgets and rows. Shadows only on things that float: palette, side panels, drawer, toast, compare bar, menus.
+- Shapes: pills for buttons and chips; 8px for fields and small controls; 10–14px for cards, widgets and panels.
+- Lime #AFCB08 appears in three places only: the single primary action, the inquiry count, and the active state (tree row `acS`, tab underline, tab-bar icon). Text on lime is always ink.
+
+## Catalog
+- **Sidebar (≥1024px):** logo, «محصول یا کد مدل Ctrl K», pages (خانه، راهنمای انتخاب، مقایسه، درباره و تماس), every category under its parent with its pictogram and published count, brands (collapsed), a WhatsApp line and the theme switch. Under 1024px it is a drawer.
+- **Top bar:** breadcrumb (کاتالوگ › دسته › محصول), the search field, the ink «لیست استعلام» pill with the lime count. Phones: menu or back, title, theme; a bottom tab bar carries خانه، دسته‌ها، جست‌وجو، مقایسه، استعلام with counts, hidden on pages with their own sticky action.
+- **Home:** widgets, not a long scroll: headline with the search field and the finder (the page's one lime action), all categories as tiles, the finder's three steps, a line to a specialist, featured products, brands.
+- **Category:** page head with the category pictogram, a view bar (کارت / ردیف tabs, sort, filter with its count) sticky under the top bar; filters open as a side panel on desktop and a sheet on phones.
+- **Product:** a task view: gallery, identity, specs and description in the main column; a sticky properties panel with the one action (add to inquiry), datasheet, compare and the properties (brand, code, category, protocol, origin). Phones keep the sticky action bar.
+- Overlays: on desktop sheets become a side panel on the inline end (left); on phones they stay bottom sheets.
 
 ## Type
 - Kalameh (300–900, self-hosted from the user's files) is the only typeface. Its own Latin glyphs set brand names and model codes.
