@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('status', 16)->default('preview'); // preview, applied, failed, rolled_back
             $table->unsignedInteger('added')->default(0);
             $table->unsignedInteger('modified')->default(0);
-            $table->json('diff')->nullable();
+            $table->longText('diff')->nullable();
             $table->string('backup_path')->nullable();
             $table->text('error')->nullable();
             $table->timestamp('applied_at')->nullable();
@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('action', 64);
             $table->string('subject_type', 64)->nullable();
             $table->unsignedBigInteger('subject_id')->nullable();
-            $table->json('changes')->nullable();
+            $table->longText('changes')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->index(['subject_type', 'subject_id']);
         });
@@ -73,7 +73,7 @@ return new class extends Migration
 
         Schema::create('settings', function (Blueprint $table) {
             $table->string('key', 64)->primary();
-            $table->json('value')->nullable();
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }

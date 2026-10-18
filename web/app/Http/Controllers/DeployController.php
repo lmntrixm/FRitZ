@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -30,10 +31,14 @@ class DeployController extends Controller
         $given = (string) ($request->header('X-Deploy-Token') ?? $request->input('token', ''));
         abort_unless(hash_equals($token, $given), 404);
 
+        // A first run that failed half-way leaves some tables but records no migration.
+        // Nothing of value can exist yet, so start clean instead of failing on «table already exists».
+        $fresh = Schema::hasTable('migrations') && DB::table('migrations')->doesntExist();
+
         $out = [];
         $ok = true;
         foreach ([
-            ['migrate', ['--force' => true]],
+            $fresh ? ['migrate:fresh', ['--force' => true]] : ['migrate', ['--force' => true]],
             ['optimize:clear', []],
             ['config:cache', []],
             ['route:cache', []],
