@@ -6,6 +6,7 @@ Built world: a work app in the ClickUp manner, in FRitZ's own materials, chosen 
 - One shell everywhere: the catalog tree beside a white work surface (12px radius, 1px hairline ring) on the grey app ground; a sticky top bar; Ctrl+K search.
 - Hairlines (`--line`) separate regions, cards, widgets and rows. Shadows only on things that float: palette, side panels, drawer, toast, compare bar, menus.
 - Shapes: pills for buttons and chips; 8px for fields and small controls; 10–14px for cards, widgets and panels.
+- Filled dark surfaces (rail, «لیست استعلام» and «+ جدید» pills, toast, compare bar, bulk bar, footer, checked boxes) use the gray `--ink` #4D4D49 (client's request), not black; white text on it is 8.5:1. In dark theme `--ink` is the light gray #BDBDB6 with dark text. Body text stays near-black `--tx` for reading.
 - Lime #AFCB08 appears in three places only: the single primary action, the inquiry count, and the active state (tree row `acS`, tab underline, tab-bar icon). Text on lime is always ink.
 
 ## Catalog
@@ -38,7 +39,7 @@ All text pairs pass AA. Control borders (bd2) reach 3:1 against sf2.
 
 ## Admin
 A work app in the ClickUp manner (client's request), in FRitZ's own materials. The catalog rules above (no lines, square surfaces) do not apply inside `/admin`.
-- **Shell:** ink icon rail (72px, `--rail` #141414 / #080807) with the logo and section icons; active section = lime icon on a raised ink tile; the new-inquiry count is a lime badge. Beside it the catalog tree (248px) on the grey app ground: saved views (همه، ناقص‌ها، پیش‌نویس‌ها، حذف‌شده‌ها) and every category with its own product pictogram, count and completeness meter. The tree can be closed and remembers it.
+- **Shell:** gray icon rail (72px, `--rail` #4D4D49 / dark #262624; labels #E7E7E3, active tile #363633 with a lime icon) with the logo and section icons; active section = lime icon on a raised ink tile; the new-inquiry count is a lime badge. Beside it the catalog tree (248px) on the grey app ground: saved views (همه، ناقص‌ها، پیش‌نویس‌ها، حذف‌شده‌ها) and every category with its own product pictogram, count and completeness meter. The tree can be closed and remembers it.
 - **Work surface:** one white field (`--surf`, dark #141413), 12px radius, 1px hairline ring, inset 8px from the ground. Top bar: breadcrumb, «جست‌وجو یا فرمان… Ctrl K», ink «+ جدید» menu, account menu.
 - **Ctrl+K palette:** actions, sections, categories and products (lookup) in one list; arrow keys and Enter.
 - **Lines:** hairlines (`--line`) separate regions, table rows and panels. Panels are hairline-ringed fields with a 10px radius. Shadows only on things that float: menus, palette, peek, modal, toast.

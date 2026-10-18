@@ -4,13 +4,13 @@
    Lime stays where the brand allows it: the primary action, counts, the active state. */
 
 [x-cloak]{display:none!important}
-.fz{--rail:#141414;--railT:#BDBDB6;--railH:#2A2A27;--railOn:#34342F;--surf:#FFFFFF;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318;--row:40px}
-.fz.dark{--rail:#080807;--railT:#A9A9A2;--railH:#1F1F1C;--railOn:#2A2A26;--surf:#141413;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318}
+.fz{--rail:#4D4D49;--railT:#E7E7E3;--railH:#5C5C57;--railOn:#363633;--surf:#FFFFFF;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318;--row:40px}
+.fz.dark{--rail:#262624;--railT:#BDBDB6;--railH:#33332F;--railOn:#3D3D38;--surf:#141413;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318}
 html.fz{background:var(--app);min-height:100%}
 .fz body{margin:0;min-height:100dvh;background:var(--app)}
 .fz ::selection{background:var(--acS);color:var(--tx)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} /* taste-skill-ignore: visually hidden label, not a rule */
-.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:40;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700}
+.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:40;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700}
 .skip:focus{top:12px}
 .scrim{position:fixed;inset:0;background:var(--ov);z-index:20}
 .fz :focus-visible{outline:2px solid var(--tx);outline-offset:2px}
@@ -75,9 +75,9 @@ html.fz{background:var(--app);min-height:100%}
 .gsearch:hover{background:var(--sf3);color:var(--tx2)}
 .topr{display:flex;align-items:center;gap:4px;flex:none}
 .kbd{font-size:11px;font-weight:600;color:var(--tx3);background:var(--bg);border-radius:5px;padding:1px 6px;direction:ltr;box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
-.btn-ink{background:var(--tx);color:var(--bg)}
+.btn-ink{background:var(--ink);color:var(--bg)}
 .btn-ink svg{color:var(--ac)}
-.btn-ink:hover{background:var(--tx2)}
+.btn-ink:hover{background:#5C5C57}
 .avb{border:0;background:none;padding:3px;border-radius:50%;cursor:pointer;display:grid}
 .avb:hover{background:var(--sf2)}
 .newm{position:relative}
@@ -174,7 +174,7 @@ tbody:first-of-type .grp th{padding-top:8px}
 .lvf{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
 .pgn{min-width:34px;height:34px;border-radius:8px;display:inline-grid;place-items:center;font-weight:600;font-size:13.5px;color:var(--tx);text-decoration:none;font-variant-numeric:tabular-nums}
 .pgn:hover{background:var(--sf2)}
-.pgn.on{background:var(--tx);color:var(--bg)}
+.pgn.on{background:var(--ink);color:var(--bg)}
 
 .stm{position:relative;display:inline-block}
 .stm>.st{border:0;cursor:pointer;font-family:inherit}
@@ -258,7 +258,7 @@ tbody:first-of-type .grp th{padding-top:8px}
 .pal-l{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pal-none{padding:28px 16px;text-align:center;color:var(--tx3);font-size:14px}
 .pal-f{display:flex;gap:16px;padding:8px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--tx3)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:35;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:var(--sh2);max-width:calc(100% - 32px)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:35;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:var(--sh2);max-width:calc(100% - 32px)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
 
 /* ── phones and small tablets: one drawer, no rail ─────── */
 @media (max-width:899px){
