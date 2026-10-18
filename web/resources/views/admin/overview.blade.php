@@ -7,6 +7,9 @@
   $acts = [
     'settings.update' => ['i' => 'settings', 'ic' => 'ic mod', 'what' => fn ($c) => 'تنظیمات را تغییر داد: ' . implode('، ', $c['fields'] ?? [])],
     'setup' => ['i' => 'user', 'ic' => 'ic add', 'what' => fn ($c) => 'پنل را راه‌اندازی کرد'],
+    'update.apply' => ['i' => 'upload', 'ic' => 'ic up', 'what' => fn ($c) => 'به‌روزرسانی از فایل: ' . Fa::digits($c['added'] ?? 0) . ' جدید، ' . Fa::digits($c['modified'] ?? 0) . ' ویرایش، ' . Fa::digits($c['deleted'] ?? 0) . ' حذف'],
+    'update.rollback' => ['i' => 'history', 'ic' => 'ic del', 'what' => fn ($c) => 'به‌روزرسانی «' . ($c['file'] ?? '') . '» را بازگرداند'],
+    'settings.key' => ['i' => 'key', 'ic' => 'ic mod', 'what' => fn ($c) => 'رمز بسته .fritz را تغییر داد'],
   ];
 @endphp
 <x-layouts.admin title="نمای کلی" active="overview" :sub="$today . ' · داده‌های ۱۲ هفته اخیر'">
@@ -32,7 +35,7 @@
       @if ($lastUpdate)
         <span style="font-size:16px;font-weight:800;line-height:1.6">{{ Fa::date(\Illuminate\Support\Carbon::parse($lastUpdate->applied_at), 'd MMMM y') }}</span><span class="s">{{ Fa::digits($lastUpdate->added) }} جدید · {{ Fa::digits($lastUpdate->modified) }} ویرایش</span>
       @else
-        <span style="font-size:16px;font-weight:800;line-height:1.6">هنوز انجام نشده</span><span class="s">به‌روزرسانی با فایل در مرحله بعد فعال می‌شود</span>
+        <span style="font-size:16px;font-weight:800;line-height:1.6">هنوز انجام نشده</span><span class="s">از بخش «به‌روزرسانی» با فایل اکسل یا <span class="lat">.fritz</span></span>
       @endif
     </div>
   </div>

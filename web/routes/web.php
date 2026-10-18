@@ -50,6 +50,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::middleware('role:admin')->group(function () {
             Route::get('settings', [Admin\SettingsController::class, 'show'])->name('settings');
             Route::put('settings', [Admin\SettingsController::class, 'update']);
+            Route::post('settings/key', [Admin\UpdateController::class, 'setKey'])->name('settings.key');
+
+            Route::prefix('update')->name('update.')->controller(Admin\UpdateController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'upload')->name('upload');
+                Route::get('export', 'export')->name('export');
+                Route::get('packer', 'packer')->name('packer');
+                Route::get('{update}', 'show')->whereNumber('update')->name('show');
+                Route::post('{update}/apply', 'apply')->whereNumber('update')->name('apply');
+                Route::post('{update}/rollback', 'rollback')->whereNumber('update')->name('rollback');
+                Route::delete('{update}', 'discard')->whereNumber('update')->name('discard');
+                Route::get('{update}/file', 'file')->whereNumber('update')->name('file');
+            });
         });
 
         Route::get('{section}', Admin\SoonController::class)->name('soon')

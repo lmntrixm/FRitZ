@@ -1,15 +1,18 @@
-{{-- Settings (A-Settings), «مدیر کل» only. Logo and the .fritz key arrive with the update phase. --}}
+{{-- Settings (A-Settings), «مدیر کل» only. The .fritz key has its own form (keyform): it is saved on its own, never with the rest. --}}
 @php
   $sample = ['اقلام' => "۱. تاچ پنل ۷ اینچ MixPad Matter\n    کد \u{2066}MIXPAD-7M\u{2069} — ۲ عدد", 'نام' => 'علی رضایی', 'پروژه' => 'ویلای دو طبقه، لواسان', 'تاریخ' => \App\Support\Fa::date(now(), 'd MMMM y')];
   $val = fn ($k) => old($k, $s[$k] ?? '');
+  $key = $errors->getBag('key');
+  $hasKey = \App\Models\Setting::get('fritz_key') !== null;
+  $meta = \App\Models\Setting::get('fritz_key_meta');
 @endphp
 <x-layouts.admin title="تنظیمات" active="settings">
   <x-slot:actions>
     <button class="btn btn-p btn-sm" type="submit" form="settings">ذخیره تغییرات</button>
   </x-slot:actions>
 
-  @if ($errors->any())
-    <div class="msgbox er" role="alert"><x-icon i="alert" s="18" /><span><b>{{ \App\Support\Fa::digits($errors->count()) }} مورد ذخیره نشد.</b> {{ $errors->first() }}</span></div>
+  @if ($errors->default->any())
+    <div class="msgbox er" role="alert"><x-icon i="alert" s="18" /><span><b>{{ \App\Support\Fa::digits($errors->default->count()) }} مورد ذخیره نشد.</b> {{ $errors->default->first() }}</span></div>
   @endif
 
   <form id="settings" method="post" action="{{ route('admin.settings') }}" style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start"
@@ -19,6 +22,7 @@
       <a href="#wa" class="on"><x-icon i="chat" s="16" />واتساپ و پیام</a>
       <a href="#contact"><x-icon i="phone" s="16" />اطلاعات تماس</a>
       <a href="#seo"><x-icon i="globe" s="16" />سئو</a>
+      <a href="#key"><x-icon i="key" s="16" />کلید رمزنگاری</a>
     </nav>
 
     <div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:16px">
@@ -58,6 +62,35 @@
         <label class="swl" style="padding:4px 14px;background:var(--sf2)"><span>اجازه ایندکس به موتورهای جست‌وجو<br><span class="hint">روی دامنه تست خاموش بماند تا نسخه آزمایشی در گوگل نیاید.</span></span>
           <input type="checkbox" class="sw" name="allow_indexing" value="1" @checked(old('allow_indexing', $s['allow_indexing']))></label>
       </div></section>
+
+      {{-- the key fields belong to «keyform» below, outside this form; @input.stop keeps the save bar out of it --}}
+      <section class="panel" id="key" style="box-shadow:inset 0 0 0 1px var(--err)" @input.stop x-data="{ pw: '', pw2: '' }">
+        <div class="panel-h"><h2 style="display:flex;gap:8px;align-items:center"><x-icon i="key" s="18" />کلید رمزنگاری به‌روزرسانی</h2><span class="int"><x-icon i="lock" s="12" sw="2" />حساس</span></div>
+        <div class="panel-b" style="display:flex;flex-direction:column;gap:14px">
+          <table class="spec" style="font-size:13px"><tbody>
+            <tr><th>الگوریتم</th><td class="lat">AES-256-GCM · PBKDF2-SHA256</td></tr>
+            <tr><th>اثر انگشت کلید</th><td>@if ($meta)<span class="lat">{{ $meta['fp'] }}</span>@else<span class="mut">هنوز تعیین نشده</span>@endif</td></tr>
+            @if ($meta)<tr><th>آخرین تغییر</th><td>{{ \App\Support\Fa::date(\Illuminate\Support\Carbon::parse($meta['at']), 'd MMMM y') }}{{ ! empty($meta['by']) ? ' · ' . $meta['by'] : '' }}</td></tr>@endif
+          </tbody></table>
+          @if ($hasKey)
+            <div class="msgbox er"><x-icon i="alert" s="18" /><span><b>پس از تغییر رمز، فایل‌های <span class="lat">.fritz</span> ساخته‌شده با رمز قبلی دیگر باز نمی‌شوند.</b> رمز جدید را از طریق یک کانال امن به سازنده فایل‌ها بدهید.</span></div>
+          @else
+            <div class="msgbox in"><x-icon i="info" s="18" /><span>فایل‌های <span class="lat">.fritz</span> با این رمز باز می‌شوند. همان رمز را از راه امن (نه در همان پیامی که فایل را می‌فرستید) به سازنده فایل‌ها بدهید.</span></div>
+          @endif
+          <div class="frow">
+            @if ($hasKey)
+              <div class="fld"><label class="lab" for="key_current">رمز فعلی</label><input id="key_current" form="keyform" name="current" type="password" autocomplete="current-password" @class(['inp', 'ltr', 'err' => $key->has('current')]) dir="ltr" required>
+                @if ($key->has('current'))<span class="emsg"><x-icon i="alert" s="14" />{{ $key->first('current') }}</span>@endif</div>
+            @endif
+            <div class="fld"><label class="lab" for="key_new">رمز جدید</label><input id="key_new" form="keyform" name="password" type="password" autocomplete="new-password" minlength="12" @class(['inp', 'ltr', 'err' => $key->has('password')]) dir="ltr" required x-model="pw">
+              @if ($key->has('password'))<span class="emsg"><x-icon i="alert" s="14" />{{ $key->first('password') }}</span>@else
+              <span class="hint" :style="pw.length >= 12 && 'color:var(--okT);font-weight:700'" x-text="pw.length ? (pw.length >= 12 ? 'مناسب · ' : 'کوتاه · ') + FA(pw.length) + ' نویسه' : 'دست‌کم ۱۲ نویسه'">دست‌کم ۱۲ نویسه</span>@endif</div>
+            <div class="fld"><label class="lab" for="key_new2">تکرار رمز جدید</label><input id="key_new2" form="keyform" name="password_confirmation" type="password" autocomplete="new-password" class="inp ltr" :class="pw2 && pw2 !== pw && 'err'" dir="ltr" required x-model="pw2">
+              <span class="emsg" x-show="pw2 && pw2 !== pw" x-cloak>با رمز جدید یکسان نیست.</span></div>
+          </div>
+          <button class="btn btn-xs btn-sm" type="submit" form="keyform" style="align-self:flex-start" :disabled="pw.length < 12 || pw !== pw2" :class="(pw.length < 12 || pw !== pw2) && 'is-dis'"><x-icon i="key" s="16" />{{ $hasKey ? 'تغییر رمز بسته' : 'تعیین رمز بسته' }}</button>
+        </div>
+      </section>
     </div>
 
     <div class="savebar" style="flex-basis:100%;margin:0 -32px -64px" x-show="dirty" x-cloak>
@@ -66,6 +99,8 @@
       <button class="btn btn-p btn-sm" type="submit">ذخیره تغییرات</button>
     </div>
   </form>
+  <form id="keyform" method="post" action="{{ route('admin.settings.key') }}"
+        data-confirm='{{ json_encode($hasKey ? ['title' => 'رمز بسته عوض شود؟', 'body' => 'فایل‌های .fritz ساخته‌شده با رمز فعلی دیگر در پنل باز نمی‌شوند. سازنده فایل‌ها باید رمز جدید را بگیرد و بسته‌ها را دوباره بسازد.', 'ok' => 'بله، رمز عوض شود', 'danger' => true] : ['title' => 'رمز بسته تعیین شود؟', 'body' => 'از این پس فایل‌های .fritz فقط با این رمز در پنل باز می‌شوند. رمز را جایی امن نگه دارید.', 'ok' => 'تعیین رمز'], JSON_UNESCAPED_UNICODE | JSON_HEX_APOS) }}'>@csrf</form>
 
   @push('head')
   <script>

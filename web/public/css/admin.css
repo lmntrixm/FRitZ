@@ -75,3 +75,9 @@ a.crumb{text-decoration:none}
 .adm>.side{flex:0 0 256px;width:256px;min-width:256px}
 /* the artboard capped content at 1400px for a 1440 frame; on wider screens fill the page */
 .content{max-width:none}
+
+/* update: indeterminate progress while the server applies the file */
+.prog i.indet{width:40%;animation:fz-indet 1.4s var(--ease) infinite}
+@keyframes fz-indet{from{transform:translateX(60%)}to{transform:translateX(-260%)}}
+@media (prefers-reduced-motion:reduce){.prog i.indet{animation:none;width:100%;opacity:.5}}
+.drop:focus-within{outline:2px solid var(--tx);outline-offset:3px}

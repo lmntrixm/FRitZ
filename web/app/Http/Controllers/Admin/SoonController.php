@@ -10,14 +10,14 @@ class SoonController extends Controller
     public const SECTIONS = [
         'categories' => ['دسته‌ها و فیلترها', 'folder'],
         'brands' => ['برندها و پروتکل‌ها', 'tag'], 'media' => ['رسانه', 'image'],
-        'inquiries' => ['استعلام‌ها', 'chat'], 'update' => ['به‌روزرسانی', 'upload'],
+        'inquiries' => ['استعلام‌ها', 'chat'],
         'users' => ['کاربران', 'users'], 'activity' => ['گزارش فعالیت', 'activity'],
     ];
 
     public function __invoke(string $section)
     {
         abort_unless(isset(self::SECTIONS[$section]), 404);
-        if (in_array($section, ['update', 'users'], true)) {
+        if ($section === 'users') {
             abort_unless(request()->user()->isAdmin(), 403, 'این بخش فقط برای مدیر کل است.');
         }
 

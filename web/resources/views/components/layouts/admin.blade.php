@@ -13,7 +13,7 @@
     ['k' => 'media', 'l' => 'رسانه', 'i' => 'image'],
     ['k' => 'inquiries', 'l' => 'استعلام‌ها', 'i' => 'chat', 'n' => $newInq],
     ['g' => 'مدیریت'],
-    ['k' => 'update', 'l' => 'به‌روزرسانی', 'i' => 'upload', 'lock' => true],
+    ['k' => 'update', 'l' => 'به‌روزرسانی', 'i' => 'upload', 'lock' => true, 'url' => route('admin.update.index')],
     ['k' => 'users', 'l' => 'کاربران', 'i' => 'users', 'lock' => true],
     ['k' => 'activity', 'l' => 'گزارش فعالیت', 'i' => 'activity'],
     ['k' => 'settings', 'l' => 'تنظیمات', 'i' => 'settings', 'lock' => true, 'url' => route('admin.settings')],
