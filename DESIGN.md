@@ -7,7 +7,8 @@ Built world: a work app in the ClickUp manner, in FRitZ's own materials, chosen 
 - Hairlines (`--line`) separate regions, cards, widgets and rows. Shadows only on things that float: palette, side panels, drawer, toast, compare bar, menus.
 - Shapes: pills for buttons and chips; 8px for fields and small controls; 10–14px for cards, widgets and panels.
 - Filled dark surfaces (rail, «لیست استعلام» and «+ جدید» pills, toast, compare bar, bulk bar, footer, checked boxes) use the gray `--ink` #4D4D49 (client's request), not black; white text on it is 8.5:1. In dark theme `--ink` is the light gray #BDBDB6 with dark text. Body text stays near-black `--tx` for reading.
-- Lime #AFCB08 appears in three places only: the single primary action, the inquiry count, and the active state (tree row `acS`, tab underline, tab-bar icon). Text on lime is always ink.
+- Full lime #AFCB08 appears in three places only: the single primary action, the inquiry count, and the active state (tree row `acS`, tab underline, tab-bar icon, checked box with a dark-lime edge). Text on lime is always ink.
+- Brand green, about 30% more at the client's request: soft lime `acS` with ink or `acT` (5.9:1) on secondary actions («افزودن به استعلام» on cards), category pictogram tiles, the home welcome panel, step numbers and a small lime marker before widget titles; category icons in the trees are `acT`.
 
 ## Catalog
 - **Sidebar (≥1024px):** logo, «محصول یا کد مدل Ctrl K», pages (خانه، راهنمای انتخاب، مقایسه، درباره و تماس), every category under its parent with its pictogram and published count, brands (collapsed), a WhatsApp line and the theme switch. Under 1024px it is a drawer.

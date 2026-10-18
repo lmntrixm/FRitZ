@@ -20,7 +20,8 @@ Read these first, in this order:
   - Kalameh is the only typeface, self-hosted from `fonts/` (licence in `fonts/FontLicense.txt`).
     - The `.woff2` files are proprietary and git-ignored (public repo). Copy them into `fonts/` locally and upload them to the server by hand.
 - Colour and themes:
-  - Lime `#AFCB08` is used only for the single primary action, the inquiry count and the active state.
+  - Lime `#AFCB08` (full) is used only for the single primary action, the inquiry count and the active state.
+    - The client asked for about 30% more green: the soft tint `acS` and the dark lime `acT` also mark secondary «افزودن به استعلام» buttons, category pictograms, the home welcome panel, step numbers, widget markers and checked boxes. Full lime still never decorates.
   - Text on lime is always ink.
   - Light theme is the default; a dark theme is included.
   - WCAG AA in both themes.

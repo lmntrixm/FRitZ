@@ -133,10 +133,10 @@
 /* checkbox / radio */
 .cbx,.rdo{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:0;border:1.5px solid var(--bd2);background:var(--bg);display:inline-grid;place-items:center;flex:none;cursor:pointer;transition:background .15s,border-color .15s}
 .cbx{border-radius:5px}.rdo{border-radius:50%}
-.cbx:checked{background:var(--ink);border-color:var(--ink)}
-.cbx:checked::after{content:"";width:9px;height:5px;border-left:2px solid var(--bg);border-bottom:2px solid var(--bg);transform:translateY(-1px) rotate(-45deg)}
-.rdo:checked{background:var(--ink);border-color:var(--ink)}
-.rdo:checked::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--bg)}
+.cbx:checked{background:var(--ac);border-color:var(--acT)}
+.cbx:checked::after{content:"";width:9px;height:5px;border-left:2px solid var(--acI);border-bottom:2px solid var(--acI);transform:translateY(-1px) rotate(-45deg)}
+.rdo:checked{background:var(--ac);border-color:var(--acT)}
+.rdo:checked::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--acI)}
 .cbx:disabled,.rdo:disabled{opacity:.4;cursor:not-allowed}
 .opt{display:flex;align-items:center;gap:12px;min-height:44px;font-size:15px;cursor:pointer}
 .opt .n{margin-inline-start:auto;font-size:13px;color:var(--tx3);font-variant-numeric:tabular-nums}

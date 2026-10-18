@@ -324,3 +324,12 @@ select.inp{appearance:none;-webkit-appearance:none;cursor:pointer;background-ima
 .fz.dark .btn-ink{background:var(--sf3);color:var(--tx)}
 .fz.dark .btn-ink:hover{background:var(--bd)}
 
+
+/* more brand green (client's request) */
+.tic{color:var(--acT)}
+.bgi{background:var(--acS);color:var(--acT)}
+.dcard.on{box-shadow:inset 0 -3px 0 var(--ac)}
+.phd-ic{background:var(--acS);color:var(--acT)}
+.tm i{background:var(--acT)}
+.grpadd:hover{background:var(--acS);color:var(--tx)}
+.ti:hover .tic{color:var(--acT)}

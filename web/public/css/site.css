@@ -315,3 +315,18 @@ a.opt{color:inherit}
 .scrim:not(.cscrim){z-index:24}
 .sheet{z-index:25}
 .lightbox{z-index:26}
+
+/* more brand green (client's request): soft lime tints on secondary actions and pictograms;
+   full lime stays on the one primary action, counts and active states */
+.pc-add{background:var(--acS);color:var(--tx)}
+.pc-add:hover{background:color-mix(in srgb,var(--ac) 38%,var(--acS))}
+.tic,.ctile-ic,.phd-ic{color:var(--acT)}
+.ctile-ic,.phd-ic{background:var(--acS)}
+.ctile:hover .ctile-ic{background:var(--ac);color:var(--acI)}
+.sn{background:var(--acS);color:var(--acT)}
+.hwel{background:var(--acS);border-radius:16px;padding:22px 20px}
+.hwel .hsearch{background:var(--surf)}
+.hwel .hsearch:hover{background:var(--surf);color:var(--tx)}
+.tabbar .on span:last-child{color:var(--acT)}
+.wd-h h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--ac);margin-inline-end:8px;vertical-align:middle}
+@media (min-width:1024px){.hwel{padding:28px 28px}}
