@@ -147,4 +147,41 @@ class AdminProductTest extends TestCase
         $this->actingAs($this->admin)->getJson('/admin/products/lookup?q=sensor')->assertOk();
         $this->actingAs($this->admin)->getJson('/admin/products/lookup?q=PD-360')->assertJsonFragment(['code' => 'PD-360']);
     }
+
+    public function test_list_board_and_table_views_with_tree(): void
+    {
+        $cat = Category::where('slug', 'touch-panels')->first();
+        $this->actingAs($this->admin)->get('/admin/products')->assertOk()->assertSee('منتشرشده')->assertSee('تاچ پنل')->assertSee('همه محصولات');
+        $this->actingAs($this->admin)->get('/admin/products?view=board')->assertOk()->assertSee('data-col="published"', false)->assertSee('MIXPAD-7M');
+        $this->actingAs($this->admin)->get('/admin/products?view=board&group=category')->assertOk()->assertSee('data-col="category-'.$cat->id.'"', false);
+        $this->actingAs($this->admin)->get('/admin/products?view=table&group=brand')->assertOk()->assertSee('صفحه‌بندی', false);
+        $this->actingAs($this->admin)->get('/admin/products?category='.$cat->id)->assertOk()->assertSee('<h1 class="ptitle">'.$cat->name.'</h1>', false);
+        // the trash has no board
+        $this->actingAs($this->admin)->get('/admin/products?status=trashed&view=board')->assertOk()->assertDontSee('data-col=', false);
+    }
+
+    public function test_peek_and_inline_status(): void
+    {
+        $p = Product::where('model_code', 'ZVIZ50A')->first();
+        $this->actingAs($this->admin)->get('/admin/products/'.$p->slug.'/peek')->assertOk()->assertSee('ZVIZ50A')->assertSee('تکمیل اطلاعات')->assertSee('ویرایش کامل');
+
+        $this->actingAs($this->admin)->patchJson('/admin/products/'.$p->slug.'/status', ['status' => 'draft'])->assertOk()->assertJson(['ok' => true, 'status' => 'draft']);
+        $this->assertSame('draft', $p->fresh()->status);
+        $this->assertDatabaseHas('activity_log', ['action' => 'product.draft', 'subject_id' => $p->id]);
+        $this->actingAs($this->admin)->patchJson('/admin/products/'.$p->slug.'/status', ['status' => 'published'])->assertOk();
+        $this->assertSame('published', $p->fresh()->status);
+        $this->actingAs($this->admin)->patchJson('/admin/products/'.$p->slug.'/status', ['status' => 'trashed'])->assertUnprocessable();
+
+        // a required category field blocks publishing, same as the form
+        $box = $p->category->fields()->where('required_to_publish', true)->first();
+        if ($box) {
+            $p->values()->where('attribute_id', $box->id)->delete();
+            $p->update(['status' => 'draft']);
+            $this->actingAs($this->admin)->patchJson('/admin/products/'.$p->slug.'/status', ['status' => 'published'])->assertStatus(422)->assertJson(['ok' => false]);
+            $this->assertSame('draft', $p->fresh()->status);
+        }
+
+        $editor = User::create(['name' => 'رضا', 'email' => 'e2@fritz.test', 'password' => 'secret-pass-123', 'role' => 'editor']);
+        $this->actingAs($editor)->get('/admin/products')->assertOk()->assertDontSee('به‌روزرسانی از اکسل');
+    }
 }

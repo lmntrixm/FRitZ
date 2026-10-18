@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\AdminTree;
 use App\Support\Fa;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
@@ -25,6 +26,9 @@ class Product extends Model
 
     protected static function booted(): void
     {
+        foreach (['saved', 'deleted', 'restored'] as $event) {
+            static::$event(fn () => AdminTree::forget());
+        }
         static::saving(function (Product $p) {
             if (! $p->slug) {
                 // the slug stays fixed after creation so public links keep working

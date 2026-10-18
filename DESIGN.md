@@ -29,9 +29,16 @@ Built world: the category canon («استاندارد پریمیوم»), played 
 All text pairs pass AA. Control borders (bd2) reach 3:1 against sf2.
 
 ## Admin
-- The working ground is grey (`--app`); panels, stats and forms are white fields with no border.
-- Data tables keep a tone row divider, which is the one place a line is allowed.
-- Navigation: the active item is an ink pill with a lime icon. Tabs are a segmented pill.
+A work app in the ClickUp manner (client's request), in FRitZ's own materials. The catalog rules above (no lines, square surfaces) do not apply inside `/admin`.
+- **Shell:** ink icon rail (72px, `--rail` #141414 / #080807) with the logo and section icons; active section = lime icon on a raised ink tile; the new-inquiry count is a lime badge. Beside it the catalog tree (248px) on the grey app ground: saved views (همه، ناقص‌ها، پیش‌نویس‌ها، حذف‌شده‌ها) and every category with its own product pictogram, count and completeness meter. The tree can be closed and remembers it.
+- **Work surface:** one white field (`--surf`, dark #141413), 12px radius, 1px hairline ring, inset 8px from the ground. Top bar: breadcrumb, «جست‌وجو یا فرمان… Ctrl K», ink «+ جدید» menu, account menu.
+- **Ctrl+K palette:** actions, sections, categories and products (lookup) in one list; arrow keys and Enter.
+- **Lines:** hairlines (`--line`) separate regions, table rows and panels. Panels are hairline-ringed fields with a 10px radius. Shadows only on things that float: menus, palette, peek, modal, toast.
+- **Density:** 40px table rows, 13–14px text, 36px controls under a mouse (44px on touch).
+- **Status chips:** filled, 6px radius, white text: published `--okF` #2F6B3A, warning `--wnF` #8A5D00, deleted `--erF` #B42318; draft is grey (`sf3` with ink). Each chip on a product is also its menu.
+- **Products:** three views of the same filtered list (لیست grouped and collapsible by status, category or brand; جدول paged; بُرد columns with drag between statuses). A row opens in a side peek (left in RTL, bottom sheet on phones); Ctrl+click opens the full form.
+- **Lime in admin:** the page's one primary action, counts, the active rail item, the active tree row (`acS`), the active view tab underline. The global «+ جدید» is ink, never lime, so a page never shows two lime buttons.
+- Under 900px the rail and tree become one drawer; list rows drop secondary columns and show the model code under the name.
 
 ## Logo
 - The supplied PNG is used as is on light grounds.

@@ -1,39 +1,287 @@
 /* FRitZ Admin — production layer over fz.css + adm.css.
-   Artboards are fixed 1440 / 390 frames; here the shell follows the viewport:
-   sidebar on wide screens, a drawer under 900px (A-Mobile). */
+   A work app in the ClickUp manner, in FRitZ's own materials: ink icon rail, catalog tree on the grey
+   app ground, one white work surface, hairline dividers, compact rows, filled status chips.
+   Lime stays where the brand allows it: the primary action, counts, the active state. */
 
 [x-cloak]{display:none!important}
+.fz{--rail:#141414;--railT:#BDBDB6;--railH:#2A2A27;--railOn:#34342F;--surf:#FFFFFF;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318;--row:40px}
+.fz.dark{--rail:#080807;--railT:#A9A9A2;--railH:#1F1F1C;--railOn:#2A2A26;--surf:#141413;--okF:#2F6B3A;--wnF:#8A5D00;--erF:#B42318}
 html.fz{background:var(--app);min-height:100%}
 .fz body{margin:0;min-height:100dvh;background:var(--app)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:20;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700}
+.fz ::selection{background:var(--acS);color:var(--tx)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} /* taste-skill-ignore: visually hidden label, not a rule */
+.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:40;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700}
 .skip:focus{top:12px}
+.scrim{position:fixed;inset:0;background:var(--ov);z-index:20}
+.fz :focus-visible{outline:2px solid var(--tx);outline-offset:2px}
+.fz kbd{font-family:inherit}
 
-.adm{min-height:100dvh;flex-wrap:nowrap}
-.adm>.side{position:sticky;top:0;height:100dvh;overflow-y:auto}
-.side .nv{text-decoration:none}
-.nv[aria-disabled="true"]{opacity:.55}
-.me{border-radius:0}
-.mhdr{display:none;background:var(--bg)}
-.scrim{position:fixed;inset:0;background:var(--ov);z-index:7}
+/* ── shell ─────────────────────────────────────────────── */
+.app{display:flex;min-height:100dvh;background:var(--app)}
+.nav{display:flex;position:sticky;top:0;height:100dvh;flex:none;z-index:21}
 
-@media (max-width:899px){
-  .adm>.side{display:none}
-  .adm>.side.open{display:flex;position:fixed;top:0;bottom:0;right:0;z-index:8;width:300px;max-width:86vw;height:auto;box-shadow:var(--sh2)} /* taste-skill-ignore: drawer overlay (A-Mobile) */
-  .mhdr{display:flex;position:sticky;top:0;z-index:5}
-  .top{display:none}
-  .content{padding:12px 16px 64px}
-  .ptitle{font-size:24px}
-  .savebar{padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.rail{width:72px;background:var(--rail);display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 0 12px;overflow-y:auto;scrollbar-width:none}
+.mark{display:grid;place-items:center;width:60px;height:40px;margin-bottom:10px}
+.mark img{width:54px;height:auto;display:block}
+.ri{display:flex;flex-direction:column;align-items:center;gap:2px;width:64px;padding:5px 0;border:0;background:none;color:var(--railT);font:inherit;font-size:11px;font-weight:500;line-height:1.4;cursor:pointer;text-decoration:none;border-radius:10px}
+.ri .rico{position:relative;width:38px;height:32px;border-radius:9px;display:grid;place-items:center;transition:background .2s var(--ease),color .2s var(--ease)}
+.ri:hover .rico{background:var(--railH);color:#FFFFFF}
+.ri:hover{color:#FFFFFF}
+.ri.on .rico{background:var(--railOn);color:var(--ac)}
+.ri.on{color:#FFFFFF;font-weight:700}
+.ri:focus-visible{outline:2px solid #FFFFFF;outline-offset:0}
+.rl{max-width:62px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rb{position:absolute;top:-3px;inset-inline-end:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--ac);color:var(--acI);font-size:10px;font-weight:800;display:grid;place-items:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--rail)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.rsep{width:30px;height:1px;background:var(--railH);margin:8px 0} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+
+.tree{width:248px;display:flex;flex-direction:column;gap:2px;padding:12px 10px;overflow-y:auto;background:var(--app);scrollbar-width:thin}
+.no-tree .tree{display:none}
+.tree-h{display:flex;align-items:center;gap:6px;min-height:40px;padding:0 6px 6px}
+.tws{font-size:15px;font-weight:800;margin-inline-end:auto;padding-inline-start:2px}
+.tsearch{display:flex;align-items:center;gap:8px;width:100%;height:34px;padding:0 10px;margin:2px 0 6px;border:0;border-radius:8px;background:var(--surf);color:var(--tx3);font:inherit;font-size:13px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.tsearch:hover{color:var(--tx2)}
+.tsearch .kbd,.gsearch .kbd{margin-inline-start:auto}
+.tsec{display:flex;flex-direction:column;gap:1px;padding-bottom:6px}
+.tg{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--tx3);padding:10px 8px 4px}
+.tgb{border:0;background:none;font-family:inherit;cursor:pointer;text-align:right;width:100%;border-radius:6px}
+.tgb:hover{color:var(--tx)}
+.tgb svg{transition:transform .2s var(--ease)}
+.tgb[aria-expanded="false"] svg{transform:rotate(90deg)}
+.ti{display:flex;align-items:center;gap:8px;min-height:32px;padding:0 8px;border-radius:8px;font-size:13.5px;font-weight:500;color:var(--tx2);text-decoration:none;transition:background .15s var(--ease)}
+.ti:hover{background:var(--sf3);color:var(--tx)}
+.ti.on{background:var(--acS);color:var(--tx);font-weight:700}
+.ti.on .tic,.ti.on>svg{color:var(--acT)}
+.ti>svg,.tic{color:var(--tx3);flex:none;display:grid;place-items:center}
+.tl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tn{font-size:12px;color:var(--tx3);font-variant-numeric:tabular-nums;min-width:16px;text-align:left}
+.ti.none .tl{color:var(--tx3)}
+.tm{width:26px;height:4px;border-radius:2px;background:var(--sf3);overflow:hidden;flex:none;direction:ltr}
+.ti:hover .tm{background:var(--bd)}
+.tm i{display:block;height:100%;background:var(--okT);border-radius:2px}
+.tree .me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:8px;background:var(--surf);border-radius:10px;box-shadow:inset 0 0 0 1px var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.ib.sm{width:34px;height:34px;border-radius:8px}
+.mclose,.mopen{display:none}
+.topen{display:none}
+.no-tree .topen{display:inline-grid}
+
+.main{flex:1;min-width:0;display:flex;flex-direction:column;margin:8px;margin-inline-start:0;background:var(--surf);border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);min-height:calc(100dvh - 16px)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.no-tree .main{margin-inline-start:8px}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;min-height:52px;padding:0 14px;background:var(--surf);border-bottom:1px solid var(--line);border-radius:12px 12px 0 0;flex-wrap:nowrap} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.crumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--tx3);font-weight:500;min-width:0;white-space:nowrap;overflow:hidden}
+.crumb a{color:var(--tx3);text-decoration:none}
+.crumb a:hover{color:var(--tx)}
+.crumb [aria-current]{color:var(--tx);font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.gsearch{display:flex;align-items:center;gap:8px;flex:0 1 380px;height:34px;padding:0 10px;margin-inline:auto;border:0;border-radius:8px;background:var(--sf2);color:var(--tx3);font:inherit;font-size:13px;cursor:pointer;max-width:none}
+.gsearch:hover{background:var(--sf3);color:var(--tx2)}
+.topr{display:flex;align-items:center;gap:4px;flex:none}
+.kbd{font-size:11px;font-weight:600;color:var(--tx3);background:var(--bg);border-radius:5px;padding:1px 6px;direction:ltr;box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.btn-ink{background:var(--tx);color:var(--bg)}
+.btn-ink svg{color:var(--ac)}
+.btn-ink:hover{background:var(--tx2)}
+.avb{border:0;background:none;padding:3px;border-radius:50%;cursor:pointer;display:grid}
+.avb:hover{background:var(--sf2)}
+.newm{position:relative}
+.menu{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:25;min-width:200px;padding:6px;background:var(--surf);border-radius:10px;box-shadow:var(--sh2),inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:1px} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.menu a,.menu button{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 10px;border:0;border-radius:7px;background:none;color:var(--tx);font:inherit;font-size:14px;text-decoration:none;cursor:pointer;width:100%;text-align:right}
+.menu a:hover,.menu button:hover{background:var(--sf2)}
+.menu svg{color:var(--tx3)}
+.menu .mh{display:flex;flex-direction:column;padding:6px 10px 8px;border-bottom:1px solid var(--line);margin-bottom:4px} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+
+.content{padding:20px 32px 64px;display:flex;flex-direction:column;gap:16px;width:100%;max-width:none;flex:1}
+.phead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:0}
+.ptitle{font-size:22px;line-height:1.45;font-weight:800}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flash{margin:0}
+
+/* compact controls where a mouse is the pointer; 44px targets stay on touch */
+@media (pointer:fine){
+  .content .btn-sm,.top .btn-sm{min-height:36px;padding:0 14px;font-size:13.5px}
+  .selbtn{height:34px;padding:0 12px;font-size:13px}
+  .content .ib{width:34px;height:34px}
 }
 
-/* the app ground is grey; inputs sit on white panels */
+/* ── surfaces inside the work area: hairline fields, small radius ── */
+.panel,.stat,.sec-card{background:var(--surf);border-radius:10px;box-shadow:inset 0 0 0 1px var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.fz.dark .panel,.fz.dark .stat,.fz.dark .sec-card{background:var(--surf)}
+.fz.dark .modal{background:#1C1C1A}
+.panel-h{padding:14px 18px 8px}
+.panel-h h2{font-size:15px}
+.panel-b{padding:12px 18px 18px}
+.stats{gap:12px}
+.stat{padding:16px 18px}
+.stat .v{font-size:28px}
 .panel .inp,.sec-card .inp{background:var(--sf2)}
+.fz.dark .panel .inp,.fz.dark .sec-card .inp{background:var(--sf2)}
+.modal{border-radius:16px;z-index:21}
+.msgbox{border-radius:8px}
+.drop{border-radius:10px}
+.file{border-radius:8px}
+.tabs{border-radius:10px}
+.tab{border-radius:8px}
+.toolbar{padding:12px 14px 10px}
+
+/* tables: compact rows, hairline dividers */
+.tbl{font-size:13.5px}
+.tbl th{padding:9px 12px;font-size:12px;font-weight:600;border-bottom:1px solid var(--line);background:var(--surf)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.tbl td{padding:8px 12px;height:var(--row)}
+.tbl tbody tr:hover td{background:var(--sf2)}
+.thumb{width:34px;height:34px;border-radius:6px}
+.pname b{font-size:13.5px}
+.tbl tr.sel{display:table-row}
+.tw{position:relative}
+
+/* status chips: filled, like a work tracker; white text passes AA on every fill */
+.st{height:22px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:700;gap:6px}
+.st::before{width:6px;height:6px}
+.st.pub{background:var(--okF);color:#FFFFFF}
+.st.wn{background:var(--wnF);color:#FFFFFF}
+.st.er{background:var(--erF);color:#FFFFFF}
+.st.draft{background:var(--sf3);color:var(--tx)}
+.st.off{border-radius:6px}
+
+/* ── products: views, grouped list, board, peek ────────── */
+.pv{display:flex;flex-direction:column;gap:10px;min-width:0}
+.vbar{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);margin-top:-6px} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.vtabs{display:flex;gap:2px}
+.vtab{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;font-size:13.5px;font-weight:600;color:var(--tx3);text-decoration:none;box-shadow:inset 0 -2px 0 transparent;transition:color .15s var(--ease)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.vtab:hover{color:var(--tx)}
+.vtab.on{color:var(--tx);box-shadow:inset 0 -2px 0 var(--ac)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.vtab.on svg{color:var(--acT)}
+.vbar .selbtn{margin-inline-start:auto}
+.selbtn.ghost{background:none;color:var(--tx2)}
+.selbtn.ghost:hover{background:var(--sf2)}
+.pv .toolbar{padding:0}
+.pv .toolbar .field{height:34px;padding:0 12px;border-radius:8px;font-size:13.5px}
+.selbtn{border-radius:8px}
+.bulkf{padding:0}
+.bulk{border-radius:10px}
+.lv .tbl td{padding-top:6px;padding-bottom:6px}
+.thumb.art{background:var(--sf2);color:var(--tx2)}
+.thumb.art .art{width:30px;height:30px}
+.pname{min-width:200px;text-decoration:none;color:var(--tx);border-radius:6px}
+a.pname:hover b{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--bd2)}
+.grp th{padding:14px 8px 6px;background:var(--surf);border-bottom:1px solid var(--line);font-weight:600} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+tbody:first-of-type .grp th{padding-top:8px}
+.grph{display:flex;align-items:center;gap:8px}
+.grpt{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:4px 6px;border-radius:6px;font:inherit;font-size:13.5px;color:var(--tx);cursor:pointer}
+.grpt:hover{background:var(--sf2)}
+.grpt svg:first-child{color:var(--tx3);transition:transform .2s var(--ease)}
+.grpt[aria-expanded="false"] svg:first-child{transform:rotate(90deg)}
+.grpadd{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;color:var(--tx3);text-decoration:none;padding:4px 8px;border-radius:6px;opacity:0;transition:opacity .15s var(--ease)}
+.grp:hover .grpadd,.grpadd:focus-visible{opacity:1}
+.grpadd:hover{background:var(--sf2);color:var(--tx)}
+.bgi{width:24px;height:24px;border-radius:6px;background:var(--sf2);display:grid;place-items:center;color:var(--tx2)}
+.lvf{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pgn{min-width:34px;height:34px;border-radius:8px;display:inline-grid;place-items:center;font-weight:600;font-size:13.5px;color:var(--tx);text-decoration:none;font-variant-numeric:tabular-nums}
+.pgn:hover{background:var(--sf2)}
+.pgn.on{background:var(--tx);color:var(--bg)}
+
+.stm{position:relative;display:inline-block}
+.stm>.st{border:0;cursor:pointer;font-family:inherit}
+.stm>.st svg{opacity:.75;margin-inline-start:-2px}
+.stm>.st[aria-busy="true"]{opacity:.6;cursor:progress}
+.stm .menu{min-width:170px;inset-inline-end:auto;inset-inline-start:0}
+.stm .menu svg:last-child{margin-inline-start:auto;color:var(--acT)}
+.sdot{width:10px;height:10px;border-radius:3px;flex:none}
+.sdot.pub{background:var(--okF)}
+.sdot.draft{background:var(--bd2)}
+
+.board{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;align-items:flex-start;scroll-snap-type:x proximity}
+.bcol{flex:0 0 272px;display:flex;flex-direction:column;gap:8px;background:var(--sf2);border-radius:12px;padding:8px;min-height:180px;scroll-snap-align:start;transition:box-shadow .15s var(--ease),background .15s var(--ease)}
+.bcol.over{background:var(--acS);box-shadow:inset 0 0 0 2px var(--ac)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.bch{display:flex;align-items:center;gap:8px;min-height:36px;padding:0 4px;font-size:13.5px}
+.bch .bgi{background:var(--surf)}
+.bcards{display:flex;flex-direction:column;gap:8px}
+.bcard{background:var(--surf);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:inset 0 0 0 1px var(--line);cursor:grab} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.bcard:hover{box-shadow:inset 0 0 0 1px var(--bd2)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.bcard[draggable="true"]:active{cursor:grabbing}
+.bimg{height:96px;background:var(--sf2);border-radius:8px;display:grid;place-items:center;overflow:hidden;color:var(--tx2)}
+.bimg img,.bimg .art{max-width:100%;max-height:96px;object-fit:contain}
+.bname{font-size:13.5px;font-weight:700;line-height:1.6;color:var(--tx);text-decoration:none}
+.bname:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--bd2)}
+.bmeta{font-size:12px;color:var(--tx3)}
+.bpro{display:flex;gap:4px;flex-wrap:wrap}
+.bpro .pb{height:20px;font-size:11px;padding:0 7px}
+.bcard footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:4px}
+.bcard .cmpl .bar{width:40px}
+.bnone{font-size:13px;color:var(--tx3);text-align:center;padding:24px 8px;border:1.5px dashed var(--bd);border-radius:10px;margin:0}
+
+.pk-wrap{position:fixed;inset:0;z-index:22}
+.pk-wrap>.scrim{position:absolute;z-index:0}
+.pk{position:absolute;z-index:1;top:8px;bottom:8px;left:8px;width:min(480px,calc(100% - 16px));background:var(--surf);border-radius:14px;box-shadow:var(--sh2),inset 0 0 0 1px var(--line);overflow-y:auto;outline:none;display:flex;flex-direction:column} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pk-in{transition:transform .24s var(--ease),opacity .24s var(--ease)}
+.pk-from{transform:translateX(-24px);opacity:0}
+.pk-to{transform:none;opacity:1}
+.pk-h{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:6px;min-height:52px;padding:0 12px;background:var(--surf);border-bottom:1px solid var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pk-b{padding:16px 20px 28px;display:flex;flex-direction:column;gap:16px}
+.pk-img{height:200px;background:var(--sf2);border-radius:10px;display:grid;place-items:center;overflow:hidden;color:var(--tx2)}
+.pk-img img{max-width:100%;max-height:200px;object-fit:contain}
+.pk-t{font-size:20px;font-weight:800;line-height:1.5}
+.pk-m{font-size:13px;color:var(--tx3);margin-top:2px}
+.pk-props{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px 12px;margin:0;font-size:13.5px;align-items:center}
+.pk-props dt{color:var(--tx3)}
+.pk-props dd{margin:0;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.pk-s{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pk-s h3{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700}
+.pk-miss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--tx2)}
+.pk-miss li{display:flex;align-items:center;gap:6px}
+.pk-miss svg{color:var(--wn)}
+.pk-load{padding:20px;display:flex;flex-direction:column;gap:12px}
+.pk-load .sk{display:block;height:180px;border-radius:10px;background:var(--sf2);animation:fz-pulse 1.2s ease-in-out infinite}
+.pk-load .sk.s{height:18px;width:60%}
+.pk-err{padding:24px;color:var(--err);font-weight:600}
+@keyframes fz-pulse{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.pk-load .sk{animation:none}.pk-in{transition:none}}
+.pnt{display:flex;flex-direction:column;min-width:0}
+.code.mo{display:none}
+@media (max-width:899px){
+  .lv .hm{display:none}
+  .code.mo{display:inline;font-size:12px}
+  .pname{min-width:0}
+  .pk{top:auto;left:0;right:0;bottom:0;width:100%;max-height:88dvh;border-radius:16px 16px 0 0}
+  .pk-from{transform:translateY(24px)}
+  .vbar{overflow-x:auto}
+  .bcol{flex-basis:84vw}
+}
+
+/* ── Ctrl+K palette ─────────────────────────────────────── */
+.pal-wrap{position:fixed;inset:0;z-index:30;display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px}
+.pal{position:relative;z-index:31;width:min(620px,100%);background:var(--surf);border-radius:14px;box-shadow:var(--sh2),inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column;max-height:76vh} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pal-in{display:flex;align-items:center;gap:10px;min-height:56px;padding:0 16px;border-bottom:1px solid var(--line);color:var(--tx3)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.pal-in input{flex:1;min-width:0;border:0;background:none;color:var(--tx);font:inherit;font-size:16px;outline:none;caret-color:var(--acT)}
+.pal-list{list-style:none;margin:0;padding:6px;overflow-y:auto}
+.pal-g{display:block;font-size:12px;font-weight:600;color:var(--tx3);padding:10px 10px 4px}
+.pal-list a{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:8px;color:var(--tx);font-size:14px;text-decoration:none}
+.pal-list a.on{background:var(--acS)}
+.pal-ic{display:grid;place-items:center;color:var(--tx3);flex:none}
+.pal-list a.on .pal-ic{color:var(--acT)}
+.pal-l{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pal-none{padding:28px 16px;text-align:center;color:var(--tx3);font-size:14px}
+.pal-f{display:flex;gap:16px;padding:8px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--tx3)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:35;background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:var(--sh2);max-width:calc(100% - 32px)} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+
+/* ── phones and small tablets: one drawer, no rail ─────── */
+@media (max-width:899px){
+  .nav{display:none}
+  .nav.open{display:flex;position:fixed;top:0;bottom:0;right:0;height:auto;max-width:92vw;box-shadow:var(--sh2)} /* taste-skill-ignore: drawer overlay */
+  .nav.open .tree{display:flex;background:var(--app)}
+  .tclose,.topen,.no-tree .topen{display:none}
+  .mclose,.mopen{display:inline-grid}
+  .main,.no-tree .main{margin:0;border-radius:0;box-shadow:none;min-height:100dvh} /* taste-skill-ignore: work-app hairlines and floating menus, the ClickUp direction the client chose */
+  .top{border-radius:0;padding:0 8px}
+  .gsearch{flex:0 0 auto;margin-inline-start:auto;margin-inline-end:0;background:none;width:34px;padding:0;justify-content:center}
+  .gsearch span,.gsearch .kbd{display:none}
+  .topr .ib[href]{display:none}
+  .content{padding:14px 16px 64px}
+  .ptitle{font-size:20px}
+  .savebar{padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+  .pal-wrap{padding-top:8px}
+}
+
 .fld textarea.inp{font-family:inherit}
 .fld .cnt-hint.over{color:var(--wn);font-weight:700}
 a.qnav-a{color:inherit}
-.qnav a{text-decoration:none}
-.flash{margin-bottom:4px}
+.qnav a{text-decoration:none;border-radius:8px}
 .soon{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:72px 24px}
 .soon .ico{width:64px;height:64px;border-radius:50%;background:var(--sf2);display:grid;place-items:center;color:var(--tx2)}
 
@@ -52,32 +300,27 @@ a.qnav-a{color:inherit}
 .ph img{width:100%;height:100%;object-fit:contain;display:block}
 .sec-card>summary .chev{transition:transform .2s var(--ease)}
 .sec-card:not([open])>summary svg:last-child{transform:rotate(90deg)}
+.sec-card>summary,.sec-hd{min-height:54px;padding:0 18px;font-size:16px}
+.sec-bd{padding:6px 18px 20px}
 .chip:has(.sr:focus-visible){outline:2px solid var(--tx);outline-offset:3px}
 select.inp{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:none}
-a.crumb{text-decoration:none}
-@media (max-width:899px){form .savebar{margin:0 -16px -64px !important}}
-/* adm.css uses «sel» for both a selected table row and a select-like input (display:flex); keep rows as rows */
-.tbl tr.sel{display:table-row}
-/* absolutely positioned screen-reader labels inside the table must stay in its scroll box */
-.tw{position:relative}
-
-/* product save bar on phones: one row; secondary actions become icons */
+.savebar{border-radius:0 0 12px 12px}
 @media (max-width:899px){
+  form .savebar{margin:0 -16px -64px !important}
   .savebar .sb-hide{display:none}
-  .savebar .sb-sec .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .savebar .sb-sec .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} /* taste-skill-ignore: visually hidden label, not a rule */
   .savebar .sb-sec{padding:0 12px}
-  .savebar{gap:6px;flex-wrap:nowrap}
+  .savebar{gap:6px;flex-wrap:nowrap;border-radius:0}
   .savebar .btn{padding-inline:14px}
+  .bulk{border-radius:24px;padding:10px 12px}
 }
-@media (max-width:899px){.bulk{border-radius:24px;padding:10px 12px}}
-
-/* fixed sidebar: never squeezed by a wide table on another page */
-.adm>.side{flex:0 0 256px;width:256px;min-width:256px}
-/* the artboard capped content at 1400px for a 1440 frame; on wider screens fill the page */
-.content{max-width:none}
 
 /* update: indeterminate progress while the server applies the file */
 .prog i.indet{width:40%;animation:fz-indet 1.4s var(--ease) infinite}
 @keyframes fz-indet{from{transform:translateX(60%)}to{transform:translateX(-260%)}}
 @media (prefers-reduced-motion:reduce){.prog i.indet{animation:none;width:100%;opacity:.5}}
 .drop:focus-within{outline:2px solid var(--tx);outline-offset:3px}
+.pal-in input:focus-visible{outline:none}
+.fz.dark .btn-ink{background:var(--sf3);color:var(--tx)}
+.fz.dark .btn-ink:hover{background:var(--bd)}
+

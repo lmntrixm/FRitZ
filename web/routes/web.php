@@ -42,6 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/', 'store')->name('store');
             Route::post('bulk', 'bulk')->name('bulk');
             Route::get('{product}/edit', 'edit')->name('edit');
+            Route::get('{product}/peek', 'peek')->name('peek');
+            Route::patch('{product}/status', 'status')->name('status');
             Route::put('{product}', 'update')->name('update');
             Route::post('{product}/duplicate', 'duplicate')->name('duplicate');
             Route::delete('{product}', 'destroy')->name('destroy');

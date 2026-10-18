@@ -14,6 +14,7 @@ use App\Support\MediaStore;
 use App\Support\ProductAudit;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -32,7 +33,12 @@ class ProductController extends Controller
             'status' => in_array($request->query('status'), ['published', 'draft', 'trashed'], true) ? $request->query('status') : '',
             'incomplete' => $request->boolean('incomplete'),
             'sort' => in_array($request->query('sort'), ['least', 'name'], true) ? $request->query('sort') : 'updated',
+            'view' => in_array($request->query('view'), ['table', 'board'], true) ? $request->query('view') : 'list',
+            'group' => in_array($request->query('group'), ['category', 'brand'], true) ? $request->query('group') : 'status',
         ];
+        if ($f['status'] === 'trashed' && $f['view'] === 'board') {
+            $f['view'] = 'list';
+        }
 
         $q = Product::query()->with(['brand', 'category.fields', 'protocols', 'media', 'values', 'updater'])
             ->when($f['status'] === 'trashed', fn ($q) => $q->onlyTrashed())
@@ -60,14 +66,62 @@ class ProductController extends Controller
         $paged = new LengthAwarePaginator($rows->slice(($page - 1) * self::PER_PAGE, self::PER_PAGE)->values(),
             $rows->count(), self::PER_PAGE, $page, ['path' => $request->url(), 'query' => $request->query()]);
 
+        // list and board show every match (~400 at most), grouped; the table pages
+        $groups = $f['view'] === 'table' ? collect() : $this->group($rows->values(), $f);
+
         return view('admin.products.index', [
-            'rows' => $paged, 'f' => $f,
+            'rows' => $paged, 'f' => $f, 'groups' => $groups, 'total' => $rows->count(),
+            'current' => $f['category'] ? Category::find($f['category']) : null,
             'counts' => ['all' => Product::count(), 'published' => Product::where('status', 'published')->count(),
                 'draft' => Product::where('status', 'draft')->count(), 'trashed' => Product::onlyTrashed()->count()],
             'brands' => Brand::query()->orderBy('sort')->get(),
             'categories' => Category::leaves()->get(),
             'protocols' => Protocol::query()->orderBy('sort')->get(),
         ]);
+    }
+
+    /** @return Collection<int, array{key: string, label: string, chip: string|null, icon: string|null, rows: Collection}> */
+    private function group($rows, array $f)
+    {
+        if ($f['status'] === 'trashed') {
+            return collect([['key' => 'trashed', 'label' => 'حذف‌شده', 'chip' => 'er', 'icon' => null, 'rows' => $rows]]);
+        }
+        if ($f['group'] === 'status') {
+            return collect([['published', 'منتشرشده', 'pub'], ['draft', 'پیش‌نویس', 'draft']])
+                ->map(fn ($g) => ['key' => $g[0], 'label' => $g[1], 'chip' => $g[2], 'icon' => null, 'rows' => $rows->filter(fn ($r) => $r['p']->status === $g[0])->values()])
+                ->filter(fn ($g) => $f['status'] === '' || $f['status'] === $g['key'])->values();
+        }
+        $key = $f['group'] === 'category' ? 'category' : 'brand';
+
+        return $rows->groupBy(fn ($r) => $r['p']->{$key.'_id'} ?? 0)
+            ->map(fn ($rs) => ['key' => $key.'-'.($rs[0]['p']->{$key.'_id'} ?? 0), 'label' => $rs[0]['p']->{$key}?->name ?? 'بدون '.($key === 'category' ? 'دسته' : 'برند'),
+                'chip' => null, 'icon' => $key === 'category' ? ($rs[0]['p']->category?->icon ?: 'folder') : 'tag', 'rows' => $rs->values(),
+                'sort' => $key === 'category' ? ($rs[0]['p']->category?->sort ?? 999) : ($rs[0]['p']->brand?->sort ?? 999)])
+            ->sortBy('sort')->values();
+    }
+
+    /** Side peek: the row's essentials without leaving the list. */
+    public function peek(Product $product)
+    {
+        $product->load(['brand', 'category.fields', 'protocols', 'media', 'values.option', 'updater', 'customSpecs']);
+
+        return view('admin.products.peek', ['p' => $product, 'a' => ProductAudit::check($product)]);
+    }
+
+    /** Inline status change from the list, board or peek. Publishing follows the same rule as the form. */
+    public function status(Request $request, Product $product)
+    {
+        $to = $request->validate(['status' => ['required', 'in:published,draft']])['status'];
+        if ($to === 'published' && ($blockers = ProductAudit::check($product)['blockers'])) {
+            return response()->json(['ok' => false, 'msg' => 'منتشر نشد. اول این را کامل کنید: '.implode('، ', $blockers)], 422);
+        }
+        if ($product->status !== $to) {
+            $product->update(['status' => $to, 'published_at' => $product->published_at ?? ($to === 'published' ? now() : null), 'updated_by' => $request->user()->id]);
+            Activity::log('product.'.($to === 'published' ? 'publish' : 'draft'), $product, ['name' => $product->name]);
+        }
+
+        return response()->json(['ok' => true, 'status' => $to,
+            'msg' => '«'.$product->name.'» '.($to === 'published' ? 'منتشر شد و در کاتالوگ عمومی دیده می‌شود.' : 'به پیش‌نویس برگشت و از کاتالوگ عمومی برداشته شد.')]);
     }
 
     public function create(Request $request)
@@ -375,7 +429,7 @@ class ProductController extends Controller
                 ->orWhere('code_compact', 'like', '%'.addcslashes(Fa::compact($q), '%_\\').'%'))
             ->whereKeyNot((int) $request->query('except'))->orderBy('name')->limit(8)->get()
             ->map(fn (Product $p) => ['id' => $p->id, 'name' => $p->name, 'code' => $p->model_code, 'art' => $p->art(),
-                'img' => $p->images()->first()?->url()]));
+                'img' => $p->images()->first()?->url(), 'url' => route('admin.products.edit', $p)]));
     }
 
     /** For the edit form: which fields a category brings, rendered when the category changes. */

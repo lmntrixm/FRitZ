@@ -33,7 +33,7 @@ Read these first, in this order:
   - `public/css/fz.css`: port of `project/fz.css`. `public/css/site.css`: the production layer (fixed overlays, page scroll).
   - `app/Support/Icons.php`: generated from `Icon.dc.html`. `resources/views/partials/art-sprite.blade.php`: generated from `ProductArt.dc.html`. Placeholder drawings only until real photos arrive.
   - Browser state (inquiry list, compare, theme) lives in `public/js/fz.js` as Alpine stores in localStorage.
-  - Admin: `/admin` (`app/Http/Controllers/Admin`, `resources/views/admin`, `public/css/adm.css` ported plus `admin.css`). The first «مدیر کل» is created at `/admin/setup` with the `DEPLOY_TOKEN` key (no SSH), or locally with `php artisan fritz:user`. Sections not built yet show an honest "next stage" page.
+  - Admin: `/admin` (`app/Http/Controllers/Admin`, `resources/views/admin`, `public/css/adm.css` ported plus `admin.css`). ClickUp-style shell chosen by the client (see DESIGN.md «Admin»): rail + catalog tree (`app/Support/AdminTree.php`, cached, cleared on product save) + Ctrl+K palette in `components/layouts/admin.blade.php`; products have list/table/board views, side peek (`products/peek`) and in-place status (`components/status`, `PATCH products/{slug}/status`). The first «مدیر کل» is created at `/admin/setup` with the `DEPLOY_TOKEN` key (no SSH), or locally with `php artisan fritz:user`. Sections not built yet show an honest "next stage" page.
   - Products admin: `Admin\ProductController`, `app/Support/ProductAudit.php` (completeness and publish blockers; photo, datasheet and protocol are warnings only), `app/Support/MediaStore.php` (uploads to `public/media`, photos to WebP ≤1600px). Dangerous actions use `data-confirm` (handled in `public/js/admin.js`).
   - Update admin: `Admin\UpdateController`, `app/Support/ProductSheet.php` (export, analyse/diff, apply with backup, rollback), `app/Support/Xlsx.php` (dependency-free xlsx), `app/Support/FritzPackage.php` (the `.fritz` format; the browser packer `resources/views/admin/update/packer.blade.php` must stay byte-compatible). Rules in `docs/PLAN.md` «قانون فایل به‌روزرسانی».
   - `CatalogSeeder` holds the reference data. `DemoProductSeeder` holds the design's sample products, for the test domain only (`FRITZ_DEMO_DATA`).
@@ -70,4 +70,4 @@ Read these first, in this order:
 - `impeccable detect`
 - the taste-skill `lint.mjs`
 
-The admin panel is an "Operate" surface: precision over expression. Table row dividers are the one place a line is allowed.
+The admin panel is an "Operate" surface: precision over expression. Inside the admin, hairlines between regions and rows are part of the chosen work-app look (lines in `admin.css` carry `taste-skill-ignore` with that reason); the public catalog keeps its no-lines rule.
