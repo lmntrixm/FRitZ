@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — مقایسه محصولات</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1314px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>مقایسه</b><span>نوار شناور و ظرفیت · جدول · فقط تفاوت‌ها</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; font-weight: 800">تاچ پنل</b><span class="t-c mut3">۴۲ محصول</span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+      </header>
+      <div class="g2" style="padding: 16px">
+        <sc-for list="{{grid}}" as="p" hint-placeholder-count="4">
+          <article class="card pc">
+            <label class="cmp"><input type="checkbox" class="cbx" checked="{{p.on}}">مقایسه</label>
+            <div class="pc-open"><div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="110" hint-size="110px,110px"></dc-import></div>
+            <div class="pc-b"><span class="brand">{{p.brand}}</span><h3 class="pc-n">{{p.name}}</h3><span class="code">{{p.code}}</span></div></div>
+          </article>
+        </sc-for>
+      </div>
+      <div class="toast-wrap up" style="bottom: 96px" role="status"><div class="toast"><dc-import name="Icon" i="info" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">حداکثر ۳ محصول. برای افزودن، یکی را بردارید.</span></div></div>
+      <div class="cbar" role="region" aria-label="نوار مقایسه">
+        <sc-for list="{{three}}" as="p" hint-placeholder-count="3"><span class="slot"><dc-import name="ProductArt" kind="{{p.kind}}" s="46" hint-size="46px,46px"></dc-import></span></sc-for>
+        <span class="t-c" style="font-weight: 700">۳ از ۳</span>
+        <button class="btn btn-p btn-sm">مقایسه</button>
+      </div>
+    </div>
+    <p class="cap">نوار شناور پر و پیام ظرفیت</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <b style="font-size: 16px; font-weight: 800">مقایسه ۳ محصول</b>
+        <div class="sp"></div>
+        <label class="opt" style="font-size: 13px; font-weight: 700; padding-inline-end: 8px"><input type="checkbox" class="cbx">فقط تفاوت‌ها</label>
+      </header>
+      <div class="scroll" style="overflow-x: auto">
+        <div style="width: 568px; padding-bottom: 24px">
+          <div style="display: grid; grid-template-columns: 112px repeat(3, 148px); gap: 0; position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--sf3)">
+            <div style="position: sticky; right: 0; background: var(--bg); padding: 14px 16px 12px 8px; display: flex; align-items: flex-end"><span class="t-c mut3" style="font-weight: 700">ویژگی</span></div>
+            <sc-for list="{{three}}" as="p" hint-placeholder-count="3">
+              <div style="padding: 12px 8px; display: flex; flex-direction: column; gap: 6px; position: relative">
+                <button class="ib" style="position: absolute; top: 4px; left: 0; width: 36px; height: 36px" aria-label="حذف از مقایسه"><dc-import name="Icon" i="x" s="16" hint-size="16px,16px"></dc-import></button>
+                <span class="ph" style="height: 92px; border-radius: 0"><dc-import name="ProductArt" kind="{{p.kind}}" s="84" hint-size="84px,84px"></dc-import></span>
+                <b style="font-size: 13px; line-height: 1.55; min-height: 40px">{{p.name}}</b>
+                <span class="code">{{p.code}}</span>
+                <button class="{{p.addCls}}" style="min-height: 40px; font-size: 12px">{{p.addTxt}}</button>
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+            <div class="{{r.cls}}" style="display: grid; grid-template-columns: 112px repeat(3, 148px); border-bottom: 1px solid var(--sf3)">
+              <div style="position: sticky; right: 0; padding: 12px 16px 12px 8px; font-size: 12px; font-weight: 700; color: var(--tx2); background: {{r.bg}}">{{r.k}}</div>
+              <sc-for list="{{r.v}}" as="v" hint-placeholder-count="3"><div style="padding: 12px 8px; font-size: 13px; font-weight: 600"><span class="{{v.c}}">{{v.t}}</span></div></sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <p class="cap">ردیف‌های متفاوت هایلایت · اسکرول افقی · ستون برچسب ثابت</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <b style="font-size: 16px; font-weight: 800">مقایسه ۳ محصول</b>
+        <div class="sp"></div>
+        <label class="opt" style="font-size: 13px; font-weight: 700; padding-inline-end: 8px"><input type="checkbox" class="cbx" checked>فقط تفاوت‌ها</label>
+      </header>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--sf3); background: var(--bg); flex: none">
+        <sc-for list="{{three}}" as="p" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 6px; min-width: 0"><span class="ph" style="width: 36px; height: 36px; border-radius: 8px; flex: none"><dc-import name="ProductArt" kind="{{p.kind}}" s="32" hint-size="32px,32px"></dc-import></span><span class="code" style="font-size: 11px; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{p.code}}</span></div>
+        </sc-for>
+      </div>
+      <div class="scroll">
+        <p class="t-c mut3" style="padding: 12px 16px 4px">هدر محصولات هنگام اسکرول ثابت و فشرده می‌ماند. ۵ ردیف متفاوت از ۸</p>
+        <sc-for list="{{diffs}}" as="r" hint-placeholder-count="5">
+          <div style="padding: 12px 16px; border-bottom: 1px solid var(--sf3)">
+            <div class="t-c mut3" style="font-weight: 700; margin-bottom: 6px">{{r.k}}</div>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><sc-for list="{{r.v}}" as="v" hint-placeholder-count="3"><span class="{{v.c}}" style="font-size: 13px; font-weight: 700">{{v.t}}</span></sc-for></div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="stick">
+        <button class="btn btn-p btn-lg btn-w"><dc-import name="Icon" i="plus" s="20" sw="2" hint-size="20px,20px"></dc-import>افزودن هر ۳ به لیست استعلام</button>
+      </div>
+    </div>
+    <p class="cap">«فقط تفاوت‌ها» روشن + هدر چسبان</p>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1314,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const three = [
+      { name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', kind: 'panel7', addCls: 'pc-add in', addTxt: 'در لیست' },
+      { name: 'تاچ پنل ۷ اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', kind: 'panel7', addCls: 'pc-add', addTxt: 'افزودن' },
+      { name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', brand: 'Zennio', kind: 'panel', addCls: 'pc-add', addTxt: 'افزودن' }
+    ];
+    const v = (a, b, c, lat) => [a, b, c].map((x) => ({ t: x, c: lat ? 'lat' : '' }));
+    const all = [
+      { k: 'برند', v: v('Orvibo', 'Akubela', 'Zennio', true), d: true },
+      { k: 'پروتکل', v: v('Zigbee', 'Zigbee', 'KNX', true), d: true },
+      { k: 'نمایشگر', v: v('۷ اینچ', '۷ اینچ', '۵ اینچ'), d: true },
+      { k: 'سیستم‌عامل', v: v('لینوکس', 'لینوکس', 'لینوکس'), d: false },
+      { k: 'ابعاد قاب', v: v('۸۶×۸۶', '۱۲۰×۸۶', '۸۶×۸۶'), d: true },
+      { k: 'نصب', v: v('توکار', 'توکار / روکار', 'توکار'), d: true },
+      { k: 'دسته', v: v('تاچ پنل', 'تاچ پنل', 'تاچ پنل'), d: false },
+      { k: 'دیتاشیت', v: v('PDF', 'PDF', 'PDF', true), d: false }
+    ];
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      three,
+      grid: [
+        { ...three[0], on: true }, { ...three[1], on: true }, { ...three[2], on: true },
+        { name: 'تاچ پنل ۷ اینچ SmartTouch', code: 'ST-7', brand: 'ABB', kind: 'panel7', on: false }
+      ],
+      rows: all.map((r) => ({ ...r, cls: r.d ? 'diff' : '', bg: r.d ? 'var(--acS)' : 'var(--bg)' })),
+      diffs: all.filter((r) => r.d)
+    };
+  }
+}
+</script>
+</body>
+</html>

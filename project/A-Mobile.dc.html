@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — موبایل</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 2158px; height: 1980px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>پنل مدیریت — موبایل ۳۹۰</b><span>ورود · منوی Drawer · نمای کلی · لیست محصولات · ویرایش محصول</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div style="display: flex; flex-direction: column"><div class="{{th.cls}} phone">
+      <div class="scroll" style="padding: 56px 20px 24px; display: flex; flex-direction: column; gap: 18px">
+        <div class="logo" style="padding: 0"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></div>
+        <div><h1 class="t-h1">ورود به پنل مدیریت</h1><p class="t-s mut">کاتالوگ آنلاین محصولات</p></div>
+        <div class="msgbox er" role="alert"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span>نام کاربری یا رمز عبور درست نیست.</span></div>
+        <div class="fld"><label class="lab">نام کاربری یا ایمیل</label><input class="inp ltr" value="reza.karimi"></div>
+        <div class="fld"><label class="lab">رمز عبور</label><div style="display: flex; gap: 8px"><input class="inp ltr err" type="password" value="wrongpass"><button class="ib ib-b" aria-label="نمایش رمز"><dc-import name="Icon" i="eye" s="18" hint-size="18px,18px"></dc-import></button></div><span class="emsg">رمز عبور اشتباه است.</span></div>
+        <label class="opt" style="font-size: 13px"><input type="checkbox" class="cbx" checked>مرا به خاطر بسپار</label>
+        <button class="btn btn-p btn-lg btn-w">ورود</button>
+        <a href="#" class="t-s" style="color: var(--acT); font-weight: 700; text-align: center; min-height: 44px; display: grid; place-items: center">فراموشی رمز</a>
+      </div>
+    </div><p class="cap">ورود — خطا</p></div>
+
+    <div style="display: flex; flex-direction: column"><div class="{{th.cls}} phone">
+      <header class="hdr"><button class="ib" aria-label="منو"><dc-import name="Icon" i="menu" s="22" hint-size="22px,22px"></dc-import></button><b style="font-size: 16px">نمای کلی</b><div class="sp"></div></header>
+      <div class="scrim"></div>
+      <aside class="side" style="position: absolute; top: 0; bottom: 0; right: 0; z-index: 6; width: 300px; box-shadow: var(--sh2); border: 0" aria-label="منوی اصلی">
+        <div style="display: flex; align-items: center; justify-content: space-between"><a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a><button class="ib" aria-label="بستن منو"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <nav style="display: flex; flex-direction: column; gap: 2px">
+          <sc-for list="{{navM}}" as="n" hint-placeholder-count="7">
+            <a class="{{n.cls}}" href="#" style="min-height: 46px"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if></a>
+          </sc-for>
+        </nav>
+        <div class="me"><span class="av">رک</span><span style="display: flex; flex-direction: column; line-height: 1.5; flex: 1"><b style="font-size: 13px">رضا کریمی</b><span class="t-c mut3">ویرایشگر محتوا</span></span><button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="18" hint-size="18px,18px"></dc-import></button></div>
+      </aside>
+    </div><p class="cap">منوی کناری به Drawer تبدیل می‌شود (نقش ویرایشگر: بدون به‌روزرسانی، کاربران و تنظیمات)</p></div>
+
+    <div style="display: flex; flex-direction: column"><div class="{{th.cls}} phone">
+      <header class="hdr"><button class="ib" aria-label="منو"><dc-import name="Icon" i="menu" s="22" hint-size="22px,22px"></dc-import></button><b style="font-size: 16px">نمای کلی</b><div class="sp"></div><button class="ib" aria-label="جست‌وجو"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import></button><button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import><span class="cnt">۳</span></button></header>
+      <div class="scroll" style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div class="stat" style="padding: 14px"><span class="l">محصولات</span><span class="v" style="font-size: 24px">۴۰۲</span><span class="s">۱۴ پیش‌نویس</span></div>
+          <div class="stat" style="padding: 14px"><span class="l">استعلام هفته</span><span class="v" style="font-size: 24px">۴۷</span><span class="s"><span class="delta">↑ ۱۸٪</span></span></div>
+        </div>
+        <div class="stat" style="padding: 14px"><span class="l">پراستعلام‌ترین</span><b style="font-size: 14px">تاچ پنل ۷ اینچ MixPad Matter</b><span class="s">۶۲ استعلام در ۱۲ هفته</span></div>
+        <section class="panel"><div class="panel-h" style="padding: 12px 14px"><h2>استعلام در هفته</h2></div><div style="padding: 10px 12px">
+          <svg viewBox="0 0 340 130" width="100%" class="chart" role="img" aria-label="نمودار خطی استعلام هفتگی"><line x1="10" y1="110" x2="330" y2="110" style="stroke: var(--bd2)"></line><line x1="10" y1="60" x2="330" y2="60" style="stroke: var(--grid)" stroke-dasharray="3 4"></line><polyline points="{{mPts}}" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" style="stroke: var(--c2)"></polyline><circle cx="{{mLastX}}" cy="{{mLastY}}" r="4.5" style="fill: var(--c2); stroke: var(--sf)" stroke-width="2"></circle></svg>
+        </div></section>
+        <section class="panel"><div class="panel-h" style="padding: 12px 14px"><h2>نیاز به توجه</h2></div>
+          <sc-for list="{{attn}}" as="a" hint-placeholder-count="4"><a href="#" style="display: flex; align-items: center; gap: 10px; padding: 0 14px; min-height: 52px; border-bottom: 1px solid var(--line)"><dc-import name="Icon" i="{{a.i}}" s="18" hint-size="18px,18px"></dc-import><span style="flex: 1; font-size: 14px; font-weight: 600">{{a.l}}</span><span class="{{a.c}}">{{a.n}}</span><dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></a></sc-for>
+        </section>
+      </div>
+    </div><p class="cap">نمای کلی</p></div>
+
+    <div style="display: flex; flex-direction: column"><div class="{{th.cls}} phone">
+      <header class="hdr"><button class="ib" aria-label="منو"><dc-import name="Icon" i="menu" s="22" hint-size="22px,22px"></dc-import></button><b style="font-size: 16px">محصولات</b><span class="t-c mut3">۴۰۲</span><div class="sp"></div><button class="ib" aria-label="افزودن محصول" style="background: var(--ac); color: var(--acI)"><dc-import name="Icon" i="plus" s="20" sw="2" hint-size="20px,20px"></dc-import></button></header>
+      <div class="bar" style="flex-wrap: wrap"><div class="field" style="flex: 1; height: 44px"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="نام یا کد مدل" aria-label="جست‌وجو"></div><button class="btn btn-s btn-sm"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر<span class="cnt" style="position: static">۱</span></button></div>
+      <div class="chips-x" style="padding-top: 10px; flex: none"><span class="chip on rm">فقط ناقص‌ها<button class="x" aria-label="حذف فیلتر"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span></div>
+      <div class="scroll" style="padding: 10px 16px 90px; display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{mRows}}" as="r" hint-placeholder-count="5">
+          <article class="card" style="padding: 12px; gap: 10px; flex-direction: row; align-items: center">
+            <input type="checkbox" class="cbx" checked="{{r.sel}}" aria-label="انتخاب">
+            <span class="thumb" style="width: 52px; height: 52px"><dc-import name="ProductArt" kind="{{r.k}}" s="46" hint-size="46px,46px"></dc-import></span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 13px; line-height: 1.5">{{r.n}}</b><span style="display: flex; align-items: center; gap: 8px"><span class="code">{{r.c}}</span><span class="{{r.sc}}" style="height: 20px; font-size: 11px">{{r.s}}</span></span><span class="cmpl"><span class="bar" style="width: 90px"><i style="width: {{r.p}}%; background: {{r.pc}}"></i></span>{{r.pt}}</span></span>
+            <dc-import name="Icon" i="chevNext" s="18" hint-size="18px,18px"></dc-import>
+          </article>
+        </sc-for>
+      </div>
+      <div class="bulk" style="position: absolute; inset-inline: 12px; bottom: 12px; z-index: 4"><b style="font-size: 13px">۱ انتخاب</b><div style="flex: 1"></div><button class="btn btn-g btn-sm" aria-label="انتشار"><dc-import name="Icon" i="globe" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-g btn-sm" aria-label="پیش‌نویس"><dc-import name="Icon" i="eye" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-x btn-sm" aria-label="حذف"><dc-import name="Icon" i="trash" s="18" hint-size="18px,18px"></dc-import></button></div>
+    </div><p class="cap">لیست محصولات — کارت به‌جای جدول، انتخاب گروهی</p></div>
+
+    <div style="display: flex; flex-direction: column"><div class="{{th.cls}} phone">
+      <header class="hdr"><button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button><div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 15px">ویرایش محصول</b><span class="code">HYP-E7</span></div><div class="sp"></div><span class="st draft">پیش‌نویس</span></header>
+      <div style="display: flex; gap: 6px; padding: 10px 16px; overflow-x: auto; border-bottom: 1px solid var(--line); flex: none" aria-label="بخش‌ها"><span class="chip" style="height: 32px; font-size: 12px">پایه</span><span class="chip on" style="height: 32px; font-size: 12px; border-color: var(--err); background: var(--errS)">مشخصات ●</span><span class="chip" style="height: 32px; font-size: 12px">توضیحات</span><span class="chip" style="height: 32px; font-size: 12px; border-color: var(--err)">رسانه ●</span><span class="chip" style="height: 32px; font-size: 12px">ارتباط‌ها</span></div>
+      <div class="scroll" style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 12px">
+        <div class="msgbox er"><dc-import name="Icon" i="alert" s="16" hint-size="16px,16px"></dc-import><span><b>۲ مورد مانع انتشار است.</b></span></div>
+        <section class="sec-card"><div class="sec-hd" style="min-height: 52px; font-size: 15px">۲. مشخصات فنی<span style="flex: 1"></span><dc-import name="Icon" i="chevUp" s="18" hint-size="18px,18px"></dc-import></div><div class="sec-bd" style="padding-top: 14px">
+          <div class="fld"><label class="lab">سیستم‌عامل</label><div class="inp sel"><span>لینوکس</span><dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></div></div>
+          <div class="fld"><label class="lab">اندازه نمایشگر</label><div style="display: flex; gap: 8px; align-items: center"><input class="inp ltr" value="7"><span class="t-s mut">اینچ</span></div></div>
+          <div class="fld"><label class="lab">اندازه قوطی <span class="req">*</span></label><div class="inp sel err"><span class="mut3">انتخاب کنید</span><dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></div><span class="emsg">برای انتشار لازم است.</span></div>
+        </div></section>
+        <section class="sec-card"><div class="sec-hd" style="min-height: 52px; font-size: 15px">۴. رسانه<span style="flex: 1"></span><dc-import name="Icon" i="chevUp" s="18" hint-size="18px,18px"></dc-import></div><div class="sec-bd" style="padding-top: 14px">
+          <div style="display: flex; gap: 8px"><div class="ph" style="width: 84px; height: 84px; border-radius: 0; box-shadow: inset 0 0 0 2px var(--tx)"><dc-import name="ProductArt" kind="panel7" s="70" hint-size="70px,70px"></dc-import></div><div class="ph" style="width: 84px; height: 84px; border-radius: 0"><dc-import name="ProductArt" kind="panel7" s="56" hint-size="56px,56px"></dc-import></div><button class="drop" style="width: 84px; height: 84px; padding: 6px; justify-content: center"><dc-import name="Icon" i="plus" s="20" hint-size="20px,20px"></dc-import><span class="t-c" style="font-size: 11px">عکس</span></button></div>
+          <div class="drop err" style="padding: 14px; flex-direction: row; justify-content: center"><dc-import name="Icon" i="doc" s="18" hint-size="18px,18px"></dc-import><span class="t-s" style="font-weight: 700">آپلود دیتاشیت <span class="lat">PDF</span></span></div>
+        </div></section>
+      </div>
+      <div class="stick" style="flex-direction: column; gap: 8px; padding-top: 10px">
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--wn)"><span style="width: 7px; height: 7px; border-radius: 50%; background: currentColor"></span>۲ تغییر ذخیره‌نشده</span>
+        <div style="display: flex; gap: 8px"><button class="btn btn-s" style="flex: 1">ذخیره پیش‌نویس</button><button class="btn btn-p" style="flex: 1">انتشار</button><button class="ib ib-b" aria-label="گزینه‌های بیشتر: کپی، انصراف"><dc-import name="Icon" i="more" s="18" sw="2.6" hint-size="18px,18px"></dc-import></button></div>
+      </div>
+    </div><p class="cap">ویرایش محصول — ناوبری بخش‌ها و نوار عملیات چسبان</p></div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":2158,"height":1980}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const data = [22, 28, 25, 31, 35, 30, 38, 41, 36, 44, 40, 47];
+    const pts = data.map((v, i) => [12 + i * 28.5, 110 - v * 2]);
+    const R = (n, c, k, pub, p, sel) => ({ n, c, k, s: pub ? 'منتشرشده' : 'پیش‌نویس', sc: pub ? 'st pub' : 'st draft', p, pt: String(p).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]) + '٪', pc: p >= 90 ? 'var(--okT)' : p >= 60 ? 'var(--wn)' : 'var(--err)', sel: !!sel });
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      navM: [
+        { l: 'نمای کلی', i: 'grid2', cls: 'nv on' }, { l: 'محصولات', i: 'box', cls: 'nv' }, { l: 'دسته‌ها و فیلترها', i: 'folder', cls: 'nv' },
+        { l: 'برندها و پروتکل‌ها', i: 'tag', cls: 'nv' }, { l: 'رسانه', i: 'image', cls: 'nv' }, { l: 'استعلام‌ها', i: 'chat', cls: 'nv', n: '۱۲' }, { l: 'گزارش فعالیت', i: 'activity', cls: 'nv' }
+      ].map((n) => ({ ...n, n: n.n || '' })),
+      mPts: pts.map((p) => p.join(',')).join(' '), mLastX: pts[11][0], mLastY: pts[11][1],
+      attn: [{ i: 'image', l: 'بدون عکس', n: '۱۸', c: 'st er' }, { i: 'doc', l: 'بدون دیتاشیت', n: '۳۱', c: 'st wn' }, { i: 'tag', l: 'بدون پروتکل', n: '۲۴', c: 'st wn' }, { i: 'table', l: 'مشخصات ناقص', n: '۴۲', c: 'st wn' }],
+      mRows: [
+        R('تاچ پنل ۷ اینچ Hypanel Elite', 'HYP-E7', 'panel7', false, 60, true),
+        R('تاچ پنل ۱۰ اینچ اندرویدی', 'OT-P10', 'panel7', true, 50),
+        R('پنل آیفون هوشمند R20A', 'R20A', 'intercom', false, 60),
+        R('تاچ پنل ۴ اینچ MixPad Mini', 'MIXPAD-M4', 'panel', true, 70),
+        R('سرور خانه هوشمند Miniserver', 'MS-GEN2', 'server', true, 80)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

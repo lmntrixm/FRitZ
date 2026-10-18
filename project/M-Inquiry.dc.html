@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — لیست استعلام و واتساپ</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1736px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>لیست استعلام</b><span>اقلام · اطلاعات و پیش‌نمایش پیام · خالی · پس از ارسال</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr"><a class="logo" href="#"><span class="mk"></span><b>FRitZ</b></a><div class="sp"></div><button class="ib" aria-label="لیست استعلام، ۳ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۳</span></button></header>
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="لیست استعلام" style="height: 92%">
+        <span class="grab"></span>
+        <div class="sheet-h"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="t-h2">لیست استعلام</h2><span class="t-c mut3">۳ قلم · ۷ عدد</span></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <div class="sheet-b">
+          <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px; padding: 14px 0">
+              <span class="ph" style="width: 64px; height: 64px; border-radius: 0; flex: none"><dc-import name="ProductArt" kind="{{it.kind}}" s="58" hint-size="58px,58px"></dc-import></span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+                <b style="font-size: 14px; line-height: 1.6">{{it.name}}</b>
+                <span class="code">{{it.code}} · {{it.brand}}</span>
+                <div style="display: flex; align-items: center; justify-content: space-between">
+                  <div class="qty" role="group" aria-label="تعداد"><button aria-label="افزایش"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import></button><b>{{it.q}}</b><button aria-label="کاهش"><dc-import name="Icon" i="minus" s="16" sw="2" hint-size="16px,16px"></dc-import></button></div>
+                  <button class="ib" aria-label="حذف از لیست"><dc-import name="Icon" i="trash" s="20" hint-size="20px,20px"></dc-import></button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <a class="more" href="#" style="margin-top: 6px"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن محصول دیگر</a>
+        </div>
+        <div class="sheet-f" style="flex-direction: column; gap: 8px">
+          <button class="btn btn-p btn-lg btn-w"><dc-import name="Icon" i="chat" s="20" sw="1.8" hint-size="20px,20px"></dc-import>ارسال استعلام در واتساپ</button>
+          <p class="t-c mut3" style="text-align: center">بدون ثبت‌نام · قیمت در واتساپ اعلام می‌شود</p>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Drawer از پایین — اقلام و تعداد</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr"><a class="logo" href="#"><span class="mk"></span><b>FRitZ</b></a><div class="sp"></div><button class="ib" aria-label="لیست استعلام، ۳ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۳</span></button></header>
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="لیست استعلام" style="height: 92%">
+        <span class="grab"></span>
+        <div class="sheet-h"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="t-h2">لیست استعلام</h2><span class="t-c mut3">۳ قلم · ۷ عدد</span></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <div class="sheet-b" style="display: flex; flex-direction: column; gap: 14px; padding-top: 16px">
+          <div><label class="lab">نام شما <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><input class="inp" value="علی رضایی"></div>
+          <div><label class="lab">نام یا توضیح پروژه <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><textarea class="inp" rows="2">ویلای دو طبقه، لواسان</textarea></div>
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between"><span class="lab" style="margin: 0">پیش‌نمایش پیام</span><button class="btn btn-g btn-sm" style="padding: 0 8px"><dc-import name="Icon" i="copy" s="16" hint-size="16px,16px"></dc-import>کپی</button></div>
+            <div class="msg" style="margin-top: 6px">{{msg}}</div>
+          </div>
+        </div>
+        <div class="sheet-f" style="flex-direction: column; gap: 8px">
+          <button class="btn btn-p btn-lg btn-w"><dc-import name="Icon" i="chat" s="20" sw="1.8" hint-size="20px,20px"></dc-import>ارسال استعلام در واتساپ</button>
+          <p class="t-c mut3" style="text-align: center">پیام در واتساپ باز می‌شود و پیش از ارسال قابل ویرایش است.</p>
+        </div>
+      </div>
+    </div>
+    <p class="cap">فیلدهای اختیاری و متن آماده پیام</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr"><a class="logo" href="#"><span class="mk"></span><b>FRitZ</b></a><div class="sp"></div><button class="ib" aria-label="لیست استعلام، خالی"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button></header>
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="لیست استعلام" style="height: 70%">
+        <span class="grab"></span>
+        <div class="sheet-h"><h2 class="t-h2">لیست استعلام</h2><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <div class="empty" style="flex: 1; justify-content: center">
+          <span class="ico"><dc-import name="Icon" i="inquiry" s="32" hint-size="32px,32px"></dc-import></span>
+          <h3 class="t-h2">لیست استعلام خالی است</h3>
+          <p class="t-s mut">محصولات مورد نظرتان را اضافه کنید تا قیمت همه را یکجا در واتساپ بپرسید.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 8px">
+            <a class="btn btn-p btn-w" href="#">مشاهده محصولات</a>
+            <a class="btn btn-s btn-w" href="#"><dc-import name="Icon" i="compass" s="20" hint-size="20px,20px"></dc-import>محصول مناسبم را پیدا کن</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">حالت خالی</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr"><a class="logo" href="#"><span class="mk"></span><b>FRitZ</b></a><div class="sp"></div><button class="ib" aria-label="لیست استعلام، ۳ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۳</span></button></header>
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="استعلام ارسال شد" style="height: 70%">
+        <span class="grab"></span>
+        <div class="sheet-h"><h2 class="t-h2">لیست استعلام</h2><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <div class="empty" style="flex: 1; justify-content: center">
+          <span class="ico" style="background: var(--acS); color: var(--tx)"><dc-import name="Icon" i="checkCircle" s="34" hint-size="34px,34px"></dc-import></span>
+          <h3 class="t-h2">استعلام به واتساپ منتقل شد</h3>
+          <p class="t-s mut">پس از ارسال پیام، کارشناسان FRitZ قیمت و زمان تأمین را برایتان می‌فرستند.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 8px">
+            <a class="btn btn-p btn-w" href="#">بازگشت به کاتالوگ</a>
+            <button class="btn btn-s btn-w"><dc-import name="Icon" i="external" s="18" hint-size="18px,18px"></dc-import>واتساپ باز نشد؟ دوباره باز کن</button>
+            <button class="btn btn-g btn-w" style="color: var(--acT)">پاک کردن لیست</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">پس از ارسال — لیست تا پاک کردن ذخیره می‌ماند</p>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1736,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      items: [
+        { name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', kind: 'panel7', q: '۲' },
+        { name: 'رله ۲۴ کانال', code: 'SA/S 24.16', brand: 'ABB', kind: 'relay', q: '۱' },
+        { name: 'پنل آیفون هوشمند R20A', code: 'R20A', brand: 'Akuvox', kind: 'intercom', q: '۴' }
+      ],
+      msg: 'سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:\n\n۱. تاچ پنل ۷ اینچ MixPad Matter\n    کد MIXPAD-7M — ۲ عدد\n۲. رله ۲۴ کانال\n    کد SA/S 24.16 — ۱ عدد\n۳. پنل آیفون هوشمند R20A\n    کد R20A — ۴ عدد\n\nنام: علی رضایی\nپروژه: ویلای دو طبقه، لواسان\n\nارسال‌شده از کاتالوگ FRitZ'
+    };
+  }
+}
+</script>
+</body>
+</html>

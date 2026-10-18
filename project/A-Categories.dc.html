@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — دسته‌ها و فیلترها</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>دسته‌ها و فیلترها</b><span>درخت قابل کشیدن · فیلترهای اختصاصی «تاچ پنل» · پنل ویرایش فیلتر باز</span></div>
+  <div class="{{th.cls}} adm" style="position: relative">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>دسته‌ها و فیلترها</span></nav><h1 class="ptitle">دسته‌ها و فیلترها</h1></div>
+          <div class="acts"><button class="btn btn-s btn-sm"><dc-import name="Icon" i="folder" s="18" hint-size="18px,18px"></dc-import>دسته جدید</button><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>فیلتر جدید برای «تاچ پنل»</button></div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="panel" style="flex: 0 1 300px; min-width: 260px">
+            <div class="panel-h"><h2>دسته‌ها</h2><span class="t-c mut3">۱۴ دسته · ۴۰۲ محصول</span></div>
+            <div style="padding: 8px" role="tree" aria-label="درخت دسته‌ها">
+              <sc-for list="{{tree}}" as="t" hint-placeholder-count="16">
+                <sc-if value="{{t.drop}}" hint-placeholder-val="{{false}}"><div class="tdrop" aria-hidden="true"></div></sc-if>
+                <div class="{{t.cls}}" role="treeitem" aria-selected="{{t.on}}" style="padding-inline-start: {{t.pad}}px">
+                  <span class="grip" aria-label="جابه‌جایی"><dc-import name="Icon" i="drag" s="16" sw="2.4" hint-size="16px,16px"></dc-import></span>
+                  <sc-if value="{{t.parent}}" hint-placeholder-val="{{false}}"><dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></sc-if>
+                  <span>{{t.l}}</span><span class="c">{{t.n}}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p class="t-c mut3" style="padding: 0 18px 14px">برای ترتیب‌دهی بکشید. با صفحه‌کلید: <span class="kbd">Alt</span> + فلش بالا/پایین.</p>
+          </section>
+
+          <section class="panel" style="flex: 999 1 560px; min-width: 0">
+            <div class="panel-h"><div><h2>فیلترهای «تاچ پنل»</h2><p class="t-c mut3">۴ فیلتر اختصاصی · در کاتالوگ عمومی و جدول مقایسه</p></div><button class="btn btn-s btn-sm"><dc-import name="Icon" i="eye" s="16" hint-size="16px,16px"></dc-import>پیش‌نمایش فیلتر عمومی</button></div>
+            <div class="msgbox in" style="margin: 14px 18px 4px"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import><span>فیلترهای مشترک <b>دسته، برند و پروتکل</b> برای همه دسته‌ها ثابت‌اند.</span></div>
+            <div class="tw"><table class="tbl">
+              <thead><tr><th style="width: 32px"></th><th>فیلتر</th><th>کلید</th><th>نوع</th><th>گزینه‌ها / بازه</th><th>فیلتر عمومی</th><th>مقایسه</th><th>بدون مقدار</th><th></th></tr></thead>
+              <tbody>
+                <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+                  <tr class="{{f.rc}}">
+                    <td style="color: var(--tx3)"><dc-import name="Icon" i="drag" s="16" sw="2.4" hint-size="16px,16px"></dc-import></td>
+                    <td><b>{{f.n}}</b></td>
+                    <td><span class="code" style="color: var(--tx)">{{f.k}}</span></td>
+                    <td><span class="st draft" style="height: 22px">{{f.t}}</span></td>
+                    <td class="t-c mut" style="max-width: 200px">{{f.o}}</td>
+                    <td><input type="checkbox" class="sw" checked="{{f.pub}}" aria-label="نمایش {{f.n}} در فیلتر عمومی"></td>
+                    <td><input type="checkbox" class="sw" checked="{{f.cmp}}" aria-label="نمایش {{f.n}} در جدول مقایسه"></td>
+                    <td><sc-if value="{{f.miss}}" hint-placeholder-val="{{false}}"><a href="#" class="st wn">{{f.miss}} محصول</a></sc-if><sc-if value="{{f.full}}" hint-placeholder-val="{{true}}"><span class="st pub">کامل</span></sc-if></td>
+                    <td><button class="ib" style="width: 36px; height: 36px" aria-label="ویرایش {{f.n}}"><dc-import name="Icon" i="edit" s="18" hint-size="18px,18px"></dc-import></button></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table></div>
+            <div style="padding: 14px 18px; border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center"><dc-import name="Icon" i="info" s="16" hint-size="16px,16px"></dc-import><span class="t-c mut">با کلیک روی «بدون مقدار»، لیست محصولات همین دسته با فیلتر «فیلد خالی» باز می‌شود تا تکمیل شوند.</span></div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="scrim" style="z-index: 5"></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-label="ویرایش فیلتر" style="width: 460px">
+      <div class="sheet-h" style="padding-top: 16px; padding-bottom: 16px"><div><h2 class="t-h2">ویرایش فیلتر</h2><p class="t-c mut3">دسته: تاچ پنل · ۴۲ محصول</p></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+      <div class="sheet-b" style="display: flex; flex-direction: column; gap: 16px; padding-top: 16px">
+        <div class="frow">
+          <div class="fld"><label class="lab">نام فارسی</label><input class="inp" value="اندازه نمایشگر"></div>
+          <div class="fld"><label class="lab">کلید انگلیسی</label><input class="inp ltr" value="display_size"><span class="hint">حروف کوچک انگلیسی و _ · بعد از ساخت تغییر نمی‌کند</span></div>
+        </div>
+        <div class="fld"><span class="lab">نوع</span>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <label class="opt" style="padding: 10px 12px; background: var(--sf2); border-radius: 0"><input type="radio" class="rdo" name="t-{{th.k}}">انتخابی تکی</label>
+            <label class="opt" style="padding: 10px 12px; background: var(--sf2); border-radius: 0"><input type="radio" class="rdo" name="t-{{th.k}}">چندانتخابی</label>
+            <label class="opt" style="padding: 10px 12px; background: var(--sf2); box-shadow: inset 0 0 0 2px var(--tx); border-radius: 0"><input type="radio" class="rdo" name="t-{{th.k}}" checked>عددی با واحد</label>
+            <label class="opt" style="padding: 10px 12px; background: var(--sf2); border-radius: 0"><input type="radio" class="rdo" name="t-{{th.k}}">بله / خیر</label>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+          <div class="fld"><label class="lab">واحد</label><input class="inp" value="اینچ"></div>
+          <div class="fld"><label class="lab">حداقل</label><input class="inp ltr" value="4"></div>
+          <div class="fld"><label class="lab">حداکثر</label><input class="inp ltr" value="10"></div>
+          <div class="fld"><label class="lab">گام</label><input class="inp ltr" value="0.5"></div>
+        </div>
+        <div class="fld"><span class="lab">بازه‌های پیشنهادی در فیلتر عمومی</span><div class="chips"><span class="chip rm" style="background: var(--sf2); border-color: transparent">۴ اینچ<button class="x" aria-label="حذف"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span><span class="chip rm" style="background: var(--sf2); border-color: transparent">۵ اینچ<button class="x" aria-label="حذف"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span><span class="chip rm" style="background: var(--sf2); border-color: transparent">۷ اینچ<button class="x" aria-label="حذف"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span><span class="chip rm" style="background: var(--sf2); border-color: transparent">۱۰ اینچ<button class="x" aria-label="حذف"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span><button class="chip" style="color: var(--acT)"><dc-import name="Icon" i="plus" s="14" sw="2" hint-size="14px,14px"></dc-import>افزودن</button></div></div>
+        <div class="fld"><label class="lab">ترتیب نمایش</label><input class="inp ltr" value="2" style="max-width: 120px"></div>
+        <div style="display: flex; flex-direction: column; background: var(--sf2); border-radius: 0; padding: 4px 14px">
+          <label class="swl" style="border-bottom: 1px solid var(--line)"><span>نمایش در فیلتر عمومی</span><input type="checkbox" class="sw" checked></label>
+          <label class="swl"><span>نمایش در جدول مقایسه</span><input type="checkbox" class="sw" checked></label>
+        </div>
+        <div class="msgbox ok"><dc-import name="Icon" i="checkCircle" s="16" hint-size="16px,16px"></dc-import><span>همه ۴۲ محصول این دسته مقدار این فیلتر را دارند.</span></div>
+      </div>
+      <div class="sheet-f"><button class="btn btn-g btn-sm" style="color: var(--err)"><dc-import name="Icon" i="trash" s="16" hint-size="16px,16px"></dc-import>حذف فیلتر</button><div style="flex: 1"></div><button class="btn btn-s btn-sm">انصراف</button><button class="btn btn-p btn-sm">ذخیره فیلتر</button></div>
+    </aside>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2400}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره', k: 'l' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن', k: 'd' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    const T = (l, n, lvl, extra) => ({ l, n, pad: 10 + lvl * 22, parent: !!(extra && extra.parent), on: !!(extra && extra.on), drop: !!(extra && extra.drop), cls: 'tn' + (extra && extra.on ? ' on' : '') + (extra && extra.drag ? ' drag' : '') });
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('cats'),
+      tree: [
+        T('کنترل و رابط کاربری', '۱۲۴', 0, { parent: true }),
+        T('تاچ پنل', '۴۲', 1, { on: true }), T('کلید هوشمند', '۵۸', 1), T('ترموستات', '۲۴', 1),
+        T('رله و درایور', '۱۰۷', 0, { parent: true }),
+        T('رله و اکچوایتور', '۴۷', 1), T('دیمر و درایور', '۲۹', 1, { drop: true }), T('رله پشت‌کلیدی', '۳۱', 1, { drag: true }),
+        T('سنسور', '۳۸', 0), T('سرور', '۱۲', 0), T('ماژول رابط', '۲۶', 0), T('ورودی / خروجی', '۲۲', 0),
+        T('منبع تغذیه', '۱۵', 0), T('پرده', '۱۹', 0), T('آیفون و درب‌بازکن', '۲۳', 0), T('صوت', '۱۶', 0)
+      ],
+      filters: [
+        { n: 'سیستم‌عامل', k: 'os', t: 'انتخابی تکی', o: 'اندروید، لینوکس', pub: true, cmp: true, miss: '۳', full: false, rc: '' },
+        { n: 'اندازه نمایشگر', k: 'display_size', t: 'عددی · اینچ', o: '۴ تا ۱۰، گام ۰٫۵', pub: true, cmp: true, miss: '', full: true, rc: 'sel' },
+        { n: 'اندازه قوطی', k: 'box_size', t: 'انتخابی تکی', o: '۸۶×۸۶، ۱۲۰×۸۶، روکار', pub: true, cmp: true, miss: '۵', full: false, rc: '' },
+        { n: 'نصب روکار', k: 'surface_mount', t: 'بله / خیر', o: 'بله، خیر', pub: false, cmp: true, miss: '۱۲', full: false, rc: '' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

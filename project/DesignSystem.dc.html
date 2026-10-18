@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>FRitZ — پایه‌های سیستم طراحی</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="fz" style="width: 1440px; min-height: 3400px; padding: 96px 96px 120px; display: flex; flex-direction: column; gap: 140px">
+
+  <header style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: end">
+    <div style="display: flex; flex-direction: column; gap: 28px">
+      <div class="logo lg" style="padding: 0"><span class="mk"></span><b>FRitZ</b></div>
+      <h1 style="font-size: 72px; line-height: 1.25; font-weight: 800">محصول، خود صفحه است.</h1>
+    </div>
+    <p class="t-b mut" style="font-size: 19px; max-width: 40ch">زمینه سفید، یک پله خاکستری به‌جای خط، تایپوگرافی بزرگ و آرام با کلمه. سبز لیمویی FRitZ فقط روی یک اقدام اصلی، شمارنده استعلام و حالت فعال می‌نشیند. بدون قیمت، بدون موجودی، بدون سبد خرید.</p>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px"><h2 style="font-size: 44px; line-height: 1.3; font-weight: 800">رنگ</h2><p class="t-s mut3" style="max-width: 46ch">یک زمینه، یک جوهر، یک رنگ تأکید. سطح‌ها با پله تونال از هم جدا می‌شوند، نه با خط و سایه.</p></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px">
+      <sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+        <div class="{{th.cls}}" style="padding: 36px; display: flex; flex-direction: column; gap: 24px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between"><h3 class="t-h2">{{th.label}}</h3><span class="code">{{th.sub}}</span></div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 14px">
+            <sc-for list="{{th.sw}}" as="c" hint-placeholder-count="10">
+              <div style="display: flex; flex-direction: column; gap: 10px">
+                <div style="height: 88px; background: {{c.hex}}; box-shadow: inset 0 0 0 1px rgba(128,128,120,.24)"></div>
+                <div style="display: flex; flex-direction: column; line-height: 1.55"><b style="font-size: 15px; font-weight: 600">{{c.name}}</b><span class="code">{{c.tok}} · {{c.hex}}</span><span class="t-c mut3">{{c.use}}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <table class="spec" style="font-size: 14px">
+            <tbody>
+              <sc-for list="{{th.cr}}" as="r" hint-placeholder-count="6">
+                <tr><th>{{r.pair}}</th><td class="lat" style="font-variant-numeric: tabular-nums">{{r.ratio}}</td><td>{{r.level}}</td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </sc-for>
+    </div>
+    <p class="t-s mut" style="max-width: 80ch">لیمویی <span class="lat">#AFCB08</span> روی سفید فقط ۱٫۷:۱ است؛ پس هرگز متن یا مرز تنها روی سفید نیست. متن روی لیمویی همیشه جوهر است و لینک تأکیدی در تم روشن از <span class="lat">acT #566400</span> استفاده می‌کند. لوگو از این قاعده مستثناست.</p>
+  </section>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px">
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <h2 style="font-size: 44px; line-height: 1.3; font-weight: 800">تایپوگرافی</h2>
+      <p class="t-b mut">یک خانواده برای همه چیز: <span class="lat">Kalameh</span>، از ۳۰۰ تا ۹۰۰، با حروف لاتین خودش برای نام برند و کد مدل. سه اندازه کار اصلی را می‌کنند: نمایشی، عنوان و متن.</p>
+      <p class="t-s mut3">فاصله حروف در فارسی صفر می‌ماند تا اتصال حروف نشکند. کد مدل با <span class="lat">dir="ltr"</span> ایزوله و اعداد جدولی است.</p>
+      <p class="t-b" style="padding: 16px 18px; background: var(--sf2); margin-top: 12px">تاچ پنل <span class="hl lat">Hypanel Elite</span> با کد <span class="hl lat">HYP-E7</span> را ۲ عدد می‌خواهم.</p>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <sc-for list="{{type}}" as="t" hint-placeholder-count="7">
+        <div style="display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 20px 0">
+          <div style="display: flex; flex-direction: column; line-height: 1.55"><b style="font-size: 15px; font-weight: 600">{{t.name}}</b><span class="code">{{t.spec}}</span><span class="t-c mut3">{{t.desk}}</span></div>
+          <div class="{{t.cls}}">{{t.sample}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px">
+    <div style="background: var(--sf2); padding: 36px; display: flex; flex-direction: column; gap: 16px">
+      <h2 class="t-h1">فاصله</h2>
+      <p class="t-s mut3">مبنای ۴ · حاشیه موبایل ۲۰ · دسکتاپ ۴۸ · فاصله بخش‌ها ۹۶ تا ۱۶۰</p>
+      <sc-for list="{{space}}" as="sp" hint-placeholder-count="10">
+        <div style="display: flex; align-items: center; gap: 12px"><span class="code" style="width: 32px">{{sp.n}}</span><span style="height: 10px; background: var(--tx); width: {{sp.w}}px"></span><span class="t-c mut3">{{sp.use}}</span></div>
+      </sc-for>
+    </div>
+    <div style="background: var(--sf2); padding: 36px; display: flex; flex-direction: column; gap: 16px">
+      <h2 class="t-h1">فرم</h2>
+      <p class="t-s mut3">دو شکل، نه بیشتر: قرص کامل برای هر چیز قابل‌لمس، گوشه صاف برای سطح و تصویر.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+        <button class="btn btn-p">اقدام اصلی</button>
+        <button class="btn btn-d">اقدام جوهری</button>
+        <button class="btn btn-s">اقدام ثانویه</button>
+        <div class="chips"><span class="chip on">فعال</span><span class="chip">چیپ</span></div>
+        <div style="width: 100%; height: 88px; background: var(--bg); display: grid; place-items: center" class="t-c mut3">سطح · گوشه صاف</div>
+      </div>
+    </div>
+    <div style="background: var(--sf2); padding: 36px; display: flex; flex-direction: column; gap: 16px">
+      <h2 class="t-h1">عمق و حرکت</h2>
+      <p class="t-s mut3">در حالت سکون هیچ سایه‌ای نیست. سایه فقط روی چیزی می‌نشیند که واقعاً شناور است: Sheet، Drawer، Toast، نوار مقایسه و نوار چسبان.</p>
+      <div style="height: 88px; background: var(--bg); box-shadow: var(--sh2); display: grid; place-items: center" class="t-c mut3">شناور · sh2</div>
+      <table class="spec" style="font-size: 14px"><tbody>
+        <tr><th>منحنی</th><td class="lat">cubic-bezier(.16,1,.3,1)</td></tr>
+        <tr><th>هاور</th><td class="lat">200ms · tone step</td></tr>
+        <tr><th>Sheet و Drawer</th><td class="lat">320ms</td></tr>
+        <tr><th>کاهش حرکت</th><td>با <span class="lat">prefers-reduced-motion</span> خاموش</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px">
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between"><h2 style="font-size: 44px; line-height: 1.3; font-weight: 800">آیکون</h2><span class="code">24 grid · stroke 1.6 · round</span></div>
+      <div style="display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 2px">
+        <sc-for list="{{icons}}" as="ic" hint-placeholder-count="44">
+          <div style="display: grid; place-items: center; height: 64px; background: var(--sf2)" title="{{ic}}"><dc-import name="Icon" i="{{ic}}" s="22" hint-size="22px,22px"></dc-import></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <h2 style="font-size: 44px; line-height: 1.3; font-weight: 800">دسترس‌پذیری</h2>
+      <div style="display: flex; gap: 12px; align-items: center"><button class="btn btn-p is-focus">دکمه با فوکوس</button><span class="chip is-focus">چیپ</span></div>
+      <table class="spec" style="font-size: 14px"><tbody>
+        <tr><th>هدف لمسی</th><td>حداقل ۴۴×۴۴</td></tr>
+        <tr><th>حلقه فوکوس</th><td>۲px جوهر با فاصله ۳</td></tr>
+        <tr><th>کنتراست</th><td>متن ۴٫۵:۱ · اجزای بزرگ ۳:۱</td></tr>
+        <tr><th>برچسب</th><td><span class="lat">aria-label</span> برای دکمه‌های آیکونی</td></tr>
+        <tr><th>حالت</th><td>هرگز فقط با رنگ؛ تیک، وزن یا متن هم هست</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px"><h2 style="font-size: 44px; line-height: 1.3; font-weight: 800">تصویر محصول</h2><p class="t-s mut3" style="max-width: 52ch">عکس تمیز روی سطح <span class="lat">sf2</span>، قاب ۴:۵، بدون پس‌زمینه شلوغ. طرح‌های خطی فعلی جای‌نگهدارند تا عکس‌های واقعی برسد.</p></div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px 14px">
+      <sc-for list="{{arts}}" as="a" hint-placeholder-count="10">
+        <div style="display: flex; flex-direction: column; gap: 10px"><div class="ph" style="aspect-ratio: 4 / 5"><dc-import name="ProductArt" kind="{{a.k}}" s="150" hint-size="150px,150px"></dc-import></div><span class="t-s">{{a.l}}</span></div>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sw = (dark) => dark ? [
+      { name: 'زمینه', tok: 'bg', hex: '#0F0F0E', use: 'صفحه و سطح' },
+      { name: 'پله ۱', tok: 'sf2', hex: '#1C1C1A', use: 'قاب عکس، فیلد، ردیف' },
+      { name: 'پله ۲', tok: 'sf3', hex: '#282826', use: 'هاور' },
+      { name: 'مرز کنترل', tok: 'bd2', hex: '#8E8E87', use: 'چک‌باکس، سوییچ' },
+      { name: 'جوهر', tok: 'tx', hex: '#F3F3EF', use: 'عنوان و بدنه' },
+      { name: 'متن ۲', tok: 'tx2', hex: '#BDBDB6', use: 'توضیح' },
+      { name: 'متن ۳', tok: 'tx3', hex: '#9C9C95', use: 'کد، کپشن' },
+      { name: 'لیمویی', tok: 'ac', hex: '#AFCB08', use: 'اقدام اصلی، فعال' },
+      { name: 'لیمویی متن', tok: 'acT', hex: '#C5DE33', use: 'تأکید متنی' },
+      { name: 'خطا', tok: 'err', hex: '#FF8F7E', use: 'پیام خطا' }
+    ] : [
+      { name: 'زمینه', tok: 'bg', hex: '#FFFFFF', use: 'صفحه و سطح' },
+      { name: 'پله ۱', tok: 'sf2', hex: '#F3F3F1', use: 'قاب عکس، فیلد، ردیف' },
+      { name: 'پله ۲', tok: 'sf3', hex: '#E7E7E3', use: 'هاور' },
+      { name: 'مرز کنترل', tok: 'bd2', hex: '#8A8A84', use: 'چک‌باکس، سوییچ' },
+      { name: 'جوهر', tok: 'tx', hex: '#141414', use: 'عنوان و بدنه' },
+      { name: 'متن ۲', tok: 'tx2', hex: '#4D4D49', use: 'توضیح' },
+      { name: 'متن ۳', tok: 'tx3', hex: '#62625D', use: 'کد، کپشن' },
+      { name: 'لیمویی', tok: 'ac', hex: '#AFCB08', use: 'اقدام اصلی، فعال' },
+      { name: 'لیمویی متن', tok: 'acT', hex: '#566400', use: 'تأکید متنی' },
+      { name: 'خطا', tok: 'err', hex: '#B42318', use: 'پیام خطا' }
+    ];
+    const ok = 'pb';
+    const cr = (dark) => dark ? [
+      { pair: 'جوهر روی زمینه', ratio: '17.2:1', level: 'AAA' },
+      { pair: 'متن ۲ روی زمینه', ratio: '10.2:1', level: 'AAA' },
+      { pair: 'متن ۳ روی پله ۱', ratio: '6.2:1', level: 'AA' },
+      { pair: 'جوهر روی لیمویی', ratio: '10.0:1', level: 'AAA' },
+      { pair: 'لیمویی متن روی زمینه', ratio: '12.7:1', level: 'AAA' },
+      { pair: 'مرز کنترل روی پله ۱', ratio: '5.2:1', level: 'UI 3:1' }
+    ] : [
+      { pair: 'جوهر روی زمینه', ratio: '18.4:1', level: 'AAA' },
+      { pair: 'متن ۲ روی زمینه', ratio: '8.5:1', level: 'AAA' },
+      { pair: 'متن ۳ روی پله ۲', ratio: '5.0:1', level: 'AA' },
+      { pair: 'جوهر روی لیمویی', ratio: '10.0:1', level: 'AAA' },
+      { pair: 'لیمویی متن روی زمینه', ratio: '6.5:1', level: 'AA' },
+      { pair: 'مرز کنترل روی پله ۱', ratio: '3.1:1', level: 'UI 3:1' }
+    ];
+    const mk = (dark) => ({
+      cls: dark ? 'fz dark' : 'fz',
+      label: dark ? 'تم تیره' : 'تم روشن (پیش‌فرض)',
+      sub: dark ? '.fz.dark' : '.fz',
+      sw: sw(dark),
+      cr: cr(dark).map((r) => ({ ...r, cls: ok }))
+    });
+    return {
+      themes: [mk(false), mk(true)],
+      type: [
+        { name: 'نمایشی', spec: '38 / 1.3 / 800', desk: 'دسکتاپ ۶۸ تا ۷۲', cls: 't-dsp', sample: 'تجهیز دقیق، برای خانه‌ای که فکر می‌کند.' },
+        { name: 'عنوان بخش', spec: '28 / 1.4 / 800', desk: 'دسکتاپ ۴۴', cls: 't-h1', sample: 'ده برند، کنار هم و بی‌طرف.' },
+        { name: 'عنوان کارت', spec: '21 / 1.5 / 700', desk: 'دسکتاپ ۲۴', cls: 't-h2', sample: 'تاچ پنل ۷ اینچ MixPad Matter' },
+        { name: 'برچسب قوی', spec: '17 / 1.6 / 700', desk: 'دسکتاپ ۱۸', cls: 't-h3', sample: 'مشخصات فنی' },
+        { name: 'متن', spec: '16 / 1.85 / 400', desk: 'دسکتاپ ۱۷ تا ۱۹', cls: 't-b', sample: 'پنل لمسی برای کنترل یکجای روشنایی، پرده و تهویه از روی دیوار.' },
+        { name: 'متن کوچک', spec: '14 / 1.75 / 400–600', desk: 'دسکتاپ ۱۵', cls: 't-s', sample: 'رله و اکچوایتور · ۴۷ محصول' },
+        { name: 'کپشن', spec: '13 / 1.65 / 400', desk: 'حداقل اندازه', cls: 't-c mut3', sample: 'پیام در واتساپ باز می‌شود و قابل ویرایش است.' }
+      ],
+      space: [
+        { n: 4, w: 4, use: 'آیکون و متن' }, { n: 8, w: 8, use: 'بین چیپ‌ها' }, { n: 14, w: 14, use: 'بین کارت‌ها' },
+        { n: 20, w: 20, use: 'حاشیه موبایل' }, { n: 24, w: 24, use: 'داخل Sheet' }, { n: 32, w: 32, use: 'بین گروه‌ها' },
+        { n: 48, w: 48, use: 'حاشیه دسکتاپ' }, { n: 96, w: 96, use: 'بین بخش‌ها، موبایل' }, { n: 160, w: 160, use: 'بین بخش‌ها، دسکتاپ' }
+      ],
+      icons: ['search', 'filter', 'sort', 'grid2', 'grid1', 'x', 'check', 'plus', 'minus', 'trash', 'chevBack', 'chevNext', 'chevDown', 'arrowNext', 'sun', 'moon', 'globe', 'chat', 'phone', 'mail', 'pin', 'download', 'compare', 'inquiry', 'zoom', 'info', 'alert', 'refresh', 'clock', 'compass', 'help', 'checkCircle', 'noResult', 'panel', 'switch', 'thermo', 'relay', 'backRelay', 'dimmer', 'sensor', 'server', 'iface', 'io', 'power', 'curtain', 'intercom', 'audio', 'bulb', 'shield', 'music', 'cable', 'apartment', 'villa'],
+      arts: [
+        { k: 'panel', l: 'تاچ پنل ۴ تا ۵ اینچ' }, { k: 'panel7', l: 'تاچ پنل ۷ تا ۱۰ اینچ' }, { k: 'switch', l: 'کلید' }, { k: 'thermo', l: 'ترموستات' }, { k: 'relay', l: 'رله ریلی' },
+        { k: 'module', l: 'پشت‌کلیدی' }, { k: 'sensor', l: 'سنسور' }, { k: 'server', l: 'سرور' }, { k: 'intercom', l: 'آیفون' }, { k: 'speaker', l: 'صوت' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

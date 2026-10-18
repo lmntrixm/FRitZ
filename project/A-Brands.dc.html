@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — برندها و پروتکل‌ها</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>برندها و پروتکل‌ها</b><span>تب برندها با مودال «حذف ممکن نیست» · تب پروتکل‌ها</span></div>
+  <div class="{{th.cls}} adm" style="position: relative">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>برندها و پروتکل‌ها</span></nav><h1 class="ptitle">برندها و پروتکل‌ها</h1></div>
+          <div class="acts"><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>برند جدید</button></div>
+        </div>
+        <div class="tabs" role="tablist"><button class="tab on" role="tab" aria-selected="true">برندها <span class="st draft" style="height: 20px">۱۰</span></button><button class="tab" role="tab" aria-selected="false">پروتکل‌ها <span class="st draft" style="height: 20px">۵</span></button></div>
+        <div class="panel"><div class="tw"><table class="tbl">
+          <thead><tr><th>لوگو</th><th>نام</th><th>کشور</th><th>توضیح</th><th>محصولات</th><th>وضعیت</th><th></th></tr></thead>
+          <tbody>
+            <sc-for list="{{brands}}" as="b" hint-placeholder-count="10">
+              <tr class="{{b.rc}}"><td><span class="btile" style="height: 40px; min-width: 96px; padding: 0 10px"><span class="brand" style="font-size: 12px; color: var(--tx)">{{b.n}}</span></span></td><td><b class="lat">{{b.n}}</b></td><td>{{b.c}}</td><td class="t-c mut" style="max-width: 280px">{{b.d}}</td><td><a href="#" class="num" style="font-weight: 800; text-decoration: underline; text-decoration-color: var(--bd2)">{{b.p}}</a></td><td><label class="swl" style="min-height: 36px; justify-content: flex-start; gap: 8px"><input type="checkbox" class="sw" checked="{{b.on}}" aria-label="فعال بودن {{b.n}}"><span class="t-c mut">{{b.st}}</span></label></td>
+                <td><span style="display: inline-flex"><button class="ib" style="width: 36px; height: 36px" aria-label="ویرایش {{b.n}}"><dc-import name="Icon" i="edit" s="18" hint-size="18px,18px"></dc-import></button><button class="ib" style="width: 36px; height: 36px; color: var(--err)" aria-label="حذف {{b.n}}"><dc-import name="Icon" i="trash" s="18" hint-size="18px,18px"></dc-import></button></span></td></tr>
+            </sc-for>
+          </tbody>
+        </table></div></div>
+      </div>
+    </div>
+    <div style="position: absolute; inset: 0; z-index: 9; display: grid; place-items: center">
+      <div class="scrim"></div>
+      <div class="modal" role="alertdialog" aria-modal="true" aria-label="حذف ممکن نیست">
+        <span style="width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--wnS); color: var(--wn)"><dc-import name="Icon" i="lock" s="24" hint-size="24px,24px"></dc-import></span>
+        <h2 class="t-h2">برند <span class="lat">Zennio</span> قابل حذف نیست</h2>
+        <p class="t-s mut">این برند در <b style="color: var(--tx)">۸۴ محصول</b> استفاده شده است. برای حذف، ابتدا محصولات را به برند دیگری منتقل کنید یا به‌جای حذف، برند را <b style="color: var(--tx)">غیرفعال</b> کنید تا در کاتالوگ عمومی نمایش داده نشود.</p>
+        <div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap"><button class="btn btn-g btn-sm">بستن</button><button class="btn btn-s btn-sm">مشاهده ۸۴ محصول</button><button class="btn btn-p btn-sm">غیرفعال کردن برند</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="{{th.cls}}" style="padding: 24px 28px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px">
+    <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="false">برندها</button><button class="tab on" role="tab" aria-selected="true">پروتکل‌ها</button></div>
+    <div class="panel"><div class="tw"><table class="tbl">
+      <thead><tr><th>نام</th><th>کد</th><th>توضیح</th><th>محصولات</th><th>وضعیت</th><th></th></tr></thead>
+      <tbody>
+        <sc-for list="{{protos}}" as="p" hint-placeholder-count="5">
+          <tr><td><b class="lat">{{p.n}}</b></td><td><span class="code" style="color: var(--tx)">{{p.k}}</span></td><td class="t-c mut" style="max-width: 320px">{{p.d}}</td><td class="num" style="font-weight: 800">{{p.c}}</td><td><span class="{{p.stc}}">{{p.st}}</span></td>
+            <td><span style="display: inline-flex; gap: 4px; align-items: center"><button class="ib" style="width: 36px; height: 36px" aria-label="ویرایش {{p.n}}"><dc-import name="Icon" i="edit" s="18" hint-size="18px,18px"></dc-import></button><sc-if value="{{p.lockDel}}" hint-placeholder-val="{{true}}"><span class="ib" style="width: 36px; height: 36px; color: var(--tx3)" title="در حال استفاده؛ حذف ممکن نیست" aria-label="حذف ممکن نیست"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import></span></sc-if><sc-if value="{{p.canDel}}" hint-placeholder-val="{{false}}"><button class="ib" style="width: 36px; height: 36px; color: var(--err)" aria-label="حذف {{p.n}}"><dc-import name="Icon" i="trash" s="18" hint-size="18px,18px"></dc-import></button></sc-if></span></td></tr>
+        </sc-for>
+      </tbody>
+    </table></div></div>
+    <div class="msgbox in"><dc-import name="Icon" i="info" s="16" hint-size="16px,16px"></dc-import><span>پروتکل غیرفعال در فیلتر عمومی، ویزارد و فرم محصول نمایش داده نمی‌شود. <span class="lat">IP</span> و <span class="lat">Wi-Fi</span> در ۲۴ مهر غیرفعال شدند و ۲۲ محصول بدون پروتکل ماندند؛ این محصولات در «نیاز به توجه» فهرست شده‌اند.</span></div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2400}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    const B = (n, c, d, p, on, rc) => ({ n, c, d, p, on, st: on ? 'فعال' : 'غیرفعال', rc: rc || '' });
+    const P = (n, k, d, c, on) => ({ n, k, d, c, st: on ? 'فعال' : 'غیرفعال', stc: on ? 'st pub' : 'st off', lockDel: c !== '۰', canDel: c === '۰' });
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('brands'),
+      brands: [
+        B('Zennio', 'اسپانیا', 'تجهیزات KNX: تاچ پنل، اکچوایتور و سنسور', '۸۴', true, 'sel'),
+        B('ABB', 'سوئیس', 'رله، اکچوایتور و پنل‌های KNX', '۶۸', true),
+        B('Orvibo', 'چین', 'تاچ پنل و تجهیزات بی‌سیم Zigbee', '۶۰', true),
+        B('Schneider', 'فرانسه', 'ترموستات، کلید و تجهیزات KNX', '۴۸', true),
+        B('Loxone', 'اتریش', 'سرور مرکزی و افزونه‌ها', '۳۲', true),
+        B('Ountech', 'چین', 'کلید و تاچ پنل Modbus', '۳۰', true),
+        B('Akuvox', 'چین', 'آیفون تصویری و درب‌بازکن', '۲۳', true),
+        B('Akubela', 'چین', 'تاچ پنل و کلید هوشمند', '۲۰', true),
+        B('Panasonic', 'ژاپن', 'سنسور حضور و حرکت', '۲۱', true),
+        B('ITC', 'چین', 'صوت و اسپیکر سقفی', '۱۶', false)
+      ],
+      protos: [
+        P('KNX', 'knx', 'استاندارد سیمی باس برای ساختمان هوشمند', '۱۹۶', true),
+        P('Zigbee', 'zigbee', 'بی‌سیم مش کم‌مصرف', '۱۱۸', true),
+        P('Modbus', 'modbus', 'سیمی RTU و TCP', '۷۲', true),
+        P('IP', 'ip', 'شبکه اترنت', '۰', false),
+        P('Wi-Fi', 'wifi', 'بی‌سیم مستقیم بدون هاب', '۰', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

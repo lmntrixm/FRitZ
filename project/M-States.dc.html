@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — حالت‌های بارگذاری، خالی و خطا</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1314px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>حالت‌های لیست</b><span>بارگذاری · بدون نتیجه · خطا</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone" aria-busy="true">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 16px; font-weight: 800; line-height: 1.35">تاچ پنل</b><span class="sk" style="width: 64px; height: 10px"></span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+      </header>
+      <div class="bar">
+        <button class="btn btn-s btn-sm"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</button>
+        <div style="flex: 1"></div>
+        <span class="sk" style="width: 84px; height: 40px; border-radius: 0"></span>
+      </div>
+      <div class="g2" style="padding: 16px">
+        <sc-for list="{{sk}}" as="x" hint-placeholder-count="4">
+          <div class="card">
+            <div class="sk" style="aspect-ratio: 1 / 1; border-radius: 0"></div>
+            <div style="padding: 12px; display: flex; flex-direction: column; gap: 10px"><span class="sk" style="width: 40%; height: 10px"></span><span class="sk" style="height: 13px"></span><span class="sk" style="width: 70%; height: 13px"></span><span class="sk" style="width: 50%; height: 10px"></span><span class="sk" style="height: 40px; border-radius: 0; margin-top: 4px"></span></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <p class="cap">بارگذاری — Skeleton هم‌شکل کارت</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; font-weight: 800">تاچ پنل</b><span class="t-c mut3">۰ نتیجه</span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+      </header>
+      <div class="bar">
+        <button class="btn btn-s btn-sm"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر<span class="cnt" style="position: static">۳</span></button>
+      </div>
+      <div class="chips-x" style="padding-top: 12px; flex: none">
+        <span class="chip on rm">Zennio<button class="x" aria-label="حذف فیلتر Zennio"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+        <span class="chip on rm">اندروید<button class="x" aria-label="حذف فیلتر اندروید"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+        <span class="chip on rm">۱۰ اینچ<button class="x" aria-label="حذف فیلتر ۱۰ اینچ"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+      </div>
+      <div class="empty" style="padding-top: 64px">
+        <span class="ico"><dc-import name="Icon" i="noResult" s="32" hint-size="32px,32px"></dc-import></span>
+        <h2 class="t-h2">محصولی با این ترکیب پیدا نشد</h2>
+        <p class="t-s mut">تاچ پنل اندرویدی ۱۰ اینچ از <span class="lat">Zennio</span> در کاتالوگ نیست. با حذف یکی از فیلترها نتیجه می‌گیرید:</p>
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 8px">
+          <button class="btn btn-s btn-w" style="justify-content: space-between">بدون «اندروید»<span class="t-c mut3">۳ نتیجه</span></button>
+          <button class="btn btn-s btn-w" style="justify-content: space-between">بدون «<span class="lat">Zennio</span>»<span class="t-c mut3">۴ نتیجه</span></button>
+          <button class="btn btn-g btn-w" style="color: var(--acT)">پاک کردن همه فیلترها</button>
+        </div>
+      </div>
+    </div>
+    <p class="cap">بدون نتیجه — پیشنهاد حذف فیلتر با تعداد نتیجه</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <b style="font-size: 16px; font-weight: 800">تاچ پنل</b>
+        <div class="sp"></div>
+        <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+      </header>
+      <div class="empty" style="padding-top: 120px">
+        <span class="ico" style="background: var(--errS); color: var(--err)"><dc-import name="Icon" i="wifiOff" s="32" hint-size="32px,32px"></dc-import></span>
+        <h2 class="t-h2">محصولات بارگذاری نشد</h2>
+        <p class="t-s mut">اتصال اینترنت قطع شده یا سرور پاسخ نمی‌دهد. لیست استعلام شما ذخیره است و از دست نمی‌رود.</p>
+        <div style="display: flex; gap: 10px; margin-top: 8px">
+          <button class="btn btn-p"><dc-import name="Icon" i="refresh" s="20" hint-size="20px,20px"></dc-import>تلاش دوباره</button>
+          <button class="btn btn-s"><dc-import name="Icon" i="chat" s="20" hint-size="20px,20px"></dc-import>واتساپ</button>
+        </div>
+        <p class="t-c mut3" style="margin-top: 12px">کد خطا: <span class="lat">NET-503</span></p>
+      </div>
+      <div class="toast-wrap"><div class="alert" style="background: var(--errS); color: var(--err); box-shadow: var(--sh2)"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span style="font-weight: 600">دیتاشیت دانلود نشد. دوباره تلاش کنید.</span></div></div>
+    </div>
+    <p class="cap">خطا — صفحه کامل و پیام خطای کوتاه</p>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1314,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    return { themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D], sk: [1, 2, 3, 4] };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — ویزارد انتخاب محصول</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1736px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>محصول مناسبم را پیدا کن</b><span>نیاز ← پروتکل ← برند ← محصولات پیشنهادی با فیلتر کوچک</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+  <sc-for list="{{steps}}" as="st" hint-placeholder-count="3">
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <div style="display: flex; align-items: center; gap: 4px; padding: 8px; flex: none">
+        <button class="ib" aria-label="{{st.backLabel}}"><dc-import name="Icon" i="{{st.backIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+        <span class="t-s" style="flex: 1; text-align: center; font-weight: 700">مرحله {{st.n}} از ۳</span>
+        <button class="ib" aria-label="بستن راهنما"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button>
+      </div>
+      <div class="prog" style="margin: 0 16px" role="progressbar" aria-label="پیشرفت" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{st.pct}}"><i style="width: {{st.pct}}%"></i></div>
+      <div class="scroll" style="padding: 28px 16px 16px">
+        <h1 class="t-h1">{{st.q}}</h1>
+        <p class="t-s mut" style="margin-top: 6px">{{st.help}}</p>
+        <sc-if value="{{st.picked}}" hint-placeholder-val="{{false}}">
+          <div class="chips" style="margin-top: 12px"><sc-for list="{{st.picked}}" as="c" hint-placeholder-count="2"><span class="chip" style="height: 32px; font-size: 13px">{{c}}</span></sc-for></div>
+        </sc-if>
+        <div class="g2" style="margin-top: 20px">
+          <sc-for list="{{st.opts}}" as="o" hint-placeholder-count="4">
+            <button class="{{o.cls}}" aria-pressed="{{o.on}}">
+              <sc-if value="{{o.on}}" hint-placeholder-val="{{false}}"><span class="ck"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></span></sc-if>
+              <sc-if value="{{o.icon}}" hint-placeholder-val="{{true}}"><span class="ico"><dc-import name="Icon" i="{{o.i}}" s="24" hint-size="24px,24px"></dc-import></span></sc-if>
+              <sc-if value="{{o.word}}" hint-placeholder-val="{{false}}"><span class="ico" style="width: auto; padding: 0 12px"><span class="brand" style="font-size: 12px; color: inherit">{{o.b}}</span></span></sc-if>
+              <span><b class="{{o.bc}}">{{o.b}}</b><span>{{o.s}}</span></span>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{st.note}}" hint-placeholder-val="{{false}}">
+          <div class="alert" style="margin-top: 16px"><dc-import name="Icon" i="info" s="18" hint-size="18px,18px"></dc-import><span>{{st.note}}</span></div>
+        </sc-if>
+      </div>
+      <div class="stick" style="background: var(--bg)">
+        <button class="btn btn-p btn-lg" style="flex: 1">{{st.cta}}<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></button>
+      </div>
+    </div>
+    <p class="cap">{{st.cap}}</p>
+    </div>
+  </sc-for>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <div style="display: flex; align-items: center; gap: 4px; padding: 8px; flex: none">
+        <button class="ib" aria-label="بازگشت به سؤال‌ها"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <span class="t-s" style="flex: 1; text-align: center; font-weight: 700">پیشنهاد برای شما</span>
+        <button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button>
+      </div>
+      <div class="scroll" style="padding: 8px 16px 16px">
+        <div class="chips" style="gap: 6px">
+          <span class="chip" style="height: 32px; font-size: 13px">روشنایی</span>
+          <span class="chip" style="height: 32px; font-size: 13px">کنترل مرکزی</span>
+          <span class="chip" style="height: 32px; font-size: 13px"><span class="lat">Zigbee</span></span>
+          <span class="chip" style="height: 32px; font-size: 13px"><span class="lat">Orvibo</span></span>
+          <button class="chip" style="height: 30px; font-size: 12px; border-color: transparent; background: transparent; color: var(--acT); font-weight: 800">ویرایش</button>
+        </div>
+
+        <div class="card" style="margin-top: 16px; padding: 18px; gap: 14px; background: var(--sf2)">
+          <div style="display: flex; align-items: center; justify-content: space-between"><b style="font-size: 14px; display: inline-flex; align-items: center; gap: 6px"><dc-import name="Icon" i="filter" s="16" hint-size="16px,16px"></dc-import>تنظیم کلید روشنایی</b><span class="t-c mut3">فقط برای همین انتخاب‌ها</span></div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span class="t-c mut" style="font-weight: 700">تعداد پل</span>
+            <div class="chips" style="gap: 6px"><sc-for list="{{gangs}}" as="g" hint-placeholder-count="4"><span class="{{g.cls}}" style="height: 34px; padding: 0 12px">{{g.l}}</span></sc-for></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span class="t-c mut" style="font-weight: 700">رنگ</span>
+            <div class="chips" style="gap: 6px"><sc-for list="{{colors}}" as="c" hint-placeholder-count="4"><span class="{{c.cls}}" style="height: 34px; padding: 0 12px"><span style="width: 14px; height: 14px; border-radius: 50%; background: {{c.sw}}; box-shadow: inset 0 0 0 1px rgba(128,128,120,.5)"></span>{{c.l}}</span></sc-for></div>
+          </div>
+        </div>
+
+        <sc-for list="{{groups}}" as="gr" hint-placeholder-count="2">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 20px; margin-bottom: 10px"><h2 class="t-h3" style="display: inline-flex; align-items: center; gap: 6px"><dc-import name="Icon" i="{{gr.i}}" s="18" hint-size="18px,18px"></dc-import>{{gr.t}}</h2><span class="t-c mut3">{{gr.n}}</span></div>
+          <div style="display: flex; flex-direction: column; gap: 28px">
+            <sc-for list="{{gr.items}}" as="p" hint-placeholder-count="2">
+              <article class="card" style="padding: 0; gap: 12px">
+                <div style="display: flex; gap: 12px">
+                  <span class="ph" style="width: 72px; height: 72px; border-radius: 0; flex: none"><dc-import name="ProductArt" kind="{{p.kind}}" s="64" hint-size="64px,64px"></dc-import></span>
+                  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span class="brand">{{p.brand}}</span><b style="font-size: 14px; line-height: 1.6">{{p.name}}</b><span class="code">{{p.code}}</span></div>
+                </div>
+                <div class="why"><dc-import name="Icon" i="check" s="16" sw="2" hint-size="16px,16px"></dc-import><span>{{p.why}}</span></div>
+                <button class="{{p.addCls}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button>
+              </article>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div class="stick" style="flex-direction: column; gap: 8px">
+        <button class="btn btn-p btn-w"><dc-import name="Icon" i="plus" s="20" sw="2" hint-size="20px,20px"></dc-import>افزودن هر ۳ به لیست استعلام</button>
+        <a class="btn btn-g btn-sm btn-w" href="#" style="color: var(--acT)">مشاهده همه نتایج در فیلتر<dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></a>
+      </div>
+    </div>
+    <p class="cap">نتیجه — فیلتر کوچک (پل و رنگ) متناسب با انتخاب‌ها</p>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1736,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const o = (i, b, s, on, lat) => ({ i, b, s, on: !!on, cls: 'wopt' + (on ? ' on' : ''), icon: true, word: false, bc: lat ? 'lat' : '' });
+    const br = (b, s, on) => ({ b, s, on: !!on, cls: 'wopt' + (on ? ' on' : ''), icon: false, word: true, bc: 'lat' });
+    const chip = (l, on) => ({ l, cls: 'chip' + (on ? ' on' : '') });
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      steps: [
+        {
+          n: '۱', pct: 33, backIcon: 'x', backLabel: 'انصراف', picked: null, note: '',
+          q: 'چه چیزی را می‌خواهید کنترل کنید؟', help: 'هر چند مورد که لازم دارید انتخاب کنید.',
+          opts: [o('bulb', 'روشنایی', 'کلید، دیمر و سناریو', true), o('curtain', 'پرده', 'پرده برقی و کرکره'), o('thermo', 'سرمایش و گرمایش', 'ترموستات و فن‌کویل'), o('shield', 'آیفون و امنیت', 'درب‌بازکن و دوربین'), o('music', 'صوت', 'اسپیکر سقفی و پخش'), o('panel', 'کنترل مرکزی', 'همه چیز از یک تاچ پنل', true)],
+          cta: 'ادامه', cap: 'مرحله ۱ — نیاز (چندانتخابی)'
+        },
+        {
+          n: '۲', pct: 66, backIcon: 'chevBack', backLabel: 'مرحله قبل', picked: ['روشنایی', 'کنترل مرکزی'], note: '',
+          q: 'کدام پروتکل؟', help: 'اگر نمی‌دانید، «نمی‌دانم» را بزنید؛ بر اساس نیازتان پیشنهاد می‌دهیم.',
+          opts: [o('wifi', 'Zigbee', 'بی‌سیم؛ ساختمان آماده، بدون تخریب', true, true), o('cable', 'KNX', 'سیمی؛ پایدار برای ساختمان در حال ساخت', false, true), o('cable', 'Modbus', 'سیمی؛ مقرون‌به‌صرفه', false, true), o('help', 'نمی‌دانم', 'کارشناس پیشنهاد می‌دهد')],
+          cta: 'ادامه', cap: 'مرحله ۲ — پروتکل (چندانتخابی)'
+        },
+        {
+          n: '۳', pct: 100, backIcon: 'chevBack', backLabel: 'مرحله قبل', picked: ['روشنایی', 'کنترل مرکزی', 'Zigbee'],
+          q: 'برند مورد نظرتان؟', help: 'برندهایی که برای انتخاب‌های شما محصول دارند.',
+          opts: [br('Orvibo', 'کلید، رله و تاچ پنل', true), br('Akubela', 'تاچ پنل و کلید'), o('help', 'نمی‌دانم / فرقی ندارد', 'بهترین گزینه را پیشنهاد می‌دهیم')],
+          note: 'فقط برندهایی نمایش داده می‌شوند که در کاتالوگ محصول Zigbee دارند.',
+          cta: 'نمایش محصولات پیشنهادی', cap: 'مرحله ۳ — برند (فیلترشده با پروتکل)'
+        }
+      ],
+      gangs: [chip('۱ پل'), chip('۲ پل'), chip('۳ پل', true), chip('۴ پل')],
+      colors: [
+        { l: 'سفید', sw: '#F4F4F0', cls: 'chip on' }, { l: 'مشکی', sw: '#1A1B17', cls: 'chip' },
+        { l: 'طوسی', sw: '#8C8E86', cls: 'chip' }, { l: 'طلایی', sw: '#C9A961', cls: 'chip' }
+      ],
+      groups: [
+        {
+          t: 'روشنایی', i: 'bulb', n: '۲ محصول · ۳ پل · سفید',
+          items: [
+            { name: 'کلید هوشمند ۳ پل سفید', code: 'ORV-SW3W', brand: 'Orvibo', kind: 'switch', why: 'جایگزین کلید فعلی در همان قوطی ۸۶؛ هر پل یک مدار روشنایی.', addCls: 'pc-add in', addIcon: 'check', addTxt: 'در لیست استعلام' },
+            { name: 'رله پشت‌کلیدی ۳ کانال', code: 'ZR-3CH', brand: 'Orvibo', kind: 'module', why: 'کلیدهای فعلی می‌مانند؛ رله پشت آن‌ها نصب می‌شود.', addCls: 'pc-add', addIcon: 'plus', addTxt: 'افزودن به استعلام' }
+          ]
+        },
+        {
+          t: 'کنترل مرکزی', i: 'panel', n: '۱ محصول',
+          items: [
+            { name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', kind: 'panel7', why: 'همه چراغ‌ها و سناریوها از یک صفحه؛ با کلیدهای Orvibo هماهنگ است.', addCls: 'pc-add', addIcon: 'plus', addTxt: 'افزودن به استعلام' }
+          ]
+        }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

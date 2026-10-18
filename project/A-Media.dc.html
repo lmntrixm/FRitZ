@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — رسانه</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>رسانه</b><span>گالری با نشان «بدون استفاده»، انتخاب گروهی و جزئیات فایل</span></div>
+  <div class="{{th.cls}} adm">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>رسانه</span></nav><h1 class="ptitle">رسانه <span class="t-s mut3" style="font-weight: 600">۱٬۲۱۸ فایل · ۲٫۳ گیگابایت</span></h1></div>
+          <div class="acts"><button class="btn btn-p btn-sm"><dc-import name="Icon" i="upload" s="18" hint-size="18px,18px"></dc-import>آپلود فایل</button></div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="panel" style="flex: 999 1 560px; min-width: 0">
+            <div class="toolbar">
+              <div class="field" style="flex: 1 1 200px; max-width: 280px; height: 40px"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="نام فایل یا کد محصول" aria-label="جست‌وجو در رسانه"></div>
+              <button class="selbtn on" aria-pressed="true">همه</button><button class="selbtn">عکس</button><button class="selbtn">دیتاشیت</button>
+              <button class="selbtn">برند<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+              <button class="selbtn" aria-pressed="false">بدون استفاده <span class="st wn" style="height: 20px">۱۷</span></button>
+              <div style="flex: 1"></div>
+              <span class="t-c mut">مرتب: بزرگ‌ترین حجم</span>
+            </div>
+            <div style="padding: 10px 14px 0"><div class="bulk" role="region" aria-label="عملیات گروهی"><b style="font-size: 13px">۳ فایل انتخاب شده · ۱۴٫۲ مگابایت</b><div style="flex: 1"></div><button class="btn btn-x btn-sm"><dc-import name="Icon" i="trash" s="16" hint-size="16px,16px"></dc-import>حذف ۳ فایل</button><button class="btn btn-g btn-sm">لغو انتخاب</button></div></div>
+            <div style="padding: 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px">
+              <sc-for list="{{files}}" as="f" hint-placeholder-count="12">
+                <article style="display: flex; flex-direction: column; gap: 6px; position: relative">
+                  <div class="ph" style="aspect-ratio: 1 / 1; border-radius: 0; box-shadow: {{f.ring}}">
+                    <sc-if value="{{f.img}}" hint-placeholder-val="{{true}}"><dc-import name="ProductArt" kind="{{f.kind}}" s="110" hint-size="110px,110px"></dc-import></sc-if>
+                    <sc-if value="{{f.pdf}}" hint-placeholder-val="{{false}}"><span style="display: grid; place-items: center; gap: 4px; color: var(--err)"><dc-import name="Icon" i="doc" s="40" sw="1.4" hint-size="40px,40px"></dc-import><b class="lat" style="font-size: 12px">PDF</b></span></sc-if>
+                    <label style="position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; display: grid; place-items: center; background: var(--sf); border-radius: 8px; box-shadow: var(--sh1)"><input type="checkbox" class="cbx" checked="{{f.sel}}" aria-label="انتخاب {{f.n}}"></label>
+                    <sc-if value="{{f.unused}}" hint-placeholder-val="{{false}}"><span class="st wn" style="position: absolute; bottom: 8px; right: 8px; height: 22px">بدون استفاده</span></sc-if>
+                  </div>
+                  <b class="lat" style="font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right">{{f.n}}</b>
+                  <span class="t-c mut3">{{f.m}}</span>
+                </article>
+              </sc-for>
+            </div>
+          </section>
+          <aside class="panel" style="flex: 0 1 300px; min-width: 260px">
+            <div class="panel-h"><h2>جزئیات فایل</h2><button class="ib" style="width: 36px; height: 36px" aria-label="بستن"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button></div>
+            <div class="panel-b" style="display: flex; flex-direction: column; gap: 14px">
+              <div class="ph" style="height: 180px; border-radius: 0"><dc-import name="ProductArt" kind="panel7" s="150" hint-size="150px,150px"></dc-import></div>
+              <b class="lat" style="font-size: 13px; word-break: break-all">mixpad-7m_front.webp</b>
+              <table class="spec" style="font-size: 13px"><tbody>
+                <tr><th>نوع</th><td class="lat">WebP</td></tr>
+                <tr><th>ابعاد</th><td class="lat">1600 × 1600</td></tr>
+                <tr><th>حجم</th><td>۲۱۴ کیلوبایت</td></tr>
+                <tr><th>آپلود</th><td>۲۰ مهر ۱۴۰۵ · رضا کریمی</td></tr>
+              </tbody></table>
+              <div><span class="lab">استفاده‌شده در ۲ محصول</span>
+                <a href="#" class="kbd-row" style="padding: 0; min-height: 48px"><span class="thumb" style="width: 32px; height: 32px"><dc-import name="ProductArt" kind="panel7" s="28" hint-size="28px,28px"></dc-import></span><span style="flex: 1; font-size: 13px">تاچ پنل ۷ اینچ MixPad Matter</span><span class="st pub" style="height: 20px">اصلی</span></a>
+                <a href="#" class="kbd-row" style="padding: 0; min-height: 48px; border: 0"><span class="thumb" style="width: 32px; height: 32px"><dc-import name="ProductArt" kind="panel7" s="28" hint-size="28px,28px"></dc-import></span><span style="flex: 1; font-size: 13px">تاچ پنل ۷ اینچ MixPad Matter نقره‌ای</span></a>
+              </div>
+              <div class="msgbox wn"><dc-import name="Icon" i="alert" s="16" hint-size="16px,16px"></dc-import><span>این فایل در حال استفاده است. با حذف آن، عکس از ۲ محصول برداشته می‌شود.</span></div>
+              <div style="display: flex; gap: 8px"><button class="btn btn-s btn-sm" style="flex: 1"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import>دانلود</button><button class="btn btn-xs btn-sm" style="flex: 1"><dc-import name="Icon" i="trash" s="16" hint-size="16px,16px"></dc-import>حذف</button></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2400}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    const F = (n, m, kind, pdf, unused, sel) => ({ n, m, kind, img: !pdf, pdf: !!pdf, unused: !!unused, sel: !!sel, ring: sel ? 'inset 0 0 0 2px var(--tx)' : 'none' });
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('media'),
+      files: [
+        F('ot-p10_datasheet_v1.pdf', 'PDF · ۸٫۴ مگابایت', 'panel7', true, true, true),
+        F('relay24_old_side.jpg', '۲۴۰۰×۱۸۰۰ · ۳٫۱ مگابایت', 'relay', false, true, true),
+        F('switch3_gold_draft.png', '۲۰۰۰×۲۰۰۰ · ۲٫۷ مگابایت', 'switch', false, true, true),
+        F('mixpad-7m_front.webp', '۱۶۰۰×۱۶۰۰ · ۲۱۴ کیلوبایت', 'panel7', false, false, false),
+        F('t-104_speaker.jpg', '۱۲۰۰×۱۲۰۰ · ۱٫۲ مگابایت', 'speaker', false, true, false),
+        F('pd-180_sensor.webp', '۱۶۰۰×۱۶۰۰ · ۱۸۰ کیلوبایت', 'sensor', false, true, false),
+        F('hyp-l4_datasheet.pdf', 'PDF · ۲٫۲ مگابایت', 'panel', true, true, false),
+        F('r20a_front.webp', '۱۶۰۰×۱۶۰۰ · ۲۰۲ کیلوبایت', 'intercom', false, false, false),
+        F('ms-gen2_top.webp', '۱۶۰۰×۱۶۰۰ · ۱۹۰ کیلوبایت', 'server', false, false, false),
+        F('zr-1ch_wires.jpg', '۱۸۰۰×۱۸۰۰ · ۱٫۴ مگابایت', 'module', false, true, false),
+        F('thermo_mtn-rt.webp', '۱۶۰۰×۱۶۰۰ · ۱۷۵ کیلوبایت', 'thermo', false, false, false),
+        F('st-7b_black.jpg', '۲۰۰۰×۲۰۰۰ · ۲٫۰ مگابایت', 'panel7', false, true, false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

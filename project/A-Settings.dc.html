@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — تنظیمات</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>تنظیمات</b><span>ویژه مدیر کل</span></div>
+  <div class="{{th.cls}} adm">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead"><div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>تنظیمات</span></nav><h1 class="ptitle">تنظیمات</h1></div><div class="acts"><button class="btn btn-p btn-sm">ذخیره تغییرات</button></div></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+          <nav class="qnav panel" style="flex: 0 1 220px; min-width: 200px; padding: 8px; position: static" aria-label="بخش‌های تنظیمات">
+            <a href="#" class="on"><dc-import name="Icon" i="chat" s="16" hint-size="16px,16px"></dc-import>واتساپ و پیام</a><a href="#"><dc-import name="Icon" i="phone" s="16" hint-size="16px,16px"></dc-import>اطلاعات تماس</a><a href="#"><dc-import name="Icon" i="image" s="16" hint-size="16px,16px"></dc-import>لوگو</a><a href="#"><dc-import name="Icon" i="globe" s="16" hint-size="16px,16px"></dc-import>سئو</a><a href="#"><dc-import name="Icon" i="key" s="16" hint-size="16px,16px"></dc-import>کلید رمزنگاری</a>
+          </nav>
+          <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <section class="panel"><div class="panel-h"><h2>واتساپ و قالب پیام استعلام</h2></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px">
+              <div class="frow"><div class="fld"><label class="lab">شماره واتساپ استعلام</label><input class="inp ltr" value="+98 912 000 0000"><span class="hint">با کد کشور. استعلام‌ها به این شماره ارسال می‌شوند.</span></div><div class="fld"><label class="lab">نام نمایشی</label><input class="inp" value="فروش FRitZ"></div></div>
+              <div class="fld"><label class="lab">قالب متن پیام</label><textarea class="inp" rows="6" style="font-family: inherit">سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:
+
+{اقلام}
+
+نام: {نام}
+پروژه: {پروژه}</textarea>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span class="hint">متغیرها:</span><button class="chip" style="height: 30px; font-size: 12px">{اقلام}</button><button class="chip" style="height: 30px; font-size: 12px">{نام}</button><button class="chip" style="height: 30px; font-size: 12px">{پروژه}</button><button class="chip" style="height: 30px; font-size: 12px">{تاریخ}</button></div></div>
+              <div class="fld"><span class="lab">پیش‌نمایش</span><div class="msg" style="max-width: 420px">سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:
+
+۱. تاچ پنل ۷ اینچ MixPad Matter
+    کد MIXPAD-7M — ۲ عدد
+
+نام: علی رضایی
+پروژه: ویلای دو طبقه، لواسان</div></div>
+            </div></section>
+            <section class="panel"><div class="panel-h"><h2>اطلاعات تماس</h2></div><div class="panel-b"><div class="frow"><div class="fld"><label class="lab">تلفن</label><input class="inp ltr" value="+98 21 0000 0000"></div><div class="fld"><label class="lab">ایمیل</label><input class="inp ltr" value="info@fritz.ir"></div><div class="fld"><label class="lab">ساعات پاسخ‌گویی</label><input class="inp" value="شنبه تا چهارشنبه، ۹ تا ۱۸"></div></div><div class="fld" style="margin-top: 14px"><label class="lab">نشانی</label><input class="inp" placeholder="[نشانی دفتر]"></div></div></section>
+            <section class="panel"><div class="panel-h"><h2>لوگو</h2></div><div class="panel-b"><div class="frow">
+              <div class="fld"><span class="lab">نسخه روشن</span><div class="file"><span class="thumb" style="background: #F7F7F4; width: 64px"><span class="logo" style="padding: 0; transform: scale(.7); color: #14160F"><span class="mk"></span><b>FRitZ</b></span></span><span style="flex: 1; display: flex; flex-direction: column"><b class="lat" style="font-size: 13px">fritz-logo.png</b><span class="t-c mut3">SVG · ۴ کیلوبایت</span></span><button class="btn btn-g btn-sm">تعویض</button></div></div>
+              <div class="fld"><span class="lab">نسخه تیره</span><div class="drop" style="padding: 16px; flex-direction: row; justify-content: center"><dc-import name="Icon" i="upload" s="18" hint-size="18px,18px"></dc-import><span class="t-s" style="font-weight: 700">آپلود SVG یا PNG شفاف</span></div></div>
+            </div></div></section>
+            <section class="panel"><div class="panel-h"><h2>سئو</h2></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px">
+              <div class="fld"><label class="lab">عنوان سایت</label><input class="inp" value="کاتالوگ تجهیزات خانه هوشمند | FRitZ Smart Solutions"><span class="hint">۵۲ نویسه · پیشنهاد: کمتر از ۶۰</span></div>
+              <div class="fld"><label class="lab">توضیح متا</label><textarea class="inp" rows="2">بیش از ۴۰۰ محصول خانه هوشمند از ۱۰ برند در پروتکل‌های KNX، Zigbee و Modbus. مشخصات را ببینید، مقایسه کنید و در واتساپ استعلام بگیرید.</textarea><span class="hint" style="color: var(--wn); font-weight: 700">۱۶۸ نویسه · کمی بلندتر از ۱۶۰</span></div>
+              <label class="swl" style="padding: 4px 14px; background: var(--sf2); border-radius: 0"><span>اجازه ایندکس به موتورهای جست‌وجو</span><input type="checkbox" class="sw" checked></label>
+            </div></section>
+            <section class="panel" style="border-color: var(--err)"><div class="panel-h"><h2 style="display: flex; gap: 8px; align-items: center"><dc-import name="Icon" i="key" s="18" hint-size="18px,18px"></dc-import>کلید رمزنگاری به‌روزرسانی</h2><span class="int"><dc-import name="Icon" i="lock" s="12" sw="2" hint-size="12px,12px"></dc-import>حساس</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px">
+              <table class="spec" style="font-size: 13px"><tbody><tr><th>الگوریتم</th><td class="lat">AES-256-GCM</td></tr><tr><th>اثر انگشت کلید</th><td class="lat">9F:2C:…:A1:4E</td></tr><tr><th>آخرین تغییر</th><td>۲۰ شهریور ۱۴۰۵ · سارا محمدی</td></tr></tbody></table>
+              <div class="msgbox er"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span><b>پس از تغییر رمز، فایل‌های .fritz ساخته‌شده با رمز قبلی دیگر باز نمی‌شوند.</b> رمز جدید را از طریق یک کانال امن به سازنده فایل‌ها بدهید.</span></div>
+              <div class="frow"><div class="fld"><label class="lab">رمز فعلی</label><input class="inp ltr" type="password" value="••••••••••"></div><div class="fld"><label class="lab">رمز جدید</label><input class="inp ltr" type="password" value="••••••••••••••"><span class="hint" style="color: var(--okT); font-weight: 700">قوی · ۱۴ نویسه</span></div><div class="fld"><label class="lab">تکرار رمز جدید</label><input class="inp ltr err" type="password" value="•••••••••••••"><span class="emsg">با رمز جدید یکسان نیست.</span></div></div>
+              <button class="btn btn-xs btn-sm" style="align-self: flex-start"><dc-import name="Icon" i="key" s="16" hint-size="16px,16px"></dc-import>تغییر رمز بسته</button>
+            </div></section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":3600}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    return { themes: themesFor(this.props.theme ?? 'both'), nav: navFor('settings') };
+  }
+}
+</script>
+</body>
+</html>

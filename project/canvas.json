@@ -1,0 +1,509 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "A-Activity.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "page": "adesk",
+      "title": "۱۱. گزارش فعالیت",
+      "w": 1440,
+      "x": 3040,
+      "y": 7440
+    },
+    "A-Brands.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "page": "adesk",
+      "title": "۶. برندها و پروتکل‌ها",
+      "w": 1440,
+      "x": 1520,
+      "y": 4920
+    },
+    "A-Categories.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "page": "adesk",
+      "title": "۵. دسته‌ها و فیلترها",
+      "w": 1440,
+      "x": 0,
+      "y": 4920
+    },
+    "A-Components.dc.html": {
+      "h": 3200,
+      "page": "asystem",
+      "title": "اجزای پنل و حالت‌ها — روشن و تیره",
+      "w": 1600,
+      "x": 0,
+      "y": 0
+    },
+    "A-FlowEdit.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "is_interactive": true,
+      "page": "aflows",
+      "title": "جریان الف: ویرایش محصول از لیست تا انتشار",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "A-FlowUpdate.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "is_interactive": true,
+      "page": "aflows",
+      "title": "جریان ب: به‌روزرسانی با فایل رمزنگاری‌شده تا بازگردانی",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "A-Inquiries.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "page": "adesk",
+      "title": "۹. استعلام‌ها",
+      "w": 1440,
+      "x": 0,
+      "y": 7440
+    },
+    "A-Login.dc.html": {
+      "expand": "fill",
+      "h": 2700,
+      "page": "adesk",
+      "title": "۱. ورود",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "A-Media.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "page": "adesk",
+      "title": "۷. رسانه",
+      "w": 1440,
+      "x": 3040,
+      "y": 4920
+    },
+    "A-Mobile.dc.html": {
+      "h": 1980,
+      "page": "amobile",
+      "title": "موبایل: ورود، منو، نمای کلی، لیست و ویرایش محصول",
+      "w": 2158,
+      "x": 0,
+      "y": 0
+    },
+    "A-Overview.dc.html": {
+      "expand": "fill",
+      "h": 3200,
+      "page": "adesk",
+      "title": "۲. نمای کلی",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "A-ProductEdit.dc.html": {
+      "expand": "fill",
+      "h": 4800,
+      "page": "adesk",
+      "title": "۴. افزودن / ویرایش محصول",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "A-Products.dc.html": {
+      "expand": "fill",
+      "h": 3700,
+      "page": "adesk",
+      "title": "۳. لیست محصولات و حالت‌ها",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "A-Settings.dc.html": {
+      "expand": "fill",
+      "h": 3600,
+      "page": "adesk",
+      "title": "۱۲. تنظیمات",
+      "w": 1440,
+      "x": 0,
+      "y": 9960
+    },
+    "A-Tablet.dc.html": {
+      "h": 1360,
+      "page": "amobile",
+      "title": "تبلت ۸۳۴: نمای کلی با منوی جمع‌شده",
+      "w": 1788,
+      "x": 0,
+      "y": 2100
+    },
+    "A-Update.dc.html": {
+      "expand": "fill",
+      "h": 6400,
+      "page": "adesk",
+      "title": "۸. به‌روزرسانی — مراحل، حالت‌ها، تاریخچه",
+      "w": 1440,
+      "x": 4560,
+      "y": 4920
+    },
+    "A-Users.dc.html": {
+      "expand": "fill",
+      "h": 2200,
+      "page": "adesk",
+      "title": "۱۰. کاربران",
+      "w": 1440,
+      "x": 1520,
+      "y": 7440
+    },
+    "Components.dc.html": {
+      "h": 3400,
+      "page": "system",
+      "title": "اجزا و حالت‌ها — روشن و تیره",
+      "w": 1600,
+      "x": 1520,
+      "y": 0
+    },
+    "D-Compare.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "page": "desktop",
+      "title": "دسکتاپ — مقایسه",
+      "w": 1440,
+      "x": 0,
+      "y": 10520
+    },
+    "D-Home.dc.html": {
+      "expand": "fill",
+      "h": 10400,
+      "page": "desktop",
+      "title": "دسکتاپ — صفحه اصلی با هدر چسبان",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "D-List.dc.html": {
+      "expand": "fill",
+      "h": 3200,
+      "page": "desktop",
+      "title": "دسکتاپ — لیست و فیلتر کناری",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "D-Overlays.dc.html": {
+      "expand": "fill",
+      "h": 5100,
+      "page": "desktop",
+      "title": "دسکتاپ — جست‌وجو، ویزارد، لیست استعلام",
+      "w": 1440,
+      "x": 1520,
+      "y": 6320
+    },
+    "D-Product.dc.html": {
+      "expand": "fill",
+      "h": 4400,
+      "page": "desktop",
+      "title": "دسکتاپ — صفحه محصول",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "DesignSystem.dc.html": {
+      "h": 3600,
+      "page": "system",
+      "title": "پایه‌ها: رنگ، تایپوگرافی، فاصله، فرم، عمق، آیکون",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 48,
+      "page": "system",
+      "title": "Icon",
+      "w": 48,
+      "x": 0,
+      "y": 3720
+    },
+    "M-About.dc.html": {
+      "h": 2300,
+      "page": "mobile",
+      "title": "درباره و تماس",
+      "w": 900,
+      "x": 1816,
+      "y": 8920
+    },
+    "M-Compare.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "مقایسه",
+      "w": 1314,
+      "x": 1816,
+      "y": 6780
+    },
+    "M-Filter.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "فیلتر Bottom Sheet — فیلترهای اختصاصی هر دسته",
+      "w": 1314,
+      "x": 0,
+      "y": 4640
+    },
+    "M-Home.dc.html": {
+      "h": 4500,
+      "page": "mobile",
+      "title": "صفحه اصلی — نوار جست‌وجو و فیلتر چسبان",
+      "w": 1736,
+      "x": 0,
+      "y": 0
+    },
+    "M-Inquiry.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "لیست استعلام و ارسال در واتساپ",
+      "w": 1736,
+      "x": 0,
+      "y": 8920
+    },
+    "M-List.dc.html": {
+      "h": 1960,
+      "page": "mobile",
+      "title": "لیست محصولات — ۲ ستون و ۱ ستون",
+      "w": 892,
+      "x": 1816,
+      "y": 0
+    },
+    "M-Product.dc.html": {
+      "h": 1960,
+      "page": "mobile",
+      "title": "صفحه محصول",
+      "w": 892,
+      "x": 2788,
+      "y": 0
+    },
+    "M-Search.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "جست‌وجو",
+      "w": 1314,
+      "x": 1394,
+      "y": 4640
+    },
+    "M-States.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "حالت‌ها: بارگذاری، بدون نتیجه، خطا",
+      "w": 1314,
+      "x": 2788,
+      "y": 4640
+    },
+    "M-Wizard.dc.html": {
+      "h": 2020,
+      "page": "mobile",
+      "title": "ویزارد «محصول مناسبم را پیدا کن» — نیاز، پروتکل، برند، پیشنهاد",
+      "w": 1736,
+      "x": 0,
+      "y": 6780
+    },
+    "Main.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "page": "proto",
+      "radius": 32,
+      "title": "نمونه کلیک‌پذیر: خانه ← فیلتر ← محصول ← استعلام ← واتساپ",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "ProductArt.dc.html": {
+      "h": 200,
+      "page": "system",
+      "title": "ProductArt",
+      "w": 200,
+      "x": 128,
+      "y": 3720
+    },
+    "T-List.dc.html": {
+      "h": 1360,
+      "page": "desktop",
+      "title": "تبلت ۸۳۴ — لیست محصولات",
+      "w": 1788,
+      "x": 3040,
+      "y": 6320
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-17T10:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "proto",
+    "view": "canvas"
+  },
+  "notes": {
+    "adeskTitle": {
+      "kind": "title1",
+      "maxW": 6000,
+      "page": "adesk",
+      "text": "پنل مدیریت — دسکتاپ ۱۴۴۰ (روشن و تیره)",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "aflowHow": {
+      "fill": "green",
+      "maxH": 520,
+      "page": "aflows",
+      "text": "Play را بزنید.\n\nالف) در جدول روی «تاچ پنل ۷ اینچ MixPad Matter» بزنید ← کد مدل را پاک کنید و «انتشار» بزنید تا خطا را ببینید ← کد را برگردانید یا یک فیلد را عوض کنید ← «انتشار».\n\nب) «انتخاب فایل» ← یک رمز کمتر از ۴ کاراکتر خطای رمز می‌دهد؛ رمز درست ← اعتبارسنجی ← Diff و فیلتر ← گزینه‌ها ← اعمال ← «بازگردانی به نسخه قبل».",
+      "w": 340,
+      "x": 1581,
+      "y": 0
+    },
+    "aflowTitle": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "aflows",
+      "text": "پنل مدیریت — دو جریان کلیک‌پذیر",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "amobTitle": {
+      "kind": "title1",
+      "maxW": 2158,
+      "page": "amobile",
+      "text": "پنل مدیریت — موبایل و تبلت",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "asysTitle": {
+      "kind": "title1",
+      "maxW": 1600,
+      "page": "asystem",
+      "text": "پنل مدیریت — اجزا",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "deskTitle": {
+      "kind": "title1",
+      "maxW": 4830,
+      "page": "desktop",
+      "text": "دسکتاپ ۱۴۴۰ و تبلت ۸۳۴",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "mobTitle": {
+      "kind": "title1",
+      "maxW": 4100,
+      "page": "mobile",
+      "text": "موبایل ۳۹۰ — هر صفحه در تم روشن و تیره",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "protoHow": {
+      "fill": "green",
+      "maxH": 420,
+      "page": "proto",
+      "text": "دکمه Play را بزنید.\n\n۱. دکمه «فیلتر» در نوار چسبان بالای صفحه، یا دسته «تاچ پنل»\n۲. «فیلتر» ← یک برند یا پروتکل را انتخاب کنید ← «نمایش نتایج»\n۳. روی یک کارت بزنید ← صفحه محصول\n۴. «افزودن به لیست استعلام»\n۵. آیکون لیست در هدر ← تعداد را تنظیم کنید ← «ارسال استعلام در واتساپ»\n\nسوئیچ تم در هدر کار می‌کند.",
+      "w": 320,
+      "x": 470,
+      "y": 0
+    },
+    "protoTitle": {
+      "kind": "title1",
+      "maxW": 1200,
+      "page": "proto",
+      "text": "FRitZ — نمونه کلیک‌پذیر",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "sysTitle": {
+      "kind": "title1",
+      "maxW": 3120,
+      "page": "system",
+      "text": "سیستم طراحی FRitZ Catalog",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "DesignSystem.dc.html",
+    "Components.dc.html",
+    "Icon.dc.html",
+    "ProductArt.dc.html",
+    "M-Home.dc.html",
+    "M-List.dc.html",
+    "M-Product.dc.html",
+    "M-Filter.dc.html",
+    "M-Search.dc.html",
+    "M-States.dc.html",
+    "M-Wizard.dc.html",
+    "M-Compare.dc.html",
+    "M-Inquiry.dc.html",
+    "M-About.dc.html",
+    "D-Home.dc.html",
+    "D-List.dc.html",
+    "D-Product.dc.html",
+    "D-Compare.dc.html",
+    "D-Overlays.dc.html",
+    "T-List.dc.html",
+    "A-FlowEdit.dc.html",
+    "A-FlowUpdate.dc.html",
+    "A-Components.dc.html",
+    "A-Login.dc.html",
+    "A-Overview.dc.html",
+    "A-Products.dc.html",
+    "A-ProductEdit.dc.html",
+    "A-Categories.dc.html",
+    "A-Brands.dc.html",
+    "A-Media.dc.html",
+    "A-Update.dc.html",
+    "A-Inquiries.dc.html",
+    "A-Users.dc.html",
+    "A-Activity.dc.html",
+    "A-Settings.dc.html",
+    "A-Mobile.dc.html",
+    "A-Tablet.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "proto",
+      "name": "نمونه تعاملی"
+    },
+    {
+      "id": "system",
+      "name": "سیستم طراحی"
+    },
+    {
+      "id": "mobile",
+      "name": "موبایل ۳۹۰"
+    },
+    {
+      "id": "desktop",
+      "name": "تبلت و دسکتاپ"
+    },
+    {
+      "id": "aflows",
+      "name": "پنل — نمونه‌های تعاملی"
+    },
+    {
+      "id": "asystem",
+      "name": "پنل — سیستم طراحی"
+    },
+    {
+      "id": "adesk",
+      "name": "پنل — دسکتاپ"
+    },
+    {
+      "id": "amobile",
+      "name": "پنل — موبایل و تبلت"
+    }
+  ],
+  "title": "FRitZ — کاتالوگ آنلاین و پنل مدیریت"
+}

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — نمای کلی</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>نمای کلی</b></div>
+  <div class="{{th.cls}} adm">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها، ۳ مورد جدید"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import><span class="cnt">۳</span></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>نمای کلی</span></nav><h1 class="ptitle">نمای کلی</h1><p class="t-s mut">شنبه ۲۵ مهر ۱۴۰۵ · داده‌های ۱۲ هفته اخیر</p></div>
+          <div class="acts"><button class="selbtn"><dc-import name="Icon" i="calendar" s="16" hint-size="16px,16px"></dc-import>۱۲ هفته اخیر<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>افزودن محصول</button></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><span class="l"><dc-import name="Icon" i="box" s="16" hint-size="16px,16px"></dc-import>محصولات</span><span class="v">۴۰۲</span><span class="s"><span style="color: var(--okT); font-weight: 700">۳۸۸ منتشرشده</span> · ۱۴ پیش‌نویس</span></div>
+          <div class="stat"><span class="l"><dc-import name="Icon" i="chat" s="16" hint-size="16px,16px"></dc-import>استعلام‌های این هفته</span><span class="v">۴۷</span><span class="s"><span class="delta"><dc-import name="Icon" i="arrowUp" s="12" sw="2.2" hint-size="12px,12px"></dc-import>۱۸٪</span> نسبت به هفته قبل (۴۰)</span></div>
+          <div class="stat"><span class="l"><dc-import name="Icon" i="chart" s="16" hint-size="16px,16px"></dc-import>پراستعلام‌ترین محصول</span><span style="font-size: 16px; font-weight: 800; line-height: 1.6">تاچ پنل ۷ اینچ MixPad Matter</span><span class="s">۶۲ بار در ۱۲ هفته · <span class="code">MIXPAD-7M</span></span></div>
+          <div class="stat"><span class="l"><dc-import name="Icon" i="upload" s="16" hint-size="16px,16px"></dc-import>آخرین به‌روزرسانی</span><span style="font-size: 16px; font-weight: 800; line-height: 1.6">۱۸ مهر ۱۴۰۵</span><span class="s">۴ جدید · ۲۱ ویرایش · سارا محمدی</span></div>
+        </div>
+
+        <div class="g2a">
+          <section class="panel">
+            <div class="panel-h"><h2>تعداد استعلام در هفته</h2><span class="t-c mut3">مجموع ۴۲۷ استعلام</span></div>
+            <div class="panel-b" style="position: relative">
+              <svg class="chart" viewBox="0 0 600 230" width="100%" role="img" aria-label="نمودار خطی تعداد استعلام هفتگی، از ۲۲ در ۱۲ هفته پیش تا ۴۷ در این هفته">
+                <line x1="40" y1="190" x2="590" y2="190" style="stroke: var(--bd2)"></line>
+                <line x1="40" y1="122" x2="590" y2="122" style="stroke: var(--grid)" stroke-dasharray="3 4"></line>
+                <line x1="40" y1="54" x2="590" y2="54" style="stroke: var(--grid)" stroke-dasharray="3 4"></line>
+                <text x="30" y="194" text-anchor="end">۰</text>
+                <text x="30" y="126" text-anchor="end">۲۰</text>
+                <text x="30" y="58" text-anchor="end">۴۰</text>
+                <polyline points="{{linePts}}" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" style="stroke: var(--c2)"></polyline>
+                <line x1="{{lastX}}" y1="20" x2="{{lastX}}" y2="190" style="stroke: var(--bd2)" stroke-dasharray="2 3"></line>
+                <circle cx="{{lastX}}" cy="{{lastY}}" r="5" style="fill: var(--c2); stroke: var(--sf)" stroke-width="2"></circle>
+                <text x="50" y="214" text-anchor="middle">مرداد</text>
+                <text x="250" y="214" text-anchor="middle">شهریور</text>
+                <text x="450" y="214" text-anchor="middle">مهر</text>
+              </svg>
+              <div class="tip" style="top: 20px; left: 36px">هفته ۲۰ تا ۲۵ مهر<br>۴۷ استعلام</div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-h"><h2>۱۰ محصول پراستعلام</h2><span class="t-c mut3">تعداد استعلام · ۱۲ هفته</span></div>
+            <div class="panel-b" style="display: flex; flex-direction: column; gap: 6px">
+              <sc-for list="{{top}}" as="t" hint-placeholder-count="10">
+                <div class="hbar"><span style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 600">{{t.n}}</span><span class="tr"><i style="width: {{t.w}}%; background: var(--c2)"></i></span><span class="num" style="font-weight: 800">{{t.v}}</span></div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+
+        <div class="g2a">
+          <section class="panel">
+            <div class="panel-h"><h2>سهم برندها</h2><span class="t-c mut3">از ۴۰۲ محصول</span></div>
+            <div class="panel-b" style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+              <svg viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="نمودار حلقوی سهم برندها">
+                <g transform="rotate(-90 80 80)">
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{b.d0}}" stroke-dashoffset="{{b.o0}}" style="stroke: var(--c1)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{b.d1}}" stroke-dashoffset="{{b.o1}}" style="stroke: var(--c2)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{b.d2}}" stroke-dashoffset="{{b.o2}}" style="stroke: var(--c3)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{b.d3}}" stroke-dashoffset="{{b.o3}}" style="stroke: var(--c4)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{b.d4}}" stroke-dashoffset="{{b.o4}}" style="stroke: var(--bd2)"></circle>
+                </g>
+                <text x="80" y="78" text-anchor="middle" style="font-size: 22px; font-weight: 800; fill: var(--tx)">۱۰</text>
+                <text x="80" y="98" text-anchor="middle" style="font-size: 11px; fill: var(--tx3)">برند</text>
+              </svg>
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 200px">
+                <sc-for list="{{brandLg}}" as="l" hint-placeholder-count="5"><div style="display: flex; align-items: center; gap: 8px; font-size: 13px"><i style="width: 10px; height: 10px; border-radius: 3px; background: {{l.c}}; display: inline-block"></i><span class="{{l.lc}}" style="flex: 1; font-weight: 600">{{l.n}}</span><b class="num">{{l.p}}</b><span class="t-c mut3" style="width: 64px">{{l.v}}</span></div></sc-for>
+              </div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-h"><h2>سهم پروتکل‌ها</h2><span class="t-c mut3">هر محصول می‌تواند چند پروتکل داشته باشد</span></div>
+            <div class="panel-b" style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+              <svg viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="نمودار حلقوی سهم پروتکل‌ها">
+                <g transform="rotate(-90 80 80)">
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{p.d0}}" stroke-dashoffset="{{p.o0}}" style="stroke: var(--c1)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{p.d1}}" stroke-dashoffset="{{p.o1}}" style="stroke: var(--c2)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{p.d2}}" stroke-dashoffset="{{p.o2}}" style="stroke: var(--c3)"></circle>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke-width="22" stroke-dasharray="{{p.d3}}" stroke-dashoffset="{{p.o3}}" style="stroke: var(--bd2)"></circle>
+                </g>
+                <text x="80" y="78" text-anchor="middle" style="font-size: 22px; font-weight: 800; fill: var(--tx)">۳</text>
+                <text x="80" y="98" text-anchor="middle" style="font-size: 11px; fill: var(--tx3)">پروتکل فعال</text>
+              </svg>
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 200px">
+                <sc-for list="{{protoLg}}" as="l" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 8px; font-size: 13px"><i style="width: 10px; height: 10px; border-radius: 3px; background: {{l.c}}; display: inline-block"></i><span class="{{l.lc}}" style="flex: 1; font-weight: 600">{{l.n}}</span><b class="num">{{l.p}}</b><span class="t-c mut3" style="width: 64px">{{l.v}}</span></div></sc-for>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="g2a">
+          <section class="panel">
+            <div class="panel-h"><h2 style="display: flex; align-items: center; gap: 8px"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import>نیاز به توجه</h2><span class="t-c mut3">۱۱۸ مورد در ۸۷ محصول</span></div>
+            <div>
+              <sc-for list="{{attn}}" as="a" hint-placeholder-count="5">
+                <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line)">
+                  <span class="thumb"><dc-import name="Icon" i="{{a.i}}" s="18" hint-size="18px,18px"></dc-import></span>
+                  <span style="flex: 1; display: flex; flex-direction: column"><b style="font-size: 14px">{{a.l}}</b><span class="t-c mut3">{{a.s}}</span></span>
+                  <span class="{{a.stc}}">{{a.n}}</span>
+                  <dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import>
+                </a>
+              </sc-for>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-h"><h2>فعالیت اخیر</h2><a class="more" href="#">گزارش کامل<dc-import name="Icon" i="chevNext" s="14" hint-size="14px,14px"></dc-import></a></div>
+            <div class="tl" style="padding: 4px 18px">
+              <sc-for list="{{acts}}" as="a" hint-placeholder-count="5">
+                <div class="tli" style="border-bottom: 1px solid var(--line)"><span class="{{a.ic}}"><dc-import name="Icon" i="{{a.i}}" s="16" hint-size="16px,16px"></dc-import></span><span style="display: flex; flex-direction: column; gap: 2px"><span class="t-s"><b>{{a.who}}</b> {{a.what}}</span><span class="t-c mut3">{{a.when}}</span></span></div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":3200}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+const donut = (vals) => { const C = 2 * Math.PI * 60; const tot = vals.reduce((a, b) => a + b, 0); let acc = 0; const o = {}; vals.forEach((v, i) => { const len = v / tot * C; o['d' + i] = Math.max(len - 3, 0).toFixed(1) + ' ' + C.toFixed(1); o['o' + i] = (-acc).toFixed(1); acc += len; }); return o; };
+class Component extends DCLogic {
+  renderVals() {
+    const data = [22, 28, 25, 31, 35, 30, 38, 41, 36, 44, 40, 47];
+    const pts = data.map((v, i) => [40 + i * 50, 190 - v * 3.4]);
+    const topRaw = [['تاچ پنل ۷ اینچ MixPad Matter', 62], ['رله ۲۴ کانال', 48], ['تاچ پنل ۵ اینچ Z50', 41], ['سرور خانه هوشمند Miniserver', 37], ['کلید هوشمند ۳ پل', 33], ['پنل آیفون هوشمند R20A', 29], ['تاچ پنل ۷ اینچ Hypanel Elite', 24], ['ترموستات اتاقی KNX', 21], ['سنسور حضور سقفی ۳۶۰ درجه', 17], ['رله پشت‌کلیدی ۲ کانال', 14]];
+    const fa = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('overview'),
+      linePts: pts.map((p) => p.join(',')).join(' '), lastX: pts[11][0], lastY: pts[11][1],
+      top: topRaw.map(([n, v]) => ({ n, v: fa(v), w: Math.round(v / 62 * 100) })),
+      b: donut([84, 68, 60, 48, 142]),
+      brandLg: [
+        { n: 'Zennio', p: '۲۱٪', v: '۸۴ محصول', c: 'var(--c1)', lc: 'lat' }, { n: 'ABB', p: '۱۷٪', v: '۶۸ محصول', c: 'var(--c2)', lc: 'lat' },
+        { n: 'Orvibo', p: '۱۵٪', v: '۶۰ محصول', c: 'var(--c3)', lc: 'lat' }, { n: 'Schneider', p: '۱۲٪', v: '۴۸ محصول', c: 'var(--c4)', lc: 'lat' },
+        { n: 'سایر (۶ برند)', p: '۳۵٪', v: '۱۴۲ محصول', c: 'var(--bd2)', lc: '' }
+      ],
+      p: donut([196, 118, 72, 24]),
+      protoLg: [
+        { n: 'KNX', p: '۴۸٪', v: '۱۹۶ محصول', c: 'var(--c1)', lc: 'lat' }, { n: 'Zigbee', p: '۲۹٪', v: '۱۱۸ محصول', c: 'var(--c2)', lc: 'lat' },
+        { n: 'Modbus', p: '۱۸٪', v: '۷۲ محصول', c: 'var(--c3)', lc: 'lat' }, { n: 'بدون پروتکل', p: '۶٪', v: '۲۴ محصول', c: 'var(--bd2)', lc: '' }
+      ],
+      attn: [
+        { i: 'image', l: 'بدون عکس', s: 'در کاتالوگ عمومی با تصویر جای‌نگهدار نمایش داده می‌شوند', n: '۱۸', stc: 'st er' },
+        { i: 'doc', l: 'بدون دیتاشیت', s: 'دکمه «دانلود دیتاشیت» پنهان است', n: '۳۱', stc: 'st wn' },
+        { i: 'folder', l: 'بدون دسته', s: 'در هیچ فیلتر و لیستی دیده نمی‌شوند', n: '۳', stc: 'st er' },
+        { i: 'tag', l: 'بدون پروتکل', s: 'شامل ۲۲ محصولی که پروتکل IP یا Wi-Fi داشتند', n: '۲۴', stc: 'st wn' },
+        { i: 'table', l: 'مشخصات ناقص', s: 'فیلدهای اختصاصی دسته خالی است', n: '۴۲', stc: 'st wn' }
+      ],
+      acts: [
+        { ic: 'ic add', i: 'plus', who: 'رضا کریمی', what: '«رله پشت‌کلیدی ۳ کانال» را ساخت', when: '۲۰ دقیقه پیش' },
+        { ic: 'ic mod', i: 'edit', who: 'سارا محمدی', what: 'توضیحات «تاچ پنل ۷ اینچ MixPad Matter» را ویرایش کرد', when: '۲ ساعت پیش' },
+        { ic: 'ic', i: 'tag', who: 'سارا محمدی', what: 'پروتکل‌های IP و Wi-Fi را غیرفعال کرد', when: 'دیروز، ۱۸:۱۰' },
+        { ic: 'ic up', i: 'upload', who: 'سارا محمدی', what: 'به‌روزرسانی fritz_update_1405-07-18 را اعمال کرد', when: '۱۸ مهر، ۱۰:۰۵' },
+        { ic: 'ic del', i: 'trash', who: 'رضا کریمی', what: '۲ عکس بدون استفاده را حذف کرد', when: '۱۷ مهر، ۱۴:۲۰' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — ورود</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>ورود</b><span>بدون ثبت‌نام عمومی؛ کاربران فقط با دعوت مدیر کل ساخته می‌شوند</span></div>
+  <div class="{{th.cls}}" style="min-height: 720px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr))">
+    <main style="display: grid; place-items: center; padding: 48px 24px">
+      <form style="width: min(400px, 100%); display: flex; flex-direction: column; gap: 18px" aria-label="ورود به پنل">
+        <div class="logo" style="padding: 0"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></div>
+        <div><h1 class="t-h1">ورود به پنل مدیریت</h1><p class="t-s mut">کاتالوگ آنلاین محصولات FRitZ Smart Solutions</p></div>
+        <div class="fld"><label class="lab" for="u-{{th.k}}">نام کاربری یا ایمیل</label><input id="u-{{th.k}}" class="inp ltr" value="sara.mohammadi" autocomplete="username"></div>
+        <div class="fld"><label class="lab" for="p-{{th.k}}">رمز عبور</label><div style="display: flex; gap: 8px"><input id="p-{{th.k}}" class="inp ltr" type="password" value="password12" autocomplete="current-password"><button type="button" class="ib ib-b" aria-label="نمایش رمز"><dc-import name="Icon" i="eye" s="18" hint-size="18px,18px"></dc-import></button></div></div>
+        <div style="display: flex; align-items: center; justify-content: space-between"><label class="opt" style="font-size: 13px"><input type="checkbox" class="cbx" checked>مرا به خاطر بسپار</label><a href="#" class="t-s" style="color: var(--acT); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">فراموشی رمز</a></div>
+        <button type="button" class="btn btn-p btn-lg btn-w">ورود</button>
+        <p class="t-c mut3">حساب ندارید؟ از مدیر کل بخواهید شما را دعوت کند.</p>
+      </form>
+    </main>
+    <div class="ph" style="min-height: 720px; align-content: center; gap: 32px; padding: 48px">
+      <dc-import name="ProductArt" kind="panel7" s="360" hint-size="360px,360px"></dc-import>
+      <div style="text-align: center; max-width: 380px; justify-self: center"><b style="font-size: 24px; line-height: 1.5">۴۰۲ محصول، یک منبع حقیقت.</b><p class="t-s mut" style="margin-top: 4px">محصولات، فیلترها، رسانه و به‌روزرسانی‌های کاتالوگ عمومی از همین‌جا مدیریت می‌شوند.</p></div>
+    </div>
+  </div>
+
+  <div class="{{th.cls}}" style="padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 2px; background: var(--app)">
+    <div class="panel" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+      <span class="glabel">حالت: خطای ورود</span>
+      <div class="msgbox er" role="alert"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span>نام کاربری یا رمز عبور درست نیست. ۴ تلاش دیگر باقی مانده است.</span></div>
+      <div class="fld"><label class="lab">نام کاربری یا ایمیل</label><input class="inp ltr" value="sara.mohammadi"></div>
+      <div class="fld"><label class="lab">رمز عبور</label><input class="inp ltr err" type="password" value="wrongpass" aria-invalid="true"><span class="emsg">رمز عبور اشتباه است.</span></div>
+      <button type="button" class="btn btn-p btn-w">ورود</button>
+    </div>
+    <div class="panel" style="padding: 22px; display: flex; flex-direction: column; gap: 12px" aria-busy="true">
+      <span class="glabel">حالت: در حال بارگذاری</span>
+      <div class="fld"><label class="lab">نام کاربری یا ایمیل</label><input class="inp ltr dis" value="sara.mohammadi" disabled></div>
+      <div class="fld"><label class="lab">رمز عبور</label><input class="inp ltr dis" type="password" value="password12" disabled></div>
+      <button type="button" class="btn btn-p btn-w" aria-disabled="true" style="opacity: .85"><span class="sk" style="width: 16px; height: 16px; border-radius: 50%; background: var(--acI); opacity: .35"></span>در حال ورود…</button>
+      <p class="t-c mut3">فیلدها تا پایان بررسی قفل می‌شوند.</p>
+    </div>
+    <div class="panel" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+      <span class="glabel">حالت: قفل موقت</span>
+      <div class="msgbox wn"><dc-import name="Icon" i="lock" s="18" hint-size="18px,18px"></dc-import><span>پس از ۵ تلاش ناموفق، ورود برای ۱۵ دقیقه قفل شد. زمان باقی‌مانده: <b class="lat">12:40</b></span></div>
+      <p class="t-s mut">اگر رمز را فراموش کرده‌اید، از «فراموشی رمز» استفاده کنید یا به مدیر کل اطلاع دهید.</p>
+      <button type="button" class="btn btn-p btn-w" disabled>ورود</button>
+      <a href="#" class="t-s" style="color: var(--acT); font-weight: 700">فراموشی رمز</a>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', k: 'l' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', k: 'd' };
+    return { themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D] };
+  }
+}
+</script>
+</body>
+</html>

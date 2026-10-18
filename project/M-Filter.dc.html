@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — فیلتر در Bottom Sheet</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1314px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>فیلتر</b><span>با انتخاب دسته، گروه «ویژه» عوض می‌شود</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+  <sc-for list="{{screens}}" as="sc" hint-placeholder-count="3">
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; font-weight: 800">{{sc.cat}}</b><span class="t-c mut3">{{sc.total}} محصول</span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+      </header>
+      <div class="g2" style="padding: 16px">
+        <div class="card" style="height: 250px"><div class="ph" style="height: 160px"></div></div>
+        <div class="card" style="height: 250px"><div class="ph" style="height: 160px"></div></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="فیلتر محصولات" style="height: 88%">
+        <span class="grab"></span>
+        <div class="sheet-h"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="t-h2">فیلتر</h2><span class="t-c mut3">{{sc.activeTxt}}</span></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+        <div class="sheet-b">
+          <div class="fgrp">
+            <div class="fgrp-h">دسته</div>
+            <div class="chips"><sc-for list="{{sc.cats}}" as="o" hint-placeholder-count="6"><span class="{{o.cls}}">{{o.l}}</span></sc-for></div>
+          </div>
+          <sc-for list="{{sc.groups}}" as="g" hint-placeholder-count="2">
+            <div class="fgrp">
+              <div class="fgrp-h">{{g.t}}<span class="tag-new"><dc-import name="Icon" i="layers" s="14" hint-size="14px,14px"></dc-import>ویژه {{sc.cat}}</span></div>
+              <div class="chips"><sc-for list="{{g.o}}" as="o" hint-placeholder-count="3"><span class="{{o.cls}}"><sc-if value="{{o.sw}}" hint-placeholder-val="{{false}}"><span style="width: 14px; height: 14px; border-radius: 50%; background: {{o.sw}}; box-shadow: inset 0 0 0 1px rgba(128,128,120,.5)"></span></sc-if>{{o.l}}</span></sc-for></div>
+            </div>
+          </sc-for>
+          <div class="fgrp">
+            <div class="fgrp-h">برند</div>
+            <div><sc-for list="{{sc.brands}}" as="o" hint-placeholder-count="4"><label class="opt"><input type="checkbox" class="cbx" checked="{{o.on}}"><span class="lat" style="font-weight: 600">{{o.l}}</span><span class="n">{{o.n}}</span></label></sc-for></div>
+            <button class="more" style="background: none; border: 0; padding: 0; align-self: flex-start">نمایش همه برندها<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+          </div>
+          <div class="fgrp">
+            <div class="fgrp-h">پروتکل</div>
+            <div class="chips"><sc-for list="{{sc.protos}}" as="o" hint-placeholder-count="5"><span class="{{o.cls}}"><span class="lat">{{o.l}}</span></span></sc-for></div>
+          </div>
+        </div>
+        <div class="sheet-f">
+          <button class="btn btn-s">پاک کردن</button>
+          <button class="btn btn-p" style="flex: 1">نمایش {{sc.res}} نتیجه</button>
+        </div>
+      </div>
+    </div>
+    <p class="cap">{{sc.cap}}</p>
+    </div>
+  </sc-for>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1314,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const ch = (l, on, sw) => ({ l, cls: 'chip' + (on ? ' on' : ''), sw: sw || '' });
+    const catList = (cur) => ['تاچ پنل', 'کلید هوشمند', 'رله و اکچوایتور', 'ترموستات', 'سنسور', 'سرور'].map((l) => ch(l, l === cur));
+    const protos = (on) => ['KNX', 'Zigbee', 'Modbus'].map((l) => ch(l, on.includes(l)));
+    const br = (rows) => rows.map(([l, n, on]) => ({ l, n, on: !!on }));
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      screens: [
+        {
+          cat: 'تاچ پنل', total: '۴۲', res: '۹', activeTxt: '۳ فیلتر فعال', cats: catList('تاچ پنل'),
+          groups: [
+            { t: 'سیستم‌عامل', o: [ch('اندروید'), ch('لینوکس', true)] },
+            { t: 'اندازه نمایشگر', o: [ch('۴ اینچ'), ch('۵ اینچ'), ch('۷ اینچ', true), ch('۱۰ اینچ')] },
+            { t: 'ابعاد', o: [ch('۸۶×۸۶', true), ch('۱۲۰×۸۶'), ch('روکار')] }
+          ],
+          brands: br([['Orvibo', '۱۱'], ['Akubela', '۸'], ['Zennio', '۷'], ['ABB', '۶']]),
+          protos: protos([]),
+          cap: 'تاچ پنل: سیستم‌عامل، اندازه نمایشگر، ابعاد'
+        },
+        {
+          cat: 'رله و اکچوایتور', total: '۴۷', res: '۶', activeTxt: '۲ فیلتر فعال', cats: catList('رله و اکچوایتور'),
+          groups: [
+            { t: 'تعداد کانال', o: [ch('۴ کانال'), ch('۸ کانال'), ch('۱۲ کانال', true), ch('۲۴ کانال')] }
+          ],
+          brands: br([['ABB', '۱۴'], ['Zennio', '۱۲'], ['Schneider', '۹'], ['Loxone', '۵']]),
+          protos: protos(['KNX']),
+          cap: 'رله: تعداد کانال + پروتکل'
+        },
+        {
+          cat: 'کلید هوشمند', total: '۵۸', res: '۴', activeTxt: '۴ فیلتر فعال', cats: catList('کلید هوشمند'),
+          groups: [
+            { t: 'تعداد پل', o: [ch('۱ پل'), ch('۲ پل'), ch('۳ پل', true), ch('۴ پل')] },
+            { t: 'رنگ', o: [ch('سفید', false, '#F4F4F0'), ch('مشکی', true, '#1A1B17'), ch('طوسی', false, '#8C8E86'), ch('طلایی', false, '#C9A961')] },
+            { t: 'رله داخلی', o: [ch('با رله داخلی', true), ch('بدون رله')] }
+          ],
+          brands: br([['Ountech', '۱۶', true], ['Schneider', '۱۳'], ['Orvibo', '۱۰'], ['ABB', '۸']]),
+          protos: protos([]),
+          cap: 'کلید: تعداد پل، رنگ، رله داخلی'
+        }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

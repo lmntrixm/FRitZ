@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — کاربران</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>کاربران</b><span>لیست، منوی عملیات باز و پنل دعوت کاربر</span></div>
+  <div class="{{th.cls}} adm" style="position: relative">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>کاربران</span></nav><h1 class="ptitle">کاربران <span class="t-s mut3" style="font-weight: 600">۵ کاربر · ۲ مدیر کل</span></h1></div>
+          <div class="acts"><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>دعوت کاربر</button></div>
+        </div>
+        <section class="panel" style="position: relative"><div class="tw" style="overflow: visible"><table class="tbl">
+          <thead><tr><th>کاربر</th><th>نقش</th><th>وضعیت</th><th>آخرین ورود</th><th></th></tr></thead>
+          <tbody>
+            <sc-for list="{{users}}" as="u" hint-placeholder-count="5">
+              <tr><td><span style="display: inline-flex; align-items: center; gap: 10px"><span class="av">{{u.i}}</span><span style="display: flex; flex-direction: column"><b>{{u.n}}</b><span class="code">{{u.e}}</span></span></span></td><td><span class="{{u.rc}}">{{u.r}}</span></td><td><span class="{{u.sc}}">{{u.s}}</span></td><td class="t-c mut">{{u.l}}</td><td style="position: relative"><button class="{{u.mc}}" style="width: 36px; height: 36px" aria-label="عملیات {{u.n}}" aria-expanded="{{u.open}}"><dc-import name="Icon" i="more" s="18" sw="2.6" hint-size="18px,18px"></dc-import></button>
+                <sc-if value="{{u.open}}" hint-placeholder-val="{{false}}"><div class="card" role="menu" style="position: absolute; top: 44px; left: 8px; z-index: 4; width: 220px; box-shadow: var(--sh2); padding: 6px">
+                  <button class="nv" role="menuitem"><dc-import name="Icon" i="user" s="16" hint-size="16px,16px"></dc-import>تغییر نقش</button>
+                  <button class="nv" role="menuitem"><dc-import name="Icon" i="key" s="16" hint-size="16px,16px"></dc-import>بازنشانی رمز</button>
+                  <button class="nv" role="menuitem" style="color: var(--err)"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import>غیرفعال‌سازی</button>
+                </div></sc-if></td></tr>
+            </sc-for>
+          </tbody>
+        </table></div></section>
+        <section class="panel" style="margin-top: 70px">
+          <div class="panel-h"><h2>دسترسی نقش‌ها</h2></div>
+          <div class="tw"><table class="tbl"><thead><tr><th>بخش</th><th>مدیر کل</th><th>ویرایشگر محتوا</th></tr></thead><tbody>
+            <sc-for list="{{perm}}" as="p" hint-placeholder-count="7"><tr><td>{{p.n}}</td><td><span class="st pub">کامل</span></td><td><span class="{{p.ec}}">{{p.e}}</span></td></tr></sc-for>
+          </tbody></table></div>
+        </section>
+      </div>
+    </div>
+    <div class="scrim" style="z-index: 5"></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-label="دعوت کاربر" style="width: 440px">
+      <div class="sheet-h" style="padding-top: 16px; padding-bottom: 16px"><h2 class="t-h2">دعوت کاربر</h2><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+      <div class="sheet-b" style="display: flex; flex-direction: column; gap: 16px; padding-top: 16px">
+        <div class="fld"><label class="lab">نام و نام خانوادگی</label><input class="inp" value="نیلوفر شریفی"></div>
+        <div class="fld"><label class="lab">ایمیل</label><input class="inp ltr err" value="niloofar.sharifi@" aria-invalid="true"><span class="emsg">ایمیل کامل نیست؛ مثلاً name@fritz.ir</span></div>
+        <div class="fld"><span class="lab">نقش</span>
+          <label class="opt" style="align-items: flex-start; padding: 12px; background: var(--sf2); box-shadow: inset 0 0 0 2px var(--tx); border-radius: 0"><input type="radio" class="rdo" name="r-{{th.k}}" checked style="margin-top: 3px"><span style="display: flex; flex-direction: column"><b>ویرایشگر محتوا</b><span class="t-c mut">محصولات، دسته‌ها، رسانه و استعلام‌ها. بدون تنظیمات، کاربران و به‌روزرسانی.</span></span></label>
+          <label class="opt" style="align-items: flex-start; padding: 12px; background: var(--sf2); border-radius: 0"><input type="radio" class="rdo" name="r-{{th.k}}" style="margin-top: 3px"><span style="display: flex; flex-direction: column"><b>مدیر کل</b><span class="t-c mut">دسترسی کامل، شامل به‌روزرسانی با فایل و کلید رمزنگاری.</span></span></label>
+        </div>
+        <div class="msgbox in"><dc-import name="Icon" i="mail" s="16" hint-size="16px,16px"></dc-import><span>لینک فعال‌سازی ۴۸ ساعت معتبر است. کاربر خودش رمز را تعیین می‌کند.</span></div>
+      </div>
+      <div class="sheet-f"><div style="flex: 1"></div><button class="btn btn-s btn-sm">انصراف</button><button class="btn btn-p btn-sm"><dc-import name="Icon" i="send" s="16" hint-size="16px,16px"></dc-import>ارسال دعوت</button></div>
+    </aside>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2200}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره', k: 'l' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن', k: 'd' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    const U = (i, n, e, admin, s, l, open) => ({ i, n, e, r: admin ? 'مدیر کل' : 'ویرایشگر محتوا', rc: admin ? 'st pub' : 'st draft', s, sc: s === 'فعال' ? 'st pub' : s === 'دعوت‌شده' ? 'st wn' : 'st off', l, open: !!open, mc: 'ib' + (open ? ' is-hover' : '') });
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('users'),
+      users: [
+        U('سم', 'سارا محمدی', 'sara@fritz.ir', true, 'فعال', 'هم‌اکنون'),
+        U('کا', 'کامران افشار', 'kamran@fritz.ir', true, 'فعال', 'دیروز ۲۲:۱۰'),
+        U('رک', 'رضا کریمی', 'reza@fritz.ir', false, 'فعال', 'امروز ۱۱:۲۰', true),
+        U('مت', 'مهسا تقوی', 'mahsa@fritz.ir', false, 'دعوت‌شده', 'هنوز وارد نشده'),
+        U('حن', 'حامد نیک‌نام', 'hamed@fritz.ir', false, 'غیرفعال', '۲ ماه پیش')
+      ],
+      perm: [
+        { n: 'محصولات و رسانه', e: 'کامل', ec: 'st pub' },
+        { n: 'دسته‌ها، فیلترها، برندها و پروتکل‌ها', e: 'کامل', ec: 'st pub' },
+        { n: 'استعلام‌ها', e: 'مشاهده و خروجی', ec: 'st pub' },
+        { n: 'قیمت داخلی', e: 'فقط مشاهده', ec: 'st wn' },
+        { n: 'به‌روزرسانی با فایل', e: 'بدون دسترسی', ec: 'st off' },
+        { n: 'کاربران', e: 'بدون دسترسی', ec: 'st off' },
+        { n: 'تنظیمات و کلید رمزنگاری', e: 'بدون دسترسی', ec: 'st off' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

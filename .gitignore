@@ -1,0 +1,7 @@
+# Kalameh is a proprietary font (see fonts/FontLicense.txt) and this repo is public.
+# Keep the .woff2 files local / on the server only; never commit them.
+fonts/*.woff2
+
+# local tooling state
+.impeccable/questions/
+.DS_Store

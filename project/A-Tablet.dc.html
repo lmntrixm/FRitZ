@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — تبلت</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1788px; height: 1360px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>تبلت ۸۳۴</b><span>منوی جمع‌شده آیکونی · نمای کلی</span></div>
+  <div class="{{th.cls}} phone" style="width: 834px; height: 1194px; border-radius: 32px; flex-direction: row">
+    <nav aria-label="منوی اصلی" style="width: 76px; flex: none; background: var(--sf); border-inline-end: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 0">
+      <span class="logo" style="padding: 0 0 10px"><span class="mk"></span></span>
+      <sc-for list="{{rail}}" as="n" hint-placeholder-count="10"><a class="{{n.cls}}" href="#" aria-label="{{n.l}}" title="{{n.l}}" style="width: 48px; height: 48px; padding: 0; justify-content: center; position: relative"><span class="nvi" style="width: 32px; height: 32px"><dc-import name="Icon" i="{{n.i}}" s="20" hint-size="20px,20px"></dc-import></span><sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="cnt" style="top: 2px; left: 2px">{{n.n}}</span></sc-if></a></sc-for>
+      <span class="av" style="margin-top: auto">سم</span>
+    </nav>
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+      <header class="top" style="padding: 8px 20px"><div class="field gsearch" style="max-width: none"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"></div><button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button><button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import><span class="cnt">۳</span></button></header>
+      <div class="scroll" style="padding: 20px; display: flex; flex-direction: column; gap: 16px">
+        <div class="phead"><div><nav class="crumb">پنل / نمای کلی</nav><h1 class="ptitle">نمای کلی</h1></div><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>افزودن محصول</button></div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+          <div class="stat"><span class="l">محصولات</span><span class="v">۴۰۲</span><span class="s">۳۸۸ منتشرشده · ۱۴ پیش‌نویس</span></div>
+          <div class="stat"><span class="l">استعلام‌های این هفته</span><span class="v">۴۷</span><span class="s"><span class="delta">↑ ۱۸٪</span> نسبت به هفته قبل</span></div>
+          <div class="stat"><span class="l">پراستعلام‌ترین</span><b style="font-size: 15px">تاچ پنل ۷ اینچ MixPad Matter</b><span class="s">۶۲ استعلام</span></div>
+          <div class="stat"><span class="l">آخرین به‌روزرسانی</span><b style="font-size: 15px">۱۸ مهر ۱۴۰۵</b><span class="s">۴ جدید · ۲۱ ویرایش</span></div>
+        </div>
+        <section class="panel"><div class="panel-h"><h2>تعداد استعلام در هفته</h2><span class="t-c mut3">۱۲ هفته</span></div><div class="panel-b">
+          <svg class="chart" viewBox="0 0 680 200" width="100%" role="img" aria-label="نمودار خطی استعلام هفتگی"><line x1="30" y1="170" x2="670" y2="170" style="stroke: var(--bd2)"></line><line x1="30" y1="102" x2="670" y2="102" style="stroke: var(--grid)" stroke-dasharray="3 4"></line><line x1="30" y1="34" x2="670" y2="34" style="stroke: var(--grid)" stroke-dasharray="3 4"></line><text x="22" y="174" text-anchor="end">۰</text><text x="22" y="106" text-anchor="end">۲۰</text><text x="22" y="38" text-anchor="end">۴۰</text><polyline points="{{pts}}" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" style="stroke: var(--c2)"></polyline><circle cx="{{lx}}" cy="{{ly}}" r="5" style="fill: var(--c2); stroke: var(--sf)" stroke-width="2"></circle></svg>
+        </div></section>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+          <section class="panel"><div class="panel-h"><h2>نیاز به توجه</h2></div>
+            <sc-for list="{{attn}}" as="a" hint-placeholder-count="5"><a href="#" style="display: flex; align-items: center; gap: 10px; padding: 0 16px; min-height: 50px; border-bottom: 1px solid var(--line)"><dc-import name="Icon" i="{{a.i}}" s="18" hint-size="18px,18px"></dc-import><span style="flex: 1; font-size: 13px; font-weight: 600">{{a.l}}</span><span class="{{a.c}}">{{a.n}}</span></a></sc-for>
+          </section>
+          <section class="panel"><div class="panel-h"><h2>فعالیت اخیر</h2></div><div class="tl" style="padding: 0 16px">
+            <sc-for list="{{acts}}" as="a" hint-placeholder-count="4"><div class="tli" style="border-bottom: 1px solid var(--line); padding: 10px 0"><span class="{{a.ic}}"><dc-import name="Icon" i="{{a.i}}" s="14" hint-size="14px,14px"></dc-import></span><span style="display: flex; flex-direction: column"><span class="t-c"><b>{{a.w}}</b> {{a.t}}</span><span class="t-c mut3">{{a.d}}</span></span></div></sc-for>
+          </div></section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1788,"height":1360}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' };
+    const data = [22, 28, 25, 31, 35, 30, 38, 41, 36, 44, 40, 47];
+    const p = data.map((v, i) => [40 + i * 56, 170 - v * 3.4]);
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      rail: [['نمای کلی', 'grid2', 1], ['محصولات', 'box'], ['دسته‌ها و فیلترها', 'folder'], ['برندها و پروتکل‌ها', 'tag'], ['رسانه', 'image'], ['استعلام‌ها', 'chat', 0, '۱۲'], ['به‌روزرسانی', 'upload'], ['کاربران', 'users'], ['گزارش فعالیت', 'activity'], ['تنظیمات', 'settings']].map(([l, i, on, n]) => ({ l, i, n: n || '', cls: 'nv' + (on ? ' on' : '') })),
+      pts: p.map((x) => x.join(',')).join(' '), lx: p[11][0], ly: p[11][1],
+      attn: [{ i: 'image', l: 'بدون عکس', n: '۱۸', c: 'st er' }, { i: 'doc', l: 'بدون دیتاشیت', n: '۳۱', c: 'st wn' }, { i: 'folder', l: 'بدون دسته', n: '۳', c: 'st er' }, { i: 'tag', l: 'بدون پروتکل', n: '۲۴', c: 'st wn' }, { i: 'table', l: 'مشخصات ناقص', n: '۴۲', c: 'st wn' }],
+      acts: [
+        { ic: 'ic add', i: 'plus', w: 'رضا کریمی', t: '«رله پشت‌کلیدی ۳ کانال» را ساخت', d: '۲۰ دقیقه پیش' },
+        { ic: 'ic mod', i: 'edit', w: 'سارا محمدی', t: 'توضیحات MixPad را ویرایش کرد', d: '۲ ساعت پیش' },
+        { ic: 'ic', i: 'tag', w: 'سارا محمدی', t: 'IP و Wi-Fi را غیرفعال کرد', d: 'دیروز' },
+        { ic: 'ic up', i: 'upload', w: 'سارا محمدی', t: 'به‌روزرسانی ۱۸ مهر را اعمال کرد', d: '۱۸ مهر' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

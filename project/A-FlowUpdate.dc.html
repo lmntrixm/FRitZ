@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — جریان به‌روزرسانی با فایل رمزنگاری‌شده</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="fz adm {{dk}}" style="min-height: 100dvh; position: relative">
+  <aside class="side" aria-label="منوی اصلی">
+    <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+    <nav style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+        <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+        <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+      </sc-for>
+    </nav>
+    <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+      <div style="flex: 1"></div>
+      <button class="ib" aria-label="{{themeLabel}}" onClick="{{toggleDark}}"><dc-import name="Icon" i="{{themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+      <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+      <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+      <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+    </header>
+
+    <div class="content">
+      <div class="phead">
+        <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>به‌روزرسانی</span></nav>
+          <h1 class="ptitle" style="display: flex; align-items: center; gap: 10px">به‌روزرسانی محصولات <span class="int"><dc-import name="Icon" i="lock" s="12" sw="2" hint-size="12px,12px"></dc-import>ویژه مدیر کل</span></h1></div>
+        <div class="acts"><span class="t-c mut3">آخرین به‌روزرسانی: ۱۸ مهر ۱۴۰۵ · سارا محمدی</span></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}"><dc-import name="Icon" i="{{t.i}}" s="16" hint-size="16px,16px"></dc-import>{{t.l}}</button></sc-for>
+      </div>
+
+      <sc-if value="{{isFlow}}" hint-placeholder-val="{{true}}">
+        <ol class="stepper" aria-label="مراحل" style="list-style: none; margin: 0; padding: 0">
+          <sc-for list="{{steps}}" as="st" hint-placeholder-count="5"><li class="{{st.cls}}" aria-current="{{st.cur}}"><span class="n"><sc-if value="{{st.done}}" hint-placeholder-val="{{false}}"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></sc-if><sc-if value="{{st.todo}}" hint-placeholder-val="{{true}}">{{st.n}}</sc-if></span>{{st.l}}</li></sc-for>
+        </ol>
+
+        <sc-if value="{{s1}}" hint-placeholder-val="{{true}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+          <sc-if value="{{noFile}}" hint-placeholder-val="{{true}}">
+            <div class="{{dropCls}}">
+              <span class="ico"><dc-import name="Icon" i="{{dropIcon}}" s="26" hint-size="26px,26px"></dc-import></span>
+              <b style="font-size: 16px">{{dropTitle}}</b>
+              <span class="t-s mut">{{dropSub}}</span>
+              <div style="display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; justify-content: center">
+                <button class="btn btn-s btn-sm" onClick="{{pickFile}}"><dc-import name="Icon" i="folder" s="18" hint-size="18px,18px"></dc-import>{{pickTxt}}</button>
+                <sc-if value="{{isExcel}}" hint-placeholder-val="{{false}}"><button class="btn btn-g btn-sm" style="color: var(--acT)"><dc-import name="Icon" i="download" s="18" hint-size="18px,18px"></dc-import>دانلود قالب اکسل نمونه</button></sc-if>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center"><span class="t-c mut3">نمایش حالت‌های خطا:</span><button class="btn btn-g btn-sm" style="min-height: 32px; font-size: 12px" onClick="{{simBig}}">فایل خیلی بزرگ</button><button class="btn btn-g btn-sm" style="min-height: 32px; font-size: 12px" onClick="{{simBad}}">فایل دستکاری‌شده</button></div>
+          </sc-if>
+          <sc-if value="{{hasFile}}" hint-placeholder-val="{{false}}">
+            <div class="file"><span class="thumb"><dc-import name="Icon" i="{{fileIcon}}" s="20" hint-size="20px,20px"></dc-import></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><b class="lat" style="font-size: 13px">{{fileName}}</b><span class="t-c mut3">{{fileMeta}}</span></span><button class="btn btn-g btn-sm" onClick="{{clearFile}}">تغییر فایل</button></div>
+            <sc-if value="{{needPw}}" hint-placeholder-val="{{true}}">
+              <div class="msgbox in"><dc-import name="Icon" i="lock" s="18" hint-size="18px,18px"></dc-import><span>این فایل با رمزنگاری <b class="lat">AES-256</b> محافظت می‌شود. رمز بسته را از فرستنده فایل بگیرید.</span></div>
+              <div class="fld" style="max-width: 420px"><label class="lab" for="pw">رمز عبور بسته</label>
+                <div style="display: flex; gap: 8px"><input id="pw" class="{{pwCls}}" type="{{pwType}}" value="{{pw}}" onChange="{{onPw}}" placeholder="••••••••" autocomplete="off"><button class="ib ib-b" aria-label="{{pwEyeLabel}}" onClick="{{togglePw}}"><dc-import name="Icon" i="eye" s="18" hint-size="18px,18px"></dc-import></button></div>
+                <sc-if value="{{pwErr}}" hint-placeholder-val="{{false}}"><span class="emsg"><dc-import name="Icon" i="alert" s="14" hint-size="14px,14px"></dc-import>{{pwErr}}</span></sc-if>
+              </div>
+            </sc-if>
+            <div><button class="btn btn-p" onClick="{{decrypt}}"><dc-import name="Icon" i="key" s="18" hint-size="18px,18px"></dc-import>{{decryptTxt}}</button></div>
+          </sc-if>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{s2}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 16px">
+          <sc-if value="{{validating}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; justify-content: space-between; align-items: baseline"><b>{{vStage}}</b><span class="t-s mut">{{vPctTxt}}</span></div>
+            <div class="prog lg" role="progressbar" aria-label="اعتبارسنجی" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{vPct}}"><i style="width: {{vPct}}%"></i></div>
+          </sc-if>
+          <sc-if value="{{validated}}" hint-placeholder-val="{{false}}">
+            <div class="msgbox ok"><dc-import name="Icon" i="checkCircle" s="20" hint-size="20px,20px"></dc-import><span><b>فایل معتبر است.</b> امضای فایل تأیید شد و رمزگشایی کامل انجام شد.</span></div>
+            <div class="stats">
+              <div class="stat"><span class="l">محصول در فایل</span><span class="v">۴۰۶</span></div>
+              <div class="stat"><span class="l">عکس و دیتاشیت</span><span class="v">۱٬۲۱۸</span></div>
+              <div class="stat"><span class="l">خطا (ردیف رد می‌شود)</span><span class="v" style="color: var(--err)">۱</span></div>
+              <div class="stat"><span class="l">هشدار</span><span class="v" style="color: var(--wn)">۳</span></div>
+            </div>
+            <div class="panel" style="border-radius: 0">
+              <table class="tbl"><thead><tr><th>نوع</th><th>مورد</th><th>اثر</th></tr></thead><tbody>
+                <tr><td><span class="st er">خطا</span></td><td>کد تکراری <span class="code" style="color: var(--tx)">ZVIZ50A</span> در ردیف‌های ۴۲ و ۱۸۷</td><td class="t-c mut">ردیف ۱۸۷ وارد نمی‌شود</td></tr>
+                <tr><td><span class="st wn">هشدار</span></td><td>دسته ناشناخته «پریز هوشمند» در ۳ محصول</td><td class="t-c mut">بدون دسته وارد و در «نیاز به توجه» نمایش داده می‌شوند</td></tr>
+                <tr><td><span class="st wn">هشدار</span></td><td>پروتکل غیرفعال <span class="lat">IP</span> در ۲ محصول</td><td class="t-c mut">پروتکل نادیده گرفته می‌شود</td></tr>
+                <tr><td><span class="st wn">هشدار</span></td><td>۴ فایل عکس ناقص یا خراب</td><td class="t-c mut">عکس فعلی محصول حفظ می‌شود</td></tr>
+              </tbody></table>
+            </div>
+            <div style="display: flex; gap: 8px"><button class="btn btn-p" onClick="{{toDiff}}">ادامه: پیش‌نمایش تغییرات<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-g" onClick="{{restart}}">انصراف</button></div>
+          </sc-if>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{s3}}" hint-placeholder-val="{{false}}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px">
+            <sc-for list="{{dcards}}" as="d" hint-placeholder-count="4"><button class="{{d.cls}}" aria-pressed="{{d.on}}" onClick="{{d.pick}}"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--tx2)"><span class="{{d.mk}}">{{d.sym}}</span>{{d.l}}</span><span class="v">{{d.v}}</span></button></sc-for>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><h2>تفاوت‌ها <span class="t-c mut3" style="font-weight: 600">{{diffSub}}</span></h2><div class="field" style="height: 38px; max-width: 260px"><dc-import name="Icon" i="search" s="16" hint-size="16px,16px"></dc-import><input placeholder="جست‌وجوی کد یا نام" aria-label="جست‌وجو در تفاوت‌ها"></div></div>
+            <div class="tw"><table class="tbl"><thead><tr><th style="width: 40px">نوع</th><th>محصول</th><th>فیلد</th><th>قبل</th><th style="width: 24px"></th><th>بعد</th></tr></thead><tbody>
+              <sc-for list="{{diffRows}}" as="r" hint-placeholder-count="6">
+                <tr class="{{r.cls}}"><td><span class="{{r.mk}}" aria-label="{{r.tl}}">{{r.sym}}</span></td><td><b style="font-size: 13px">{{r.name}}</b> <span class="code">{{r.code}}</span></td><td class="t-c mut" style="font-weight: 700">{{r.field}}</td><td><span class="{{r.bc}}">{{r.before}}</span></td><td style="color: var(--tx3)"><dc-import name="Icon" i="arrowNext" s="14" hint-size="14px,14px"></dc-import></td><td><span class="{{r.ac}}">{{r.after}}</span></td></tr>
+              </sc-for>
+            </tbody></table></div>
+          </div>
+          <div style="display: flex; gap: 8px"><button class="btn btn-p" onClick="{{toOpts}}">ادامه: گزینه‌ها<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-g" onClick="{{backTo2}}">مرحله قبل</button></div>
+        </sc-if>
+
+        <sc-if value="{{s4}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+          <label class="{{optAddCls}}" style="align-items: flex-start; cursor: pointer; padding: 12px 14px; border: 1.5px solid {{optAddBd}}; border-radius: 0"><input type="radio" class="rdo" name="mode" checked="{{modeAdd}}" onChange="{{setAdd}}" style="margin-top: 4px"><span style="display: flex; flex-direction: column; gap: 2px"><b>فقط افزودن و ویرایش</b><span class="t-c mut">۱۲ محصول جدید اضافه و ۳۷ محصول ویرایش می‌شود. محصولاتی که در فایل نیستند دست نمی‌خورند.</span></span><span class="st pub" style="margin-inline-start: auto">پیشنهادی</span></label>
+          <label class="{{optDelCls}}" style="align-items: flex-start; cursor: pointer; padding: 12px 14px; border: 1.5px solid {{optDelBd}}; border-radius: 0"><input type="radio" class="rdo" name="mode" checked="{{modeDel}}" onChange="{{setDel}}" style="margin-top: 4px"><span style="display: flex; flex-direction: column; gap: 2px"><b>همچنین حذف محصولات غایب</b><span class="t-c mut">۶ محصولی که در کاتالوگ هستند ولی در فایل نیستند حذف می‌شوند.</span></span></label>
+          <sc-if value="{{modeDel}}" hint-placeholder-val="{{false}}">
+            <div class="msgbox er" style="flex-direction: column; gap: 8px"><span style="display: flex; gap: 8px"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span><b>۶ محصول حذف می‌شوند:</b> <span class="lat">OT-P10، HYP-L4، ST-7B، ZR-1CH، T-104، PD-180</span>. این محصولات از کاتالوگ، مقایسه و «سازگار با» برداشته می‌شوند.</span></span>
+              <label class="opt" style="color: var(--tx); min-height: 36px"><input type="checkbox" class="cbx" checked="{{delAck}}" onChange="{{toggleAck}}">می‌دانم ۶ محصول حذف می‌شود</label></div>
+          </sc-if>
+          <label class="swl" style="padding: 8px 14px; background: var(--sf2); border-radius: 0"><span style="display: flex; flex-direction: column"><b style="font-size: 14px">نادیده گرفتن قیمت</b><span class="t-c mut">قیمت‌های داخلی فعلی حفظ می‌شوند و از فایل خوانده نمی‌شوند.</span></span><input type="checkbox" class="sw" checked="{{ignorePrice}}" onChange="{{togglePrice}}"></label>
+          <div style="display: flex; gap: 8px"><button class="{{optNextCls}}" onClick="{{toConfirm}}" disabled="{{optBlocked}}">ادامه: تأیید نهایی<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-g" onClick="{{backTo3}}">مرحله قبل</button></div>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{s5}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+          <h2 class="t-h2">مرور نهایی</h2>
+          <table class="spec"><tbody>
+            <tr><th>فایل</th><td class="lat">fritz_update_1405-07-25.fritz</td></tr>
+            <tr><th>محصول جدید</th><td>۱۲</td></tr>
+            <tr><th>محصول ویرایش‌شده</th><td>۳۷</td></tr>
+            <tr><th>حذف</th><td>{{delSummary}}</td></tr>
+            <tr><th>قیمت</th><td>{{priceSummary}}</td></tr>
+            <tr><th>ردیف رد شده</th><td>۱ (کد تکراری)</td></tr>
+          </tbody></table>
+          <label class="opt" style="align-items: flex-start"><input type="checkbox" class="cbx" checked="{{backup}}" onChange="{{toggleBackup}}" style="margin-top: 4px"><span style="display: flex; flex-direction: column"><b>ایجاد پشتیبان خودکار قبل از اعمال</b><span class="t-c mut">برای بازگردانی به نسخه قبل لازم است.</span></span></label>
+          <sc-if value="{{noBackup}}" hint-placeholder-val="{{false}}"><div class="msgbox wn"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span>بدون پشتیبان، امکان بازگردانی این به‌روزرسانی وجود ندارد.</span></div></sc-if>
+          <div style="display: flex; gap: 8px"><button class="btn btn-p btn-lg" onClick="{{apply}}"><dc-import name="Icon" i="database" s="20" hint-size="20px,20px"></dc-import>اعمال تغییرات</button><button class="btn btn-g" onClick="{{backTo4}}">مرحله قبل</button></div>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{applying}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+          <div class="msgbox wn"><dc-import name="Icon" i="lock" s="18" hint-size="18px,18px"></dc-import><span><b>در حال اعمال — این عملیات قابل لغو نیست.</b> تا پایان، این صفحه را نبندید. در صورت خطا، سیستم خودکار به نسخه پشتیبان برمی‌گردد.</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><b>{{aStage}}</b><span class="t-s mut">{{aPctTxt}}</span></div>
+          <div class="prog lg" role="progressbar" aria-label="اعمال تغییرات" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{aPct}}"><i style="width: {{aPct}}%"></i></div>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{done}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+          <div class="msgbox ok"><dc-import name="Icon" i="checkCircle" s="20" hint-size="20px,20px"></dc-import><span><b>به‌روزرسانی با موفقیت اعمال شد.</b> ۲۵ مهر ۱۴۰۵، ساعت ۱۴:۳۲ — پشتیبان <span class="lat">BK-14050725-1432</span> ذخیره شد.</span></div>
+          <div class="stats">
+            <div class="stat"><span class="l"><span class="dm add">+</span>اضافه شد</span><span class="v">۱۲</span></div>
+            <div class="stat"><span class="l"><span class="dm mod">~</span>ویرایش شد</span><span class="v">۳۷</span></div>
+            <div class="stat"><span class="l"><span class="dm del">−</span>حذف شد</span><span class="v">{{delCount}}</span></div>
+            <div class="stat"><span class="l">رد شد</span><span class="v">۱</span></div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap"><button class="btn btn-s"><dc-import name="Icon" i="download" s="18" hint-size="18px,18px"></dc-import>دانلود گزارش</button><button class="btn btn-xs" onClick="{{askRollback}}" disabled="{{noRollback}}"><dc-import name="Icon" i="history" s="18" hint-size="18px,18px"></dc-import>بازگردانی به نسخه قبل</button><button class="btn btn-g" onClick="{{restart}}">به‌روزرسانی جدید</button></div>
+        </div></div>
+        </sc-if>
+
+        <sc-if value="{{rolled}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="panel-b" style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+          <div class="msgbox in"><dc-import name="Icon" i="history" s="20" hint-size="20px,20px"></dc-import><span><b>کاتالوگ به نسخه پیش از به‌روزرسانی برگشت.</b> ۴۹ تغییر برگردانده شد. این بازگردانی در «تاریخچه» و «گزارش فعالیت» ثبت شد.</span></div>
+          <div style="display: flex; gap: 8px"><button class="btn btn-p" onClick="{{restart}}">شروع دوباره</button><button class="btn btn-s" onClick="{{toHistory}}">مشاهده تاریخچه</button></div>
+        </div></div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{isHistory}}" hint-placeholder-val="{{false}}">
+        <div class="panel"><div class="tw"><table class="tbl">
+          <thead><tr><th>تاریخ</th><th>کاربر</th><th>فایل</th><th>تغییرات</th><th>وضعیت</th><th></th></tr></thead>
+          <tbody>
+            <sc-for list="{{history}}" as="h" hint-placeholder-count="4">
+              <tr><td class="t-s">{{h.date}}</td><td><span style="display: inline-flex; align-items: center; gap: 8px"><span class="av sm">{{h.ini}}</span>{{h.user}}</span></td><td><span class="code" style="color: var(--tx)">{{h.file}}</span></td>
+                <td><span style="display: inline-flex; gap: 6px; align-items: center"><span class="dm add">+</span>{{h.add}}<span class="dm mod">~</span>{{h.mod}}<span class="dm del">−</span>{{h.del}}</span></td>
+                <td><span class="{{h.stc}}">{{h.st}}</span></td>
+                <td><span style="display: inline-flex; gap: 4px"><button class="ib" style="width: 36px; height: 36px" aria-label="دانلود گزارش"><dc-import name="Icon" i="download" s="18" hint-size="18px,18px"></dc-import></button><sc-if value="{{h.canRb}}" hint-placeholder-val="{{false}}"><button class="btn btn-g btn-sm" style="min-height: 36px">بازگردانی</button></sc-if></span></td></tr>
+            </sc-for>
+          </tbody></table></div></div>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{rbModal}}" hint-placeholder-val="{{false}}">
+    <div style="position: fixed; inset: 0; z-index: 20; display: grid; place-items: center">
+      <div class="scrim" onClick="{{closeModal}}"></div>
+      <div class="modal" role="alertdialog" aria-modal="true" aria-label="بازگردانی به نسخه قبل">
+        <span style="width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--errS); color: var(--err)"><dc-import name="Icon" i="history" s="24" hint-size="24px,24px"></dc-import></span>
+        <h2 class="t-h2">بازگردانی به نسخه قبل؟</h2>
+        <p class="t-s mut">کاتالوگ به پشتیبان <span class="lat">BK-14050725-1432</span> برمی‌گردد. ۱۲ محصول جدید حذف و ۳۷ ویرایش برگردانده می‌شود. تغییرات دستی پس از این به‌روزرسانی هم از بین می‌رود.</p>
+        <div style="display: flex; gap: 8px; justify-content: flex-end"><button class="btn btn-s btn-sm" onClick="{{closeModal}}">انصراف</button><button class="btn btn-x btn-sm" onClick="{{rollback}}">بله، بازگردانی شود</button></div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startDark":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1000}}'>
+const FA = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const DIFF = [
+  { t: 'add', name: 'تاچ پنل ۱۰ اینچ Hypanel Pro', code: 'HYP-P10', field: 'محصول جدید', before: '—', after: 'پیش‌نویس، ۳ عکس' },
+  { t: 'add', name: 'رله پشت‌کلیدی ۳ کانال', code: 'ZR-3CH', field: 'محصول جدید', before: '—', after: 'منتشرشده، ۲ عکس' },
+  { t: 'mod', name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', field: 'توضیحات', before: '۱۲۰ نویسه', after: '۲۸۴ نویسه' },
+  { t: 'mod', name: 'رله ۲۴ کانال', code: 'SA/S 24.16', field: 'جریان هر کانال', before: '۱۰ آمپر', after: '۱۶ آمپر' },
+  { t: 'mod', name: 'کلید هوشمند ۳ پل', code: 'OT-SW3', field: 'عکس', before: 'بدون عکس', after: '۲ عکس' },
+  { t: 'mod', name: 'سرور خانه هوشمند Miniserver', code: 'MS-GEN2', field: 'پروتکل', before: 'تعیین نشده', after: 'Modbus' },
+  { t: 'del', name: 'تاچ پنل ۱۰ اینچ اندرویدی', code: 'OT-P10', field: 'در فایل نیست', before: 'منتشرشده', after: 'حذف' },
+  { t: 'del', name: 'اسپیکر سقفی ۴ اینچ', code: 'T-104', field: 'در فایل نیست', before: 'منتشرشده', after: 'حذف' },
+  { t: 'same', name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', field: '—', before: 'بدون تغییر', after: 'بدون تغییر' }
+];
+const MK = { add: ['dm add', '+', 'r-add', 'جدید'], mod: ['dm mod', '~', 'r-mod', 'ویرایش'], del: ['dm del', '−', 'r-del', 'حذف'], same: ['dm same', '=', '', 'بدون تغییر'] };
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { dark: !!props.startDark, tab: 'file', step: 1, phase: 'idle', file: null, fileErr: '', pw: '', showPw: false, pwErr: '', tries: 3, v: 0, a: 0, df: 'all', mode: 'add', delAck: false, ignorePrice: true, backup: true, rb: false, rolled: false };
+    this.iv = null;
+  }
+  componentWillUnmount() { clearInterval(this.iv); }
+  run(key, onDone) {
+    clearInterval(this.iv);
+    this.setState({ [key]: 0 });
+    this.iv = setInterval(() => {
+      const n = Math.min(100, this.state[key] + 7);
+      this.setState({ [key]: n });
+      if (n >= 100) { clearInterval(this.iv); onDone(); }
+    }, 160);
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (o) => this.setState(o);
+    const nav = NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === 'update' ? ' on' : ''), cur: n.k === 'update' ? 'page' : 'false' }));
+    const isExcel = s.tab === 'excel';
+    const restart = () => { clearInterval(this.iv); set({ step: 1, phase: 'idle', file: null, fileErr: '', pw: '', pwErr: '', tries: 3, v: 0, a: 0, df: 'all', mode: 'add', delAck: false, backup: true, rb: false, rolled: false }); };
+    const stepNames = ['آپلود', 'اعتبارسنجی', 'پیش‌نمایش تغییرات', 'گزینه‌ها', 'تأیید و اعمال'];
+    const curStep = s.phase === 'applying' || s.phase === 'done' || s.phase === 'rolled' ? 6 : s.step;
+    const vStages = ['رمزگشایی بسته', 'بررسی امضا و یکپارچگی', 'خواندن ۴۰۶ محصول', 'بررسی ۱٬۲۱۸ فایل رسانه'];
+    const aStages = ['ایجاد پشتیبان', 'افزودن محصولات جدید', 'ویرایش محصولات', 'به‌روزرسانی رسانه‌ها و فهرست جست‌وجو'];
+    const counts = { add: 12, mod: 37, same: 351, del: 6 };
+    const rows = DIFF.filter((r) => s.df === 'all' ? r.t !== 'same' : r.t === s.df).map((r) => ({ ...r, mk: MK[r.t][0], sym: MK[r.t][1], cls: MK[r.t][2], tl: MK[r.t][3], bc: r.t === 'mod' || r.t === 'del' ? 'was' : 'mut3', ac: r.t === 'same' ? 'mut3' : 'now' }));
+    const fileTooBig = s.fileErr === 'big'; const fileBad = s.fileErr === 'bad';
+    return {
+      dk: s.dark ? 'dark' : '', nav,
+      themeIcon: s.dark ? 'sun' : 'moon', themeLabel: s.dark ? 'تم روشن' : 'تم تیره', toggleDark: () => set({ dark: !s.dark }),
+      tabs: [['file', 'فایل رمزنگاری‌شده', 'lock'], ['excel', 'ورود از اکسل', 'table'], ['history', 'تاریخچه به‌روزرسانی‌ها', 'history']].map(([k, l, i]) => ({ l, i, on: s.tab === k, cls: 'tab' + (s.tab === k ? ' on' : ''), pick: () => { restart(); set({ tab: k }); } })),
+      isFlow: s.tab !== 'history', isHistory: s.tab === 'history', isExcel,
+      steps: stepNames.map((l, i) => { const n = i + 1; const done = n < curStep; const cur = n === curStep; return { l, n: FA(n), done, todo: !done, cls: 'step' + (done ? ' done' : cur ? ' cur' : ''), cur: cur ? 'step' : 'false' }; }),
+      s1: s.step === 1 && s.phase === 'idle',
+      noFile: !s.file, hasFile: !!s.file, needPw: !isExcel,
+      dropCls: 'drop' + (s.fileErr ? ' err' : ''),
+      dropIcon: s.fileErr ? 'alert' : 'upload',
+      dropTitle: fileTooBig ? 'فایل بزرگ‌تر از حد مجاز است' : fileBad ? 'فایل مخدوش یا دستکاری‌شده است' : isExcel ? 'فایل اکسل را اینجا رها کنید' : 'فایل بسته .fritz را اینجا رها کنید',
+      dropSub: fileTooBig ? 'حداکثر حجم ۲۰۰ مگابایت است. فایل انتخاب‌شده ۳۱۲ مگابایت است؛ آن را در دو بسته تهیه کنید.' : fileBad ? 'امضای دیجیتال فایل با محتوا هم‌خوانی ندارد. فایل را دوباره از منبع اصلی دریافت کنید.' : isExcel ? 'فرمت xlsx · حداکثر ۵۰ مگابایت · ستون‌ها مطابق قالب نمونه' : 'فایل با رمزنگاری AES محافظت می‌شود · حداکثر ۲۰۰ مگابایت',
+      pickTxt: s.fileErr ? 'انتخاب فایل دیگر' : 'انتخاب فایل',
+      pickFile: () => set({ file: isExcel ? 'products_1405-07.xlsx' : 'fritz_update_1405-07-25.fritz', fileErr: '' }),
+      simBig: () => set({ file: null, fileErr: 'big' }), simBad: () => set({ file: null, fileErr: 'bad' }),
+      fileName: s.file || '', fileIcon: isExcel ? 'table' : 'lock', fileMeta: isExcel ? '۲٫۴ مگابایت · ۴۰۶ ردیف' : '۴۸٫۶ مگابایت · ساخته‌شده ۲۴ مهر ۱۴۰۵',
+      clearFile: () => set({ file: null, pw: '', pwErr: '' }),
+      pw: s.pw, onPw: (e) => set({ pw: e.target.value, pwErr: '' }),
+      pwType: s.showPw ? 'text' : 'password', pwEyeLabel: s.showPw ? 'پنهان کردن رمز' : 'نمایش رمز', togglePw: () => set({ showPw: !s.showPw }),
+      pwCls: 'inp ltr' + (s.pwErr ? ' err' : ''), pwErr: s.pwErr,
+      decryptTxt: isExcel ? 'بررسی فایل' : 'رمزگشایی و بررسی',
+      decrypt: () => {
+        if (!isExcel && s.pw.length < 4) { const t = s.tries - 1; set({ pwErr: t > 0 ? 'رمز بسته اشتباه است. ' + FA(t) + ' تلاش دیگر باقی مانده است.' : 'تلاش‌ها تمام شد. ۱۵ دقیقه دیگر دوباره امتحان کنید.', tries: Math.max(t, 0) }); return; }
+        set({ step: 2, phase: 'validating' });
+        this.run('v', () => set({ phase: 'validated' }));
+      },
+      s2: s.step === 2, validating: s.phase === 'validating', validated: s.phase === 'validated',
+      vPct: s.v, vPctTxt: FA(s.v) + '٪', vStage: vStages[Math.min(3, Math.floor(s.v / 25))] + '…',
+      toDiff: () => set({ step: 3, phase: 'idle' }), restart,
+      s3: s.step === 3 && s.phase === 'idle',
+      dcards: [['add', 'جدید'], ['mod', 'ویرایش‌شده'], ['same', 'بدون تغییر'], ['del', 'حذف‌شونده']].map(([k, l]) => ({ l, v: FA(counts[k]), mk: MK[k][0], sym: MK[k][1], on: s.df === k, cls: 'dcard' + (s.df === k ? ' on' : ''), pick: () => set({ df: s.df === k ? 'all' : k }) })),
+      diffSub: s.df === 'all' ? '· همه تغییرات · برای فیلتر روی کارت‌ها بزنید' : '· فقط «' + MK[s.df][3] + '»',
+      diffRows: rows,
+      toOpts: () => set({ step: 4 }), backTo2: () => set({ step: 2, phase: 'validated' }),
+      s4: s.step === 4 && s.phase === 'idle',
+      modeAdd: s.mode === 'add', modeDel: s.mode === 'del',
+      optAddCls: 'opt', optDelCls: 'opt',
+      optAddBd: s.mode === 'add' ? 'var(--tx)' : 'var(--bd)', optDelBd: s.mode === 'del' ? 'var(--err)' : 'var(--bd)',
+      setAdd: () => set({ mode: 'add', delAck: false }), setDel: () => set({ mode: 'del' }),
+      delAck: s.delAck, toggleAck: () => set({ delAck: !s.delAck }),
+      ignorePrice: s.ignorePrice, togglePrice: () => set({ ignorePrice: !s.ignorePrice }),
+      optBlocked: s.mode === 'del' && !s.delAck,
+      optNextCls: 'btn btn-p' + (s.mode === 'del' && !s.delAck ? ' is-dis' : ''),
+      toConfirm: () => { if (s.mode === 'del' && !s.delAck) return; set({ step: 5 }); }, backTo3: () => set({ step: 3 }),
+      s5: s.step === 5 && s.phase === 'idle',
+      delSummary: s.mode === 'del' ? '۶ محصول غایب حذف می‌شود' : 'هیچ — فقط افزودن و ویرایش',
+      priceSummary: s.ignorePrice ? 'نادیده گرفته می‌شود' : 'از فایل به‌روز می‌شود',
+      backup: s.backup, noBackup: !s.backup, toggleBackup: () => set({ backup: !s.backup }),
+      backTo4: () => set({ step: 4 }),
+      apply: () => { set({ phase: 'applying' }); this.run('a', () => set({ phase: 'done' })); },
+      applying: s.phase === 'applying', aPct: s.a, aPctTxt: FA(s.a) + '٪', aStage: aStages[Math.min(3, Math.floor(s.a / 25))] + '…',
+      done: s.phase === 'done', delCount: s.mode === 'del' ? '۶' : '۰',
+      noRollback: !s.backup,
+      askRollback: () => set({ rb: true }), rbModal: s.rb, closeModal: () => set({ rb: false }),
+      rollback: () => set({ rb: false, phase: 'rolled', rolledOnce: true }),
+      rolled: s.phase === 'rolled',
+      toHistory: () => { restart(); set({ tab: 'history' }); },
+      history: [
+        ...(s.rolledOnce ? [{ date: '۲۵ مهر ۱۴۰۵ · ۱۴:۳۲', ini: 'سم', user: 'سارا محمدی', file: 'fritz_update_1405-07-25.fritz', add: '۱۲', mod: '۳۷', del: '۰', st: 'بازگردانی‌شده', stc: 'st draft', canRb: false }] : []),
+        { date: '۱۸ مهر ۱۴۰۵ · ۱۰:۰۵', ini: 'سم', user: 'سارا محمدی', file: 'fritz_update_1405-07-18.fritz', add: '۴', mod: '۲۱', del: '۰', st: 'موفق', stc: 'st pub', canRb: true },
+        { date: '۳ مهر ۱۴۰۵ · ۱۶:۴۰', ini: 'رک', user: 'رضا کریمی', file: 'products_1405-07.xlsx', add: '۰', mod: '۸۶', del: '۰', st: 'ناموفق — بازگردانی خودکار', stc: 'st er', canRb: false },
+        { date: '۲۰ شهریور ۱۴۰۵ · ۰۹:۱۲', ini: 'سم', user: 'سارا محمدی', file: 'fritz_update_1405-06-20.fritz', add: '۳۸۰', mod: '۰', del: '۰', st: 'موفق', stc: 'st pub', canRb: false }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

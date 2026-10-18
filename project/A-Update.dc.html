@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — به‌روزرسانی</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>به‌روزرسانی</b><span>مرحله ۳: پیش‌نمایش تغییرات · سپس همه حالت‌ها و تاریخچه</span></div>
+  <div class="{{th.cls}} adm">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>به‌روزرسانی</span></nav><h1 class="ptitle" style="display: flex; align-items: center; gap: 10px">به‌روزرسانی محصولات <span class="int"><dc-import name="Icon" i="lock" s="12" sw="2" hint-size="12px,12px"></dc-import>ویژه مدیر کل</span></h1></div>
+          <div class="acts"><span class="file" style="padding: 6px 12px"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import><span class="code" style="color: var(--tx)">fritz_update_1405-07-25.fritz</span></span></div>
+        </div>
+        <div class="tabs" role="tablist"><button class="tab on" role="tab" aria-selected="true"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import>فایل رمزنگاری‌شده</button><button class="tab" role="tab" aria-selected="false"><dc-import name="Icon" i="table" s="16" hint-size="16px,16px"></dc-import>ورود از اکسل</button><button class="tab" role="tab" aria-selected="false"><dc-import name="Icon" i="history" s="16" hint-size="16px,16px"></dc-import>تاریخچه به‌روزرسانی‌ها</button></div>
+        <ol class="stepper" style="list-style: none; margin: 0; padding: 0" aria-label="مراحل">
+          <li class="step done"><span class="n"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></span>آپلود</li><li class="step done"><span class="n"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></span>اعتبارسنجی</li><li class="step cur" aria-current="step"><span class="n">۳</span>پیش‌نمایش تغییرات</li><li class="step"><span class="n">۴</span>گزینه‌ها</li><li class="step"><span class="n">۵</span>تأیید و اعمال</li>
+        </ol>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px">
+          <button class="dcard on" aria-pressed="true"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--tx2)"><span class="dm mod">~</span>ویرایش‌شده</span><span class="v">۳۷</span></button>
+          <button class="dcard"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--tx2)"><span class="dm add">+</span>جدید</span><span class="v">۱۲</span></button>
+          <button class="dcard"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--tx2)"><span class="dm same">=</span>بدون تغییر</span><span class="v">۳۵۱</span></button>
+          <button class="dcard"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--tx2)"><span class="dm del">−</span>حذف‌شونده (اگر فعال شود)</span><span class="v">۶</span></button>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h2>ویرایش‌شده‌ها <span class="t-c mut3" style="font-weight: 600">۳۷ محصول · ۵۲ فیلد</span></h2><div style="display: flex; gap: 8px"><div class="field" style="height: 38px; max-width: 240px"><dc-import name="Icon" i="search" s="16" hint-size="16px,16px"></dc-import><input placeholder="جست‌وجوی کد یا نام" aria-label="جست‌وجو"></div><button class="selbtn"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import>خروجی Diff</button></div></div>
+          <div class="tw"><table class="tbl"><thead><tr><th style="width: 40px">نوع</th><th>محصول</th><th>فیلد</th><th>قبل</th><th style="width: 24px"></th><th>بعد</th></tr></thead><tbody>
+            <sc-for list="{{diff}}" as="r" hint-placeholder-count="7">
+              <tr class="r-mod"><td><span class="dm mod" aria-label="ویرایش">~</span></td><td><b style="font-size: 13px">{{r.n}}</b> <span class="code">{{r.c}}</span></td><td class="t-c mut" style="font-weight: 700">{{r.f}}</td><td><span class="was">{{r.b}}</span></td><td style="color: var(--tx3)"><dc-import name="Icon" i="arrowNext" s="14" hint-size="14px,14px"></dc-import></td><td><span class="now">{{r.a}}</span></td></tr>
+            </sc-for>
+          </tbody></table></div>
+          <div style="padding: 12px 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px"><span class="t-c mut">نمایش ۷ از ۳۷</span><div class="pg"><button class="on" aria-current="page">۱</button><button>۲</button><button>۳</button><button>۴</button><button>۵</button><button>۶</button></div></div>
+        </div>
+        <div style="display: flex; gap: 8px"><button class="btn btn-p">ادامه: گزینه‌ها<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></button><button class="btn btn-g">مرحله قبل</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="{{th.cls}}" style="padding: 28px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px">
+    <h2 class="t-h2">حالت‌های به‌روزرسانی</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 16px">
+
+      <section class="panel"><div class="panel-h"><h2>۱. آپلود — رمز اشتباه</h2><span class="st er">خطا</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 12px">
+        <div class="file"><span class="thumb"><dc-import name="Icon" i="lock" s="18" hint-size="18px,18px"></dc-import></span><span style="flex: 1; display: flex; flex-direction: column"><b class="lat" style="font-size: 13px">fritz_update_1405-07-25.fritz</b><span class="t-c mut3">۴۸٫۶ مگابایت</span></span></div>
+        <div class="msgbox in"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import><span>فایل با رمزنگاری <b class="lat">AES-256</b> محافظت می‌شود.</span></div>
+        <div class="fld"><label class="lab">رمز عبور بسته</label><input class="inp ltr err" type="password" value="12345678" aria-invalid="true"><span class="emsg"><dc-import name="Icon" i="alert" s="14" hint-size="14px,14px"></dc-import>رمز بسته اشتباه است. ۲ تلاش دیگر باقی مانده است.</span></div>
+        <button class="btn btn-p btn-sm" style="align-self: flex-start"><dc-import name="Icon" i="key" s="16" hint-size="16px,16px"></dc-import>رمزگشایی و بررسی</button>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>خطای رمزگشایی / فایل دستکاری‌شده</h2><span class="st er">خطا</span></div><div class="panel-b">
+        <div class="drop err"><span class="ico" style="color: var(--err)"><dc-import name="Icon" i="alert" s="26" hint-size="26px,26px"></dc-import></span><b>فایل مخدوش یا دستکاری‌شده است</b><span class="t-s mut">امضای دیجیتال فایل با محتوا هم‌خوانی ندارد. هیچ تغییری اعمال نشد. فایل را دوباره از منبع اصلی دریافت کنید.</span><button class="btn btn-s btn-sm">انتخاب فایل دیگر</button></div>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>فایل خیلی بزرگ</h2><span class="st er">خطا</span></div><div class="panel-b">
+        <div class="drop err"><span class="ico" style="color: var(--err)"><dc-import name="Icon" i="upload" s="26" hint-size="26px,26px"></dc-import></span><b>فایل بزرگ‌تر از حد مجاز است</b><span class="t-s mut">حداکثر حجم ۲۰۰ مگابایت است. فایل انتخاب‌شده ۳۱۲ مگابایت است؛ آن را در دو بسته تهیه کنید.</span><button class="btn btn-s btn-sm">انتخاب فایل دیگر</button></div>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>۲. اعتبارسنجی — در حال انجام</h2><span class="st draft">۶۴٪</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between"><b>خواندن ۴۰۶ محصول…</b><span class="t-s mut">۶۴٪</span></div>
+        <div class="prog lg"><i style="width: 64%"></i></div>
+        <div class="tl"><div class="tli" style="padding: 6px 0"><span class="ic add"><dc-import name="Icon" i="check" s="14" sw="2" hint-size="14px,14px"></dc-import></span><span class="t-s">رمزگشایی بسته</span></div><div class="tli" style="padding: 6px 0"><span class="ic add"><dc-import name="Icon" i="check" s="14" sw="2" hint-size="14px,14px"></dc-import></span><span class="t-s">بررسی امضا و یکپارچگی</span></div><div class="tli" style="padding: 6px 0"><span class="ic up"><dc-import name="Icon" i="refresh" s="14" hint-size="14px,14px"></dc-import></span><span class="t-s" style="font-weight: 700">خواندن ۴۰۶ محصول</span></div><div class="tli" style="padding: 6px 0"><span class="ic"><dc-import name="Icon" i="dot" s="14" hint-size="14px,14px"></dc-import></span><span class="t-s mut3">بررسی ۱٬۲۱۸ فایل رسانه</span></div></div>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>۲. اعتبارسنجی — نتیجه</h2><span class="st pub">معتبر</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <div class="msgbox ok"><dc-import name="Icon" i="checkCircle" s="18" hint-size="18px,18px"></dc-import><span><b>فایل معتبر است.</b> ۴۰۶ محصول و ۱٬۲۱۸ رسانه.</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px">
+          <span style="display: flex; gap: 8px"><span class="st er">خطا</span>کد تکراری <span class="code" style="color: var(--tx)">ZVIZ50A</span> در ردیف ۴۲ و ۱۸۷</span>
+          <span style="display: flex; gap: 8px"><span class="st wn">هشدار</span>دسته ناشناخته «پریز هوشمند» · ۳ محصول</span>
+          <span style="display: flex; gap: 8px"><span class="st wn">هشدار</span>پروتکل نامعتبر <span class="lat">IP</span> · ۲ محصول</span>
+          <span style="display: flex; gap: 8px"><span class="st wn">هشدار</span>۴ فایل عکس ناقص</span>
+        </div>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>۴. گزینه‌ها — حذف محصولات غایب</h2><span class="st wn">نیاز به تأیید</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <label class="opt" style="padding: 10px 12px; background: var(--sf2); border-radius: 0"><input type="radio" class="rdo" name="m-{{th.k}}">فقط افزودن و ویرایش</label>
+        <label class="opt" style="padding: 10px 12px; border: 1.5px solid var(--err); border-radius: 0"><input type="radio" class="rdo" name="m-{{th.k}}" checked>همچنین حذف محصولات غایب</label>
+        <div class="msgbox er" style="flex-direction: column; gap: 6px"><span><b>۶ محصول حذف می‌شوند</b> و از کاتالوگ، مقایسه و «سازگار با» برداشته می‌شوند.</span><label class="opt" style="color: var(--tx); min-height: 36px"><input type="checkbox" class="cbx">می‌دانم ۶ محصول حذف می‌شود</label></div>
+        <label class="swl" style="padding: 4px 12px; background: var(--sf2); border-radius: 0"><span>نادیده گرفتن قیمت</span><input type="checkbox" class="sw" checked></label>
+        <button class="btn btn-p btn-sm is-dis" disabled style="align-self: flex-start">ادامه: تأیید نهایی</button>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>در حال اعمال</h2><span class="st draft">غیرقابل لغو</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <div class="msgbox wn"><dc-import name="Icon" i="lock" s="16" hint-size="16px,16px"></dc-import><span><b>این عملیات قابل لغو نیست.</b> تا پایان صفحه را نبندید.</span></div>
+        <div style="display: flex; justify-content: space-between"><b>ویرایش محصولات… (۲۹ از ۳۷)</b><span class="t-s mut">۷۱٪</span></div>
+        <div class="prog lg"><i style="width: 71%"></i></div>
+        <span class="t-c mut3">پشتیبان <span class="lat">BK-14050725-1432</span> ساخته شد.</span>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>موفق</h2><span class="st pub">اعمال شد</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <div class="msgbox ok"><dc-import name="Icon" i="checkCircle" s="18" hint-size="18px,18px"></dc-import><span><b>به‌روزرسانی اعمال شد.</b> ۱۲ جدید · ۳۷ ویرایش · ۰ حذف · ۱ ردیف رد شد.</span></div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap"><button class="btn btn-s btn-sm"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import>دانلود گزارش</button><button class="btn btn-xs btn-sm"><dc-import name="Icon" i="history" s="16" hint-size="16px,16px"></dc-import>بازگردانی به نسخه قبل</button></div>
+      </div></section>
+
+      <section class="panel"><div class="panel-h"><h2>ناموفق — بازگردانی خودکار</h2><span class="st er">ناموفق</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 10px">
+        <div class="msgbox er"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span><b>اعمال تغییرات در ۴۸٪ متوقف شد.</b> خطای ذخیره رسانه روی سرور. کاتالوگ خودکار به پشتیبان <span class="lat">BK-14050703-1640</span> برگشت و هیچ تغییری باقی نماند.</span></div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap"><button class="btn btn-p btn-sm"><dc-import name="Icon" i="refresh" s="16" hint-size="16px,16px"></dc-import>تلاش دوباره</button><button class="btn btn-s btn-sm"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import>گزارش خطا</button></div>
+      </div></section>
+    </div>
+
+    <div class="g2a">
+      <section class="panel"><div class="panel-h"><h2>تب «ورود از اکسل»</h2><span class="t-c mut3">همان ۵ مرحله، بدون رمز</span></div><div class="panel-b" style="display: flex; flex-direction: column; gap: 12px">
+        <div class="drop"><span class="ico"><dc-import name="Icon" i="table" s="26" hint-size="26px,26px"></dc-import></span><b>فایل اکسل را اینجا رها کنید</b><span class="t-s mut"><span class="lat">xlsx</span> · حداکثر ۵۰ مگابایت · ستون‌ها مطابق قالب نمونه</span><div style="display: flex; gap: 8px"><button class="btn btn-s btn-sm">انتخاب فایل</button><button class="btn btn-g btn-sm" style="color: var(--acT)"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import>دانلود قالب اکسل نمونه</button></div></div>
+        <span class="hint">عکس‌ها در اکسل با نام فایل ارجاع داده می‌شوند و باید از قبل در «رسانه» آپلود شده باشند.</span>
+      </div></section>
+      <section class="panel"><div class="panel-h"><h2>تاریخچه به‌روزرسانی‌ها</h2><a class="more" href="#">همه<dc-import name="Icon" i="chevNext" s="14" hint-size="14px,14px"></dc-import></a></div>
+        <div class="tw"><table class="tbl"><thead><tr><th>تاریخ</th><th>کاربر</th><th>فایل</th><th>تغییرات</th><th>وضعیت</th><th></th></tr></thead><tbody>
+          <sc-for list="{{history}}" as="h" hint-placeholder-count="4">
+            <tr><td class="t-c">{{h.d}}</td><td><span class="av sm" title="{{h.u}}">{{h.i}}</span></td><td><span class="code" style="color: var(--tx); font-size: 11px">{{h.f}}</span></td><td><span style="display: inline-flex; gap: 4px; align-items: center; font-size: 12px"><span class="dm add">+</span>{{h.a}}<span class="dm mod">~</span>{{h.m}}</span></td><td><span class="{{h.sc}}">{{h.s}}</span></td><td><span style="display: inline-flex"><button class="ib" style="width: 36px; height: 36px" aria-label="دانلود گزارش"><dc-import name="Icon" i="download" s="16" hint-size="16px,16px"></dc-import></button><sc-if value="{{h.rb}}" hint-placeholder-val="{{false}}"><button class="ib" style="width: 36px; height: 36px" aria-label="بازگردانی"><dc-import name="Icon" i="history" s="16" hint-size="16px,16px"></dc-import></button></sc-if></span></td></tr>
+          </sc-for>
+        </tbody></table></div>
+      </section>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":6400}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره', k: 'l' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن', k: 'd' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('update'),
+      diff: [
+        { n: 'تاچ پنل ۷ اینچ MixPad Matter', c: 'MIXPAD-7M', f: 'توضیحات', b: '۱۲۰ نویسه', a: '۲۸۴ نویسه' },
+        { n: 'رله ۲۴ کانال', c: 'SA/S 24.16', f: 'جریان هر کانال', b: '۱۰ آمپر', a: '۱۶ آمپر' },
+        { n: 'کلید هوشمند ۳ پل', c: 'OT-SW3', f: 'عکس', b: 'بدون عکس', a: '۲ عکس' },
+        { n: 'سرور خانه هوشمند Miniserver', c: 'MS-GEN2', f: 'پروتکل', b: 'تعیین نشده', a: 'Modbus' },
+        { n: 'تاچ پنل ۷ اینچ Hypanel Elite', c: 'HYP-E7', f: 'اندازه قوطی', b: '—', a: '۸۶×۸۶' },
+        { n: 'تاچ پنل ۷ اینچ Hypanel Elite', c: 'HYP-E7', f: 'دیتاشیت', b: '—', a: 'HYP-E7_datasheet.pdf' },
+        { n: 'پنل آیفون هوشمند R20A', c: 'R20A', f: 'وضعیت', b: 'پیش‌نویس', a: 'منتشرشده' }
+      ],
+      history: [
+        { d: '۱۸ مهر ۱۴۰۵', u: 'سارا محمدی', i: 'سم', f: 'fritz_update_1405-07-18.fritz', a: '۴', m: '۲۱', s: 'موفق', sc: 'st pub', rb: true },
+        { d: '۳ مهر ۱۴۰۵', u: 'رضا کریمی', i: 'رک', f: 'products_1405-07.xlsx', a: '۰', m: '۸۶', s: 'ناموفق — بازگردانی خودکار', sc: 'st er', rb: false },
+        { d: '۲۸ شهریور ۱۴۰۵', u: 'سارا محمدی', i: 'سم', f: 'fritz_update_1405-06-28.fritz', a: '۶', m: '۱۲', s: 'بازگردانی‌شده', sc: 'st draft', rb: false },
+        { d: '۲۰ شهریور ۱۴۰۵', u: 'سارا محمدی', i: 'سم', f: 'fritz_update_1405-06-20.fritz', a: '۳۸۰', m: '۰', s: 'موفق', sc: 'st pub', rb: false }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دسکتاپ — صفحه محصول</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 32px; padding: 32px 0 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 32px"><i class="{{th.tag}}">{{th.label}}</i><b>دسکتاپ — صفحه محصول</b></div>
+  <div class="{{th.cls}}" style="width: 100%">
+    <header >
+      <div style="max-width: 1280px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+        <a class="logo" href="#" style="padding: 0"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b></span></a>
+        <nav aria-label="منوی اصلی" style="display: flex; flex-wrap: wrap; gap: 4px"><a class="btn btn-g btn-sm" href="#">همه محصولات</a><a class="btn btn-g btn-sm" href="#">برندها</a><a class="btn btn-g btn-sm" href="#">راهنمای انتخاب</a></nav>
+        <div class="field" style="flex: 1 1 280px; max-width: 420px; margin-inline-start: auto"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام محصول یا کد مدل" aria-label="جست‌وجو"></div>
+        <div style="display: flex; align-items: center; gap: 4px">
+          <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+          <button class="btn btn-s btn-sm" aria-label="لیست استعلام، ۲ قلم"><dc-import name="Icon" i="inquiry" s="20" hint-size="20px,20px"></dc-import>لیست استعلام<span class="cnt" style="position: static">۲</span></button>
+        </div>
+      </div>
+    </header>
+
+    <div style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 0">
+      <nav aria-label="مسیر" class="t-s mut3" style="display: flex; align-items: center; gap: 6px"><a href="#">کاتالوگ</a><dc-import name="Icon" i="chevNext" s="14" hint-size="14px,14px"></dc-import><a href="#">تاچ پنل</a><dc-import name="Icon" i="chevNext" s="14" hint-size="14px,14px"></dc-import><span style="color: var(--tx); font-weight: 700">MixPad Matter</span></nav>
+    </div>
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 48px; align-items: start">
+      <div style="display: flex; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 10px" aria-label="تصاویر">
+          <button class="ph" style="width: 76px; height: 76px; border-radius: 0; border: 0; box-shadow: inset 0 0 0 2px var(--tx); cursor: pointer" aria-label="تصویر ۱"><dc-import name="ProductArt" kind="panel7" s="64" hint-size="64px,64px"></dc-import></button>
+          <button class="ph" style="width: 76px; height: 76px; border-radius: 0; border: 0; cursor: pointer" aria-label="تصویر ۲"><dc-import name="ProductArt" kind="panel" s="56" hint-size="56px,56px"></dc-import></button>
+          <button class="ph" style="width: 76px; height: 76px; border-radius: 0; border: 0; cursor: pointer" aria-label="تصویر ۳"><dc-import name="ProductArt" kind="panel7" s="44" hint-size="44px,44px"></dc-import></button>
+          <button class="ph" style="width: 76px; height: 76px; border-radius: 0; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; color: var(--tx2)">ابعاد</button>
+        </div>
+        <div class="ph" style="flex: 1; height: 540px; border-radius: 0">
+          <dc-import name="ProductArt" kind="panel7" s="420" label="تاچ پنل ۷ اینچ MixPad Matter" hint-size="420px,420px"></dc-import>
+          <button class="ib ib-b" style="position: absolute; bottom: 16px; left: 16px" aria-label="بزرگ‌نمایی تصویر"><dc-import name="Icon" i="zoom" s="20" hint-size="20px,20px"></dc-import></button>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 8px">
+        <div style="display: flex; align-items: center; gap: 12px"><span class="brand" style="color: var(--tx); font-size: 12px">Orvibo</span><span style="width: 1px; height: 14px; background: var(--bd2)"></span><span class="code" style="font-size: 13px">MIXPAD-7M</span></div>
+        <h1 style="font-size: 32px; line-height: 1.45; font-weight: 800">تاچ پنل ۷ اینچ MixPad Matter</h1>
+        <div class="pbs"><span class="pb">Zigbee</span><span class="pb">Matter</span></div>
+        <p class="t-b mut">پنل لمسی ۷ اینچی برای کنترل یکجای روشنایی، پرده، تهویه و سناریوها از روی دیوار؛ برای نصب در قوطی استاندارد ۸۶.</p>
+        <table class="spec" style="margin-top: 4px"><tbody>
+          <tr><th scope="row">نمایشگر</th><td>۷ اینچ لمسی</td></tr>
+          <tr><th scope="row">سیستم‌عامل</th><td>لینوکس</td></tr>
+          <tr><th scope="row">ابعاد قاب</th><td>۸۶×۸۶ میلی‌متر</td></tr>
+        </tbody></table>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
+          <button class="btn btn-p btn-lg" style="flex: 1 1 240px"><dc-import name="Icon" i="plus" s="20" sw="2" hint-size="20px,20px"></dc-import>افزودن به لیست استعلام</button>
+          <button class="btn btn-s btn-lg" style="flex: 0 1 auto"><dc-import name="Icon" i="download" s="20" hint-size="20px,20px"></dc-import>دانلود دیتاشیت <span class="lat" style="font-size: 13px">(PDF)</span></button>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+          <label class="opt"><input type="checkbox" class="cbx">افزودن به مقایسه</label>
+          <span class="t-c mut3" style="display: inline-flex; align-items: center; gap: 6px"><dc-import name="Icon" i="chat" s="16" hint-size="16px,16px"></dc-import>قیمت و زمان تأمین در واتساپ اعلام می‌شود</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: start">
+      <div>
+        <button class="acc" aria-expanded="true" style="font-size: 20px">مشخصات فنی<dc-import name="Icon" i="chevUp" s="22" hint-size="22px,22px"></dc-import></button>
+        <table class="spec" style="font-size: 15px"><tbody>
+          <sc-for list="{{specs}}" as="r" hint-placeholder-count="8"><tr><th scope="row">{{r.k}}</th><td><span class="{{r.c}}">{{r.v}}</span></td></tr></sc-for>
+        </tbody></table>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <h2 style="font-size: 20px; font-weight: 800; min-height: 56px; display: flex; align-items: center">توضیحات</h2>
+        <p class="t-b mut">پنل لمسی ۷ اینچی برای کنترل یکجای روشنایی، پرده، تهویه و سناریوها از روی دیوار. با پشتیبانی Matter و Zigbee، تجهیزات برندهای مختلف را در یک رابط ساده کنار هم می‌آورد و برای نصب در قوطی استاندارد ۸۶ طراحی شده است.</p>
+        <p class="t-b mut">برای پروژه‌های بی‌سیم و بازسازی مناسب است؛ کنار رله‌های پشت‌کلیدی <span class="lat">Zigbee</span> بدون سیم‌کشی جدید نصب می‌شود.</p>
+      </div>
+    </section>
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 0">
+      <div class="sec-h"><h2 style="font-size: 20px; font-weight: 800">سازگار با</h2><span class="t-s mut3">تأییدشده برای همین پنل</span></div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 12px">
+        <sc-for list="{{compat}}" as="p" hint-placeholder-count="4">
+          <a class="mini" href="#" style="width: auto"><span class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="56" hint-size="56px,56px"></dc-import></span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b style="font-size: 14px; line-height: 1.6">{{p.name}}</b><span class="code">{{p.code}}</span></span></a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 80px">
+      <div class="sec-h"><h2 style="font-size: 20px; font-weight: 800">محصولات مرتبط</h2><div style="display: flex; gap: 6px"><button class="ib ib-b" aria-label="قبلی"><dc-import name="Icon" i="chevBack" s="20" hint-size="20px,20px"></dc-import></button><button class="ib ib-b" aria-label="بعدی"><dc-import name="Icon" i="chevNext" s="20" hint-size="20px,20px"></dc-import></button></div></div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(232px, 100%), 1fr)); gap: 16px">
+        <sc-for list="{{related}}" as="p" hint-placeholder-count="4">
+          <article class="card pc">
+            <label class="cmp"><input type="checkbox" class="cbx">مقایسه</label>
+            <a class="pc-open" href="#"><div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="150" hint-size="150px,150px"></dc-import></div>
+            <div class="pc-b" style="padding: 16px 16px 4px"><span class="brand">{{p.brand}}</span><h3 class="pc-n" style="font-size: 15px">{{p.name}}</h3><span class="code">{{p.code}}</span></div></a>
+            <div class="pc-f" style="padding: 10px 16px 16px"><button class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</button></div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":4000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      specs: [
+        { k: 'برند', v: 'Orvibo', c: 'lat' },
+        { k: 'کد مدل', v: 'MIXPAD-7M', c: 'lat' },
+        { k: 'دسته', v: 'تاچ پنل', c: '' },
+        { k: 'پروتکل', v: 'Zigbee / Matter', c: 'lat' },
+        { k: 'نمایشگر', v: '۷ اینچ لمسی', c: '' },
+        { k: 'سیستم‌عامل', v: 'لینوکس', c: '' },
+        { k: 'ابعاد قاب', v: '۸۶×۸۶ میلی‌متر', c: '' },
+        { k: 'نصب', v: 'توکار، قوطی ۸۶', c: '' }
+      ],
+      compat: [
+        { name: 'رله پشت‌کلیدی ۲ کانال', code: 'ZR-2CH', kind: 'module' },
+        { name: 'سنسور حضور سقفی ۳۶۰ درجه', code: 'PD-360', kind: 'sensor' },
+        { name: 'کلید هوشمند ۳ پل', code: 'OT-SW3', kind: 'switch' },
+        { name: 'ترموستات اتاقی', code: 'MTN-RT', kind: 'thermo' }
+      ],
+      related: [
+        { name: 'تاچ پنل ۷ اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', kind: 'panel7' },
+        { name: 'تاچ پنل ۴ اینچ MixPad Mini', code: 'MIXPAD-M4', brand: 'Orvibo', kind: 'panel' },
+        { name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', brand: 'Zennio', kind: 'panel' },
+        { name: 'تاچ پنل ۷ اینچ SmartTouch', code: 'ST-7', brand: 'ABB', kind: 'panel7' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

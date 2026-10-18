@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>FRitZ — اجزا و حالت‌ها</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1600px; min-height: 3000px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>اجزا و حالت‌ها</b></div>
+  <div class="{{th.cls}}" style="padding: 40px; display: flex; flex-direction: column; gap: 36px">
+
+    <section style="display: flex; flex-direction: column; gap: 14px">
+      <h2 class="t-h3">دکمه‌ها</h2>
+      <div style="display: grid; grid-template-columns: 92px repeat(4, minmax(0, 1fr)); gap: 10px; align-items: center; font-size: 11px; color: var(--tx3); font-weight: 700">
+        <span></span><span>پیش‌فرض</span><span>هاور</span><span>فوکوس</span><span>غیرفعال</span>
+        <span>اصلی</span>
+        <button class="btn btn-p btn-sm">افزودن</button><button class="btn btn-p btn-sm is-hover">افزودن</button><button class="btn btn-p btn-sm is-focus">افزودن</button><button class="btn btn-p btn-sm" disabled>افزودن</button>
+        <span>ثانویه</span>
+        <button class="btn btn-s btn-sm">دیتاشیت</button><button class="btn btn-s btn-sm is-hover">دیتاشیت</button><button class="btn btn-s btn-sm is-focus">دیتاشیت</button><button class="btn btn-s btn-sm" disabled>دیتاشیت</button>
+        <span>متنی</span>
+        <button class="btn btn-g btn-sm">پاک کردن</button><button class="btn btn-g btn-sm is-hover">پاک کردن</button><button class="btn btn-g btn-sm is-focus">پاک کردن</button><button class="btn btn-g btn-sm" disabled>پاک کردن</button>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+        <button class="btn btn-p btn-lg"><dc-import name="Icon" i="chat" s="20" hint-size="20px,20px"></dc-import>ارسال استعلام در واتساپ</button>
+        <button class="btn btn-ok btn-lg"><dc-import name="Icon" i="check" s="20" sw="2" hint-size="20px,20px"></dc-import>در لیست استعلام · ۲ عدد</button>
+        <button class="btn btn-p" aria-busy="true"><span class="sk" style="width: 16px; height: 16px; border-radius: 50%; background: var(--acI); opacity: .35"></span>در حال آماده‌سازی…</button>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center">
+        <button class="ib" aria-label="جست‌وجو"><dc-import name="Icon" i="search" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib is-hover" aria-label="تم"><dc-import name="Icon" i="moon" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib" aria-label="لیست استعلام، ۳ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۳</span></button>
+        <button class="ib ib-b" aria-label="دانلود دیتاشیت"><dc-import name="Icon" i="download" s="20" hint-size="20px,20px"></dc-import></button>
+        <span class="t-c mut3" style="margin-inline-start: 8px">دکمه آیکونی ۴۴×۴۴ · شمارنده لیمویی</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 14px">
+      <h2 class="t-h3">چیپ و نشان پروتکل</h2>
+      <div class="chips">
+        <span class="chip">لینوکس</span>
+        <span class="chip on"><dc-import name="Icon" i="check" s="14" sw="2" hint-size="14px,14px"></dc-import>اندروید</span>
+        <span class="chip on rm">Orvibo<button class="x" aria-label="حذف فیلتر Orvibo"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+        <span class="chip is-focus">۷ اینچ</span>
+        <span class="chip dis">۱۲ اینچ (۰)</span>
+      </div>
+      <div class="t-c mut3">پیش‌فرض · فعال · قابل حذف · فوکوس · غیرفعال (بدون نتیجه)</div>
+      <div class="pbs"><span class="pb">KNX</span><span class="pb">Zigbee</span><span class="pb">Modbus</span></div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px">
+      <h2 class="t-h3">فیلد جست‌وجو و ورودی</h2>
+      <div class="field"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام یا کد مدل، مثلاً ZVIZ50A" aria-label="جست‌وجو"></div>
+      <div class="field focus"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input value="تاچ پنل ۷" aria-label="جست‌وجو"><button class="ib" style="width: 36px; height: 36px" aria-label="پاک کردن"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div><label class="lab">نام شما <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><input class="inp" placeholder="مثلاً علی رضایی"></div>
+        <div><label class="lab">تعداد</label><div class="qty"><button aria-label="افزایش"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import></button><b>۲</b><button aria-label="کاهش"><dc-import name="Icon" i="minus" s="16" sw="2" hint-size="16px,16px"></dc-import></button></div></div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h2 class="t-h3" style="margin-bottom: 6px">چک‌باکس</h2>
+        <label class="opt"><input type="checkbox" class="cbx"><span class="lat">Zennio</span><span class="n">۳۸</span></label>
+        <label class="opt"><input type="checkbox" class="cbx" checked><span class="lat">Orvibo</span><span class="n">۲۴</span></label>
+        <label class="opt"><input type="checkbox" class="cbx is-focus"><span class="lat">ABB</span><span class="n">۱۲</span></label>
+        <label class="opt dis"><input type="checkbox" class="cbx" disabled><span class="lat">ITC</span><span class="n">۰</span></label>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h2 class="t-h3" style="margin-bottom: 6px">رادیو</h2>
+        <label class="opt"><input type="radio" class="rdo" name="{{th.rn}}" checked>پیشنهادی</label>
+        <label class="opt"><input type="radio" class="rdo" name="{{th.rn}}">جدیدترین</label>
+        <label class="opt"><input type="radio" class="rdo" name="{{th.rn}}">نام برند (الف تا ی)</label>
+        <label class="opt dis"><input type="radio" class="rdo" disabled>پرجست‌وجوترین</label>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 14px">
+      <h2 class="t-h3">کارت محصول</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+        <article class="card pc">
+          <label class="cmp"><input type="checkbox" class="cbx">مقایسه</label>
+          <div class="pc-open"><div class="ph"><dc-import name="ProductArt" kind="panel7" s="130" hint-size="130px,130px"></dc-import></div>
+          <div class="pc-b"><span class="brand">Orvibo</span><h3 class="pc-n">تاچ پنل ۷ اینچ MixPad Matter</h3><span class="code">MIXPAD-7M</span><span class="pbs"><span class="pb">Zigbee</span></span></div></div>
+          <div class="pc-f"><button class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</button></div>
+        </article>
+        <article class="card pc" style="box-shadow: var(--sh2); border-color: var(--bd2)">
+          <label class="cmp"><input type="checkbox" class="cbx" checked>مقایسه</label>
+          <div class="pc-open"><div class="ph"><dc-import name="ProductArt" kind="relay" s="130" hint-size="130px,130px"></dc-import></div>
+          <div class="pc-b"><span class="brand">ABB</span><h3 class="pc-n">رله ۲۴ کانال</h3><span class="code">SA/S 24.16</span><span class="pbs"><span class="pb">KNX</span></span></div></div>
+          <div class="pc-f"><button class="pc-add in"><dc-import name="Icon" i="check" s="16" sw="2" hint-size="16px,16px"></dc-import>در لیست استعلام</button></div>
+        </article>
+        <article class="card pc" aria-busy="true">
+          <div class="ph sk" style="border-radius: 0"></div>
+          <div class="pc-b" style="gap: 10px"><span class="sk" style="width: 40%; height: 10px"></span><span class="sk" style="width: 90%; height: 14px"></span><span class="sk" style="width: 65%; height: 14px"></span><span class="sk" style="width: 30%; height: 10px"></span></div>
+          <div class="pc-f"><span class="sk" style="display: block; height: 44px; border-radius: 0"></span></div>
+        </article>
+      </div>
+      <div class="t-c mut3">پیش‌فرض · هاور + انتخاب برای مقایسه + در لیست استعلام · Skeleton</div>
+      <article class="card pc row">
+        <label class="cmp"><input type="checkbox" class="cbx">مقایسه</label>
+        <div class="pc-open"><div class="ph"><dc-import name="ProductArt" kind="server" s="104" hint-size="104px,104px"></dc-import></div>
+        <div class="pc-b"><span class="brand">Loxone</span><h3 class="pc-n">سرور خانه هوشمند Miniserver</h3><span class="code">MS-GEN2</span></div></div>
+        <div class="pc-f"><button class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</button></div>
+      </article>
+      <div class="t-c mut3">نمای یک‌ستونی (تاگل لیست)</div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h2 class="t-h3">Bottom Sheet</h2>
+        <div style="position: relative; height: 320px; border-radius: 0; overflow: hidden; background: var(--bg); border: 0">
+          <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px"><span class="sk" style="height: 14px; width: 60%"></span><span class="sk" style="height: 80px"></span></div>
+          <div class="scrim"></div>
+          <div class="sheet" style="height: 78%">
+            <span class="grab"></span>
+            <div class="sheet-h"><h3 class="t-h3">فیلتر</h3><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="20" hint-size="20px,20px"></dc-import></button></div>
+            <div class="sheet-b"><div class="chips" style="padding-top: 8px"><span class="chip on">KNX</span><span class="chip">Zigbee</span><span class="chip">Modbus</span></div></div>
+            <div class="sheet-f"><button class="btn btn-s btn-sm">پاک کردن</button><button class="btn btn-p btn-sm" style="flex: 1">نمایش ۱۸ نتیجه</button></div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h2 class="t-h3">Drawer (دسکتاپ)</h2>
+        <div style="position: relative; height: 320px; border-radius: 0; overflow: hidden; background: var(--bg); border: 0">
+          <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-end"><span class="sk" style="height: 14px; width: 40%"></span><span class="sk" style="height: 80px; width: 50%"></span></div>
+          <div class="scrim"></div>
+          <div class="drawer" style="width: 72%">
+            <div class="sheet-h" style="padding-top: 12px"><h3 class="t-h3">لیست استعلام</h3><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="20" hint-size="20px,20px"></dc-import></button></div>
+            <div class="sheet-b" style="display: flex; flex-direction: column; gap: 10px; padding-top: 12px"><span class="sk" style="height: 48px"></span><span class="sk" style="height: 48px"></span></div>
+            <div class="sheet-f"><button class="btn btn-p btn-sm btn-w"><dc-import name="Icon" i="chat" s="18" hint-size="18px,18px"></dc-import>ارسال در واتساپ</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 class="t-h3">جدول مشخصات</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start">
+        <div class="card" style="padding: 0 18px">
+          <button class="acc" aria-expanded="true">مشخصات فنی<dc-import name="Icon" i="chevUp" s="20" hint-size="20px,20px"></dc-import></button>
+          <table class="spec" ><tbody>
+            <tr><th>پروتکل</th><td class="lat">Zigbee</td></tr>
+            <tr><th>نمایشگر</th><td>۷ اینچ لمسی</td></tr>
+            <tr><th>ابعاد قاب</th><td>۸۶×۸۶ میلی‌متر</td></tr>
+          </tbody></table>
+        </div>
+        <div class="card" style="padding: 0 18px"><button class="acc" aria-expanded="false">مشخصات فنی<dc-import name="Icon" i="chevDown" s="20" hint-size="20px,20px"></dc-import></button></div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 class="t-h3">نوار مقایسه و پیام‌ها</h2>
+      <div style="position: relative; height: 72px">
+        <div class="cbar" style="inset-inline: 0; bottom: 0">
+          <span class="slot"><dc-import name="ProductArt" kind="panel7" s="46" hint-size="46px,46px"></dc-import></span>
+          <span class="slot empty"></span><span class="slot empty"></span>
+          <span class="t-c" style="font-weight: 700">۱ از ۳</span>
+          <button class="btn btn-p btn-sm" disabled style="margin-inline-start: auto">حداقل ۲ محصول</button>
+        </div>
+      </div>
+      <div style="position: relative; height: 72px">
+        <div class="cbar" style="inset-inline: 0; bottom: 0">
+          <span class="slot"><dc-import name="ProductArt" kind="panel7" s="46" hint-size="46px,46px"></dc-import></span>
+          <span class="slot"><dc-import name="ProductArt" kind="panel" s="46" hint-size="46px,46px"></dc-import></span>
+          <span class="slot"><dc-import name="ProductArt" kind="panel7" s="46" hint-size="46px,46px"></dc-import></span>
+          <span class="t-c" style="font-weight: 700">۳ از ۳</span>
+          <button class="btn btn-p btn-sm">مقایسه</button>
+        </div>
+      </div>
+      <div class="toast"><dc-import name="Icon" i="info" s="20" hint-size="20px,20px"></dc-import><span>حداکثر ۳ محصول را می‌توانید مقایسه کنید</span><button class="lnk">مدیریت</button></div>
+      <div class="toast"><dc-import name="Icon" i="checkCircle" s="20" hint-size="20px,20px"></dc-import><span>به لیست استعلام اضافه شد</span><button class="lnk">مشاهده لیست</button></div>
+      <div class="alert" style="background: var(--errS); color: var(--err)"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span style="font-weight: 600">بارگذاری محصولات انجام نشد. اتصال را بررسی کنید و دوباره تلاش کنید.</span></div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 class="t-h3">گزینه ویزارد و پیام آماده</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+        <button class="wopt"><span class="ico"><dc-import name="Icon" i="bulb" s="24" hint-size="24px,24px"></dc-import></span><span><b>روشنایی</b><span>چراغ‌ها، دیمر و سناریو</span></span></button>
+        <button class="wopt on" aria-pressed="true"><span class="ck"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></span><span class="ico"><dc-import name="Icon" i="curtain" s="24" hint-size="24px,24px"></dc-import></span><span><b>پرده</b><span>موتور و کلید پرده</span></span></button>
+        <div class="msg">سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:
+۱. رله ۲۴ کانال — کد SA/S 24.16 — ۲ عدد</div>
+      </div>
+    </section>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1600,"height":3000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', rn: 'sortL' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', rn: 'sortD' };
+    return { themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D] };
+  }
+}
+</script>
+</body>
+</html>

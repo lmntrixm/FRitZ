@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — جریان ویرایش و انتشار محصول</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="fz adm {{dk}}" style="min-height: 100dvh; position: relative">
+  <aside class="side" aria-label="منوی اصلی">
+    <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+    <nav style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+        <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+        <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><button class="{{n.cls}}" aria-current="{{n.cur}}" onClick="{{n.go}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></button></sc-if>
+      </sc-for>
+    </nav>
+    <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+      <div style="flex: 1"></div>
+      <button class="ib" aria-label="{{themeLabel}}" onClick="{{toggleDark}}"><dc-import name="Icon" i="{{themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+      <button class="ib" aria-label="اعلان‌ها، ۳ مورد جدید"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import><span class="cnt">۳</span></button>
+      <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+      <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+    </header>
+
+    <sc-if value="{{isList}}" hint-placeholder-val="{{true}}">
+    <div class="content">
+      <div class="phead">
+        <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>محصولات</span></nav><h1 class="ptitle">محصولات <span class="t-s mut3" style="font-weight: 600">۴۰۲ محصول · ۳۸۸ منتشرشده · ۱۴ پیش‌نویس</span></h1></div>
+        <div class="acts"><button class="btn btn-s btn-sm"><dc-import name="Icon" i="table" s="18" hint-size="18px,18px"></dc-import>خروجی اکسل</button><button class="btn btn-p btn-sm" onClick="{{newProduct}}"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>افزودن محصول</button></div>
+      </div>
+      <div class="panel">
+        <div class="toolbar">
+          <div class="field" style="flex: 1 1 240px; max-width: 320px; height: 40px"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="نام یا کد مدل" aria-label="جست‌وجو در محصولات" value="{{q}}" onChange="{{onQ}}"></div>
+          <button class="selbtn">برند<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+          <button class="selbtn">دسته<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+          <button class="selbtn">پروتکل<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+          <sc-for list="{{statusTabs}}" as="s" hint-placeholder-count="3"><button class="{{s.cls}}" aria-pressed="{{s.on}}" onClick="{{s.pick}}">{{s.l}}</button></sc-for>
+          <button class="{{incCls}}" aria-pressed="{{incOnly}}" onClick="{{toggleInc}}"><dc-import name="Icon" i="alert" s="16" hint-size="16px,16px"></dc-import>فقط ناقص‌ها</button>
+          <div style="flex: 1"></div>
+          <button class="selbtn"><dc-import name="Icon" i="sort" s="16" hint-size="16px,16px"></dc-import>آخرین ویرایش</button>
+        </div>
+        <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
+          <div style="padding: 10px 14px 0"><div class="bulk" role="region" aria-label="عملیات گروهی">
+            <b style="font-size: 13px">{{selTxt}}</b>
+            <button class="btn btn-g btn-sm" onClick="{{bulkPub}}"><dc-import name="Icon" i="globe" s="16" hint-size="16px,16px"></dc-import>انتشار</button>
+            <button class="btn btn-g btn-sm" onClick="{{bulkDraft}}"><dc-import name="Icon" i="eye" s="16" hint-size="16px,16px"></dc-import>پیش‌نویس</button>
+            <button class="btn btn-g btn-sm"><dc-import name="Icon" i="folder" s="16" hint-size="16px,16px"></dc-import>تغییر دسته</button>
+            <div style="flex: 1"></div>
+            <button class="btn btn-x btn-sm" onClick="{{askDelete}}"><dc-import name="Icon" i="trash" s="16" hint-size="16px,16px"></dc-import>حذف</button>
+            <button class="btn btn-g btn-sm" onClick="{{clearSel}}">لغو انتخاب</button>
+          </div></div>
+        </sc-if>
+        <sc-if value="{{hasRows}}" hint-placeholder-val="{{true}}">
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th style="width: 36px"><input type="checkbox" class="cbx" aria-label="انتخاب همه" checked="{{allSel}}" onChange="{{toggleAll}}"></th><th>محصول</th><th>کد مدل</th><th>برند</th><th>دسته</th><th>پروتکل</th><th>وضعیت</th><th>تکمیل اطلاعات</th><th>آخرین ویرایش</th><th><span class="sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden">عملیات</span></th></tr></thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+                <tr class="{{r.rowCls}}">
+                  <td><input type="checkbox" class="cbx" aria-label="انتخاب {{r.name}}" checked="{{r.sel}}" onChange="{{r.toggle}}"></td>
+                  <td><button class="pname" style="background: none; border: 0; padding: 0; cursor: pointer; color: inherit; text-align: right" onClick="{{r.open}}">
+                    <sc-if value="{{r.hasImg}}" hint-placeholder-val="{{true}}"><span class="thumb"><dc-import name="ProductArt" kind="{{r.kind}}" s="36" hint-size="36px,36px"></dc-import></span></sc-if>
+                    <sc-if value="{{r.noImg}}" hint-placeholder-val="{{false}}"><span class="thumb miss" aria-label="بدون عکس"><dc-import name="Icon" i="image" s="16" hint-size="16px,16px"></dc-import></span></sc-if>
+                    <b style="text-decoration: underline; text-decoration-color: var(--bd2); text-underline-offset: 4px">{{r.name}}</b></button></td>
+                  <td><span class="code" style="color: var(--tx)">{{r.code}}</span></td>
+                  <td><span class="lat" style="font-weight: 600">{{r.brand}}</span></td>
+                  <td>{{r.cat}}</td>
+                  <td><sc-if value="{{r.hasProto}}" hint-placeholder-val="{{true}}"><span class="pbs"><sc-for list="{{r.pl}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></sc-if><sc-if value="{{r.noProto}}" hint-placeholder-val="{{false}}"><span class="t-c" style="color: var(--wn); font-weight: 700">تعیین نشده</span></sc-if></td>
+                  <td><span class="{{r.stCls}}">{{r.stTxt}}</span></td>
+                  <td><span class="cmpl"><span class="bar"><i style="width: {{r.pct}}%; background: {{r.pctColor}}"></i></span>{{r.pctTxt}}</span></td>
+                  <td class="t-c mut">{{r.edited}}</td>
+                  <td><button class="ib" style="width: 36px; height: 36px" aria-label="ویرایش {{r.name}}" onClick="{{r.open}}"><dc-import name="Icon" i="edit" s="18" hint-size="18px,18px"></dc-import></button></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        </sc-if>
+        <sc-if value="{{noRows}}" hint-placeholder-val="{{false}}">
+          <div class="empty"><span class="ico"><dc-import name="Icon" i="noResult" s="30" hint-size="30px,30px"></dc-import></span><h2 class="t-h3">محصولی با این جست‌وجو پیدا نشد</h2><p class="t-s mut">املای نام یا کد مدل را بررسی کنید یا فیلترها را بردارید.</p><button class="btn btn-s btn-sm" onClick="{{resetFilters}}">پاک کردن جست‌وجو و فیلترها</button></div>
+        </sc-if>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 8px">
+          <span class="t-c mut">نمایش ۱ تا {{shownN}} از ۴۰۲</span>
+          <div class="pg" role="navigation" aria-label="صفحه‌بندی"><button aria-label="صفحه قبل"><dc-import name="Icon" i="chevBack" s="16" hint-size="16px,16px"></dc-import></button><button class="on" aria-current="page">۱</button><button>۲</button><button>۳</button><span class="mut3">…</span><button>۴۱</button><button aria-label="صفحه بعد"><dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></button></div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{isEdit}}" hint-placeholder-val="{{false}}">
+    <div class="content" style="padding-bottom: 24px">
+      <div class="phead">
+        <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><button style="background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline" onClick="{{tryBack}}">محصولات</button><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>{{editCrumb}}</span></nav>
+          <h1 class="ptitle" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">{{editTitle}}<span class="{{fStCls}}">{{fStTxt}}</span></h1></div>
+        <div class="acts"><span class="t-c mut3">آخرین ویرایش: {{fEdited}}</span></div>
+      </div>
+
+      <sc-if value="{{hasErr}}" hint-placeholder-val="{{false}}">
+        <div class="msgbox er" role="alert"><dc-import name="Icon" i="alert" s="18" hint-size="18px,18px"></dc-import><span><b>{{errCount}} مورد مانع انتشار است.</b> {{errList}}</span></div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+        <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+
+          <section class="sec-card" id="sec-base">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.base}}" onClick="{{tg.base}}"><span>۱. اطلاعات پایه</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.base}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.base}}" hint-placeholder-val="{{true}}">
+            <div class="sec-bd">
+              <div class="frow">
+                <div class="fld"><label class="lab" for="f-name">نام فارسی <span class="req">*</span></label><input id="f-name" class="{{ec.name}}" value="{{f.name}}" onChange="{{on.name}}"><sc-if value="{{er.name}}" hint-placeholder-val="{{false}}"><span class="emsg">{{er.name}}</span></sc-if></div>
+                <div class="fld"><label class="lab" for="f-code">کد مدل <span class="req">*</span></label><input id="f-code" class="{{ec.code}}" value="{{f.code}}" onChange="{{on.code}}" placeholder="ZVIZ50A"><sc-if value="{{er.code}}" hint-placeholder-val="{{false}}"><span class="emsg">{{er.code}}</span></sc-if><sc-if value="{{noErrCode}}" hint-placeholder-val="{{true}}"><span class="hint">یکتا؛ برای تطبیق در به‌روزرسانی فایلی استفاده می‌شود.</span></sc-if></div>
+              </div>
+              <div class="frow">
+                <div class="fld"><label class="lab" for="f-brand">برند <span class="req">*</span></label><select id="f-brand" class="inp" value="{{f.brand}}" onChange="{{on.brand}}"><sc-for list="{{brands}}" as="b" hint-placeholder-count="10"><option value="{{b}}">{{b}}</option></sc-for></select></div>
+                <div class="fld"><label class="lab" for="f-country">کشور سازنده</label><select id="f-country" class="inp" value="{{f.country}}" onChange="{{on.country}}"><option value="">انتخاب کنید</option><option value="چین">چین</option><option value="اسپانیا">اسپانیا</option><option value="سوئیس">سوئیس</option><option value="اتریش">اتریش</option><option value="فرانسه">فرانسه</option><option value="آلمان">آلمان</option><option value="ژاپن">ژاپن</option></select></div>
+                <div class="fld"><label class="lab" for="f-cat">دسته <span class="req">*</span></label><select id="f-cat" class="inp" value="{{f.cat}}" onChange="{{on.cat}}"><sc-for list="{{cats}}" as="c" hint-placeholder-count="8"><option value="{{c}}">{{c}}</option></sc-for></select></div>
+              </div>
+              <div class="fld"><span class="lab">پروتکل <span class="req">*</span> <span class="hint">(چندانتخابی)</span></span>
+                <div class="chips" role="group" aria-label="پروتکل"><sc-for list="{{protoOpts}}" as="o" hint-placeholder-count="3"><button class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.toggle}}"><span class="lat">{{o.l}}</span></button></sc-for></div>
+                <sc-if value="{{er.protos}}" hint-placeholder-val="{{false}}"><span class="emsg">{{er.protos}}</span></sc-if>
+                <span class="hint">IP و Wi-Fi در «برندها و پروتکل‌ها» غیرفعال‌اند و اینجا نمایش داده نمی‌شوند.</span>
+              </div>
+              <div class="fld"><span class="lab">وضعیت</span><div class="chips"><sc-for list="{{stOpts}}" as="o" hint-placeholder-count="2"><button class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}">{{o.l}}</button></sc-for></div></div>
+            </div>
+            </sc-if>
+          </section>
+
+          <section class="sec-card" id="sec-spec">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.spec}}" onClick="{{tg.spec}}"><span>۲. مشخصات فنی</span><span class="t-c mut3" style="font-weight: 600">فیلدهای دسته «{{f.cat}}»</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.spec}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.spec}}" hint-placeholder-val="{{true}}">
+            <div class="sec-bd">
+              <sc-if value="{{hasSpec}}" hint-placeholder-val="{{true}}">
+              <div class="frow">
+                <sc-for list="{{specFields}}" as="sf" hint-placeholder-count="3">
+                  <div class="fld">
+                    <label class="lab" for="{{sf.id}}">{{sf.l}}</label>
+                    <sc-if value="{{sf.isSel}}" hint-placeholder-val="{{true}}"><select id="{{sf.id}}" class="inp" value="{{sf.v}}" onChange="{{sf.set}}"><option value="">انتخاب کنید</option><sc-for list="{{sf.o}}" as="op2" hint-placeholder-count="3"><option value="{{op2}}">{{op2}}</option></sc-for></select></sc-if>
+                    <sc-if value="{{sf.isNum}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 8px; align-items: center"><input id="{{sf.id}}" class="inp ltr" type="number" value="{{sf.v}}" onChange="{{sf.set}}"><span class="t-s mut" style="white-space: nowrap">{{sf.u}}</span></div></sc-if>
+                    <sc-if value="{{sf.isBool}}" hint-placeholder-val="{{false}}"><label class="swl" style="min-height: 48px"><span>{{sf.bt}}</span><input id="{{sf.id}}" type="checkbox" class="sw" checked="{{sf.b}}" onChange="{{sf.toggle}}"></label></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              </sc-if>
+              <sc-if value="{{noSpec}}" hint-placeholder-val="{{false}}"><div class="msgbox in"><dc-import name="Icon" i="info" s="18" hint-size="18px,18px"></dc-import><span>برای این دسته هنوز فیلد اختصاصی تعریف نشده است. از «دسته‌ها و فیلترها» اضافه کنید؛ نیازی به برنامه‌نویس نیست.</span></div></sc-if>
+              <div class="fld">
+                <span class="lab">مشخصات دلخواه</span>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <sc-for list="{{customs}}" as="cu" hint-placeholder-count="2">
+                    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 44px; gap: 8px; align-items: center">
+                      <input class="inp" aria-label="برچسب" value="{{cu.l}}" onChange="{{cu.setL}}" placeholder="برچسب، مثلاً رنگ قاب">
+                      <input class="inp" aria-label="مقدار" value="{{cu.v}}" onChange="{{cu.setV}}" placeholder="مقدار">
+                      <button class="ib" aria-label="حذف ردیف" onClick="{{cu.remove}}"><dc-import name="Icon" i="trash" s="18" hint-size="18px,18px"></dc-import></button>
+                    </div>
+                  </sc-for>
+                  <button class="btn btn-g btn-sm" style="align-self: flex-start; color: var(--acT)" onClick="{{addCustom}}"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن ردیف</button>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+          </section>
+
+          <section class="sec-card" id="sec-desc">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.desc}}" onClick="{{tg.desc}}"><span>۳. توضیحات</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.desc}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.desc}}" hint-placeholder-val="{{true}}">
+            <div class="sec-bd"><div class="fld"><label class="lab" for="f-desc">توضیح عمومی محصول</label><textarea id="f-desc" class="inp" rows="4" value="{{f.desc}}" onChange="{{on.desc}}" placeholder="کاربرد، مزیت اصلی و نکته نصب در ۲ تا ۳ جمله"></textarea><span class="hint">{{descLen}} نویسه · پیشنهاد: ۱۵۰ تا ۴۰۰</span></div></div>
+            </sc-if>
+          </section>
+
+          <section class="sec-card" id="sec-media">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.media}}" onClick="{{tg.media}}"><span>۴. رسانه</span><span class="t-c mut3" style="font-weight: 600">{{imgTxt}}</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.media}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.media}}" hint-placeholder-val="{{true}}">
+            <div class="sec-bd">
+              <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                <sc-for list="{{imgs}}" as="im" hint-placeholder-count="3">
+                  <div style="width: 120px; display: flex; flex-direction: column; gap: 6px">
+                    <div class="ph" style="width: 120px; height: 120px; border-radius: 0; box-shadow: {{im.ring}}">
+                      <dc-import name="ProductArt" kind="{{f.kind}}" s="{{im.s}}" hint-size="96px,96px"></dc-import>
+                      <span style="position: absolute; top: 6px; right: 6px; color: var(--tx3)" aria-hidden="true"><dc-import name="Icon" i="drag" s="16" sw="2.4" hint-size="16px,16px"></dc-import></span>
+                      <sc-if value="{{im.main}}" hint-placeholder-val="{{false}}"><span class="st pub" style="position: absolute; bottom: 6px; right: 6px; height: 22px">اصلی</span></sc-if>
+                      <button class="ib" style="position: absolute; top: 2px; left: 2px; width: 32px; height: 32px; background: var(--sf)" aria-label="حذف عکس {{im.n}}" onClick="{{im.remove}}"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button>
+                    </div>
+                    <sc-if value="{{im.notMain}}" hint-placeholder-val="{{true}}"><button class="btn btn-g btn-sm" style="min-height: 32px; font-size: 12px; padding: 0 6px" onClick="{{im.setMain}}">تعیین به‌عنوان اصلی</button></sc-if>
+                  </div>
+                </sc-for>
+                <button class="drop" style="width: 120px; height: 120px; padding: 10px; gap: 6px; cursor: pointer; justify-content: center" onClick="{{addImg}}"><dc-import name="Icon" i="upload" s="22" hint-size="22px,22px"></dc-import><span class="t-c" style="font-weight: 700">افزودن عکس</span><span class="t-c mut3" style="font-size: 12px">کشیدن و رها کردن</span></button>
+              </div>
+              <sc-if value="{{er.img}}" hint-placeholder-val="{{false}}"><span class="emsg">{{er.img}}</span></sc-if>
+              <span class="hint">عکس اول در کارت عمومی نمایش داده می‌شود. برای ترتیب، بکشید و رها کنید. JPG، PNG یا WebP تا ۵ مگابایت.</span>
+              <div class="fld"><span class="lab">دیتاشیت</span>
+                <sc-if value="{{f.pdf}}" hint-placeholder-val="{{true}}"><div class="file"><span class="thumb" style="color: var(--err)"><dc-import name="Icon" i="doc" s="20" hint-size="20px,20px"></dc-import></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><b class="lat" style="font-size: 13px">{{pdfName}}</b><span class="t-c mut3">PDF · ۱٫۸ مگابایت</span></span><button class="btn btn-g btn-sm" onClick="{{removePdf}}">حذف</button></div></sc-if>
+                <sc-if value="{{noPdf}}" hint-placeholder-val="{{false}}"><button class="drop" style="padding: 18px; flex-direction: row; justify-content: center; cursor: pointer" onClick="{{addPdf}}"><dc-import name="Icon" i="upload" s="20" hint-size="20px,20px"></dc-import><span class="t-s" style="font-weight: 700">آپلود دیتاشیت <span class="lat">PDF</span></span><span class="t-c mut3">تا ۲۰ مگابایت</span></button></sc-if>
+              </div>
+            </div>
+            </sc-if>
+          </section>
+
+          <section class="sec-card" id="sec-rel">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.rel}}" onClick="{{tg.rel}}"><span>۵. ارتباط‌ها</span><span class="t-c mut3" style="font-weight: 600">{{relTxt}}</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.rel}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.rel}}" hint-placeholder-val="{{false}}">
+            <div class="sec-bd">
+              <div class="fld"><span class="lab">سازگار با</span>
+                <div class="chips"><sc-for list="{{rel}}" as="r2" hint-placeholder-count="2"><span class="chip rm" style="background: var(--sf2); border-color: transparent">{{r2.name}} <span class="code">{{r2.code}}</span><button class="x" aria-label="حذف {{r2.name}}" onClick="{{r2.remove}}"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span></sc-for></div>
+                <div class="field" style="height: 44px"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی محصول برای افزودن" aria-label="جست‌وجوی محصول سازگار"></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{relSugg}}" as="s2" hint-placeholder-count="2"><button class="chip" onClick="{{s2.add}}"><dc-import name="Icon" i="plus" s="14" sw="2" hint-size="14px,14px"></dc-import>{{s2.name}}</button></sc-for></div>
+              </div>
+              <div class="fld"><span class="lab">محصولات مرتبط</span><div class="chips"><span class="chip rm" style="background: var(--sf2); border-color: transparent">تاچ پنل ۴ اینچ MixPad Mini<button class="x" aria-label="حذف"><dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button></span></div></div>
+            </div>
+            </sc-if>
+          </section>
+
+          <section class="sec-card" id="sec-int">
+            <button class="sec-hd" style="width: 100%; background: none; border: 0; color: inherit" aria-expanded="{{op.int}}" onClick="{{tg.int}}"><span>۶. اطلاعات داخلی</span><span class="int"><dc-import name="Icon" i="lock" s="12" sw="2" hint-size="12px,12px"></dc-import>فقط داخلی، عمومی نمی‌شود</span><span style="flex: 1"></span><dc-import name="Icon" i="{{opi.int}}" s="20" hint-size="20px,20px"></dc-import></button>
+            <sc-if value="{{op.int}}" hint-placeholder-val="{{false}}">
+            <div class="sec-bd"><div class="frow">
+              <div class="fld"><label class="lab" for="f-price">قیمت</label><input id="f-price" class="inp ltr" value="{{f.price}}" onChange="{{on.price}}" placeholder="0"></div>
+              <div class="fld"><label class="lab" for="f-cur">ارز</label><select id="f-cur" class="inp" value="{{f.cur}}" onChange="{{on.cur}}"><option value="تومان">تومان</option><option value="دلار">دلار</option><option value="یورو">یورو</option></select></div>
+            </div><span class="hint">این فیلدها در API و خروجی عمومی کاتالوگ وجود ندارند.</span></div>
+            </sc-if>
+          </section>
+        </div>
+
+        <aside style="flex: 0 1 300px; min-width: 260px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 16px">
+          <div class="panel" style="padding: 10px">
+            <p class="glabel" style="padding: 4px 10px 6px">بخش‌ها</p>
+            <nav class="qnav" style="position: static" aria-label="ناوبری فرم">
+              <sc-for list="{{qn}}" as="q" hint-placeholder-count="6"><a class="{{q.cls}}" href="{{q.href}}"><span class="{{q.dot}}"></span>{{q.l}}<span class="t-c mut3" style="margin-inline-start: auto">{{q.note}}</span></a></sc-for>
+            </nav>
+            <div style="padding: 10px 10px 4px; border-top: 1px solid var(--line); margin-top: 8px"><div class="cmpl" style="justify-content: space-between"><span class="t-c mut" style="font-weight: 700">تکمیل اطلاعات</span><span>{{fPctTxt}}</span></div><div class="prog" style="margin-top: 8px"><i style="width: {{fPct}}%"></i></div></div>
+          </div>
+          <div class="panel" style="padding: 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center"><span class="glabel">پیش‌نمایش زنده کارت عمومی</span><span class="pb" style="font-family: inherit; letter-spacing: 0">بدون قیمت</span></div>
+            <article class="card pc">
+              <span class="cmp" aria-hidden="true"><span class="cbx" style="display: inline-block"></span>مقایسه</span>
+              <div class="ph"><dc-import name="ProductArt" kind="{{f.kind}}" s="150" hint-size="150px,150px"></dc-import></div>
+              <div class="pc-b"><span class="brand">{{f.brand}}</span><h3 class="pc-n">{{pvName}}</h3><span class="code">{{pvCode}}</span><span class="pbs"><sc-for list="{{f.protos}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></div>
+              <div class="pc-f"><span class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</span></div>
+            </article>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <div class="savebar">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: {{dirtyColor}}"><span style="width: 8px; height: 8px; border-radius: 50%; background: currentColor"></span>{{dirtyTxt}}</span>
+      <div style="flex: 1"></div>
+      <button class="btn btn-g btn-sm" onClick="{{tryBack}}">انصراف</button>
+      <button class="btn btn-g btn-sm" onClick="{{copyProduct}}"><dc-import name="Icon" i="copy" s="16" hint-size="16px,16px"></dc-import>کپی محصول</button>
+      <button class="btn btn-s btn-sm" onClick="{{saveDraft}}">ذخیره پیش‌نویس</button>
+      <button class="btn btn-p btn-sm" onClick="{{publish}}"><dc-import name="Icon" i="globe" s="16" hint-size="16px,16px"></dc-import>انتشار</button>
+    </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{modal}}" hint-placeholder-val="{{false}}">
+    <div style="position: fixed; inset: 0; z-index: 20; display: grid; place-items: center">
+      <div class="scrim" onClick="{{closeModal}}"></div>
+      <div class="modal" role="alertdialog" aria-modal="true" aria-label="{{mTitle}}">
+        <span class="ico" style="width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: {{mIcoBg}}; color: {{mIcoFg}}"><dc-import name="Icon" i="{{mIcon}}" s="24" hint-size="24px,24px"></dc-import></span>
+        <h2 class="t-h2">{{mTitle}}</h2>
+        <p class="t-s mut">{{mBody}}</p>
+        <div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap">
+          <button class="btn btn-s btn-sm" onClick="{{closeModal}}">{{mCancel}}</button>
+          <button class="{{mOkCls}}" onClick="{{mOk}}">{{mOkTxt}}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+    <div style="position: fixed; bottom: {{toastB}}px; left: 24px; z-index: 30; max-width: 420px" role="status" aria-live="polite"><div class="toast"><dc-import name="Icon" i="{{toastIcon}}" s="20" hint-size="20px,20px"></dc-import><span>{{toast}}</span></div></div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startDark":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1000}}'>
+const FA = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const BRANDS = ['Zennio', 'Loxone', 'Schneider', 'Orvibo', 'ABB', 'ITC', 'Ountech', 'Panasonic', 'Akuvox', 'Akubela'];
+const CATS = ['تاچ پنل', 'کلید هوشمند', 'ترموستات', 'رله و اکچوایتور', 'رله پشت‌کلیدی', 'سنسور', 'سرور', 'آیفون و درب‌بازکن'];
+const PROTOS = ['KNX', 'Zigbee', 'Modbus'];
+const SPEC = {
+  'تاچ پنل': [{ k: 'os', l: 'سیستم‌عامل', t: 'sel', o: ['اندروید', 'لینوکس'] }, { k: 'inch', l: 'اندازه نمایشگر', t: 'num', u: 'اینچ' }, { k: 'box', l: 'اندازه قوطی', t: 'sel', o: ['۸۶×۸۶', '۱۲۰×۸۶', 'روکار'] }],
+  'رله و اکچوایتور': [{ k: 'ch', l: 'تعداد کانال', t: 'num', u: 'کانال' }, { k: 'amp', l: 'جریان هر کانال', t: 'num', u: 'آمپر' }],
+  'کلید هوشمند': [{ k: 'gang', l: 'تعداد پل', t: 'sel', o: ['۱', '۲', '۳', '۴'] }, { k: 'color', l: 'رنگ', t: 'sel', o: ['سفید', 'مشکی', 'طوسی', 'طلایی'] }, { k: 'relay', l: 'رله داخلی', t: 'bool' }]
+};
+const SEED = [
+  { id: 1, kind: 'panel7', name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', country: 'چین', cat: 'تاچ پنل', protos: ['Zigbee'], status: 'pub', edited: '۲ ساعت پیش', img: 3, pdf: true, spec: { os: 'لینوکس', inch: '7', box: '۸۶×۸۶' }, desc: 'پنل لمسی ۷ اینچی برای کنترل یکجای روشنایی، پرده، تهویه و سناریوها از روی دیوار؛ برای نصب در قوطی استاندارد ۸۶.', customs: [{ l: 'رنگ قاب', v: 'مشکی، نقره‌ای' }], rel: [{ name: 'رله پشت‌کلیدی ۲ کانال', code: 'ZR-2CH' }], price: '', cur: 'تومان' },
+  { id: 2, kind: 'panel7', name: 'تاچ پنل ۷ اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', country: '', cat: 'تاچ پنل', protos: ['Zigbee'], status: 'draft', edited: 'دیروز', img: 1, pdf: false, spec: { os: 'لینوکس', inch: '7', box: '' }, desc: '', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 3, kind: 'relay', name: 'رله ۲۴ کانال', code: 'SA/S 24.16', brand: 'ABB', country: 'سوئیس', cat: 'رله و اکچوایتور', protos: ['KNX'], status: 'pub', edited: '۳ روز پیش', img: 2, pdf: true, spec: { ch: '24', amp: '16' }, desc: 'اکچوایتور ریلی ۲۴ کاناله KNX برای کنترل روشنایی و بارهای سوئیچی در تابلو.', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 4, kind: 'server', name: 'سرور خانه هوشمند Miniserver', code: 'MS-GEN2', brand: 'Loxone', country: 'اتریش', cat: 'سرور', protos: [], status: 'pub', edited: '۵ روز پیش', img: 2, pdf: true, spec: {}, desc: 'سرور مرکزی Loxone برای منطق، سناریوها و اپلیکیشن.', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 5, kind: 'switch', name: 'کلید هوشمند ۳ پل', code: 'OT-SW3', brand: 'Ountech', country: 'چین', cat: 'کلید هوشمند', protos: ['Modbus'], status: 'pub', edited: '۱ هفته پیش', img: 0, pdf: true, spec: { gang: '۳', color: 'سفید', relay: true }, desc: 'کلید لمسی ۳ پل با رله داخلی برای قوطی ۸۶.', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 6, kind: 'intercom', name: 'پنل آیفون هوشمند R20A', code: 'R20A', brand: 'Akuvox', country: 'چین', cat: 'آیفون و درب‌بازکن', protos: [], status: 'draft', edited: '۱ هفته پیش', img: 2, pdf: false, spec: {}, desc: '', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 7, kind: 'panel', name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', brand: 'Zennio', country: 'اسپانیا', cat: 'تاچ پنل', protos: ['KNX'], status: 'pub', edited: '۲ هفته پیش', img: 3, pdf: true, spec: { os: 'لینوکس', inch: '5', box: '۸۶×۸۶' }, desc: 'پنل لمسی ۵ اینچی KNX با طراحی تخت و قاب باریک.', customs: [], rel: [], price: '', cur: 'تومان' },
+  { id: 8, kind: 'thermo', name: 'ترموستات اتاقی KNX', code: 'MTN-RT', brand: 'Schneider', country: 'فرانسه', cat: 'ترموستات', protos: ['KNX'], status: 'pub', edited: '۳ هفته پیش', img: 1, pdf: true, spec: {}, desc: 'ترموستات دیواری با نمایشگر و کنترل فن‌کویل.', customs: [], rel: [], price: '', cur: 'تومان' }
+];
+const clone = (o) => JSON.parse(JSON.stringify(o));
+const pctOf = (p) => {
+  const fields = SPEC[p.cat] || [];
+  const specOk = fields.every((x) => x.t === 'bool' || (p.spec && p.spec[x.k] !== undefined && p.spec[x.k] !== ''));
+  const checks = [!!p.name, !!p.code, !!p.brand, !!p.cat, p.protos.length > 0, !!p.desc, p.img > 0, !!p.pdf, specOk, !!p.country];
+  return Math.round(checks.filter(Boolean).length / checks.length * 100);
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { dark: !!props.startDark, scr: 'list', items: clone(SEED), f: null, dirty: [], errs: {}, open: { base: true, spec: true, desc: true, media: true, rel: false, int: false }, mainImg: 0, sel: [], q: '', st: 'all', inc: false, modal: null, toast: '', toastIcon: 'checkCircle', hl: null };
+    this.tm = null;
+  }
+  componentWillUnmount() { clearTimeout(this.tm); }
+  flash(msg, icon) {
+    clearTimeout(this.tm);
+    this.setState({ toast: msg, toastIcon: icon || 'checkCircle' });
+    this.tm = setTimeout(() => this.setState({ toast: '' }), 3400);
+  }
+  setF(patch, key) {
+    const s = this.state;
+    const dirty = s.dirty.includes(key) ? s.dirty : [...s.dirty, key];
+    const errs = { ...s.errs }; delete errs[key];
+    this.setState({ f: { ...s.f, ...patch }, dirty, errs });
+  }
+  validate(forPublish) {
+    const f = this.state.f; const e = {};
+    if (!f.name.trim()) e.name = 'نام فارسی را وارد کنید.';
+    if (!f.code.trim()) e.code = 'کد مدل الزامی است.';
+    else if (this.state.items.some((p) => p.code === f.code.trim() && p.id !== f.id)) e.code = 'این کد مدل قبلاً برای محصول دیگری ثبت شده است.';
+    if (forPublish) {
+      if (!f.protos.length) e.protos = 'برای انتشار حداقل یک پروتکل انتخاب کنید.';
+      if (!f.img) e.img = 'برای انتشار حداقل یک عکس لازم است.';
+    }
+    return e;
+  }
+  commit(status, msg) {
+    const s = this.state;
+    const saved = { ...s.f, status, edited: 'همین حالا', code: s.f.code.trim() };
+    const exists = s.items.some((p) => p.id === saved.id);
+    const items = exists ? s.items.map((p) => (p.id === saved.id ? saved : p)) : [saved, ...s.items];
+    return { items, saved };
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (o) => this.setState(o);
+    const nav = NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === 'products' ? ' on' : ''), cur: n.k === 'products' ? 'page' : 'false', go: () => { if (n.k === 'products' && s.scr === 'edit') this.tryBack(); } }));
+    const base = {
+      dk: s.dark ? 'dark' : '', nav,
+      themeIcon: s.dark ? 'sun' : 'moon', themeLabel: s.dark ? 'تم روشن' : 'تم تیره',
+      toggleDark: () => set({ dark: !s.dark }),
+      isList: s.scr === 'list', isEdit: s.scr === 'edit',
+      hasToast: !!s.toast, toast: s.toast, toastIcon: s.toastIcon, toastB: s.scr === 'edit' ? 88 : 24,
+      modal: !!s.modal, closeModal: () => set({ modal: null })
+    };
+    if (s.modal === 'delete') {
+      Object.assign(base, { mTitle: 'حذف ' + FA(s.sel.length) + ' محصول؟', mBody: 'این محصولات از کاتالوگ عمومی، جدول مقایسه و لیست‌های «سازگار با» حذف می‌شوند. استعلام‌های قبلی حفظ می‌شوند. تا ۳۰ روز از «گزارش فعالیت» قابل بازگردانی است.', mIcon: 'trash', mIcoBg: 'var(--errS)', mIcoFg: 'var(--err)', mCancel: 'انصراف', mOkTxt: 'بله، حذف شود', mOkCls: 'btn btn-x btn-sm', mOk: () => { const n = s.sel.length; set({ items: s.items.filter((p) => !s.sel.includes(p.id)), sel: [], modal: null }); this.flash(FA(n) + ' محصول حذف شد', 'trash'); } });
+    } else if (s.modal === 'leave') {
+      Object.assign(base, { mTitle: 'تغییرات ذخیره نشده است', mBody: FA(s.dirty.length) + ' تغییر ذخیره‌نشده دارید. اگر خارج شوید از بین می‌رود.', mIcon: 'alert', mIcoBg: 'var(--wnS)', mIcoFg: 'var(--wn)', mCancel: 'ماندن در صفحه', mOkTxt: 'خروج بدون ذخیره', mOkCls: 'btn btn-xs btn-sm', mOk: () => set({ modal: null, scr: 'list', f: null, dirty: [], errs: {} }) });
+    }
+
+    if (s.scr === 'list') {
+      const rowsAll = s.items.filter((p) =>
+        (!s.q || p.name.includes(s.q) || p.code.toLowerCase().includes(s.q.toLowerCase())) &&
+        (s.st === 'all' || p.status === s.st) && (!s.inc || pctOf(p) < 100));
+      const rows = rowsAll.map((p) => {
+        const pct = pctOf(p);
+        const sel = s.sel.includes(p.id);
+        return {
+          ...p, pl: p.protos, hasProto: p.protos.length > 0, noProto: !p.protos.length, hasImg: p.img > 0, noImg: !p.img,
+          sel, rowCls: sel ? 'sel' : (s.hl === p.id ? 'sel' : ''),
+          stCls: p.status === 'pub' ? 'st pub' : 'st draft', stTxt: p.status === 'pub' ? 'منتشرشده' : 'پیش‌نویس',
+          pct, pctTxt: FA(pct) + '٪', pctColor: pct >= 90 ? 'var(--okT)' : pct >= 60 ? 'var(--wn)' : 'var(--err)',
+          toggle: () => set({ sel: sel ? s.sel.filter((x) => x !== p.id) : [...s.sel, p.id] }),
+          open: () => set({ scr: 'edit', f: clone(p), dirty: [], errs: {}, mainImg: 0, hl: null, open: { base: true, spec: true, desc: true, media: true, rel: false, int: false } })
+        };
+      });
+      const stDefs = [['all', 'همه'], ['pub', 'منتشرشده'], ['draft', 'پیش‌نویس']];
+      const bulk = (status, label) => () => { const n = s.sel.length; set({ items: s.items.map((p) => (s.sel.includes(p.id) ? { ...p, status, edited: 'همین حالا' } : p)), sel: [] }); this.flash(FA(n) + ' محصول ' + label, 'checkCircle'); };
+      return Object.assign(base, {
+        q: s.q, onQ: (e) => set({ q: e.target.value }),
+        statusTabs: stDefs.map(([k, l]) => ({ l, on: s.st === k, cls: 'selbtn' + (s.st === k ? ' on' : ''), pick: () => set({ st: k }) })),
+        incOnly: s.inc, incCls: 'selbtn' + (s.inc ? ' on' : ''), toggleInc: () => set({ inc: !s.inc }),
+        rows, hasRows: rows.length > 0, noRows: rows.length === 0, shownN: FA(rows.length),
+        resetFilters: () => set({ q: '', st: 'all', inc: false }),
+        hasSel: s.sel.length > 0, selTxt: FA(s.sel.length) + ' مورد انتخاب شده',
+        allSel: rows.length > 0 && rows.every((r) => s.sel.includes(r.id)),
+        toggleAll: () => { const ids = rows.map((r) => r.id); const all = ids.every((i) => s.sel.includes(i)); set({ sel: all ? [] : ids }); },
+        clearSel: () => set({ sel: [] }),
+        bulkPub: bulk('pub', 'منتشر شد'), bulkDraft: bulk('draft', 'به پیش‌نویس رفت'),
+        askDelete: () => set({ modal: 'delete' }),
+        newProduct: () => set({ scr: 'edit', f: { id: Date.now(), kind: 'panel7', name: '', code: '', brand: 'Orvibo', country: '', cat: 'تاچ پنل', protos: [], status: 'draft', edited: '—', img: 0, pdf: false, spec: {}, desc: '', customs: [], rel: [], price: '', cur: 'تومان' }, dirty: [], errs: {}, mainImg: 0 })
+      });
+    }
+
+    const f = s.f; const er = s.errs;
+    const tg = {}; const op = s.open; const opi = {};
+    ['base', 'spec', 'desc', 'media', 'rel', 'int'].forEach((k) => { tg[k] = () => set({ open: { ...op, [k]: !op[k] } }); opi[k] = op[k] ? 'chevUp' : 'chevDown'; });
+    const on = {};
+    ['name', 'code', 'brand', 'country', 'desc', 'price', 'cur'].forEach((k) => { on[k] = (e) => this.setF({ [k]: e.target.value }, k); });
+    on.cat = (e) => this.setF({ cat: e.target.value, spec: {} }, 'cat');
+    const ec = { name: 'inp' + (er.name ? ' err' : ''), code: 'inp ltr' + (er.code ? ' err' : '') };
+    const fields = SPEC[f.cat] || [];
+    const specFields = fields.map((x) => {
+      const v = f.spec[x.k];
+      const setv = (val) => this.setF({ spec: { ...f.spec, [x.k]: val } }, 'spec');
+      return { ...x, id: 'sp-' + x.k, o: x.o || [], u: x.u || '', v: v === undefined ? '' : v, b: !!v, bt: v ? 'دارد' : 'ندارد', isSel: x.t === 'sel', isNum: x.t === 'num', isBool: x.t === 'bool', set: (e) => setv(e.target.value), toggle: () => setv(!v) };
+    });
+    const customs = f.customs.map((c, i) => ({ ...c,
+      setL: (e) => { const a = clone(f.customs); a[i].l = e.target.value; this.setF({ customs: a }, 'customs'); },
+      setV: (e) => { const a = clone(f.customs); a[i].v = e.target.value; this.setF({ customs: a }, 'customs'); },
+      remove: () => this.setF({ customs: f.customs.filter((_, j) => j !== i) }, 'customs') }));
+    const imgs = Array.from({ length: f.img }, (_, i) => ({ n: FA(i + 1), s: [96, 80, 66, 90, 74][i % 5], main: i === s.mainImg, notMain: i !== s.mainImg, ring: i === s.mainImg ? 'inset 0 0 0 2px var(--tx)' : 'none',
+      setMain: () => { set({ mainImg: i }); this.setF({}, 'media'); },
+      remove: () => { if (s.mainImg >= f.img - 1) set({ mainImg: 0 }); this.setF({ img: f.img - 1 }, 'img'); } }));
+    const sugg = [{ name: 'سنسور حضور سقفی ۳۶۰ درجه', code: 'PD-360' }, { name: 'کلید هوشمند ۳ پل', code: 'OT-SW3' }].filter((x) => !f.rel.some((r) => r.code === x.code));
+    const pct = pctOf(f);
+    const errKeys = Object.keys(er);
+    const errNames = { name: 'نام فارسی', code: 'کد مدل', protos: 'پروتکل', img: 'عکس' };
+    const sectionOf = { name: 'base', code: 'base', protos: 'base', img: 'media' };
+    const errSec = errKeys.map((k) => sectionOf[k]);
+    const qDefs = [['base', '۱. اطلاعات پایه', !!(f.name && f.code && f.protos.length)], ['spec', '۲. مشخصات فنی', fields.every((x) => x.t === 'bool' || (f.spec[x.k] !== undefined && f.spec[x.k] !== ''))], ['desc', '۳. توضیحات', !!f.desc], ['media', '۴. رسانه', f.img > 0 && f.pdf], ['rel', '۵. ارتباط‌ها', f.rel.length > 0], ['int', '۶. اطلاعات داخلی', true]];
+    const qn = qDefs.map(([k, l, ok]) => { const bad = errSec.includes(k); return { l, href: '#sec-' + k, cls: '', dot: 'dot' + (bad ? ' er' : ok ? ' ok' : ''), note: bad ? 'خطا' : ok ? '' : 'ناقص' }; });
+    const isNew = !s.items.some((p) => p.id === f.id);
+    const leave = () => { if (s.dirty.length) set({ modal: 'leave' }); else set({ scr: 'list', f: null, errs: {} }); };
+    this.tryBack = leave;
+    return Object.assign(base, {
+      f, er, ec, op, opi, tg, on,
+      noErrCode: !er.code,
+      editCrumb: isNew ? 'محصول جدید' : f.code || 'بدون کد', editTitle: isNew ? 'افزودن محصول' : 'ویرایش محصول',
+      fStCls: f.status === 'pub' ? 'st pub' : 'st draft', fStTxt: f.status === 'pub' ? 'منتشرشده' : 'پیش‌نویس', fEdited: f.edited,
+      hasErr: errKeys.length > 0, errCount: FA(errKeys.length), errList: errKeys.map((k) => errNames[k]).join('، ') + ' را اصلاح کنید.',
+      brands: BRANDS, cats: CATS,
+      protoOpts: PROTOS.map((p) => { const onp = f.protos.includes(p); return { l: p, on: onp, cls: 'chip' + (onp ? ' on' : ''), toggle: () => this.setF({ protos: onp ? f.protos.filter((x) => x !== p) : [...f.protos, p] }, 'protos') }; }),
+      stOpts: [['draft', 'پیش‌نویس'], ['pub', 'منتشرشده']].map(([k, l]) => ({ l, on: f.status === k, cls: 'chip' + (f.status === k ? ' on' : ''), pick: () => this.setF({ status: k }, 'status') })),
+      specFields, hasSpec: fields.length > 0, noSpec: fields.length === 0,
+      customs, addCustom: () => this.setF({ customs: [...f.customs, { l: '', v: '' }] }, 'customs'),
+      descLen: FA(f.desc.length),
+      imgs, imgTxt: f.img ? FA(f.img) + ' عکس' + (f.pdf ? ' · دیتاشیت' : ' · بدون دیتاشیت') : 'بدون عکس',
+      addImg: () => this.setF({ img: Math.min(f.img + 1, 5) }, 'img'),
+      noPdf: !f.pdf, pdfName: (f.code || 'product') + '_datasheet.pdf',
+      removePdf: () => this.setF({ pdf: false }, 'pdf'), addPdf: () => this.setF({ pdf: true }, 'pdf'),
+      rel: f.rel.map((r, i) => ({ ...r, remove: () => this.setF({ rel: f.rel.filter((_, j) => j !== i) }, 'rel') })),
+      relSugg: sugg.map((x) => ({ ...x, add: () => this.setF({ rel: [...f.rel, x] }, 'rel') })),
+      relTxt: FA(f.rel.length) + ' سازگار · ۱ مرتبط',
+      qn, fPct: pct, fPctTxt: FA(pct) + '٪',
+      pvName: f.name || 'نام محصول', pvCode: f.code || 'CODE',
+      dirtyTxt: s.dirty.length ? FA(s.dirty.length) + ' تغییر ذخیره‌نشده' : 'همه تغییرات ذخیره شده',
+      dirtyColor: s.dirty.length ? 'var(--wn)' : 'var(--okT)',
+      tryBack: leave,
+      copyProduct: () => { const c = { ...clone(f), id: Date.now(), name: 'کپی از ' + f.name, code: f.code + '-COPY', status: 'draft', edited: 'همین حالا' }; set({ items: [c, ...s.items], f: c, dirty: [], errs: {} }); this.flash('نسخه پیش‌نویس از محصول ساخته شد', 'copy'); },
+      saveDraft: () => { const e = this.validate(false); if (Object.keys(e).length) { set({ errs: e, open: { ...op, base: true } }); this.flash('پیش از ذخیره، خطاها را اصلاح کنید', 'alert'); return; } const { items, saved } = this.commit('draft'); set({ items, f: saved, dirty: [], errs: {} }); this.flash('پیش‌نویس ذخیره شد', 'checkCircle'); },
+      publish: () => { const e = this.validate(true); if (Object.keys(e).length) { set({ errs: e, open: { ...op, base: true, media: true } }); return; } const { items, saved } = this.commit('pub'); set({ items, f: null, scr: 'list', dirty: [], errs: {}, hl: saved.id }); this.flash('«' + saved.name + '» منتشر شد و در کاتالوگ عمومی دیده می‌شود', 'globe'); }
+    });
+  }
+}
+</script>
+</body>
+</html>

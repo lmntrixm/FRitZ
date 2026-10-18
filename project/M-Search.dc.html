@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — جست‌وجو</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1314px; height: 2020px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>جست‌وجو</b><span>جست‌وجوهای اخیر · پیشنهاد زنده · بدون نتیجه</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <div class="bar" style="padding: 8px 8px 8px 12px; gap: 4px; height: 64px">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div class="field focus" style="flex: 1"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام محصول یا کد مدل" aria-label="جست‌وجو"></div>
+      </div>
+      <div class="scroll" style="padding: 8px 0">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 4px"><h2 class="t-h3">جست‌وجوهای اخیر</h2><button class="btn btn-g btn-sm" style="color: var(--acT)">پاک کردن</button></div>
+        <sc-for list="{{recent}}" as="r" hint-placeholder-count="4">
+          <div class="kbd-row"><dc-import name="Icon" i="clock" s="18" hint-size="18px,18px"></dc-import><span class="{{r.c}}" style="flex: 1; font-weight: 600">{{r.q}}</span><button class="ib" style="width: 40px; height: 40px" aria-label="حذف از تاریخچه"><dc-import name="Icon" i="x" s="16" hint-size="16px,16px"></dc-import></button></div>
+        </sc-for>
+        <h2 class="t-h3" style="padding: 24px 16px 12px">جست‌وجوهای پرتکرار</h2>
+        <div class="chips" style="padding: 0 16px">
+          <span class="chip">تاچ پنل لینوکسی</span><span class="chip">رله ۱۲ کانال</span><span class="chip"><span class="lat">Miniserver</span></span><span class="chip">آیفون تصویری</span><span class="chip">سنسور حضور</span><span class="chip">کلید ۳ پل</span>
+        </div>
+        <h2 class="t-h3" style="padding: 24px 16px 12px">نمی‌دانید چه بخواهید؟</h2>
+        <a class="kbd-row" href="#" style="border: 0"><span class="cat" style="min-height: 0; padding: 0; border: 0; background: none; flex-direction: row; align-items: center; gap: 12px; flex: 1"><span class="ico"><dc-import name="Icon" i="compass" s="20" hint-size="20px,20px"></dc-import></span><b>محصول مناسبم را پیدا کن</b></span><dc-import name="Icon" i="chevNext" s="18" hint-size="18px,18px"></dc-import></a>
+      </div>
+    </div>
+    <p class="cap">فوکوس، بدون متن</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <div class="bar" style="padding: 8px 8px 8px 12px; gap: 4px; height: 64px">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div class="field focus" style="flex: 1"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input value="zvi" aria-label="جست‌وجو" dir="ltr" style="text-align: right"><button class="ib" style="width: 36px; height: 36px" aria-label="پاک کردن متن"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button></div>
+      </div>
+      <div class="scroll">
+        <p class="glabel" style="padding: 16px 16px 4px">محصولات</p>
+        <sc-for list="{{sugg}}" as="p" hint-placeholder-count="3">
+          <a class="kbd-row" href="#" style="min-height: 72px; gap: 12px">
+            <span class="ph" style="width: 52px; height: 52px; border-radius: 50%; flex: none"><dc-import name="ProductArt" kind="{{p.kind}}" s="46" hint-size="46px,46px"></dc-import></span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><b style="font-size: 14px">{{p.name}}</b><span class="code" style="color: var(--tx2)"><span class="hl">{{p.m}}</span>{{p.rest}} · {{p.brand}}</span></span>
+            <dc-import name="Icon" i="chevNext" s="18" hint-size="18px,18px"></dc-import>
+          </a>
+        </sc-for>
+        <p class="glabel" style="padding: 20px 16px 4px">دسته و برند</p>
+        <a class="kbd-row" href="#"><dc-import name="Icon" i="panel" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">تاچ پنل‌های <span class="lat" style="font-weight: 800">Zennio</span></span><span class="t-c mut3">۷ محصول</span></a>
+        <a class="kbd-row" href="#"><dc-import name="Icon" i="layers" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">همه محصولات <span class="lat" style="font-weight: 800">Zennio</span></span><span class="t-c mut3">۳۸ محصول</span></a>
+        <div style="padding: 16px"><button class="btn btn-s btn-w">مشاهده همه ۱۲ نتیجه برای «<span class="lat">zvi</span>»</button></div>
+      </div>
+    </div>
+    <p class="cap">پیشنهاد زنده هنگام تایپ (کد مدل)</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+    <div class="{{th.cls}} phone">
+      <div class="bar" style="padding: 8px 8px 8px 12px; gap: 4px; height: 64px">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div class="field focus" style="flex: 1"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input value="کلید ۸ پل" aria-label="جست‌وجو"><button class="ib" style="width: 36px; height: 36px" aria-label="پاک کردن متن"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button></div>
+      </div>
+      <div class="scroll">
+        <div class="empty" style="padding-top: 56px">
+          <span class="ico"><dc-import name="Icon" i="noResult" s="32" hint-size="32px,32px"></dc-import></span>
+          <h2 class="t-h2">نتیجه‌ای برای «کلید ۸ پل» پیدا نشد</h2>
+          <p class="t-s mut">کلیدهای کاتالوگ حداکثر ۴ پل هستند. املای کد مدل را بررسی کنید یا عبارت کوتاه‌تری بنویسید.</p>
+        </div>
+        <p class="glabel" style="padding: 0 16px 10px">شاید منظورتان این بود</p>
+        <div class="chips" style="padding: 0 16px">
+          <span class="chip">کلید ۴ پل</span><span class="chip">رله ۸ کانال</span><span class="chip">کلید هوشمند</span>
+        </div>
+        <div class="card" style="margin: 28px 16px 0; padding: 16px; gap: 10px; background: var(--sf2); border-color: transparent">
+          <b style="font-size: 14px">محصول را پیدا نکردید؟</b>
+          <p class="t-s mut">کد یا عکس محصول را در واتساپ بفرستید؛ کارشناسان ما معادل مناسب را پیشنهاد می‌دهند.</p>
+          <a class="btn btn-s btn-sm" href="#" style="align-self: flex-start"><dc-import name="Icon" i="chat" s="18" hint-size="18px,18px"></dc-import>پرسش در واتساپ</a>
+        </div>
+      </div>
+    </div>
+    <p class="cap">بدون نتیجه</p>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1314,"height":2020}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      recent: [
+        { q: 'تاچ پنل ۷ اینچ', c: '' },
+        { q: 'MixPad', c: 'lat' },
+        { q: 'رله ۲۴ کانال KNX', c: '' },
+        { q: 'R20A', c: 'lat' }
+      ],
+      sugg: [
+        { name: 'تاچ پنل ۵ اینچ Z50', m: 'ZVI', rest: 'Z50A', brand: 'Zennio', kind: 'panel' },
+        { name: 'تاچ پنل ۵ اینچ Z50 سفید', m: 'ZVI', rest: 'Z50W', brand: 'Zennio', kind: 'panel' },
+        { name: 'تاچ پنل ۷ اینچ Z70', m: 'ZVI', rest: 'Z70', brand: 'Zennio', kind: 'panel7' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

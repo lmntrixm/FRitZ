@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — لیست محصولات</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>لیست محصولات</b><span>انتخاب گروهی فعال · سپس حالت‌های خالی، بارگذاری و بدون نتیجه</span></div>
+  <div class="{{th.cls}} adm">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها، ۳ مورد جدید"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import><span class="cnt">۳</span></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>محصولات</span></nav><h1 class="ptitle">محصولات <span class="t-s mut3" style="font-weight: 600">۴۰۲ محصول · ۳۸۸ منتشرشده · ۱۴ پیش‌نویس</span></h1></div>
+          <div class="acts"><button class="btn btn-s btn-sm"><dc-import name="Icon" i="table" s="18" hint-size="18px,18px"></dc-import>خروجی اکسل</button><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="18" sw="2" hint-size="18px,18px"></dc-import>افزودن محصول</button></div>
+        </div>
+        <div class="panel">
+          <div class="toolbar">
+            <div class="field" style="flex: 1 1 220px; max-width: 300px; height: 40px"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="نام یا کد مدل" aria-label="جست‌وجو در محصولات"></div>
+            <button class="selbtn">برند<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+            <button class="selbtn on">دسته: تاچ پنل<dc-import name="Icon" i="x" s="14" hint-size="14px,14px"></dc-import></button>
+            <button class="selbtn">پروتکل<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+            <button class="selbtn">وضعیت<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button>
+            <button class="selbtn on" aria-pressed="true"><dc-import name="Icon" i="alert" s="16" hint-size="16px,16px"></dc-import>فقط ناقص‌ها</button>
+            <div style="flex: 1"></div>
+            <button class="selbtn"><dc-import name="Icon" i="sort" s="16" hint-size="16px,16px"></dc-import>کمترین تکمیل</button>
+          </div>
+          <div style="padding: 10px 14px 0"><div class="bulk" role="region" aria-label="عملیات گروهی">
+            <b style="font-size: 13px">۲ مورد انتخاب شده</b>
+            <button class="btn btn-g btn-sm"><dc-import name="Icon" i="globe" s="16" hint-size="16px,16px"></dc-import>انتشار</button>
+            <button class="btn btn-g btn-sm"><dc-import name="Icon" i="eye" s="16" hint-size="16px,16px"></dc-import>پیش‌نویس</button>
+            <button class="btn btn-g btn-sm"><dc-import name="Icon" i="folder" s="16" hint-size="16px,16px"></dc-import>تغییر دسته</button>
+            <div style="flex: 1"></div>
+            <button class="btn btn-x btn-sm"><dc-import name="Icon" i="trash" s="16" hint-size="16px,16px"></dc-import>حذف</button>
+            <button class="btn btn-g btn-sm">لغو انتخاب</button>
+          </div></div>
+          <div class="tw"><table class="tbl">
+            <thead><tr><th style="width: 36px"><input type="checkbox" class="cbx" aria-label="انتخاب همه"></th><th>محصول</th><th>کد مدل</th><th>برند</th><th>دسته</th><th>پروتکل</th><th>وضعیت</th><th>تکمیل اطلاعات <dc-import name="Icon" i="arrowUp" s="12" hint-size="12px,12px"></dc-import></th><th>آخرین ویرایش</th><th><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">عملیات</span></th></tr></thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+                <tr class="{{r.rc}}">
+                  <td><input type="checkbox" class="cbx" checked="{{r.sel}}" aria-label="انتخاب {{r.name}}"></td>
+                  <td><a class="pname" href="#"><sc-if value="{{r.img}}" hint-placeholder-val="{{true}}"><span class="thumb"><dc-import name="ProductArt" kind="{{r.kind}}" s="36" hint-size="36px,36px"></dc-import></span></sc-if><sc-if value="{{r.noImg}}" hint-placeholder-val="{{false}}"><span class="thumb miss" aria-label="بدون عکس"><dc-import name="Icon" i="image" s="16" hint-size="16px,16px"></dc-import></span></sc-if><b>{{r.name}}</b></a></td>
+                  <td><span class="code" style="color: var(--tx)">{{r.code}}</span></td>
+                  <td><span class="lat" style="font-weight: 600">{{r.brand}}</span></td>
+                  <td>{{r.cat}}</td>
+                  <td><sc-if value="{{r.hasP}}" hint-placeholder-val="{{true}}"><span class="pb">{{r.p}}</span></sc-if><sc-if value="{{r.noP}}" hint-placeholder-val="{{false}}"><span class="t-c" style="color: var(--wn); font-weight: 700">تعیین نشده</span></sc-if></td>
+                  <td><span class="{{r.stc}}">{{r.st}}</span></td>
+                  <td><span class="cmpl"><span class="bar"><i style="width: {{r.pct}}%; background: {{r.pc}}"></i></span>{{r.pt}}</span><span class="t-c mut3" style="display: block">{{r.miss}}</span></td>
+                  <td class="t-c mut">{{r.ed}}</td>
+                  <td><span style="display: inline-flex"><a class="ib" style="width: 36px; height: 36px" href="#" aria-label="ویرایش {{r.name}}"><dc-import name="Icon" i="edit" s="18" hint-size="18px,18px"></dc-import></a><button class="ib" style="width: 36px; height: 36px" aria-label="گزینه‌های بیشتر"><dc-import name="Icon" i="more" s="18" sw="2.6" hint-size="18px,18px"></dc-import></button></span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 8px">
+            <span class="t-c mut">نمایش ۱ تا ۸ از ۱۹ محصول ناقص در «تاچ پنل» · <button class="btn btn-g btn-sm" style="min-height: 32px; padding: 0 6px">۲۰ در هر صفحه<dc-import name="Icon" i="chevDown" s="14" hint-size="14px,14px"></dc-import></button></span>
+            <div class="pg" role="navigation" aria-label="صفحه‌بندی"><button aria-label="صفحه قبل"><dc-import name="Icon" i="chevBack" s="16" hint-size="16px,16px"></dc-import></button><button class="on" aria-current="page">۱</button><button>۲</button><button>۳</button><button aria-label="صفحه بعد"><dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></button></div>
+          </div>
+        </div>
+
+        <div class="g3a">
+          <div class="panel">
+            <div class="panel-h"><h2>حالت خالی</h2><span class="t-c mut3">قبل از اولین محصول</span></div>
+            <div class="empty" style="padding: 36px 24px"><span class="ico"><dc-import name="Icon" i="box" s="30" hint-size="30px,30px"></dc-import></span><h3 class="t-h3">هنوز محصولی ثبت نشده است</h3><p class="t-s mut">اولین محصول را دستی بسازید یا همه را یکجا از فایل به‌روزرسانی وارد کنید.</p><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><button class="btn btn-p btn-sm"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن محصول</button><button class="btn btn-s btn-sm"><dc-import name="Icon" i="upload" s="16" hint-size="16px,16px"></dc-import>ورود از فایل</button></div></div>
+          </div>
+          <div class="panel" aria-busy="true">
+            <div class="panel-h"><h2>در حال بارگذاری</h2><span class="t-c mut3">Skeleton هم‌شکل جدول</span></div>
+            <div style="padding: 6px 14px">
+              <sc-for list="{{sk}}" as="x" hint-placeholder-count="5"><div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)"><span class="sk" style="width: 18px; height: 18px; border-radius: 5px"></span><span class="sk" style="width: 40px; height: 40px"></span><span style="flex: 1; display: flex; flex-direction: column; gap: 6px"><span class="sk" style="height: 12px; width: {{x}}%"></span><span class="sk" style="height: 10px; width: 30%"></span></span><span class="sk" style="width: 64px; height: 22px; border-radius: 11px"></span></div></sc-for>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><h2>بدون نتیجه</h2><span class="t-c mut3">جست‌وجو یا فیلتر</span></div>
+            <div class="empty" style="padding: 36px 24px"><span class="ico"><dc-import name="Icon" i="noResult" s="30" hint-size="30px,30px"></dc-import></span><h3 class="t-h3">محصولی با «<span class="lat">ZVIZ90</span>» پیدا نشد</h3><p class="t-s mut">فیلترهای «دسته: تاچ پنل» و «فقط ناقص‌ها» فعال‌اند. با برداشتن آن‌ها در کل محصولات جست‌وجو کنید.</p><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><button class="btn btn-s btn-sm">برداشتن فیلترها</button><button class="btn btn-g btn-sm" style="color: var(--acT)">ساخت محصول با این کد</button></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":3700}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+const fa = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+class Component extends DCLogic {
+  renderVals() {
+    const R = (name, code, brand, p, kind, img, st, pct, miss, ed, sel) => ({ name, code, brand, cat: 'تاچ پنل', p, hasP: !!p, noP: !p, kind, img, noImg: !img, sel: !!sel, rc: sel ? 'sel' : '', st: st ? 'منتشرشده' : 'پیش‌نویس', stc: st ? 'st pub' : 'st draft', pct, pt: fa(pct) + '٪', pc: pct >= 90 ? 'var(--okT)' : pct >= 60 ? 'var(--wn)' : 'var(--err)', miss, ed });
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('products'),
+      rows: [
+        R('تاچ پنل ۱۰ اینچ Hypanel Pro', 'HYP-P10', 'Akubela', 'Zigbee', 'panel7', false, false, 40, 'عکس، دیتاشیت، توضیحات', 'امروز ۱۱:۲۰', true),
+        R('تاچ پنل ۱۰ اینچ اندرویدی', 'OT-P10', 'Ountech', '', 'panel7', true, true, 50, 'پروتکل، دیتاشیت', 'دیروز', true),
+        R('تاچ پنل ۷ اینچ Hypanel Elite', 'HYP-E7', 'Akubela', 'Zigbee', 'panel7', true, false, 60, 'دیتاشیت، اندازه قوطی', 'دیروز'),
+        R('تاچ پنل ۴ اینچ MixPad Mini', 'MIXPAD-M4', 'Orvibo', 'Zigbee', 'panel', true, true, 70, 'کشور سازنده، توضیحات', '۳ روز پیش'),
+        R('تاچ پنل ۷ اینچ SmartTouch', 'ST-7', 'ABB', 'KNX', 'panel7', true, true, 80, 'دیتاشیت', '۴ روز پیش'),
+        R('تاچ پنل ۴ اینچ Z41', 'ZVIZ41', 'Zennio', 'KNX', 'panel', true, true, 80, 'سیستم‌عامل', '۱ هفته پیش'),
+        R('تاچ پنل ۷ اینچ Z70', 'ZVIZ70', 'Zennio', 'KNX', 'panel7', true, true, 90, 'کشور سازنده', '۲ هفته پیش'),
+        R('تاچ پنل ۷ اینچ MixPad Matter', 'MIXPAD-7M', 'Orvibo', 'Zigbee', 'panel7', true, true, 90, 'محصولات مرتبط', '۲ ساعت پیش')
+      ],
+      sk: [70, 55, 80, 60, 45]
+    };
+  }
+}
+</script>
+</body>
+</html>

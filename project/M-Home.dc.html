@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — صفحه اصلی کاتالوگ</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 1736px; height: 4500px; padding: 40px; display: flex; gap: 48px; align-items: flex-start">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>صفحه اصلی</b><span>اسکرول کامل · پس از اسکرول با نوار چسبان</span></div>
+  <div style="display: flex; gap: 24px; align-items: flex-start">
+  <div style="display: flex; flex-direction: column">
+  <div class="{{th.cls}} phone auto">
+    <div class="stickytop">
+      <header class="hdr">
+        <a class="logo" href="#" aria-label="FRitZ، صفحه اصلی"><span class="mk"></span><b>FRitZ</b></a>
+        <div class="sp"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib" aria-label="لیست استعلام، ۲ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۲</span></button>
+      </header>
+      <div class="sbar" role="search">
+        <a class="sfield" href="#"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><span>نام محصول یا کد مدل</span></a>
+        <a class="btn btn-s btn-sm" href="#" aria-label="فیلتر محصولات"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</a>
+      </div>
+    </div>
+
+    <section style="padding: 8px 0 0">
+      <figure class="ph" style="height: 380px; margin: 0">
+        <dc-import name="ProductArt" kind="panel7" s="270" hint-size="270px,270px"></dc-import>
+        <figcaption style="position: absolute; bottom: 16px; right: 20px; left: 20px; display: flex; justify-content: space-between; gap: 12px; font-size: 13px"><span><span class="brand">Orvibo</span> · <span class="lat">MixPad Matter</span></span><span class="lat mut3">Zigbee</span></figcaption>
+      </figure>
+      <div style="padding: 32px 20px 0">
+        <h1 class="t-dsp">تجهیز دقیق، برای خانه‌ای که فکر می‌کند.</h1>
+        <p class="t-b mut" style="margin-top: 14px">بیش از ۴۰۰ محصول از ۱۰ برند؛ مشخصات را بخوانید، مقایسه کنید و یکجا استعلام بگیرید.</p>
+        <a class="btn btn-p btn-lg btn-w" href="#" style="margin-top: 28px">محصول مناسبم را پیدا کن<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></a>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 96px">
+      <h2 class="t-h1">از نیاز پروژه شروع کنید.</h2>
+      <p class="t-s mut" style="margin: 8px 0 24px">چهارده دسته، هرکدام با فیلترهای مخصوص خودش.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="14">
+          <a class="cat" href="#" style="min-height: 76px; padding: 0 16px"><span style="display: block"><b>{{c.name}}</b><span>{{c.n}} محصول</span></span></a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 96px">
+      <h2 class="t-h1">ده برند، کنار هم و بی‌طرف.</h2>
+      <nav aria-label="برندها" style="display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 18px; direction: ltr; justify-content: flex-end">
+        <sc-for list="{{brands}}" as="b" hint-placeholder-count="10"><a href="#" style="font-size: 24px; line-height: 1.7; font-weight: 700; color: var(--tx3); min-height: 44px">{{b}}</a></sc-for>
+      </nav>
+    </section>
+
+    <section class="sec" style="padding-top: 96px"><div class="sec-h"><h2 class="t-h1">منتخب‌ها</h2><a class="more" href="#">همه محصولات</a></div></section>
+    <div class="hs">
+      <sc-for list="{{featured}}" as="p" hint-placeholder-count="4">
+        <article class="card pc" style="width: 240px">
+          <label class="cmp"><input type="checkbox" class="cbx">مقایسه</label>
+          <a class="pc-open" href="#">
+            <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="160" hint-size="160px,160px"></dc-import></div>
+            <div class="pc-b"><span class="brand">{{p.brand}}</span><h3 class="pc-n">{{p.name}}</h3>
+              <div class="pc-meta"><span class="code">{{p.code}}</span><span class="pbs"><sc-for list="{{p.pl}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></div></div>
+          </a>
+          <div class="pc-f"><button class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</button></div>
+        </article>
+      </sc-for>
+    </div>
+
+    <section style="padding-top: 96px">
+      <figure class="ph" style="height: 300px; margin: 0; color: var(--tx3)"><span style="display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 14px"><dc-import name="Icon" i="image" s="28" hint-size="28px,28px"></dc-import>عکس پروژه اجراشده</span></figure>
+      <p style="padding: 28px 20px 0; font-size: 21px; line-height: 1.75; font-weight: 600">از انتخاب تجهیزات تا نصب و راه‌اندازی، یک تیم کنار پروژه شماست: چند برند و چند پروتکل در یک جا، مشاوره فنی پیش از خرید و اجرای کامل.</p>
+      <div style="padding: 12px 20px 0"><a class="more" href="#">درباره FRitZ و پروژه‌ها</a></div>
+    </section>
+
+    <section style="margin-top: 96px; background: var(--sf2); padding: 40px 20px">
+      <h2 class="t-h1">نمی‌دانید از کجا شروع کنید؟</h2>
+      <p class="t-s mut" style="margin-top: 10px">در سه قدم نیاز، پروتکل و برند را انتخاب کنید؛ محصولات مناسب را با دلیل پیشنهاد می‌کنیم.</p>
+      <a class="btn btn-d btn-w" href="#" style="margin-top: 24px">شروع راهنمای انتخاب<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></a>
+    </section>
+
+    <footer class="foot" style="margin-top: 0">
+      <p style="font-size: 22px; line-height: 1.6; font-weight: 700">برای انتخاب تجهیزات پروژه‌تان با ما گفت‌وگو کنید.</p>
+      <a class="btn btn-p btn-w" href="#"><dc-import name="Icon" i="chat" s="20" hint-size="20px,20px"></dc-import>گفت‌وگو در واتساپ</a>
+      <nav style="display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px" aria-label="پیوندهای پانویس"><a href="#" style="min-height: 44px; display: inline-flex; align-items: center">درباره FRitZ</a><a href="#" style="min-height: 44px; display: inline-flex; align-items: center">همه محصولات</a><a href="#" style="min-height: 44px; display: inline-flex; align-items: center">تماس</a><a href="#" style="min-height: 44px; display: inline-flex; align-items: center">English</a></nav>
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 12px"><span class="logo inv" style="padding: 0"><span class="mk" style="width: 150px; height: 53px"></span><b>FRitZ</b></span><p class="t-c lat" style="opacity: .7">© FRitZ</p></div>
+    </footer>
+  </div>
+  <p class="cap">بالای صفحه — جست‌وجو و فیلتر زیر هدر</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column">
+  <div class="{{th.cls}} phone">
+    <div class="stickytop stuck">
+      <header class="hdr">
+        <a class="logo" href="#" aria-label="FRitZ، صفحه اصلی"><span class="mk"></span><b>FRitZ</b></a>
+        <div class="sp"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib" aria-label="لیست استعلام، ۲ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۲</span></button>
+      </header>
+      <div class="sbar" role="search">
+        <a class="sfield" href="#"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><span>نام محصول یا کد مدل</span></a>
+        <a class="btn btn-s btn-sm" href="#" aria-label="فیلتر محصولات"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</a>
+      </div>
+    </div>
+    <div style="overflow: hidden; flex: 1">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; padding: 12px 20px 0">
+        <sc-for list="{{catsMid}}" as="c" hint-placeholder-count="8">
+          <a class="cat" href="#" style="min-height: 76px; padding: 0 16px"><span style="display: block"><b>{{c.name}}</b><span>{{c.n}} محصول</span></span></a>
+        </sc-for>
+      </div>
+      <section class="sec" style="padding-top: 96px">
+        <h2 class="t-h1">ده برند، کنار هم و بی‌طرف.</h2>
+        <nav aria-label="برندها" style="display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 18px; direction: ltr; justify-content: flex-end">
+          <sc-for list="{{brands}}" as="b" hint-placeholder-count="10"><a href="#" style="font-size: 24px; line-height: 1.7; font-weight: 700; color: var(--tx3); min-height: 44px">{{b}}</a></sc-for>
+        </nav>
+      </section>
+    </div>
+  </div>
+  <p class="cap">پس از اسکرول — نوار به بالای صفحه چسبیده است</p>
+  </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1736,"height":4500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      cats: [
+        { name: 'تاچ پنل', n: '۴۲', i: 'panel' }, { name: 'کلید هوشمند', n: '۵۸', i: 'switch' },
+        { name: 'ترموستات', n: '۲۴', i: 'thermo' }, { name: 'رله و اکچوایتور', n: '۴۷', i: 'relay' },
+        { name: 'رله پشت‌کلیدی', n: '۳۱', i: 'backRelay' }, { name: 'دیمر و درایور', n: '۲۹', i: 'dimmer' },
+        { name: 'سنسور', n: '۳۸', i: 'sensor' }, { name: 'سرور', n: '۱۲', i: 'server' },
+        { name: 'ماژول رابط', n: '۲۶', i: 'iface' }, { name: 'ورودی / خروجی', n: '۲۲', i: 'io' },
+        { name: 'منبع تغذیه', n: '۱۵', i: 'power' }, { name: 'پرده', n: '۱۹', i: 'curtain' },
+        { name: 'آیفون و درب‌بازکن', n: '۲۳', i: 'intercom' }, { name: 'صوت', n: '۱۶', i: 'audio' }
+      ],
+      catsMid: [
+        { name: 'سنسور', n: '۳۸', i: 'sensor' }, { name: 'سرور', n: '۱۲', i: 'server' },
+        { name: 'ماژول رابط', n: '۲۶', i: 'iface' }, { name: 'ورودی / خروجی', n: '۲۲', i: 'io' },
+        { name: 'منبع تغذیه', n: '۱۵', i: 'power' }, { name: 'پرده', n: '۱۹', i: 'curtain' },
+        { name: 'آیفون و درب‌بازکن', n: '۲۳', i: 'intercom' }, { name: 'صوت', n: '۱۶', i: 'audio' }
+      ],
+      brands: ['Zennio', 'Loxone', 'Schneider', 'Orvibo', 'ABB', 'ITC', 'Ountech', 'Panasonic', 'Akuvox', 'Akubela'],
+      featured: [
+        { name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', pl: ['Zigbee'], kind: 'panel7' },
+        { name: 'سرور خانه هوشمند Miniserver', code: 'MS-GEN2', brand: 'Loxone', pl: [], kind: 'server' },
+        { name: 'رله ۲۴ کانال', code: 'SA/S 24.16', brand: 'ABB', pl: ['KNX'], kind: 'relay' },
+        { name: 'پنل آیفون هوشمند R20A', code: 'R20A', brand: 'Akuvox', pl: [], kind: 'intercom' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

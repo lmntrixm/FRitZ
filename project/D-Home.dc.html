@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دسکتاپ — صفحه اصلی کاتالوگ</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.dh-wrap{max-width:1360px;margin:0 auto;padding-inline:48px}
+.dh-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:15px;font-weight:500;border-radius:999px}
+.dh-nav a:hover{background:var(--sf2)}
+.dh-h2{font-size:44px;line-height:1.3;font-weight:800;text-wrap:balance}
+.dh-brands a{font-size:34px;line-height:1.5;font-weight:700;color:var(--tx3);direction:ltr;transition:color .2s var(--ease)}
+.dh-brands a:hover{color:var(--tx)}
+.dh-foot a{display:inline-flex;align-items:center;min-height:40px;font-size:15px}
+.dh-foot a:hover{text-decoration:underline;text-decoration-color:var(--ac);text-underline-offset:6px;text-decoration-thickness:2px}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 32px; padding: 32px 0 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 32px"><i class="{{th.tag}}">{{th.label}}</i><b>دسکتاپ — صفحه اصلی</b><span>۱۴۴۰ · محتوای حداکثر ۱۳۶۰</span></div>
+  <div class="{{th.cls}}" style="width: 100%">
+    <header class="stickytop" style="background: var(--bg)">
+      <div class="dh-wrap" style="display: flex; align-items: center; gap: 24px; min-height: 84px">
+        <a class="logo" href="#" style="padding: 0" aria-label="FRitZ، صفحه اصلی"><span class="mk"></span><b>FRitZ</b></a>
+        <nav class="dh-nav" aria-label="منوی اصلی" style="display: flex; gap: 2px">
+          <a href="#">محصولات</a><a href="#">برندها</a><a href="#">راهنمای انتخاب</a><a href="#">درباره و تماس</a>
+        </nav>
+        <div role="search" style="flex: 1 1 360px; max-width: 520px; margin-inline-start: auto; display: flex; gap: 8px">
+          <div class="field" style="flex: 1; height: 48px"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام محصول یا کد مدل، مثلاً ZVIZ50A" aria-label="جست‌وجو"></div>
+          <a class="btn btn-s" href="#"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px">
+          <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+          <button class="ib lat" aria-label="English" style="font-size: 14px; font-weight: 600">EN</button>
+          <button class="btn btn-d" aria-label="لیست استعلام، ۲ قلم">لیست استعلام<span class="cnt" style="position: static">۲</span></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="dh-wrap" style="padding-top: 24px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 24px; padding-block: 40px">
+        <h1 style="font-size: 68px; line-height: 1.25; font-weight: 800; text-wrap: balance">تجهیز دقیق، برای خانه‌ای که فکر می‌کند.</h1>
+        <p class="mut" style="font-size: 19px; line-height: 1.9; max-width: 34ch">بیش از ۴۰۰ محصول از ۱۰ برند در پروتکل‌های <span class="lat">KNX</span>، <span class="lat">Zigbee</span> و <span class="lat">Modbus</span>؛ مشخصات را بخوانید، مقایسه کنید و یکجا استعلام بگیرید.</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-top: 8px">
+          <a class="btn btn-p btn-lg" href="#">محصول مناسبم را پیدا کن<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></a>
+          <a class="more" href="#">همه محصولات</a>
+        </div>
+      </div>
+      <figure class="ph" style="height: 680px; margin: 0">
+        <dc-import name="ProductArt" kind="panel7" s="460" hint-size="460px,460px"></dc-import>
+        <figcaption style="position: absolute; bottom: 28px; right: 32px; left: 32px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-size: 15px"><span><span class="brand" style="font-size: 15px">Orvibo</span> · تاچ پنل ۷ اینچ <span class="lat">MixPad Matter</span></span><span class="lat mut3">Zigbee</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="dh-wrap" style="padding-top: 160px">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px">
+        <h2 class="dh-h2">از نیاز پروژه شروع کنید.</h2>
+        <p class="t-b mut" style="max-width: 40ch">چهارده دسته، هرکدام با فیلترهای مخصوص خودش؛ از تاچ پنل تا منبع تغذیه.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="14">
+          <a class="cat" href="#" style="min-height: 88px; padding: 0 24px"><span class="ico"><dc-import name="Icon" i="{{c.i}}" s="24" hint-size="24px,24px"></dc-import></span><b style="font-size: 17px">{{c.name}}</b><span class="code" style="margin-inline-start: auto">{{c.n}}</span></a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section class="dh-wrap" style="padding-top: 160px">
+      <div style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px">
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <h2 class="dh-h2">ده برند، کنار هم و بی‌طرف.</h2>
+          <p class="t-b mut" style="max-width: 38ch">نماینده رسمی برندها هستیم؛ مقایسه را بر پایه دیتاشیت انجام دهید، نه تبلیغ.</p>
+        </div>
+        <nav class="dh-brands" aria-label="برندها" style="display: flex; flex-wrap: wrap; gap: 4px 40px; align-content: flex-start">
+          <sc-for list="{{brands}}" as="b" hint-placeholder-count="10"><a href="#">{{b}}</a></sc-for>
+        </nav>
+      </div>
+    </section>
+
+    <section class="dh-wrap" style="padding-top: 160px">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px">
+        <h2 class="dh-h2">منتخب‌ها</h2>
+        <a class="more" href="#">همه محصولات</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 20px">
+        <sc-for list="{{featured}}" as="p" hint-placeholder-count="4">
+          <article class="card pc">
+            <label class="cmp"><input type="checkbox" class="cbx">مقایسه</label>
+            <a class="pc-open" href="#"><div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="200" hint-size="200px,200px"></dc-import></div>
+            <div class="pc-b" style="padding-top: 18px"><span class="brand">{{p.brand}}</span><h3 class="pc-n" style="font-size: 17px">{{p.name}}</h3><div class="pc-meta"><span class="code">{{p.code}}</span><span class="pb">{{p.pr}}</span></div></div></a>
+            <div class="pc-f"><button class="pc-add"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import>افزودن به استعلام</button></div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <section class="dh-wrap" style="padding-top: 160px">
+      <div style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: center">
+        <figure class="ph" style="height: 560px; margin: 0; color: var(--tx3)">
+          <span style="display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 15px"><dc-import name="Icon" i="image" s="32" hint-size="32px,32px"></dc-import>عکس پروژه اجراشده</span>
+        </figure>
+        <div style="display: flex; flex-direction: column; gap: 24px">
+          <p style="font-size: 30px; line-height: 1.7; font-weight: 600; text-wrap: pretty">از انتخاب تجهیزات تا نصب و راه‌اندازی، یک تیم کنار پروژه شماست: چند برند و چند پروتکل در یک جا، مشاوره فنی پیش از خرید و اجرای کامل.</p>
+          <a class="more" href="#">درباره FRitZ و پروژه‌ها</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="dh-wrap" style="padding-top: 160px">
+      <div style="background: var(--sf2); padding: 72px 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px">
+          <h2 class="dh-h2">نمی‌دانید از کجا شروع کنید؟</h2>
+          <p class="t-b mut">در سه قدم نیاز، پروتکل و برند را انتخاب کنید؛ محصولات مناسب پروژه را با دلیل پیشنهاد می‌کنیم. دانش فنی لازم نیست.</p>
+        </div>
+        <a class="btn btn-d btn-lg" href="#">شروع راهنمای انتخاب<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></a>
+      </div>
+    </section>
+
+    <footer style="margin-top: 160px; background: var(--tx); color: var(--bg)">
+      <div class="dh-wrap dh-foot" style="padding-top: 80px; padding-bottom: 40px; display: grid; grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 2fr)); gap: 40px">
+        <div style="display: flex; flex-direction: column; gap: 20px">
+          <p style="font-size: 30px; line-height: 1.5; font-weight: 700; max-width: 18ch">برای انتخاب تجهیزات پروژه‌تان با ما گفت‌وگو کنید.</p>
+          <a class="btn btn-p" href="#" style="align-self: flex-start"><dc-import name="Icon" i="chat" s="20" hint-size="20px,20px"></dc-import>گفت‌وگو در واتساپ</a>
+        </div>
+        <nav aria-label="کاتالوگ" style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 700; margin-bottom: 8px">کاتالوگ</b><a href="#">تاچ پنل</a><a href="#">کلید هوشمند</a><a href="#">رله و اکچوایتور</a><a href="#">آیفون و درب‌بازکن</a></nav>
+        <nav aria-label="FRitZ" style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 700; margin-bottom: 8px">FRitZ</b><a href="#">درباره ما</a><a href="#">راهنمای انتخاب</a><a href="#">مقایسه محصولات</a></nav>
+        <div style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 700; margin-bottom: 8px">تماس</b><a href="#" class="lat" style="justify-content: flex-end">[شماره تماس]</a><a href="#">English</a></div>
+      </div>
+      <div class="dh-wrap" style="padding-top: 32px; padding-bottom: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px">
+        <span class="logo inv" style="padding: 0"><span class="mk" style="width: 220px; height: 78px"></span><b>FRitZ</b></span>
+        <p class="t-s lat" style="opacity: .7">© FRitZ Smart Solutions</p>
+      </div>
+    </footer>
+  </div>
+
+  <div class="blbl" style="padding: 24px 32px 0"><i class="{{th.tag}}">{{th.label}}</i><b>پس از اسکرول</b><span>هدر با جست‌وجو و فیلتر به بالای صفحه می‌چسبد</span></div>
+  <div class="{{th.cls}}" style="width: 100%; height: 560px; overflow: hidden; position: relative">
+    <header class="stickytop stuck dsk" style="background: var(--bg)">
+      <div class="dh-wrap" style="display: flex; align-items: center; gap: 24px; min-height: 72px">
+        <a class="logo" href="#" style="padding: 0" aria-label="FRitZ، صفحه اصلی"><span class="mk" style="width: 76px; height: 27px"></span><b>FRitZ</b></a>
+        <div role="search" style="flex: 1 1 380px; max-width: 680px; margin-inline-start: auto; display: flex; gap: 8px">
+          <div class="field" style="flex: 1; height: 48px"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام محصول یا کد مدل، مثلاً ZVIZ50A" aria-label="جست‌وجو"></div>
+          <a class="btn btn-s" href="#"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px">
+          <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+          <button class="btn btn-d" aria-label="لیست استعلام، ۲ قلم">لیست استعلام<span class="cnt" style="position: static">۲</span></button>
+        </div>
+      </div>
+    </header>
+    <section class="dh-wrap" style="padding-top: 32px">
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="14">
+          <a class="cat" href="#" style="min-height: 88px; padding: 0 24px"><span class="ico"><dc-import name="Icon" i="{{c.i}}" s="24" hint-size="24px,24px"></dc-import></span><b style="font-size: 17px">{{c.name}}</b><span class="code" style="margin-inline-start: auto">{{c.n}}</span></a>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":10400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      cats: [
+        { name: 'تاچ پنل', n: '۴۲', i: 'panel' }, { name: 'کلید هوشمند', n: '۵۸', i: 'switch' },
+        { name: 'ترموستات', n: '۲۴', i: 'thermo' }, { name: 'رله و اکچوایتور', n: '۴۷', i: 'relay' },
+        { name: 'رله پشت‌کلیدی', n: '۳۱', i: 'backRelay' }, { name: 'دیمر و درایور', n: '۲۹', i: 'dimmer' },
+        { name: 'سنسور', n: '۳۸', i: 'sensor' }, { name: 'سرور', n: '۱۲', i: 'server' },
+        { name: 'ماژول رابط', n: '۲۶', i: 'iface' }, { name: 'ورودی / خروجی', n: '۲۲', i: 'io' },
+        { name: 'منبع تغذیه', n: '۱۵', i: 'power' }, { name: 'پرده', n: '۱۹', i: 'curtain' },
+        { name: 'آیفون و درب‌بازکن', n: '۲۳', i: 'intercom' }, { name: 'صوت', n: '۱۶', i: 'audio' }
+      ],
+      brands: ['Zennio', 'Loxone', 'Schneider', 'Orvibo', 'ABB', 'ITC', 'Ountech', 'Panasonic', 'Akuvox', 'Akubela'],
+      featured: [
+        { name: 'تاچ پنل ۷ اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', pr: 'Zigbee', kind: 'panel7' },
+        { name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', brand: 'Zennio', pr: 'KNX', kind: 'panel' },
+        { name: 'رله ۲۴ کانال', code: 'SA/S 24.16', brand: 'ABB', pr: 'KNX', kind: 'relay' },
+        { name: 'کلید هوشمند ۳ پل', code: 'OT-SW3', brand: 'Ountech', pr: 'Modbus', kind: 'switch' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

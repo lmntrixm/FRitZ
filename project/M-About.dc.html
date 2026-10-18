@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — درباره و تماس</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 900px; height: 2300px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>درباره و تماس</b></div>
+  <div class="{{th.cls}} phone auto">
+    <header class="hdr">
+      <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+      <b style="font-size: 16px; font-weight: 800">درباره و تماس</b>
+      <div class="sp"></div>
+      <button class="ib" aria-label="لیست استعلام"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import></button>
+    </header>
+    <section style="padding: 28px 20px 0; display: flex; flex-direction: column; gap: 14px">
+      <div class="logo lg" style="padding: 0"><span class="mk"></span><b>FRitZ</b></div>
+      <h1 class="t-h1" style="margin-top: 8px">از انتخاب تجهیزات تا راه‌اندازی، کنار پروژه شما.</h1>
+      <p class="t-b mut">FRitZ تجهیزات خانه و ساختمان هوشمند را از برندهای معتبر تأمین و اجرا می‌کند. کاتالوگ را ببینید، لیست استعلام بسازید و کارشناسان ما بهترین ترکیب را برای پروژه‌تان پیشنهاد می‌دهند.</p>
+    </section>
+    <section class="sec">
+      <div class="ph" style="height: 260px; margin: 0 -20px 32px; color: var(--tx3); font-size: 14px">عکس پروژه اجراشده</div>
+      <div style="display: flex; flex-direction: column; gap: 28px">
+        <sc-for list="{{services}}" as="s" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 6px"><h2 class="t-h2">{{s.t}}</h2><p class="t-b mut">{{s.d}}</p></div>
+        </sc-for>
+      </div>
+    </section>
+    <section class="sec">
+      <h2 class="t-h2" style="margin-bottom: 14px">پروتکل‌ها و برندها</h2>
+      <div class="pbs" style="gap: 6px"><span class="pb">KNX</span><span class="pb">Zigbee</span><span class="pb">Modbus</span></div>
+      <p class="lat" style="margin-top: 16px; font-size: 22px; line-height: 1.7; font-weight: 700; color: var(--tx3); text-align: right">Zennio Loxone Schneider Orvibo ABB ITC Ountech Panasonic Akuvox Akubela</p>
+    </section>
+    <section class="sec">
+      <h2 class="t-h2" style="margin-bottom: 14px">ارتباط با ما</h2>
+      <a class="btn btn-p btn-lg btn-w" href="#"><dc-import name="Icon" i="chat" s="20" sw="1.8" hint-size="20px,20px"></dc-import>گفت‌وگو در واتساپ</a>
+      <div class="card" style="margin-top: 12px; padding: 0 20px; background: var(--sf2)">
+        <a class="kbd-row" href="#" style="padding: 0"><dc-import name="Icon" i="phone" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">تلفن</span><span class="lat" style="font-weight: 700">[شماره تماس]</span></a>
+        <a class="kbd-row" href="#" style="padding: 0"><dc-import name="Icon" i="mail" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">ایمیل</span><span class="lat" style="font-weight: 700">[ایمیل]</span></a>
+        <div class="kbd-row" style="padding: 0"><dc-import name="Icon" i="clock" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">ساعات پاسخ‌گویی</span><span style="font-weight: 700">[ساعات کاری]</span></div>
+        <a class="kbd-row" href="#" style="padding: 0; border: 0"><dc-import name="Icon" i="pin" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">نشانی دفتر</span><span style="font-weight: 700">[نشانی]</span></a>
+      </div>
+      <div class="ph" style="height: 160px; border-radius: 0; margin-top: 12px; color: var(--tx3); font-size: 13px; font-weight: 600">[نقشه موقعیت دفتر]</div>
+    </section>
+    <footer class="foot"><div style="display: flex; align-items: flex-end; justify-content: space-between"><span class="logo inv" style="padding: 0"><span class="mk" style="width: 150px; height: 53px"></span><b>FRitZ</b></span><p class="t-c lat" style="opacity: .7">© FRitZ</p></div></footer>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":900,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      services: [
+        { t: 'چند برند، چند پروتکل', d: '۱۰ برند در KNX، Zigbee و Modbus کنار هم؛ مقایسه بی‌طرف بر پایه دیتاشیت.' },
+        { t: 'نمایندگی رسمی', d: 'تجهیزات از مسیر رسمی برندها تأمین می‌شود.' },
+        { t: 'مشاوره فنی پیش از خرید', d: 'ترکیب سازگار تجهیزات بر اساس نقشه و نیاز پروژه.' },
+        { t: 'اجرا و راه‌اندازی کامل', d: 'نصب، برنامه‌ریزی و تحویل سناریوها به کارفرما.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

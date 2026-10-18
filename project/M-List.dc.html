@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>موبایل — لیست محصولات</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="width: 892px; height: 1960px; padding: 40px; display: flex; flex-direction: column; gap: 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 16px">
+  <div class="blbl"><i class="{{th.tag}}">{{th.label}}</i><b>لیست محصولات</b><span>نمای دو ستونی · نمای یک ستونی با فیلتر فعال</span></div>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; font-weight: 800">تاچ پنل</b><span class="t-c mut3">۴۲ محصول</span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="جست‌وجو"><dc-import name="Icon" i="search" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib" aria-label="لیست استعلام، ۱ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۱</span></button>
+      </header>
+      <div class="bar">
+        <button class="btn btn-s btn-sm"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><dc-import name="Icon" i="sort" s="18" hint-size="18px,18px"></dc-import>پیشنهادی</button>
+        <div style="flex: 1"></div>
+        <div class="seg" role="group" aria-label="نوع نمایش"><button class="ib on" aria-label="دو ستون" aria-pressed="true"><dc-import name="Icon" i="grid2" s="18" hint-size="18px,18px"></dc-import></button><button class="ib" aria-label="یک ستون" aria-pressed="false"><dc-import name="Icon" i="grid1" s="18" hint-size="18px,18px"></dc-import></button></div>
+      </div>
+      <div class="chips-x" style="padding-top: 12px; flex: none">
+        <span class="chip">اندروید</span><span class="chip">لینوکس</span><span class="chip">۷ اینچ</span><span class="chip">۸۶×۸۶</span><span class="chip">KNX</span>
+      </div>
+      <div class="scroll">
+        <div class="g2" style="padding: 12px 16px 24px">
+          <sc-for list="{{all}}" as="p" hint-placeholder-count="6">
+            <article class="card pc">
+              <label class="cmp"><input type="checkbox" class="cbx" checked="{{p.cmp}}">مقایسه</label>
+              <a class="pc-open" href="#">
+                <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="120" hint-size="120px,120px"></dc-import></div>
+                <div class="pc-b"><span class="brand">{{p.brand}}</span><h3 class="pc-n">{{p.name}}</h3><span class="code">{{p.code}}</span>
+                  <span class="pbs"><sc-for list="{{p.pl}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></div>
+              </a>
+              <div class="pc-f"><button class="{{p.addCls}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button></div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div class="{{th.cls}} phone">
+      <header class="hdr">
+        <button class="ib" aria-label="بازگشت"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+        <div style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; font-weight: 800">تاچ پنل</b><span class="t-c mut3">۲ نتیجه</span></div>
+        <div class="sp"></div>
+        <button class="ib" aria-label="جست‌وجو"><dc-import name="Icon" i="search" s="22" hint-size="22px,22px"></dc-import></button>
+        <button class="ib" aria-label="لیست استعلام، ۱ قلم"><dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import><span class="cnt">۱</span></button>
+      </header>
+      <div class="bar">
+        <button class="btn btn-s btn-sm" aria-label="فیلتر، ۲ فعال"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر<span class="cnt" style="position: static">۲</span></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><dc-import name="Icon" i="sort" s="18" hint-size="18px,18px"></dc-import>پیشنهادی</button>
+        <div style="flex: 1"></div>
+        <div class="seg" role="group" aria-label="نوع نمایش"><button class="ib" aria-label="دو ستون" aria-pressed="false"><dc-import name="Icon" i="grid2" s="18" hint-size="18px,18px"></dc-import></button><button class="ib on" aria-label="یک ستون" aria-pressed="true"><dc-import name="Icon" i="grid1" s="18" hint-size="18px,18px"></dc-import></button></div>
+      </div>
+      <div class="chips-x" style="padding-top: 12px; flex: none">
+        <span class="chip on rm">Zigbee<button class="x" aria-label="حذف فیلتر Zigbee"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+        <span class="chip on rm">۷ اینچ<button class="x" aria-label="حذف فیلتر ۷ اینچ"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+        <button class="chip" style="border-color: transparent; background: transparent; color: var(--acT); font-weight: 800">پاک کردن همه</button>
+      </div>
+      <div class="scroll">
+        <div class="g1" style="padding: 12px 16px 24px">
+          <sc-for list="{{filtered}}" as="p" hint-placeholder-count="2">
+            <article class="card pc row">
+              <label class="cmp"><input type="checkbox" class="cbx" checked="{{p.cmp}}">مقایسه</label>
+              <a class="pc-open" href="#">
+                <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="104" hint-size="104px,104px"></dc-import></div>
+                <div class="pc-b"><span class="brand">{{p.brand}}</span><h3 class="pc-n">{{p.name}}</h3><span class="code">{{p.code}}</span>
+                  <span class="pbs"><sc-for list="{{p.pl}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></div>
+              </a>
+              <div class="pc-f"><button class="{{p.addCls}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button></div>
+            </article>
+          </sc-for>
+          <div class="alert" style="margin-top: 4px"><dc-import name="Icon" i="info" s="18" hint-size="18px,18px"></dc-import><span>نتیجه بیشتری می‌خواهید؟ فیلتر «۷ اینچ» را بردارید تا ۵ محصول دیگر هم نمایش داده شود.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":892,"height":1960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const P = (name, code, brand, pl, kind, inq, cmp) => ({
+      name, code, brand, pl, kind, cmp: !!cmp,
+      addCls: 'pc-add' + (inq ? ' in' : ''), addIcon: inq ? 'check' : 'plus', addTxt: inq ? 'در لیست استعلام' : 'افزودن به استعلام'
+    });
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      all: [
+        P('تاچ پنل ۷ اینچ MixPad Matter', 'MIXPAD-7M', 'Orvibo', ['Zigbee'], 'panel7', true, true),
+        P('تاچ پنل ۷ اینچ Hypanel Elite', 'HYP-E7', 'Akubela', ['Zigbee'], 'panel7'),
+        P('تاچ پنل ۵ اینچ Z50', 'ZVIZ50A', 'Zennio', ['KNX'], 'panel'),
+        P('تاچ پنل ۷ اینچ SmartTouch', 'ST-7', 'ABB', ['KNX'], 'panel7'),
+        P('تاچ پنل ۱۰ اینچ Hypanel Pro', 'HYP-P10', 'Akubela', ['Zigbee'], 'panel7'),
+        P('تاچ پنل ۴ اینچ MixPad Mini', 'MIXPAD-M4', 'Orvibo', ['Zigbee'], 'panel')
+      ],
+      filtered: [
+        P('تاچ پنل ۷ اینچ MixPad Matter', 'MIXPAD-7M', 'Orvibo', ['Zigbee'], 'panel7', true, true),
+        P('تاچ پنل ۷ اینچ Hypanel Elite', 'HYP-E7', 'Akubela', ['Zigbee'], 'panel7')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

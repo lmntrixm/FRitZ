@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>FRitZ — نمونه کلیک‌پذیر کاتالوگ</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="fz phone {{dk}}">
+
+<header class="hdr">
+  <sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+    <button class="logo" style="background: none; border: 0; cursor: pointer; color: inherit" onClick="{{goHome}}" aria-label="FRitZ، صفحه اصلی">
+      <span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b></span>
+    </button>
+  </sc-if>
+  <sc-if value="{{notHome}}" hint-placeholder-val="{{false}}">
+    <button class="ib" aria-label="بازگشت" onClick="{{back}}"><dc-import name="Icon" i="chevBack" s="22" hint-size="22px,22px"></dc-import></button>
+    <div style="display: flex; flex-direction: column; line-height: 1.35; min-width: 0">
+      <b style="font-size: 16px; font-weight: 800">{{hTitle}}</b>
+      <span class="t-c mut3">{{hSub}}</span>
+    </div>
+  </sc-if>
+  <div class="sp"></div>
+  <sc-if value="{{notHome}}" hint-placeholder-val="{{false}}"><a class="ib" href="M-Search.dc.html" aria-label="جست‌وجو"><dc-import name="Icon" i="search" s="22" hint-size="22px,22px"></dc-import></a></sc-if>
+  <button class="ib" aria-label="{{themeLabel}}" onClick="{{toggleDark}}"><dc-import name="Icon" i="{{themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+  <button class="ib" aria-label="{{inqLabel}}" onClick="{{openDrawer}}">
+    <dc-import name="Icon" i="inquiry" s="22" hint-size="22px,22px"></dc-import>
+    <sc-if value="{{hasInq}}" hint-placeholder-val="{{false}}"><span class="cnt">{{inqN}}</span></sc-if>
+  </button>
+</header>
+
+<sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+<div class="scroll">
+  <div class="stickytop stuck"><div class="sbar" role="search">
+    <a class="sfield" href="M-Search.dc.html"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><span>نام محصول یا کد مدل</span></a>
+    <button class="btn btn-s btn-sm" onClick="{{goFilter}}" aria-label="فیلتر محصولات"><dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر</button>
+  </div></div>
+  <section style="padding: 8px 0 0">
+    <figure class="ph" style="height: 340px; margin: 0">
+      <dc-import name="ProductArt" kind="panel7" s="250" hint-size="250px,250px"></dc-import>
+      <figcaption style="position: absolute; bottom: 16px; right: 20px; left: 20px; display: flex; justify-content: space-between; gap: 12px; font-size: 13px"><span><span class="brand">Orvibo</span> · <span class="lat">MixPad Matter</span></span><span class="lat mut3">Zigbee</span></figcaption>
+    </figure>
+    <div style="padding: 28px 20px 0">
+      <h1 class="t-dsp">تجهیز دقیق، برای خانه‌ای که فکر می‌کند.</h1>
+      <p class="t-b mut" style="margin-top: 14px">بیش از ۴۰۰ محصول از ۱۰ برند؛ مشخصات را بخوانید، مقایسه کنید و یکجا استعلام بگیرید.</p>
+      <a class="btn btn-p btn-lg btn-w" href="M-Wizard.dc.html" style="margin-top: 28px">محصول مناسبم را پیدا کن<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></a>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top: 96px">
+    <h2 class="t-h1">از نیاز پروژه شروع کنید.</h2>
+    <p class="t-s mut" style="margin: 8px 0 24px">چهارده دسته، هرکدام با فیلترهای مخصوص خودش.</p>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px">
+      <sc-for list="{{homeCats}}" as="c" hint-placeholder-count="6">
+        <button class="cat" style="cursor: pointer; text-align: right; color: inherit; border: 0; min-height: 76px; padding: 0 16px" onClick="{{c.pick}}"><span style="display: block"><b>{{c.name}}</b><span>{{c.n}}</span></span></button>
+      </sc-for>
+    </div>
+    <button class="btn btn-g btn-w" style="margin-top: 8px" onClick="{{toggleCats}}">{{catsToggleTxt}}<dc-import name="Icon" i="{{catsToggleIcon}}" s="18" hint-size="18px,18px"></dc-import></button>
+  </section>
+
+  <section class="sec" style="padding-top: 96px">
+    <h2 class="t-h1">ده برند، کنار هم و بی‌طرف.</h2>
+    <nav aria-label="برندها" style="display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 18px; direction: ltr; justify-content: flex-end">
+      <sc-for list="{{brands}}" as="b" hint-placeholder-count="10"><button style="font-size: 24px; line-height: 1.7; font-weight: 700; color: var(--tx3); min-height: 44px; background: none; border: 0; padding: 0; cursor: pointer" onClick="{{goList}}">{{b}}</button></sc-for>
+    </nav>
+  </section>
+
+  <section class="sec" style="padding-top: 96px">
+    <div class="sec-h"><h2 class="t-h1">منتخب‌ها</h2><button class="more" style="background: none; border: 0; cursor: pointer" onClick="{{goList}}">همه محصولات</button></div>
+  </section>
+  <div class="hs">
+    <sc-for list="{{featured}}" as="p" hint-placeholder-count="4">
+      <article class="card pc" style="width: 240px">
+        <button class="pc-open" onClick="{{p.open}}" aria-label="{{p.name}}">
+          <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="160" hint-size="160px,160px"></dc-import></div>
+          <div class="pc-b">
+            <span class="brand">{{p.brand}}</span>
+            <h3 class="pc-n">{{p.name}}</h3>
+            <div class="pc-meta"><span class="code">{{p.code}}</span><span class="pbs"><sc-for list="{{p.protoList}}" as="x" hint-placeholder-count="1"><span class="pb">{{x.x}}</span></sc-for></span></div>
+          </div>
+        </button>
+        <div class="pc-f"><button class="{{p.addCls}}" onClick="{{p.toggleInq}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button></div>
+      </article>
+    </sc-for>
+  </div>
+
+  <section style="margin-top: 96px; background: var(--sf2); padding: 40px 20px">
+    <h2 class="t-h1">نمی‌دانید از کجا شروع کنید؟</h2>
+    <p class="t-s mut" style="margin-top: 10px">در سه قدم نیاز، پروتکل و برند را انتخاب کنید؛ محصولات مناسب را با دلیل پیشنهاد می‌کنیم.</p>
+    <a class="btn btn-d btn-w" href="M-Wizard.dc.html" style="margin-top: 24px">شروع راهنمای انتخاب<dc-import name="Icon" i="arrowNext" s="18" hint-size="18px,18px"></dc-import></a>
+  </section>
+
+  <footer class="foot" style="margin-top: 0">
+    <p style="font-size: 22px; line-height: 1.6; font-weight: 700">برای انتخاب تجهیزات پروژه‌تان با ما گفت‌وگو کنید.</p>
+    <button class="btn btn-p btn-w" onClick="{{openDrawer}}"><dc-import name="Icon" i="chat" s="20" hint-size="20px,20px"></dc-import>گفت‌وگو در واتساپ</button>
+    <nav style="display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px" aria-label="پیوندهای پانویس"><a href="M-About.dc.html" style="min-height: 44px; display: inline-flex; align-items: center">درباره و تماس</a><button style="min-height: 44px; background: none; border: 0; padding: 0; cursor: pointer; font-size: 15px" onClick="{{goList}}">همه محصولات</button></nav>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 12px"><span class="logo inv" style="padding: 0"><span class="mk" style="width: 150px; height: 53px"></span><b>FRitZ</b></span><p class="t-c lat" style="opacity: .7">© FRitZ</p></div>
+  </footer>
+</div>
+</sc-if>
+
+<sc-if value="{{isList}}" hint-placeholder-val="{{false}}">
+<div class="bar">
+  <button class="btn btn-s btn-sm" onClick="{{openSheet}}" aria-label="{{filterLabel}}">
+    <dc-import name="Icon" i="filter" s="18" hint-size="18px,18px"></dc-import>فیلتر
+    <sc-if value="{{hasActive}}" hint-placeholder-val="{{false}}"><span class="cnt" style="position: static">{{activeN}}</span></sc-if>
+  </button>
+  <button class="btn btn-g btn-sm" style="padding: 0 8px"><dc-import name="Icon" i="sort" s="18" hint-size="18px,18px"></dc-import>پیشنهادی</button>
+  <div style="flex: 1"></div>
+  <div class="seg" role="group" aria-label="نوع نمایش">
+    <button class="{{v2Cls}}" aria-label="دو ستون" aria-pressed="{{isV2}}" onClick="{{setV2}}"><dc-import name="Icon" i="grid2" s="18" hint-size="18px,18px"></dc-import></button>
+    <button class="{{v1Cls}}" aria-label="یک ستون" aria-pressed="{{isV1}}" onClick="{{setV1}}"><dc-import name="Icon" i="grid1" s="18" hint-size="18px,18px"></dc-import></button>
+  </div>
+</div>
+<sc-if value="{{hasActive}}" hint-placeholder-val="{{false}}">
+  <div class="chips-x" style="padding-top: 10px; padding-bottom: 2px; flex: none">
+    <sc-for list="{{activeChips}}" as="a" hint-placeholder-count="2">
+      <span class="chip on rm">{{a.label}}<button class="x" aria-label="حذف فیلتر {{a.label}}" onClick="{{a.remove}}"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+    </sc-for>
+    <button class="chip" style="border-color: transparent; background: transparent; color: var(--acT); font-weight: 800" onClick="{{clearAll}}">پاک کردن همه</button>
+  </div>
+</sc-if>
+<div class="scroll">
+  <sc-if value="{{hasRes}}" hint-placeholder-val="{{true}}">
+    <div class="{{gridCls}}" style="padding: 12px 16px 120px">
+      <sc-for list="{{results}}" as="p" hint-placeholder-count="4">
+        <article class="{{p.cardCls}}">
+          <label class="cmp"><input type="checkbox" class="cbx" checked="{{p.inCmp}}" onChange="{{p.toggleCmp}}">مقایسه</label>
+          <button class="pc-open" onClick="{{p.open}}" aria-label="{{p.name}}">
+            <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="{{artS}}" hint-size="120px,120px"></dc-import></div>
+            <div class="pc-b">
+              <span class="brand">{{p.brand}}</span>
+              <h3 class="pc-n">{{p.name}}</h3>
+              <span class="code">{{p.code}}</span>
+              <span class="pbs"><sc-for list="{{p.protoList}}" as="x" hint-placeholder-count="1"><span class="pb">{{x.x}}</span></sc-for></span>
+            </div>
+          </button>
+          <div class="pc-f"><button class="{{p.addCls}}" onClick="{{p.toggleInq}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button></div>
+        </article>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{noRes}}" hint-placeholder-val="{{false}}">
+    <div class="empty">
+      <span class="ico"><dc-import name="Icon" i="noResult" s="32" hint-size="32px,32px"></dc-import></span>
+      <h2 class="t-h2">محصولی با این ترکیب پیدا نشد</h2>
+      <p class="t-s mut">یکی از فیلترها را بردارید یا همه را پاک کنید تا نتایج بیشتری ببینید.</p>
+      <div style="display: flex; gap: 10px; margin-top: 8px">
+        <button class="btn btn-p btn-sm" onClick="{{undoLast}}">حذف آخرین فیلتر</button>
+        <button class="btn btn-s btn-sm" onClick="{{clearAll}}">پاک کردن همه</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+<sc-if value="{{hasCmp}}" hint-placeholder-val="{{false}}">
+  <div class="cbar" role="region" aria-label="نوار مقایسه">
+    <sc-for list="{{cmpSlots}}" as="c" hint-placeholder-count="3">
+      <span class="{{c.cls}}"><sc-if value="{{c.full}}" hint-placeholder-val="{{true}}"><dc-import name="ProductArt" kind="{{c.kind}}" s="46" hint-size="46px,46px"></dc-import></sc-if></span>
+    </sc-for>
+    <span class="t-c" style="font-weight: 700; padding-inline: 4px">{{cmpTxt}}</span>
+    <a class="btn btn-p btn-sm" href="M-Compare.dc.html">مقایسه</a>
+  </div>
+</sc-if>
+
+<sc-if value="{{sheet}}" hint-placeholder-val="{{false}}">
+  <div class="scrim" onClick="{{closeSheet}}"></div>
+  <div class="sheet" role="dialog" aria-label="فیلتر محصولات" style="height: 88%">
+    <span class="grab"></span>
+    <div class="sheet-h"><h2 class="t-h2">فیلتر</h2><button class="ib" aria-label="بستن" onClick="{{closeSheet}}"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+    <div class="sheet-b">
+      <div class="fgrp">
+        <div class="fgrp-h">دسته</div>
+        <div class="chips"><sc-for list="{{catChips}}" as="o" hint-placeholder-count="6"><button class="{{o.cls}}" onClick="{{o.pick}}">{{o.label}}</button></sc-for></div>
+      </div>
+      <div class="fgrp">
+        <div class="fgrp-h">برند</div>
+        <div><sc-for list="{{brandOpts}}" as="o" hint-placeholder-count="4"><label class="opt"><input type="checkbox" class="cbx" checked="{{o.on}}" onChange="{{o.toggle}}"><span class="lat" style="font-weight: 600">{{o.label}}</span><span class="n">{{o.n}}</span></label></sc-for></div>
+      </div>
+      <div class="fgrp">
+        <div class="fgrp-h">پروتکل</div>
+        <div class="chips"><sc-for list="{{protoOpts}}" as="o" hint-placeholder-count="3"><button class="{{o.cls}}" onClick="{{o.toggle}}"><span class="lat">{{o.label}}</span></button></sc-for></div>
+      </div>
+      <sc-for list="{{specGroups}}" as="g" hint-placeholder-count="2">
+        <div class="fgrp">
+          <div class="fgrp-h">{{g.title}}<span class="tag-new"><dc-import name="Icon" i="layers" s="14" hint-size="14px,14px"></dc-import>ویژه {{catName}}</span></div>
+          <div class="chips"><sc-for list="{{g.opts}}" as="o" hint-placeholder-count="3"><button class="{{o.cls}}" onClick="{{o.toggle}}">{{o.label}}</button></sc-for></div>
+        </div>
+      </sc-for>
+    </div>
+    <div class="sheet-f">
+      <button class="btn btn-s" onClick="{{clearAll}}">پاک کردن</button>
+      <button class="btn btn-p" style="flex: 1" onClick="{{closeSheet}}">{{showTxt}}</button>
+    </div>
+  </div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{isProduct}}" hint-placeholder-val="{{false}}">
+<div class="scroll">
+  <div class="hs" style="padding: 0; gap: 0; scroll-padding-inline: 0">
+    <sc-for list="{{slides}}" as="g" hint-placeholder-count="3">
+      <div class="ph" style="width: 390px; height: 330px">
+        <dc-import name="ProductArt" kind="{{pr.kind}}" s="{{g.s}}" label="{{pr.name}}" hint-size="240px,240px"></dc-import>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px 0">
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    <button class="btn btn-g btn-sm" aria-label="بزرگ‌نمایی تصویر"><dc-import name="Icon" i="zoom" s="18" hint-size="18px,18px"></dc-import>بزرگ‌نمایی</button>
+  </div>
+  <section style="padding: 12px 16px 0; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: center; gap: 10px"><span class="brand" style="color: var(--tx)">{{pr.brand}}</span><span style="width: 1px; height: 12px; background: var(--bd2)"></span><span class="code">{{pr.code}}</span></div>
+    <h1 class="t-h1">{{pr.name}}</h1>
+    <div class="pbs"><sc-for list="{{pr.protoList}}" as="x" hint-placeholder-count="1"><span class="pb">{{x.x}}</span></sc-for></div>
+    <label class="opt" style="margin-top: 4px"><input type="checkbox" class="cbx" checked="{{pr.inCmp}}" onChange="{{pr.toggleCmp}}">افزودن به مقایسه</label>
+  </section>
+  <section style="margin: 8px 16px 0">
+    <button class="acc" aria-expanded="{{specOpen}}" onClick="{{toggleSpec}}">مشخصات فنی<dc-import name="Icon" i="{{specIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+    <sc-if value="{{specOpen}}" hint-placeholder-val="{{true}}">
+      <table class="spec"><tbody>
+        <sc-for list="{{specs}}" as="r" hint-placeholder-count="6"><tr><th scope="row">{{r.k}}</th><td><span class="{{r.cls}}">{{r.v}}</span></td></tr></sc-for>
+      </tbody></table>
+    </sc-if>
+  </section>
+  <section style="margin: 8px 16px 0; padding-top: 16px">
+    <h2 class="t-h3">توضیحات</h2>
+    <p class="t-b mut" style="margin-top: 6px">{{desc}}</p>
+  </section>
+  <section class="sec" style="padding-bottom: 0"><div class="sec-h" style="margin-bottom: 10px"><h2 class="t-h3">سازگار با</h2></div></section>
+  <div class="hs">
+    <sc-for list="{{compat}}" as="p" hint-placeholder-count="3">
+      <button class="mini" style="cursor: pointer; color: inherit" onClick="{{p.open}}">
+        <span class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="56" hint-size="56px,56px"></dc-import></span>
+        <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b style="font-size: 13px; line-height: 1.6">{{p.name}}</b><span class="code">{{p.code}}</span></span>
+      </button>
+    </sc-for>
+  </div>
+  <section class="sec" style="padding-bottom: 0"><div class="sec-h" style="margin-bottom: 10px"><h2 class="t-h3">محصولات مرتبط</h2></div></section>
+  <div class="hs" style="padding-bottom: 28px">
+    <sc-for list="{{related}}" as="p" hint-placeholder-count="3">
+      <article class="card pc" style="width: 180px">
+        <button class="pc-open" onClick="{{p.open}}" aria-label="{{p.name}}">
+          <div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="110" hint-size="110px,110px"></dc-import></div>
+          <div class="pc-b"><span class="brand">{{p.brand}}</span><h3 class="pc-n">{{p.name}}</h3><span class="code">{{p.code}}</span></div>
+        </button>
+      </article>
+    </sc-for>
+  </div>
+</div>
+<div class="stick">
+  <button class="{{prAddCls}}" style="flex: 1" onClick="{{pr.toggleInq}}"><dc-import name="Icon" i="{{pr.addIcon}}" s="20" sw="2" hint-size="20px,20px"></dc-import>{{prAddTxt}}</button>
+  <button class="btn btn-s btn-lg" style="padding: 0 14px"><dc-import name="Icon" i="download" s="20" hint-size="20px,20px"></dc-import>دیتاشیت <span class="lat" style="font-size: 12px">PDF</span></button>
+</div>
+</sc-if>
+
+<sc-if value="{{drawer}}" hint-placeholder-val="{{false}}">
+  <div class="scrim" onClick="{{closeDrawer}}"></div>
+  <div class="sheet" role="dialog" aria-label="لیست استعلام" style="height: 92%">
+    <span class="grab"></span>
+    <div class="sheet-h"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="t-h2">لیست استعلام</h2><span class="t-c mut3">{{inqSub}}</span></div><button class="ib" aria-label="بستن" onClick="{{closeDrawer}}"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+
+    <sc-if value="{{dEmpty}}" hint-placeholder-val="{{false}}">
+      <div class="empty" style="flex: 1; justify-content: center">
+        <span class="ico"><dc-import name="Icon" i="inquiry" s="32" hint-size="32px,32px"></dc-import></span>
+        <h3 class="t-h2">لیست استعلام خالی است</h3>
+        <p class="t-s mut">محصولات مورد نظرتان را اضافه کنید تا قیمت همه را یکجا در واتساپ استعلام بگیرید.</p>
+        <button class="btn btn-p" style="margin-top: 8px" onClick="{{browse}}">مشاهده محصولات</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{dFilled}}" hint-placeholder-val="{{false}}">
+      <div class="sheet-b">
+        <sc-for list="{{inqItems}}" as="it" hint-placeholder-count="2">
+          <div style="display: flex; gap: 12px; padding: 14px 0">
+            <span class="ph" style="width: 64px; height: 64px; border-radius: 0; flex: none"><dc-import name="ProductArt" kind="{{it.kind}}" s="58" hint-size="58px,58px"></dc-import></span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <b style="font-size: 14px; line-height: 1.6">{{it.name}}</b>
+              <span class="code">{{it.code}}</span>
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <div class="qty" role="group" aria-label="تعداد"><button aria-label="افزایش" onClick="{{it.inc}}"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import></button><b>{{it.q}}</b><button aria-label="کاهش" onClick="{{it.dec}}"><dc-import name="Icon" i="minus" s="16" sw="2" hint-size="16px,16px"></dc-import></button></div>
+                <button class="ib" aria-label="حذف از لیست" onClick="{{it.remove}}"><dc-import name="Icon" i="trash" s="20" hint-size="20px,20px"></dc-import></button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 18px">
+          <div><label class="lab" for="nm">نام شما <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><input id="nm" class="inp" placeholder="مثلاً علی رضایی" onInput="{{onName}}"></div>
+          <div><label class="lab" for="pj">نام یا توضیح پروژه <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><textarea id="pj" class="inp" rows="2" placeholder="مثلاً ویلای دو طبقه، لواسان" onInput="{{onProj}}"></textarea></div>
+          <div>
+            <span class="lab">پیش‌نمایش پیام</span>
+            <div class="msg">{{msg}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="sheet-f" style="flex-direction: column; gap: 8px">
+        <button class="btn btn-p btn-lg btn-w" onClick="{{send}}"><dc-import name="Icon" i="chat" s="20" sw="1.8" hint-size="20px,20px"></dc-import>ارسال استعلام در واتساپ</button>
+        <p class="t-c mut3" style="text-align: center">پیام در واتساپ باز می‌شود و پیش از ارسال قابل ویرایش است.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{dSent}}" hint-placeholder-val="{{false}}">
+      <div class="empty" style="flex: 1; justify-content: center">
+        <span class="ico" style="background: var(--acS); color: var(--tx)"><dc-import name="Icon" i="checkCircle" s="34" hint-size="34px,34px"></dc-import></span>
+        <h3 class="t-h2">استعلام به واتساپ منتقل شد</h3>
+        <p class="t-s mut">پس از ارسال پیام، کارشناسان FRitZ قیمت و زمان تأمین را برایتان می‌فرستند. لیست شما تا ارسال بعدی ذخیره می‌ماند.</p>
+        <div style="display: flex; gap: 10px; margin-top: 8px">
+          <button class="btn btn-p" onClick="{{finish}}">بازگشت به کاتالوگ</button>
+          <button class="btn btn-s" onClick="{{resend}}">ویرایش لیست</button>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</sc-if>
+
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+  <div class="{{toastCls}}" role="status" aria-live="polite">
+    <div class="toast"><dc-import name="Icon" i="{{toastIcon}}" s="20" hint-size="20px,20px"></dc-import><span>{{toast}}</span>
+      <sc-if value="{{toastHasAct}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{openDrawer}}">مشاهده لیست</button></sc-if>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startDark":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+const FA = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const CATS = [
+  { id: 'panel', name: 'تاچ پنل', n: 42, i: 'panel' },
+  { id: 'switch', name: 'کلید هوشمند', n: 58, i: 'switch' },
+  { id: 'thermo', name: 'ترموستات', n: 24, i: 'thermo' },
+  { id: 'relay', name: 'رله و اکچوایتور', n: 47, i: 'relay' },
+  { id: 'back', name: 'رله پشت‌کلیدی', n: 31, i: 'backRelay' },
+  { id: 'sensor', name: 'سنسور', n: 38, i: 'sensor' },
+  { id: 'dimmer', name: 'دیمر و درایور', n: 29, i: 'dimmer' },
+  { id: 'server', name: 'سرور', n: 12, i: 'server' },
+  { id: 'iface', name: 'ماژول رابط', n: 26, i: 'iface' },
+  { id: 'io', name: 'ورودی / خروجی', n: 22, i: 'io' },
+  { id: 'power', name: 'منبع تغذیه', n: 15, i: 'power' },
+  { id: 'curtain', name: 'پرده', n: 19, i: 'curtain' },
+  { id: 'intercom', name: 'آیفون و درب‌بازکن', n: 23, i: 'intercom' },
+  { id: 'audio', name: 'صوت', n: 16, i: 'audio' }
+];
+const BRANDS = ['Zennio', 'Loxone', 'Schneider', 'Orvibo', 'ABB', 'ITC', 'Ountech', 'Panasonic', 'Akuvox', 'Akubela'];
+const PR = [
+  { id: 'mixpad', cat: 'panel', name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', protos: ['Zigbee'], kind: 'panel7', os: 'لینوکس', inch: 7, dim: '۸۶×۸۶' },
+  { id: 'hypanel', cat: 'panel', name: 'تاچ پنل ۷ اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', protos: ['Zigbee'], kind: 'panel7', os: 'لینوکس', inch: 7, dim: '۱۲۰×۸۶' },
+  { id: 'z50', cat: 'panel', name: 'تاچ پنل ۵ اینچ Z50', code: 'ZVIZ50A', brand: 'Zennio', protos: ['KNX'], kind: 'panel', os: 'لینوکس', inch: 5, dim: '۸۶×۸۶' },
+  { id: 'smart7', cat: 'panel', name: 'تاچ پنل ۷ اینچ SmartTouch', code: 'ST-7', brand: 'ABB', protos: ['KNX'], kind: 'panel7', os: 'لینوکس', inch: 7, dim: '۱۲۰×۸۶' },
+  { id: 'pro10', cat: 'panel', name: 'تاچ پنل ۱۰ اینچ Hypanel Pro', code: 'HYP-P10', brand: 'Akubela', protos: ['Zigbee'], kind: 'panel7', os: 'اندروید', inch: 10, dim: 'روکار' },
+  { id: 'ot10', cat: 'panel', name: 'تاچ پنل ۱۰ اینچ اندرویدی', code: 'OT-P10', brand: 'Ountech', protos: ['Modbus'], kind: 'panel7', os: 'اندروید', inch: 10, dim: 'روکار' },
+  { id: 'mini4', cat: 'panel', name: 'تاچ پنل ۴ اینچ MixPad Mini', code: 'MIXPAD-M4', brand: 'Orvibo', protos: ['Zigbee'], kind: 'panel', os: 'لینوکس', inch: 4, dim: '۸۶×۸۶' },
+  { id: 'sw3', cat: 'switch', name: 'کلید هوشمند ۳ پل', code: 'OT-SW3', brand: 'Ountech', protos: ['Modbus'], kind: 'switch' },
+  { id: 'relay24', cat: 'relay', name: 'رله ۲۴ کانال', code: 'SA/S 24.16', brand: 'ABB', protos: ['KNX'], kind: 'relay' },
+  { id: 'thermo', cat: 'thermo', name: 'ترموستات اتاقی KNX', code: 'MTN-RT', brand: 'Schneider', protos: ['KNX'], kind: 'thermo' },
+  { id: 'pir', cat: 'sensor', name: 'سنسور حضور سقفی ۳۶۰ درجه', code: 'PD-360', brand: 'Panasonic', protos: ['KNX'], kind: 'sensor' },
+  { id: 'mini', cat: 'server', name: 'سرور خانه هوشمند Miniserver', code: 'MS-GEN2', brand: 'Loxone', protos: [], kind: 'server' },
+  { id: 'r20a', cat: 'intercom', name: 'پنل آیفون هوشمند R20A', code: 'R20A', brand: 'Akuvox', protos: [], kind: 'intercom' },
+  { id: 'spk', cat: 'audio', name: 'اسپیکر سقفی ۶ اینچ', code: 'T-106', brand: 'ITC', protos: [], kind: 'speaker' },
+  { id: 'zbr2', cat: 'back', name: 'رله پشت‌کلیدی ۲ کانال', code: 'ZR-2CH', brand: 'Orvibo', protos: ['Zigbee'], kind: 'module' }
+];
+const DESC = {
+  mixpad: 'پنل لمسی ۷ اینچی برای کنترل یکجای روشنایی، پرده، تهویه و سناریوها از روی دیوار. با پشتیبانی Matter و Zigbee، تجهیزات برندهای مختلف را در یک رابط ساده کنار هم می‌آورد و برای نصب در قوطی استاندارد ۸۶ طراحی شده است.'
+};
+const EMPTY = () => ({ brand: [], proto: [], os: [], inch: [], dim: [] });
+const SPECIAL = {
+  relay: [{ key: 'ch', title: 'تعداد کانال', opts: ['۴', '۸', '۱۲', '۲۴'] }],
+  switch: [{ key: 'gang', title: 'تعداد پل', opts: ['۱ پل', '۲ پل', '۳ پل', '۴ پل'] }, { key: 'color', title: 'رنگ', opts: ['سفید', 'مشکی', 'طوسی', 'طلایی'] }, { key: 'rl', title: 'رله داخلی', opts: ['با رله داخلی', 'بدون رله'] }]
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { dark: !!props.startDark, scr: 'home', prev: 'home', cat: 'panel', pid: 'mixpad', view: 2, sheet: false, drawer: false, sent: false, allCats: false, f: EMPTY(), misc: [], order: [], cmp: [], inq: {}, toast: '', toastAct: '', spec: true, name: '', proj: '' };
+    this.tm = null;
+  }
+  componentWillUnmount() { clearTimeout(this.tm); }
+  flash(msg, act) {
+    clearTimeout(this.tm);
+    this.setState({ toast: msg, toastAct: act || '' });
+    this.tm = setTimeout(() => this.setState({ toast: '' }), 3200);
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (o) => this.setState(o);
+    const cat = CATS.find((c) => c.id === s.cat) || CATS[0];
+    const inCat = PR.filter((p) => p.cat === s.cat);
+    const f = s.f;
+    const nActive = f.brand.length + f.proto.length + f.os.length + f.inch.length + f.dim.length + s.misc.length;
+    const res = inCat.filter((p) =>
+      (!f.brand.length || f.brand.includes(p.brand)) &&
+      (!f.proto.length || p.protos.some((x) => f.proto.includes(x))) &&
+      (!f.os.length || f.os.includes(p.os)) &&
+      (!f.inch.length || f.inch.includes(p.inch)) &&
+      (!f.dim.length || f.dim.includes(p.dim)));
+    const toggleF = (k, v) => () => {
+      const on = f[k].includes(v);
+      const a = on ? f[k].filter((x) => x !== v) : [...f[k], v];
+      const order = on ? s.order.filter((o) => !(o.k === k && o.v === v)) : [...s.order, { k, v }];
+      set({ f: { ...f, [k]: a }, order });
+    };
+    const toggleM = (v) => () => {
+      const on = s.misc.includes(v);
+      set({ misc: on ? s.misc.filter((x) => x !== v) : [...s.misc, v], order: on ? s.order.filter((o) => o.v !== v) : [...s.order, { k: 'misc', v }] });
+    };
+    const resetFilters = () => set({ f: EMPTY(), misc: [], order: [] });
+    const chipCls = (on) => 'chip' + (on ? ' on' : '');
+    const lines = Object.keys(s.inq);
+
+    const deco = (p) => {
+      const inCmp = s.cmp.includes(p.id);
+      const inInq = !!s.inq[p.id];
+      return {
+        ...p,
+        protoList: p.protos.map((x) => ({ x })),
+        inCmp, inInq,
+        cardCls: 'card pc' + (s.view === 1 ? ' row' : ''),
+        addCls: 'pc-add' + (inInq ? ' in' : ''),
+        addTxt: inInq ? 'در لیست استعلام' : 'افزودن به استعلام',
+        addIcon: inInq ? 'check' : 'plus',
+        open: () => set({ scr: 'product', prev: s.scr === 'product' ? s.prev : s.scr, pid: p.id, spec: true }),
+        toggleCmp: () => {
+          if (inCmp) set({ cmp: s.cmp.filter((x) => x !== p.id) });
+          else if (s.cmp.length >= 3) this.flash('حداکثر ۳ محصول را می‌توانید مقایسه کنید', '');
+          else set({ cmp: [...s.cmp, p.id] });
+        },
+        toggleInq: () => {
+          const q = { ...s.inq };
+          if (inInq) { delete q[p.id]; set({ inq: q, sent: false }); this.flash('از لیست استعلام حذف شد', ''); }
+          else { q[p.id] = 1; set({ inq: q, sent: false }); this.flash('به لیست استعلام اضافه شد', 'list'); }
+        }
+      };
+    };
+
+    // active chips
+    const activeChips = [];
+    f.brand.forEach((v) => activeChips.push({ label: v, remove: toggleF('brand', v) }));
+    f.proto.forEach((v) => activeChips.push({ label: v, remove: toggleF('proto', v) }));
+    f.os.forEach((v) => activeChips.push({ label: v, remove: toggleF('os', v) }));
+    f.inch.forEach((v) => activeChips.push({ label: FA(v) + ' اینچ', remove: toggleF('inch', v) }));
+    f.dim.forEach((v) => activeChips.push({ label: v, remove: toggleF('dim', v) }));
+    s.misc.forEach((v) => activeChips.push({ label: v.split(':')[1], remove: toggleM(v) }));
+
+    // filter options
+    const brandSet = [...new Set(inCat.map((p) => p.brand))];
+    const brandOpts = brandSet.map((b) => ({ label: b, n: FA(inCat.filter((p) => p.brand === b).length * 6), on: f.brand.includes(b), toggle: toggleF('brand', b) }));
+    const protoSet = [...new Set(inCat.flatMap((p) => p.protos))];
+    const protoOpts = protoSet.map((v) => ({ label: v, cls: chipCls(f.proto.includes(v)), toggle: toggleF('proto', v) }));
+    let specGroups = [];
+    if (s.cat === 'panel') {
+      specGroups = [
+        { title: 'سیستم‌عامل', opts: ['اندروید', 'لینوکس'].map((v) => ({ label: v, cls: chipCls(f.os.includes(v)), toggle: toggleF('os', v) })) },
+        { title: 'اندازه نمایشگر', opts: [4, 5, 7, 10].map((v) => ({ label: FA(v) + ' اینچ', cls: chipCls(f.inch.includes(v)), toggle: toggleF('inch', v) })) },
+        { title: 'ابعاد', opts: ['۸۶×۸۶', '۱۲۰×۸۶', 'روکار'].map((v) => ({ label: v, cls: chipCls(f.dim.includes(v)), toggle: toggleF('dim', v) })) }
+      ];
+    } else if (SPECIAL[s.cat]) {
+      specGroups = SPECIAL[s.cat].map((g) => ({ title: g.title, opts: g.opts.map((v) => { const key = g.key + ':' + v; return { label: v, cls: chipCls(s.misc.includes(key)), toggle: toggleM(key) }; }) }));
+    }
+    const catChips = CATS.slice(0, 6).map((c) => ({ label: c.name, cls: chipCls(c.id === s.cat), pick: () => set({ cat: c.id, f: EMPTY(), misc: [], order: [] }) }));
+
+    const filteredOnly = f.brand.length + f.proto.length + f.os.length + f.inch.length + f.dim.length;
+    const shown = filteredOnly ? res.length : cat.n;
+    const countLabel = filteredOnly ? FA(res.length) + ' نتیجه' : FA(cat.n) + ' محصول';
+
+    // product
+    const base = PR.find((p) => p.id === s.pid) || PR[0];
+    const pr = deco(base);
+    const pcat = CATS.find((c) => c.id === base.cat);
+    const specs = [
+      { k: 'برند', v: base.brand, cls: 'lat' },
+      { k: 'کد مدل', v: base.code, cls: 'lat' },
+      { k: 'دسته', v: pcat ? pcat.name : '', cls: '' },
+      { k: 'پروتکل', v: base.protos.join(' / '), cls: 'lat' }
+    ];
+    if (base.cat === 'panel') {
+      specs.push({ k: 'نمایشگر', v: FA(base.inch) + ' اینچ لمسی', cls: '' });
+      specs.push({ k: 'سیستم‌عامل', v: base.os, cls: '' });
+      specs.push({ k: 'ابعاد قاب', v: base.dim === 'روکار' ? 'روکار' : base.dim + ' میلی‌متر', cls: '' });
+      specs.push({ k: 'نصب', v: base.dim === '۸۶×۸۶' ? 'توکار، قوطی ۸۶' : 'توکار / روکار', cls: '' });
+    }
+    const desc = DESC[base.id] || (base.name + ' از برند ' + base.brand + '. برای مشخصات کامل و نقشه سیم‌بندی، دیتاشیت را دانلود کنید یا درباره سازگاری با پروژه‌تان از کارشناسان FRitZ بپرسید.');
+    const compat = ['zbr2', 'pir', 'thermo', 'mini'].filter((id) => id !== base.id).map((id) => deco(PR.find((p) => p.id === id)));
+    const relatedBase = PR.filter((p) => p.cat === base.cat && p.id !== base.id);
+    const related = (relatedBase.length ? relatedBase : PR.filter((p) => p.id !== base.id).slice(0, 4)).slice(0, 5).map(deco);
+
+    // inquiry
+    const inqItems = lines.map((id) => {
+      const p = PR.find((x) => x.id === id);
+      const q = s.inq[id];
+      return {
+        ...p, q: FA(q),
+        inc: () => set({ inq: { ...s.inq, [id]: q + 1 } }),
+        dec: () => set({ inq: { ...s.inq, [id]: Math.max(1, q - 1) } }),
+        remove: () => { const n = { ...s.inq }; delete n[id]; set({ inq: n }); }
+      };
+    });
+    const listTxt = lines.map((id, i) => { const p = PR.find((x) => x.id === id); return FA(i + 1) + '. ' + p.name + '\n    کد ' + p.code + ' — ' + FA(s.inq[id]) + ' عدد'; }).join('\n');
+    const msg = 'سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:\n\n' + listTxt +
+      (s.name ? '\n\nنام: ' + s.name : '') + (s.proj ? (s.name ? '\n' : '\n\n') + 'پروژه: ' + s.proj : '') +
+      '\n\nارسال‌شده از کاتالوگ FRitZ';
+
+    const cmpSlots = [0, 1, 2].map((i) => {
+      const id = s.cmp[i];
+      const p = id ? PR.find((x) => x.id === id) : null;
+      return { full: !!p, kind: p ? p.kind : 'panel', cls: 'slot' + (p ? '' : ' empty') };
+    });
+
+    const isHome = s.scr === 'home', isList = s.scr === 'list', isProduct = s.scr === 'product';
+    return {
+      dk: s.dark ? 'dark' : '',
+      isHome, isList, isProduct, notHome: !isHome,
+      hTitle: isList ? cat.name : 'جزئیات محصول',
+      hSub: isList ? countLabel : (pcat ? pcat.name : ''),
+      themeIcon: s.dark ? 'sun' : 'moon',
+      themeLabel: s.dark ? 'تم روشن' : 'تم تیره',
+      toggleDark: () => set({ dark: !s.dark }),
+      hasInq: lines.length > 0,
+      inqN: FA(lines.length),
+      inqLabel: 'لیست استعلام، ' + FA(lines.length) + ' قلم',
+      openDrawer: () => set({ drawer: true, sheet: false, toast: '' }),
+      closeDrawer: () => set({ drawer: false }),
+      goHome: () => set({ scr: 'home' }),
+      back: () => set({ scr: isProduct ? (s.prev === 'product' ? 'list' : s.prev) : 'home', sheet: false }),
+      goList: () => set({ scr: 'list', cat: 'panel' }),
+      goFilter: () => set({ scr: 'list', cat: 'panel', sheet: true }),
+      homeCats: (s.allCats ? CATS : CATS.slice(0, 6)).map((c) => ({ ...c, n: FA(c.n) + ' محصول', pick: () => set({ scr: 'list', cat: c.id, f: EMPTY(), misc: [], order: [] }) })),
+      toggleCats: () => set({ allCats: !s.allCats }),
+      catsToggleTxt: s.allCats ? 'نمایش کمتر' : 'مشاهده همه ۱۴ دسته',
+      catsToggleIcon: s.allCats ? 'chevUp' : 'chevDown',
+      brands: BRANDS,
+      featured: ['mixpad', 'mini', 'relay24', 'r20a', 'sw3', 'hypanel'].map((id) => deco(PR.find((p) => p.id === id))),
+      // list
+      openSheet: () => set({ sheet: true }),
+      closeSheet: () => set({ sheet: false }),
+      filterLabel: nActive ? 'فیلتر، ' + FA(nActive) + ' فعال' : 'فیلتر',
+      hasActive: nActive > 0,
+      activeN: FA(nActive),
+      activeChips,
+      clearAll: resetFilters,
+      undoLast: () => {
+        const last = s.order[s.order.length - 1];
+        if (!last) return resetFilters();
+        if (last.k === 'misc') toggleM(last.v)(); else toggleF(last.k, last.v)();
+      },
+      isV2: s.view === 2, isV1: s.view === 1,
+      v2Cls: 'ib' + (s.view === 2 ? ' on' : ''), v1Cls: 'ib' + (s.view === 1 ? ' on' : ''),
+      setV2: () => set({ view: 2 }), setV1: () => set({ view: 1 }),
+      gridCls: s.view === 2 ? 'g2' : 'g1',
+      artS: s.view === 2 ? 120 : 104,
+      results: res.map(deco),
+      hasRes: res.length > 0, noRes: res.length === 0,
+      hasCmp: s.cmp.length > 0 && isList,
+      cmpSlots,
+      cmpTxt: FA(s.cmp.length) + ' از ۳',
+      sheet: s.sheet,
+      catChips, brandOpts, protoOpts, specGroups,
+      catName: cat.name,
+      showTxt: 'نمایش ' + FA(shown) + ' نتیجه',
+      // product
+      pr,
+      slides: [{ s: 250 }, { s: 200 }, { s: 160 }],
+      specs, desc, compat, related,
+      specOpen: s.spec,
+      specIcon: s.spec ? 'chevUp' : 'chevDown',
+      toggleSpec: () => set({ spec: !s.spec }),
+      prAddCls: pr.inInq ? 'btn btn-ok btn-lg' : 'btn btn-p btn-lg',
+      prAddTxt: pr.inInq ? 'در لیست استعلام · ' + FA(s.inq[pr.id]) + ' عدد' : 'افزودن به لیست استعلام',
+      // drawer
+      drawer: s.drawer,
+      inqSub: FA(lines.length) + ' قلم',
+      dEmpty: lines.length === 0 && !s.sent,
+      dFilled: lines.length > 0 && !s.sent,
+      dSent: s.sent,
+      inqItems, msg,
+      onName: (e) => set({ name: e.target.value }),
+      onProj: (e) => set({ proj: e.target.value }),
+      send: () => set({ sent: true }),
+      resend: () => set({ sent: false }),
+      finish: () => set({ sent: false, drawer: false, scr: 'home' }),
+      browse: () => set({ drawer: false, scr: 'list' }),
+      // toast
+      hasToast: !!s.toast,
+      toast: s.toast,
+      toastHasAct: s.toastAct === 'list',
+      toastIcon: s.toastAct === 'list' ? 'checkCircle' : 'info',
+      toastCls: 'toast-wrap' + ((isProduct || (isList && s.cmp.length > 0)) ? ' up' : '')
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>پنل FRitZ — استعلام‌ها</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+<link rel="stylesheet" href="./adm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 28px; padding: 28px 0 40px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 28px"><i class="{{th.tag}}">{{th.label}}</i><b>استعلام‌ها</b><span>جدول، محصولات پراستعلام و پنل جزئیات باز</span></div>
+  <div class="{{th.cls}} adm" style="position: relative">
+    <aside class="side" aria-label="منوی اصلی">
+      <a class="logo" href="#"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b><small>پنل مدیریت</small></span></a>
+      <nav style="display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+          <sc-if value="{{n.g}}" hint-placeholder-val="{{false}}"><span class="ng">{{n.g}}</span></sc-if>
+          <sc-if value="{{n.k}}" hint-placeholder-val="{{true}}"><a class="{{n.cls}}" href="#" aria-current="{{n.cur}}"><span class="nvi"><dc-import name="Icon" i="{{n.i}}" s="18" hint-size="18px,18px"></dc-import></span>{{n.l}}<sc-if value="{{n.n}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.n}}</span></sc-if><sc-if value="{{n.lock}}" hint-placeholder-val="{{false}}"><span class="nlock" aria-label="فقط مدیر کل"><dc-import name="Icon" i="lock" s="14" hint-size="14px,14px"></dc-import></span></sc-if></a></sc-if>
+        </sc-for>
+      </nav>
+      <div class="me"><span class="av">سم</span><span style="display: flex; flex-direction: column; line-height: 1.5; min-width: 0"><b style="font-size: 13px">سارا محمدی</b><span class="t-c mut3">مدیر کل</span></span></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <div class="field gsearch"><dc-import name="Icon" i="search" s="18" hint-size="18px,18px"></dc-import><input placeholder="جست‌وجوی نام یا کد محصول" aria-label="جست‌وجوی سراسری"><span class="kbd">Ctrl K</span></div>
+        <div style="flex: 1"></div>
+        <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="ib" aria-label="اعلان‌ها"><dc-import name="Icon" i="bell" s="20" hint-size="20px,20px"></dc-import></button>
+        <button class="btn btn-g btn-sm" style="padding: 0 8px"><span class="av sm">سم</span>سارا محمدی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+        <button class="ib" aria-label="خروج"><dc-import name="Icon" i="logout" s="20" hint-size="20px,20px"></dc-import></button>
+      </header>
+      <div class="content">
+        <div class="phead">
+          <div><nav class="crumb" aria-label="مسیر"><span>پنل</span><dc-import name="Icon" i="chevNext" s="12" hint-size="12px,12px"></dc-import><span>استعلام‌ها</span></nav><h1 class="ptitle">استعلام‌ها <span class="t-s mut3" style="font-weight: 600">۱۲ جدید از آخرین بازدید</span></h1></div>
+          <div class="acts"><div class="seg" role="group" aria-label="بازه زمانی" style="padding: 3px"><button class="btn btn-g btn-sm" style="min-height: 36px">امروز</button><button class="btn btn-sm" style="min-height: 36px; background: var(--sf2)" aria-pressed="true">۷ روز</button><button class="btn btn-g btn-sm" style="min-height: 36px">۳۰ روز</button><button class="btn btn-g btn-sm" style="min-height: 36px"><dc-import name="Icon" i="calendar" s="16" hint-size="16px,16px"></dc-import>دلخواه</button></div><button class="btn btn-s btn-sm"><dc-import name="Icon" i="table" s="18" hint-size="18px,18px"></dc-import>خروجی اکسل</button></div>
+        </div>
+        <div class="msgbox in"><dc-import name="Icon" i="info" s="16" hint-size="16px,16px"></dc-import><span>هر ردیف وقتی ثبت می‌شود که مشتری روی «ارسال استعلام در واتساپ» بزند. ارسال نهایی پیام در واتساپ قابل ردیابی نیست.</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="panel" style="flex: 999 1 560px; min-width: 0">
+            <div class="tw"><table class="tbl"><thead><tr><th>زمان</th><th>نام</th><th>پروژه</th><th>اقلام</th><th>خلاصه</th><th></th></tr></thead><tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+                <tr class="{{r.rc}}"><td class="t-c" style="white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 6px"><sc-if value="{{r.new}}" hint-placeholder-val="{{false}}"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--acT)" aria-label="جدید"></span></sc-if>{{r.t}}</span></td><td><b>{{r.n}}</b></td><td class="t-c mut">{{r.p}}</td><td><span class="st draft">{{r.c}}</span></td><td class="t-c" style="max-width: 300px">{{r.s}}</td><td><button class="ib" style="width: 36px; height: 36px" aria-label="جزئیات"><dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></button></td></tr>
+              </sc-for>
+            </tbody></table></div>
+          </section>
+          <section class="panel" style="flex: 0 1 340px; min-width: 280px">
+            <div class="panel-h"><h2>محصولات پراستعلام</h2><span class="t-c mut3">۷ روز</span></div>
+            <div class="panel-b" style="display: flex; flex-direction: column; gap: 6px">
+              <sc-for list="{{top}}" as="t" hint-placeholder-count="6"><div class="hbar" style="grid-template-columns: minmax(0, 150px) minmax(0, 1fr) 32px"><span style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 600">{{t.n}}</span><span class="tr"><i style="width: {{t.w}}%; background: var(--c2)"></i></span><b class="num">{{t.v}}</b></div></sc-for>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="scrim" style="z-index: 5"></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-label="جزئیات استعلام" style="width: 460px">
+      <div class="sheet-h" style="padding-top: 16px; padding-bottom: 16px"><div><h2 class="t-h2">استعلام علی رضایی</h2><p class="t-c mut3">امروز، ۱۴:۰۸ · موبایل · ۳ قلم، ۷ عدد</p></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+      <div class="sheet-b" style="display: flex; flex-direction: column; gap: 16px; padding-top: 12px">
+        <table class="spec" style="font-size: 13px"><tbody><tr><th>نام</th><td>علی رضایی</td></tr><tr><th>پروژه</th><td>ویلای دو طبقه، لواسان</td></tr></tbody></table>
+        <div>
+          <span class="lab">اقلام</span>
+          <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
+            <a href="#" class="kbd-row" style="padding: 0; min-height: 60px"><span class="thumb"><dc-import name="ProductArt" kind="{{it.k}}" s="36" hint-size="36px,36px"></dc-import></span><span style="flex: 1; display: flex; flex-direction: column"><b style="font-size: 13px">{{it.n}}</b><span class="code">{{it.c}}</span></span><b>{{it.q}} عدد</b></a>
+          </sc-for>
+        </div>
+        <div><span class="lab">متن ارسال‌شده</span><div class="msg">{{msg}}</div></div>
+      </div>
+      <div class="sheet-f"><button class="btn btn-s btn-sm"><dc-import name="Icon" i="copy" s="16" hint-size="16px,16px"></dc-import>کپی متن</button><div style="flex: 1"></div><button class="btn btn-g btn-sm"><dc-import name="Icon" i="chevBack" s="16" hint-size="16px,16px"></dc-import>قبلی</button><button class="btn btn-g btn-sm">بعدی<dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></button></div>
+    </aside>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":2400}}'>
+const NAVD = [
+  { k: 'overview', l: 'نمای کلی', i: 'grid2' }, { k: 'products', l: 'محصولات', i: 'box' },
+  { k: 'cats', l: 'دسته‌ها و فیلترها', i: 'folder' }, { k: 'brands', l: 'برندها و پروتکل‌ها', i: 'tag' },
+  { k: 'media', l: 'رسانه', i: 'image' }, { k: 'inq', l: 'استعلام‌ها', i: 'chat', n: '۱۲' },
+  { g: 'مدیریت' },
+  { k: 'update', l: 'به‌روزرسانی', i: 'upload', lock: true }, { k: 'users', l: 'کاربران', i: 'users', lock: true },
+  { k: 'log', l: 'گزارش فعالیت', i: 'activity' }, { k: 'settings', l: 'تنظیمات', i: 'settings', lock: true }
+];
+const navFor = (a) => NAVD.map((n) => (n.g ? { g: n.g, k: '' } : { ...n, g: '', n: n.n || '', lock: !!n.lock, cls: 'nv' + (n.k === a ? ' on' : ''), cur: n.k === a ? 'page' : 'false' }));
+const themesFor = (t) => { const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره' }; const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن' }; return t === 'light' ? [L] : t === 'dark' ? [D] : [L, D]; };
+class Component extends DCLogic {
+  renderVals() {
+    const R = (t, n, p, c, s, isNew, sel) => ({ t, n, p, c, s, new: !!isNew, rc: sel ? 'sel' : '' });
+    const top = [['تاچ پنل ۷ اینچ MixPad Matter', 14], ['رله ۲۴ کانال', 9], ['تاچ پنل ۵ اینچ Z50', 8], ['سرور Miniserver', 6], ['کلید هوشمند ۳ پل', 5], ['پنل آیفون R20A', 5]];
+    const fa = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    return {
+      themes: themesFor(this.props.theme ?? 'both'), nav: navFor('inq'),
+      rows: [
+        R('امروز ۱۴:۰۸', 'علی رضایی', 'ویلای دو طبقه، لواسان', '۳ قلم', 'MixPad Matter ×۲، رله ۲۴ کانال، R20A ×۴', true, true),
+        R('امروز ۱۱:۴۲', '—', '—', '۱ قلم', 'تاچ پنل ۵ اینچ Z50 ×۶', true),
+        R('امروز ۰۹:۱۵', 'شرکت آرین‌سازه', 'برج مسکونی، ۲۴ واحد', '۵ قلم', 'رله ۲۴ کانال ×۱۲، سنسور حضور ×۴۸، …', true),
+        R('دیروز ۲۱:۳۰', 'مریم احمدی', 'آپارتمان ۱۲۰ متری', '۲ قلم', 'کلید هوشمند ۳ پل ×۸، MixPad Mini', false),
+        R('دیروز ۱۶:۰۴', '—', '—', '۱ قلم', 'سرور Miniserver', false),
+        R('۲۳ مهر ۱۸:۲۲', 'حسین نوری', 'دفتر کار', '۴ قلم', 'Hypanel Elite ×۲، ترموستات KNX ×۳، …', false),
+        R('۲۳ مهر ۱۰:۵۰', 'نگار صادقی', '—', '۲ قلم', 'R20A، رله پشت‌کلیدی ۲ کانال ×۶', false),
+        R('۲۲ مهر ۱۲:۱۸', '—', 'ویلا', '۳ قلم', 'MixPad Matter، کلید ۳ پل ×۱۰، …', false)
+      ],
+      top: top.map(([n, v]) => ({ n, v: fa(v), w: Math.round(v / 14 * 100) })),
+      items: [
+        { n: 'تاچ پنل ۷ اینچ MixPad Matter', c: 'MIXPAD-7M', q: '۲', k: 'panel7' },
+        { n: 'رله ۲۴ کانال', c: 'SA/S 24.16', q: '۱', k: 'relay' },
+        { n: 'پنل آیفون هوشمند R20A', c: 'R20A', q: '۴', k: 'intercom' }
+      ],
+      msg: 'سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:\n\n۱. تاچ پنل ۷ اینچ MixPad Matter\n    کد MIXPAD-7M — ۲ عدد\n۲. رله ۲۴ کانال\n    کد SA/S 24.16 — ۱ عدد\n۳. پنل آیفون هوشمند R20A\n    کد R20A — ۴ عدد\n\nنام: علی رضایی\nپروژه: ویلای دو طبقه، لواسان'
+    };
+  }
+}
+</script>
+</body>
+</html>

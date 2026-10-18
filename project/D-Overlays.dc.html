@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دسکتاپ — جست‌وجو، ویزارد و لیست استعلام</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 32px; padding: 32px 0 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+
+  <div class="blbl" style="padding: 0 32px"><i class="{{th.tag}}">{{th.label}}</i><b>جست‌وجو با پیشنهاد زنده</b><span>فارسی و کد مدل</span></div>
+  <div class="{{th.cls}}" style="position: relative; height: 720px; overflow: hidden">
+    <header style="position: relative; z-index: 7; background: var(--bg)">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+        <a class="logo" href="#" style="padding: 0"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b></span></a>
+        <div style="flex: 1 1 320px; max-width: 560px; margin-inline-start: auto; position: relative">
+          <div class="field focus"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input value="تاچ پنل ۷" aria-label="جست‌وجو" aria-expanded="true"><button class="ib" style="width: 36px; height: 36px" aria-label="پاک کردن متن"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button></div>
+          <div class="card" role="listbox" style="position: absolute; top: 60px; inset-inline: 0; box-shadow: var(--sh2); padding: 8px 0; background: var(--bg); border-radius: 24px">
+            <p class="glabel" style="padding: 8px 16px 4px">محصولات</p>
+            <sc-for list="{{sugg}}" as="p" hint-placeholder-count="3">
+              <a class="kbd-row" href="#" role="option" style="min-height: 64px; border: 0; background: {{p.bg}}">
+                <span class="ph" style="width: 44px; height: 44px; border-radius: 50%; flex: none"><dc-import name="ProductArt" kind="{{p.kind}}" s="40" hint-size="40px,40px"></dc-import></span>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><b style="font-size: 14px"><span class="hl">{{p.m}}</span>{{p.rest}}</b><span class="code">{{p.code}} · {{p.brand}}</span></span>
+                <span class="pb">{{p.pr}}</span>
+              </a>
+            </sc-for>
+            <p class="glabel" style="padding: 12px 16px 4px; margin-top: 6px">دسته</p>
+            <a class="kbd-row" href="#" style="border: 0"><dc-import name="Icon" i="panel" s="20" hint-size="20px,20px"></dc-import><span style="flex: 1">تاچ پنل · ۷ اینچ</span><span class="t-c mut3">۱۸ محصول</span></a>
+            <div style="padding: 8px 16px 4px; display: flex; justify-content: space-between; align-items: center"><span class="t-c mut3">برای انتخاب ↑ ↓ و برای باز کردن Enter</span><a class="more" href="#">همه ۱۸ نتیجه<dc-import name="Icon" i="chevNext" s="16" hint-size="16px,16px"></dc-import></a></div>
+          </div>
+        </div>
+        <button class="btn btn-s btn-sm" aria-label="لیست استعلام، ۲ قلم"><dc-import name="Icon" i="inquiry" s="20" hint-size="20px,20px"></dc-import>لیست استعلام<span class="cnt" style="position: static">۲</span></button>
+      </div>
+    </header>
+    <div style="max-width: 1280px; margin: 0 auto; padding: 56px 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px"><div style="display: flex; flex-direction: column; gap: 16px"><span class="sk" style="height: 18px; width: 40%; animation: none"></span><span class="sk" style="height: 44px; animation: none"></span><span class="sk" style="height: 44px; width: 80%; animation: none"></span></div><div class="ph" style="height: 360px; border-radius: 28px"></div></div>
+    <div class="scrim" style="z-index: 6"></div>
+  </div>
+
+  <div class="blbl" style="padding: 24px 32px 0"><i class="{{th.tag}}">{{th.label}}</i><b>ویزارد در پنجره میانی</b><span>مرحله ۱ از ۳</span></div>
+  <div class="{{th.cls}}" style="position: relative; height: 800px; overflow: hidden; display: grid; place-items: center">
+    <div style="position: absolute; inset: 0; padding: 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-content: start"><div class="ph" style="height: 260px; border-radius: 0"></div><div class="ph" style="height: 260px; border-radius: 0"></div><div class="ph" style="height: 260px; border-radius: 0"></div><div class="ph" style="height: 260px; border-radius: 0"></div></div>
+    <div class="scrim"></div>
+    <div role="dialog" aria-label="محصول مناسبم را پیدا کن" style="position: relative; z-index: 6; width: min(760px, calc(100% - 32px)); background: var(--sf); border-radius: 28px; box-shadow: var(--sh2); display: flex; flex-direction: column; overflow: hidden">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px"><span class="t-s" style="font-weight: 800">مرحله ۱ از ۳</span><div class="prog" style="flex: 1" role="progressbar" aria-label="پیشرفت" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33"><i style="width: 33%"></i></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+      <div style="padding: 12px 40px 32px">
+        <h2 style="font-size: 28px; font-weight: 800; line-height: 1.45">چه چیزی را می‌خواهید کنترل کنید؟</h2>
+        <p class="t-b mut" style="margin-top: 4px">هر چند مورد که لازم دارید انتخاب کنید.</p>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 24px">
+          <sc-for list="{{wopts}}" as="o" hint-placeholder-count="6">
+            <button class="{{o.cls}}" aria-pressed="{{o.on}}"><sc-if value="{{o.on}}" hint-placeholder-val="{{false}}"><span class="ck"><dc-import name="Icon" i="check" s="14" sw="2.4" hint-size="14px,14px"></dc-import></span></sc-if><span class="ico"><dc-import name="Icon" i="{{o.i}}" s="24" hint-size="24px,24px"></dc-import></span><span><b>{{o.b}}</b><span>{{o.s}}</span></span></button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px">
+        <button class="btn btn-g">انصراف</button>
+        <button class="btn btn-p btn-lg">ادامه<dc-import name="Icon" i="arrowNext" s="20" hint-size="20px,20px"></dc-import></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blbl" style="padding: 24px 32px 0"><i class="{{th.tag}}">{{th.label}}</i><b>لیست استعلام — Drawer کناری</b><span>از سمت آیکون هدر (چپ) باز می‌شود</span></div>
+  <div class="{{th.cls}}" style="position: relative; height: 860px; overflow: hidden">
+    <div style="padding: 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px"><div class="ph" style="height: 300px; border-radius: 0"></div><div class="ph" style="height: 300px; border-radius: 0"></div><div class="ph" style="height: 300px; border-radius: 0"></div><div class="ph" style="height: 300px; border-radius: 0"></div></div>
+    <div class="scrim"></div>
+    <aside class="drawer" role="dialog" aria-label="لیست استعلام" style="width: 460px">
+      <div class="sheet-h" style="padding-top: 16px; padding-bottom: 16px"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="t-h2">لیست استعلام</h2><span class="t-c mut3">۳ قلم · ۷ عدد</span></div><button class="ib" aria-label="بستن"><dc-import name="Icon" i="x" s="22" hint-size="22px,22px"></dc-import></button></div>
+      <div class="sheet-b" style="padding-top: 0">
+        <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
+          <div style="display: flex; gap: 12px; padding: 14px 0; align-items: center">
+            <span class="ph" style="width: 60px; height: 60px; border-radius: 0; flex: none"><dc-import name="ProductArt" kind="{{it.kind}}" s="54" hint-size="54px,54px"></dc-import></span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><b style="font-size: 14px; line-height: 1.6">{{it.name}}</b><span class="code">{{it.code}}</span></div>
+            <div class="qty" role="group" aria-label="تعداد"><button aria-label="افزایش"><dc-import name="Icon" i="plus" s="16" sw="2" hint-size="16px,16px"></dc-import></button><b>{{it.q}}</b><button aria-label="کاهش"><dc-import name="Icon" i="minus" s="16" sw="2" hint-size="16px,16px"></dc-import></button></div>
+            <button class="ib" aria-label="حذف از لیست"><dc-import name="Icon" i="trash" s="20" hint-size="20px,20px"></dc-import></button>
+          </div>
+        </sc-for>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding-top: 16px">
+          <div><label class="lab">نام شما <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><input class="inp" value="علی رضایی"></div>
+          <div><label class="lab">پروژه <span class="mut3" style="font-weight: 500">(اختیاری)</span></label><input class="inp" value="ویلای دو طبقه، لواسان"></div>
+        </div>
+        <span class="lab" style="margin-top: 16px">پیش‌نمایش پیام</span>
+        <div class="msg">{{msg}}</div>
+      </div>
+      <div class="sheet-f" style="flex-direction: column; gap: 8px">
+        <button class="btn btn-p btn-lg btn-w"><dc-import name="Icon" i="chat" s="20" sw="1.8" hint-size="20px,20px"></dc-import>ارسال استعلام در واتساپ</button>
+        <p class="t-c mut3" style="text-align: center">در دسکتاپ، واتساپ وب یا اپ دسکتاپ باز می‌شود.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":5000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk' };
+    const o = (i, b, s, on) => ({ i, b, s, on: !!on, cls: 'wopt' + (on ? ' on' : '') });
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      sugg: [
+        { m: 'تاچ پنل ۷', rest: ' اینچ MixPad Matter', code: 'MIXPAD-7M', brand: 'Orvibo', pr: 'Zigbee', kind: 'panel7', bg: 'var(--sf2)' },
+        { m: 'تاچ پنل ۷', rest: ' اینچ Hypanel Elite', code: 'HYP-E7', brand: 'Akubela', pr: 'Zigbee', kind: 'panel7', bg: 'transparent' },
+        { m: 'تاچ پنل ۷', rest: ' اینچ SmartTouch', code: 'ST-7', brand: 'ABB', pr: 'KNX', kind: 'panel7', bg: 'transparent' }
+      ],
+      wopts: [o('bulb', 'روشنایی', 'کلید، دیمر و سناریو', true), o('curtain', 'پرده', 'پرده برقی و کرکره'), o('thermo', 'سرمایش و گرمایش', 'ترموستات و فن‌کویل'), o('shield', 'آیفون و امنیت', 'درب‌بازکن و دوربین'), o('music', 'صوت', 'اسپیکر سقفی و پخش'), o('panel', 'کنترل مرکزی', 'همه چیز از یک تاچ پنل', true)],
+      items: [
+        { name: 'تاچ پنل ۷ اینچ MixPad Matter', code: 'MIXPAD-7M', kind: 'panel7', q: '۲' },
+        { name: 'رله ۲۴ کانال', code: 'SA/S 24.16', kind: 'relay', q: '۱' },
+        { name: 'پنل آیفون هوشمند R20A', code: 'R20A', kind: 'intercom', q: '۴' }
+      ],
+      msg: 'سلام، لطفاً برای اقلام زیر استعلام قیمت بفرستید:\n\n۱. تاچ پنل ۷ اینچ MixPad Matter\n    کد MIXPAD-7M — ۲ عدد\n۲. رله ۲۴ کانال\n    کد SA/S 24.16 — ۱ عدد\n۳. پنل آیفون هوشمند R20A\n    کد R20A — ۴ عدد\n\nنام: علی رضایی\nپروژه: ویلای دو طبقه، لواسان'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دسکتاپ — لیست محصولات و فیلتر</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./fz.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="board" style="display: flex; flex-direction: column; gap: 32px; padding: 32px 0 48px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 12px">
+  <div class="blbl" style="padding: 0 32px"><i class="{{th.tag}}">{{th.label}}</i><b>دسکتاپ — لیست محصولات</b><span>فیلتر در نوار کناری · نوار مقایسه شناور</span></div>
+  <div class="{{th.cls}}" style="width: 100%; position: relative">
+    <header >
+      <div style="max-width: 1280px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+        <a class="logo" href="#" style="padding: 0"><span class="mk"></span><span style="display: flex; flex-direction: column; gap: 3px"><b>FRitZ</b></span></a>
+        <nav aria-label="منوی اصلی" style="display: flex; flex-wrap: wrap; gap: 4px"><a class="btn btn-g btn-sm" href="#" aria-current="page" style="background: var(--sf2)">همه محصولات</a><a class="btn btn-g btn-sm" href="#">برندها</a><a class="btn btn-g btn-sm" href="#">راهنمای انتخاب</a></nav>
+        <div class="field" style="flex: 1 1 280px; max-width: 420px; margin-inline-start: auto"><dc-import name="Icon" i="search" s="20" hint-size="20px,20px"></dc-import><input placeholder="نام محصول یا کد مدل" aria-label="جست‌وجو"></div>
+        <div style="display: flex; align-items: center; gap: 4px">
+          <button class="ib" aria-label="{{th.themeLabel}}"><dc-import name="Icon" i="{{th.themeIcon}}" s="22" hint-size="22px,22px"></dc-import></button>
+          <button class="btn btn-s btn-sm" aria-label="لیست استعلام، ۲ قلم"><dc-import name="Icon" i="inquiry" s="20" hint-size="20px,20px"></dc-import>لیست استعلام<span class="cnt" style="position: static">۲</span></button>
+        </div>
+      </div>
+    </header>
+
+    <div style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 0">
+      <nav aria-label="مسیر" class="t-s mut3" style="display: flex; align-items: center; gap: 6px"><a href="#">کاتالوگ</a><dc-import name="Icon" i="chevNext" s="14" hint-size="14px,14px"></dc-import><span style="color: var(--tx); font-weight: 700">تاچ پنل</span></nav>
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 10px">
+        <div><h1 style="font-size: 32px; font-weight: 800; line-height: 1.4">تاچ پنل</h1><p class="t-s mut">پنل‌های لمسی دیواری برای کنترل یکجای روشنایی، پرده، تهویه و سناریوها.</p></div>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span class="t-s mut">مرتب‌سازی</span>
+          <button class="btn btn-s btn-sm">پیشنهادی<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+          <div class="seg" role="group" aria-label="نوع نمایش"><button class="ib on" aria-label="شبکه" aria-pressed="true"><dc-import name="Icon" i="grid2" s="18" hint-size="18px,18px"></dc-import></button><button class="ib" aria-label="لیست" aria-pressed="false"><dc-import name="Icon" i="grid1" s="18" hint-size="18px,18px"></dc-import></button></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 1280px; margin: 0 auto; padding: 24px 40px 120px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+      <aside aria-label="فیلترها" style="flex: 0 1 272px; min-width: 240px; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px"><h2 class="t-h3">فیلترها</h2><button class="btn btn-g btn-sm" style="color: var(--acT); padding: 0 6px">پاک کردن همه</button></div>
+        <div class="fgrp">
+          <div class="fgrp-h">دسته</div>
+          <div>
+            <sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><label class="opt"><input type="radio" class="rdo" name="{{th.rn}}" checked="{{c.on}}">{{c.l}}<span class="n">{{c.n}}</span></label></sc-for>
+            <button class="more" style="background: none; border: 0; padding: 0">۸ دسته دیگر<dc-import name="Icon" i="chevDown" s="16" hint-size="16px,16px"></dc-import></button>
+          </div>
+        </div>
+        <div class="fgrp" style="background: var(--sf); margin: 12px -14px 0; padding: 14px; border-radius: 0; border: 0">
+          <div class="fgrp-h">سیستم‌عامل<span class="tag-new"><dc-import name="Icon" i="layers" s="14" hint-size="14px,14px"></dc-import>ویژه تاچ پنل</span></div>
+          <div><label class="opt"><input type="checkbox" class="cbx">اندروید<span class="n">۸</span></label><label class="opt"><input type="checkbox" class="cbx" checked>لینوکس<span class="n">۳۴</span></label></div>
+          <div class="fgrp-h" style="margin-top: 6px">اندازه نمایشگر</div>
+          <div class="chips"><span class="chip">۴ اینچ</span><span class="chip">۵ اینچ</span><span class="chip on">۷ اینچ</span><span class="chip">۱۰ اینچ</span></div>
+          <div class="fgrp-h" style="margin-top: 6px">ابعاد</div>
+          <div class="chips"><span class="chip">۸۶×۸۶</span><span class="chip">۱۲۰×۸۶</span><span class="chip">روکار</span></div>
+        </div>
+        <div class="fgrp">
+          <div class="fgrp-h">برند</div>
+          <div><sc-for list="{{brands}}" as="b" hint-placeholder-count="5"><label class="opt"><input type="checkbox" class="cbx" checked="{{b.on}}"><span class="lat" style="font-weight: 600">{{b.l}}</span><span class="n">{{b.n}}</span></label></sc-for></div>
+        </div>
+        <div class="fgrp">
+          <div class="fgrp-h">پروتکل</div>
+          <div class="chips"><span class="chip"><span class="lat">KNX</span></span><span class="chip"><span class="lat">Zigbee</span></span><span class="chip"><span class="lat">Modbus</span></span></div>
+        </div>
+      </aside>
+
+      <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <span class="t-s" style="font-weight: 800; margin-inline-end: 8px">۶ نتیجه</span>
+          <span class="chip on rm">لینوکس<button class="x" aria-label="حذف فیلتر لینوکس"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+          <span class="chip on rm">۷ اینچ<button class="x" aria-label="حذف فیلتر ۷ اینچ"><dc-import name="Icon" i="x" s="14" sw="2" hint-size="14px,14px"></dc-import></button></span>
+          <button class="chip" style="border-color: transparent; background: transparent; color: var(--acT); font-weight: 800">پاک کردن همه</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(232px, 100%), 1fr)); gap: 16px">
+          <sc-for list="{{products}}" as="p" hint-placeholder-count="6">
+            <article class="card pc">
+              <label class="cmp"><input type="checkbox" class="cbx" checked="{{p.cmp}}">مقایسه</label>
+              <a class="pc-open" href="#"><div class="ph"><dc-import name="ProductArt" kind="{{p.kind}}" s="160" hint-size="160px,160px"></dc-import></div>
+              <div class="pc-b" style="padding: 16px 16px 4px"><span class="brand">{{p.brand}}</span><h3 class="pc-n" style="font-size: 15px">{{p.name}}</h3><span class="code">{{p.code}}</span><span class="pbs"><sc-for list="{{p.pl}}" as="x" hint-placeholder-count="1"><span class="pb">{{x}}</span></sc-for></span></div></a>
+              <div class="pc-f" style="padding: 10px 16px 16px"><button class="{{p.addCls}}"><dc-import name="Icon" i="{{p.addIcon}}" s="16" sw="2" hint-size="16px,16px"></dc-import>{{p.addTxt}}</button></div>
+            </article>
+          </sc-for>
+        </div>
+      </main>
+    </div>
+
+    <div class="cbar" role="region" aria-label="نوار مقایسه" style="position: absolute; bottom: 24px; inset-inline: auto; left: 50%; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); padding: 10px">
+      <span class="slot"><dc-import name="ProductArt" kind="panel7" s="46" hint-size="46px,46px"></dc-import></span>
+      <span class="slot"><dc-import name="ProductArt" kind="panel7" s="46" hint-size="46px,46px"></dc-import></span>
+      <span class="slot empty"></span>
+      <span style="display: flex; flex-direction: column; line-height: 1.5"><b style="font-size: 13px">۲ محصول برای مقایسه</b><span style="font-size: 12px; opacity: .75">تا ۳ محصول</span></span>
+      <button class="btn btn-p btn-sm">مقایسه</button>
+      <button class="ib" style="color: inherit" aria-label="پاک کردن مقایسه"><dc-import name="Icon" i="x" s="18" hint-size="18px,18px"></dc-import></button>
+    </div>
+  </div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"both","options":["both","light","dark"]},"$preview":{"width":1440,"height":3300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'both';
+    const L = { cls: 'fz', label: 'روشن', tag: '', themeIcon: 'moon', themeLabel: 'تم تیره', rn: 'catL' };
+    const D = { cls: 'fz dark', label: 'تیره', tag: 'dk', themeIcon: 'sun', themeLabel: 'تم روشن', rn: 'catD' };
+    const P = (name, code, brand, pl, kind, inq, cmp) => ({
+      name, code, brand, pl, kind, cmp: !!cmp,
+      addCls: 'pc-add' + (inq ? ' in' : ''), addIcon: inq ? 'check' : 'plus', addTxt: inq ? 'در لیست استعلام' : 'افزودن به استعلام'
+    });
+    return {
+      themes: t === 'light' ? [L] : t === 'dark' ? [D] : [L, D],
+      cats: [
+        { l: 'تاچ پنل', n: '۴۲', on: true }, { l: 'کلید هوشمند', n: '۵۸' }, { l: 'ترموستات', n: '۲۴' },
+        { l: 'رله و اکچوایتور', n: '۴۷' }, { l: 'سنسور', n: '۳۸' }, { l: 'سرور', n: '۱۲' }
+      ].map((c) => ({ ...c, on: !!c.on })),
+      brands: [
+        { l: 'Orvibo', n: '۱۱' }, { l: 'Akubela', n: '۸' }, { l: 'Zennio', n: '۷' }, { l: 'ABB', n: '۶' }, { l: 'Ountech', n: '۵' }
+      ].map((b) => ({ ...b, on: false })),
+      products: [
+        P('تاچ پنل ۷ اینچ MixPad Matter', 'MIXPAD-7M', 'Orvibo', ['Zigbee'], 'panel7', true, true),
+        P('تاچ پنل ۷ اینچ Hypanel Elite', 'HYP-E7', 'Akubela', ['Zigbee'], 'panel7', false, true),
+        P('تاچ پنل ۷ اینچ SmartTouch', 'ST-7', 'ABB', ['KNX'], 'panel7', true),
+        P('تاچ پنل ۷ اینچ Hypanel Elite سفید', 'HYP-E7W', 'Akubela', ['Zigbee'], 'panel7'),
+        P('تاچ پنل ۷ اینچ MixPad Matter نقره‌ای', 'MIXPAD-7MS', 'Orvibo', ['Zigbee'], 'panel7'),
+        P('تاچ پنل ۷ اینچ SmartTouch مشکی', 'ST-7B', 'ABB', ['KNX'], 'panel7')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
