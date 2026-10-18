@@ -7,7 +7,7 @@
 web
 
 ## Stack
-Design canvas only at this stage (Design artifact, .dc.html artboards). Production hosting is cPanel (stated by the user earlier); build stack not yet decided.
+Design canvas only at this stage (Design artifact, .dc.html artboards). Production hosting is DirectAdmin shared hosting (the client switched from cPanel). Proposed stack: see docs/PLAN.md, awaiting approval.
 
 ## Users
 - End customers (homeowners, villa and apartment owners, people renovating) looking for smart-home equipment for their own project, mostly on a phone. Job: find the right product, read its specs, compare a few, and ask for a price.

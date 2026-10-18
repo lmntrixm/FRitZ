@@ -18,6 +18,7 @@ Read these first, in this order:
   - Persian, RTL, mobile-first.
   - Brand names, model codes and technical terms stay Latin and LTR-isolated (`unicode-bidi: isolate`).
   - Kalameh is the only typeface, self-hosted from `fonts/` (licence in `fonts/FontLicense.txt`).
+    - The `.woff2` files are proprietary and git-ignored (public repo). Copy them into `fonts/` locally and upload them to the server by hand.
 - Colour and themes:
   - Lime `#AFCB08` is used only for the single primary action, the inquiry count and the active state.
   - Text on lime is always ink.
@@ -25,7 +26,7 @@ Read these first, in this order:
   - WCAG AA in both themes.
 - Admin roles: `مدیر کل` (everything) and `ویرایشگر محتوا` (no settings, users or updates).
 - Every dangerous admin action is confirmed, and the confirmation explains its effect.
-- Hosting is **cPanel**. The build stack is not decided yet. Propose one that deploys cleanly to cPanel shared hosting, and ask before committing to it.
+- Hosting is **DirectAdmin** shared hosting (changed from cPanel by the client). The proposed stack is in `docs/PLAN.md` and waits for client approval before any code is written.
 
 ## How to read the design files (`project/`)
 - `*.dc.html` files are design artboards, not production pages.
