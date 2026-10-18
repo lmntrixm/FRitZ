@@ -19,6 +19,9 @@
   ]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
   @endpush
 
+  @if ($preview)
+    <div class="alert" role="status" style="background:var(--wnS,#FBF0D3);color:var(--tx)"><x-icon i="eye" s="18" /><span><b>پیش‌نمایش پیش‌نویس.</b> این محصول هنوز منتشر نشده و فقط برای کاربران پنل دیده می‌شود.</span></div>
+  @endif
   <div x-data="{ slide: 0, n: {{ max(1, $images->count()) }}, zoom: false, spec: true }">
     <div class="gal" @scroll.debounce.60ms="slide = Math.round(Math.abs($el.scrollLeft) / $el.clientWidth)" aria-label="تصاویر محصول" role="region">
       @forelse ($images as $i => $m)

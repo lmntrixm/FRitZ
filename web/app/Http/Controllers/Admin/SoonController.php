@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class SoonController extends Controller
 {
     public const SECTIONS = [
-        'products' => ['محصولات', 'box'], 'categories' => ['دسته‌ها و فیلترها', 'folder'],
+        'categories' => ['دسته‌ها و فیلترها', 'folder'],
         'brands' => ['برندها و پروتکل‌ها', 'tag'], 'media' => ['رسانه', 'image'],
         'inquiries' => ['استعلام‌ها', 'chat'], 'update' => ['به‌روزرسانی', 'upload'],
         'users' => ['کاربران', 'users'], 'activity' => ['گزارش فعالیت', 'activity'],

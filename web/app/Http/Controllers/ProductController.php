@@ -8,18 +8,26 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        abort_unless(Product::published()->whereKey($product->id)->exists(), 404);
+        // drafts: visible only to signed-in staff, as «پیش‌نمایش در کاتالوگ»
+        $preview = ! Product::published()->whereKey($product->id)->exists();
+        abort_if($preview && ! auth()->check(), 404);
         $product->load(['brand', 'category.fields.options', 'protocols', 'media', 'values.option', 'customSpecs']);
 
         $compatible = $product->compatible()->catalog()->get();
-        $related = Product::catalog()->where('category_id', $product->category_id)
-            ->whereKeyNot($product->id)->orderByDesc('is_featured')->orderBy('sort')->limit(6)->get();
+        // hand-picked «محصولات مرتبط» first, then the rest of the category
+        $related = $product->related()->catalog()->get();
+        if ($related->count() < 6) {
+            $related = $related->merge(Product::catalog()->where('category_id', $product->category_id)
+                ->whereKeyNot([$product->id, ...$related->pluck('id')])->orderByDesc('is_featured')->orderBy('sort')
+                ->limit(6 - $related->count())->get());
+        }
 
         return view('catalog.product', [
             'p' => $product,
             'specs' => self::specs($product),
             'compatible' => $compatible,
             'related' => $related,
+            'preview' => $preview,
         ]);
     }
 

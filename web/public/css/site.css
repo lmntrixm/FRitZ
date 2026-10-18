@@ -93,3 +93,7 @@ a.opt{color:inherit}
 /* chips on a grey card step up to the page tone so they stay visible */
 .fcard .chip:not(.on){background:var(--bg)}
 .fcard .chip:not(.on):hover{background:var(--sf3)}
+/* product sticky bar: inquiry + datasheet must fit 360–390px phones */
+.stick .btn{min-width:0;white-space:normal;line-height:1.4}
+.stick .btn-lg{padding-inline:16px}
+.stick a.btn-s{flex:none;padding-inline:12px;font-size:15px}

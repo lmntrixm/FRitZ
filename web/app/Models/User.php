@@ -18,6 +18,9 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    /** Same defaults as the migration, so a just-created model is not read as «disabled». */
+    protected $attributes = ['role' => 'editor', 'status' => 'active'];
+
     protected $fillable = [
         'name',
         'email',

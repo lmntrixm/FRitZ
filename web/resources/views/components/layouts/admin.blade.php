@@ -7,7 +7,7 @@
   $newInq = \App\Models\Inquiry::where('status', 'new')->count();
   $nav = [
     ['k' => 'overview', 'l' => 'نمای کلی', 'i' => 'grid2', 'url' => route('admin.overview')],
-    ['k' => 'products', 'l' => 'محصولات', 'i' => 'box'],
+    ['k' => 'products', 'l' => 'محصولات', 'i' => 'box', 'url' => route('admin.products.index')],
     ['k' => 'categories', 'l' => 'دسته‌ها و فیلترها', 'i' => 'folder'],
     ['k' => 'brands', 'l' => 'برندها و پروتکل‌ها', 'i' => 'tag'],
     ['k' => 'media', 'l' => 'رسانه', 'i' => 'image'],
@@ -36,12 +36,14 @@
 <link rel="icon" type="image/png" href="{{ asset('img/fritz-logo.png') }}">
 <script>window.FZ = {};</script>
 <script defer src="{{ Asset::url('js/fz.js') }}"></script>
+<script defer src="{{ Asset::url('js/admin.js') }}"></script>
 <script defer src="{{ Asset::url('js/alpine-focus.min.js') }}"></script>
 <script defer src="{{ Asset::url('js/alpine.min.js') }}"></script>
 @stack('head')
 </head>
 <body x-data="{ menu: false }" @keydown.escape.window="menu = false">
 <a class="skip" href="#main">رفتن به محتوای اصلی</a>
+@include('partials.art-sprite')
 <div class="adm">
   <aside class="side" :class="menu && 'open'" aria-label="منوی اصلی" x-trap.inert.noscroll="menu">
     <div style="display:flex;align-items:center;justify-content:space-between">
@@ -97,6 +99,20 @@
         <div class="msgbox ok flash" role="status"><x-icon i="checkCircle" s="18" /><span>{{ session('ok') }}</span></div>
       @endif
       {{ $slot }}
+    </div>
+  </div>
+</div>
+
+{{-- confirmation for dangerous actions: says what will happen, the cancel button is the safe default --}}
+<div x-show="$store.confirm.open" x-cloak @keydown.escape.window="$store.confirm.open = false" style="position:fixed;inset:0;z-index:9;display:grid;place-items:center">
+  <div class="scrim" @click="$store.confirm.open = false"></div>
+  <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="cf-t" aria-describedby="cf-b" x-trap.noscroll="$store.confirm.open">
+    <span style="width:48px;height:48px;border-radius:50%;display:grid;place-items:center" :style="$store.confirm.danger ? 'background:var(--errS);color:var(--err)' : 'background:var(--wnS);color:var(--wn)'"><x-icon i="alert" s="24" /></span>
+    <h2 class="t-h2" id="cf-t" x-text="$store.confirm.title"></h2>
+    <p class="t-s mut" id="cf-b" x-text="$store.confirm.body"></p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+      <button type="button" class="btn btn-s btn-sm" @click="$store.confirm.open = false">انصراف</button>
+      <button type="button" class="btn btn-sm" :class="$store.confirm.danger ? 'btn-x' : 'btn-p'" @click="$store.confirm.yes()" x-text="$store.confirm.ok"></button>
     </div>
   </div>
 </div>

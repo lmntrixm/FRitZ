@@ -34,6 +34,7 @@ Read these first, in this order:
   - `app/Support/Icons.php`: generated from `Icon.dc.html`. `resources/views/partials/art-sprite.blade.php`: generated from `ProductArt.dc.html`. Placeholder drawings only until real photos arrive.
   - Browser state (inquiry list, compare, theme) lives in `public/js/fz.js` as Alpine stores in localStorage.
   - Admin: `/admin` (`app/Http/Controllers/Admin`, `resources/views/admin`, `public/css/adm.css` ported plus `admin.css`). The first «مدیر کل» is created at `/admin/setup` with the `DEPLOY_TOKEN` key (no SSH), or locally with `php artisan fritz:user`. Sections not built yet show an honest "next stage" page.
+  - Products admin: `Admin\ProductController`, `app/Support/ProductAudit.php` (completeness and publish blockers; photo, datasheet and protocol are warnings only), `app/Support/MediaStore.php` (uploads to `public/media`, photos to WebP ≤1600px). Dangerous actions use `data-confirm` (handled in `public/js/admin.js`).
   - `CatalogSeeder` holds the reference data. `DemoProductSeeder` holds the design's sample products, for the test domain only (`FRITZ_DEMO_DATA`).
 - `docs/PLAN.md`: stack, schema and phases. `docs/DEPLOY.md`: DirectAdmin over FTP (no SSH), GitHub Actions in `.github/workflows/deploy.yml`.
 - Checks: `cd web && php artisan test && ./vendor/bin/pint --test`. `node .claude/skills/design-taste-frontend/scripts/lint.mjs web/public/css web/public/js/fz.js web/resources/views`.

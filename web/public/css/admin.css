@@ -46,3 +46,27 @@ a.qnav-a{color:inherit}
 /* charts */
 .chart{display:block;overflow:visible}
 .hbar .tr{background:var(--sf2)}
+
+/* product form */
+.ph.removed img{opacity:.3}
+.ph img{width:100%;height:100%;object-fit:contain;display:block}
+.sec-card>summary .chev{transition:transform .2s var(--ease)}
+.sec-card:not([open])>summary svg:last-child{transform:rotate(90deg)}
+.chip:has(.sr:focus-visible){outline:2px solid var(--tx);outline-offset:3px}
+select.inp{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:none}
+a.crumb{text-decoration:none}
+@media (max-width:899px){form .savebar{margin:0 -16px -64px !important}}
+/* adm.css uses «sel» for both a selected table row and a select-like input (display:flex); keep rows as rows */
+.tbl tr.sel{display:table-row}
+/* absolutely positioned screen-reader labels inside the table must stay in its scroll box */
+.tw{position:relative}
+
+/* product save bar on phones: one row; secondary actions become icons */
+@media (max-width:899px){
+  .savebar .sb-hide{display:none}
+  .savebar .sb-sec .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .savebar .sb-sec{padding:0 12px}
+  .savebar{gap:6px;flex-wrap:nowrap}
+  .savebar .btn{padding-inline:14px}
+}
+@media (max-width:899px){.bulk{border-radius:24px;padding:10px 12px}}

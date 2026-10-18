@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Support\Fa;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use SoftDeletes;
+    use MassPrunable, SoftDeletes;
 
     protected $guarded = ['id'];
 
@@ -26,7 +27,13 @@ class Product extends Model
     {
         static::saving(function (Product $p) {
             if (! $p->slug) {
-                $p->slug = Str::slug($p->model_code) ?: Str::random(8);
+                // the slug stays fixed after creation so public links keep working
+                $base = Str::slug($p->model_code) ?: Str::lower(Str::random(8));
+                $slug = $base;
+                for ($i = 2; static::withTrashed()->where('slug', $slug)->whereKeyNot($p->id)->exists(); $i++) {
+                    $slug = $base.'-'.$i;
+                }
+                $p->slug = $slug;
             }
             $p->code_compact = Fa::compact($p->model_code);
         });
@@ -40,6 +47,16 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
     public function category(): BelongsTo
@@ -88,6 +105,18 @@ class Product extends Model
     {
         return $this->belongsToMany(Product::class, 'product_relations', 'product_id', 'related_id')
             ->wherePivot('type', 'compatible')->orderByPivot('sort');
+    }
+
+    public function related(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_relations', 'product_id', 'related_id')
+            ->wherePivot('type', 'related')->orderByPivot('sort');
+    }
+
+    /** Deleted products can be restored for 30 days, then they are removed for good. */
+    public function prunable(): Builder
+    {
+        return static::onlyTrashed()->where('deleted_at', '<', now()->subDays(30));
     }
 
     public function scopePublished(Builder $q): Builder

@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Media extends Model
 {
     protected $guarded = ['id'];
 
+    /** Files live in public/media (see config/filesystems.php); asset() follows the host the page was served on. */
     public function url(): string
     {
-        return Storage::disk('public')->url($this->path);
+        return asset('media/'.$this->path);
     }
 }

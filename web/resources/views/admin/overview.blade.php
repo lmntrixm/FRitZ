@@ -94,11 +94,11 @@
       <div class="panel-h"><h2 style="display:flex;align-items:center;gap:8px"><x-icon i="alert" s="18" />نیاز به توجه</h2><span class="t-c mut3">{{ Fa::digits(collect($attention)->sum('n')) }} مورد</span></div>
       <div>
         @forelse ($attention as $a)
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)">
+          <a href="{{ route('admin.products.index', ['incomplete' => 1, 'sort' => 'least']) }}" style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);color:inherit">
             <span class="thumb"><x-icon :i="$a['i']" s="18" /></span>
             <span style="flex:1;display:flex;flex-direction:column"><b style="font-size:14px">{{ $a['l'] }}</b><span class="t-c mut3">{{ $a['s'] }}</span></span>
-            <span class="{{ $a['st'] }}">{{ Fa::digits($a['n']) }}</span>
-          </div>
+            <span class="{{ $a['st'] }}">{{ Fa::digits($a['n']) }}</span><x-icon i="chevNext" s="16" />
+          </a>
         @empty
           <p class="t-s mut" style="padding:12px 18px 22px">همه محصولات کامل‌اند.</p>
         @endforelse

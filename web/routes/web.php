@@ -39,6 +39,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
         Route::get('/', Admin\OverviewController::class)->name('overview');
 
+        Route::prefix('products')->name('products.')->controller(Admin\ProductController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::get('lookup', 'lookup')->name('lookup');
+            Route::post('/', 'store')->name('store');
+            Route::post('bulk', 'bulk')->name('bulk');
+            Route::get('{product}/edit', 'edit')->name('edit');
+            Route::put('{product}', 'update')->name('update');
+            Route::post('{product}/duplicate', 'duplicate')->name('duplicate');
+            Route::delete('{product}', 'destroy')->name('destroy');
+        });
+
         Route::middleware('role:admin')->group(function () {
             Route::get('settings', [Admin\SettingsController::class, 'show'])->name('settings');
             Route::put('settings', [Admin\SettingsController::class, 'update']);

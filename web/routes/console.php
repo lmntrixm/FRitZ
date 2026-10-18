@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
 // Local or SSH-capable hosts: create or reset a panel user. On DirectAdmin without SSH use /admin/setup.
 Artisan::command('fritz:user {email} {--name=} {--role=admin} {--password=}', function (string $email) {
@@ -19,3 +21,6 @@ Artisan::command('fritz:user {email} {--name=} {--role=admin} {--password=}', fu
     ]);
     $this->info("کاربر {$user->email} با نقش {$user->role} آماده است.");
 })->purpose('Create or reset a FRitZ panel user');
+
+// Purge products deleted more than 30 days ago (DirectAdmin cron runs schedule:run every minute).
+Schedule::command('model:prune', ['--model' => [Product::class]])->daily();
